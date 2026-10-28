@@ -1,1 +1,3 @@
-<Solution />
+<Solution>
+  <Project Path="Sortacium.Presentation/Sortacium.Presentation.csproj" />
+</Solution>
