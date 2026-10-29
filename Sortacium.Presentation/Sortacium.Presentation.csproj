@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Modelique" Version="0.1.1" />
+    <PackageReference Include="Presentique" Version="0.2.0" />
+  </ItemGroup>
+
 </Project>
