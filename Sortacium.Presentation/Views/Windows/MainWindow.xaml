@@ -1,0 +1,11 @@
+﻿<windows:ThemedWindow
+    x:Class="Sortacium.Presentation.Views.Windows.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:windows="clr-namespace:Presentique.Windows;assembly=Presentique">
+    
+    <Grid>
+        
+    </Grid>
+    
+</windows:ThemedWindow>
