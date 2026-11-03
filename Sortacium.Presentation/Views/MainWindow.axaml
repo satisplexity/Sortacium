@@ -3,6 +3,7 @@
         xmlns:vm="using:Sortacium.Presentation.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:Sortacium.Presentation.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Sortacium.Presentation.Views.MainWindow"
         x:DataType="vm:MainViewModel"
@@ -15,8 +16,24 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            </Grid.RowDefinitions>
+
+        <StackPanel>
+            
+            <Button Content="Start Sorting" Command="{Binding BubbleSortCommand}" />
+
+        </StackPanel>
+
+        <controls:BarsRenderer
+            Grid.Row="1"
+    Bars="{Binding Bars}"
+    VerticalAlignment="Stretch"
+    HorizontalAlignment="Stretch"/>
+
+    </Grid>
 
 </Window>
