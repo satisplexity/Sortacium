@@ -4,7 +4,6 @@ using Avalonia.Media;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using Sortacium.Presentation.Models;
 
 namespace Sortacium.Presentation.Controls;
@@ -173,10 +172,22 @@ public sealed class BarsRenderer : Control
                        (step - barWidth) / 2;
             double y = Bounds.Height - height;
 
-            context.DrawRectangle(
-                new SolidColorBrush(visual.Color),
-                null,
-                new Rect(x, y, barWidth, height));
+            LinearGradientBrush borderBrush = new LinearGradientBrush()
+            {
+                StartPoint = new RelativePoint(0.5, 0, RelativeUnit.Relative),
+                EndPoint = new RelativePoint(0.5, 1, RelativeUnit.Relative),
+            };
+
+            HsvColor hsv = visual.Color.ToHsv();
+            double top = Math.Clamp(hsv.V + 0.2, 0, 1);
+            double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
+
+            borderBrush.GradientStops.Add(new GradientStop(new HsvColor(1, hsv.H, hsv.S, top).ToRgb(), 0));
+            borderBrush.GradientStops.Add(new GradientStop(visual.Color, 0.2));
+            borderBrush.GradientStops.Add(new GradientStop(visual.Color, 0.8));
+            borderBrush.GradientStops.Add(new GradientStop(new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(), 1));
+
+            context.DrawRectangle(new SolidColorBrush(visual.Color), new Pen(borderBrush, 2), new Rect(x, y, barWidth, height), 20, 20);
         }
     }
 

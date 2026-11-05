@@ -11,9 +11,6 @@ namespace Sortacium.Presentation.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty]
-    public partial string Greeting { get; set; } = "Welcome to Avalonia!";
-
-    [ObservableProperty]
     public IReadOnlyList<Bar> Bars { get; } = new List<Bar>
     {
         new Bar(0, 0.2),

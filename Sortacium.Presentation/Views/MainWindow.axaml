@@ -8,7 +8,8 @@
         x:Class="Sortacium.Presentation.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Sortacium.Presentation">
+        Title="Sortacium.Presentation"
+        WindowDecorations="BorderOnly">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
