@@ -26,5 +26,11 @@
 
   <ItemGroup>
     <Folder Include="NewFolder\" />
+        <Content Include="Assets/Sounds/*.wav" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\Sounds\pressed.wav" />
+    <AvaloniaResource Remove="Assets\Sounds\released.wav" />
   </ItemGroup>
 </Project>
