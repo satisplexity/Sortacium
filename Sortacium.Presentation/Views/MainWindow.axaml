@@ -80,7 +80,8 @@
                         <controls:IconButton
                             Icon="{StaticResource Icon.Shuffle}"/>
 
-                        <controls:IconButton Icon="{StaticResource Icon.Play}"/>
+                        <controls:IconButton Icon="{StaticResource Icon.Play}"
+                                             Command="{Binding BubbleSortCommand}"/>
                         <controls:IconButton Icon="{StaticResource Icon.Pause}"/>
 
                         <controls:IconButton Icon="{StaticResource Icon.Force}"/>
@@ -123,12 +124,6 @@
             <Grid Grid.Row="1"
                   RowDefinitions="Auto,*"
                   Margin="16">
-
-                <Button Grid.Row="0"
-                        Content="Start Sorting"
-                        Command="{Binding BubbleSortCommand}"
-                        HorizontalAlignment="Left"
-                        Margin="0,0,0,12"/>
 
                 <controls:BarsRenderer
                     Grid.Row="1"
