@@ -1,40 +1,148 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Sortacium.Presentation.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="using:Sortacium.Presentation.Controls"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Sortacium.Presentation.Views.MainWindow"
         x:DataType="vm:MainViewModel"
+        Title="Sortacium"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Sortacium.Presentation"
-        WindowDecorations="BorderOnly">
+        Width="1000"
+        Height="650"
+        MinWidth="600"
+        MinHeight="400"
+        WindowStartupLocation="CenterScreen"
+        WindowDecorations="None"
+        ExtendClientAreaToDecorationsHint="True"
+        CanResize="True"
+        Background="{StaticResource Brush.WindowBackground}">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainViewModel />
+        <vm:MainViewModel/>
     </Design.DataContext>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-            </Grid.RowDefinitions>
 
-        <StackPanel>
-            
-            <Button Content="Start Sorting" Command="{Binding BubbleSortCommand}" />
+        <Grid
+            RowDefinitions="auto,*">
 
-        </StackPanel>
+            <Border
+                Grid.Row="0"
+                Background="{StaticResource Brush.TitleBarBackground}"
+                WindowDecorationProperties.ElementRole="TitleBar"
+                Padding="10">
 
-        <controls:BarsRenderer
-            Grid.Row="1"
-    Bars="{Binding Bars}"
-    VerticalAlignment="Stretch"
-    HorizontalAlignment="Stretch"/>
+                <DockPanel
+                    LastChildFill="True">
+
+                    <StackPanel
+                        DockPanel.Dock="Right"
+                        Orientation="Horizontal"
+                        Spacing="10">
+
+                        <controls:IconButton
+                            Content="─"
+                            Click="Minimize_Click"
+                            WindowDecorationProperties.ElementRole="MinimizeButton"/>
+
+                        <controls:IconButton
+                            Content="□"
+                            Click="Maximize_Click"
+                            WindowDecorationProperties.ElementRole="MaximizeButton"/>
+
+                        <controls:IconButton
+                            Content="✕"
+                            Click="Close_Click"
+                            WindowDecorationProperties.ElementRole="CloseButton"/>
+
+                    </StackPanel>
+
+                    <!-- Область заголовка -->
+                    <TextBlock Text="Sortacium"
+                               Margin="16,0"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               IsHitTestVisible="False"/>
+                </DockPanel>
+            </Border>
+
+            <!-- Содержимое Sortacium -->
+            <Grid Grid.Row="1"
+                  RowDefinitions="Auto,*"
+                  Margin="16">
+
+                <Button Grid.Row="0"
+                        Content="Start Sorting"
+                        Command="{Binding BubbleSortCommand}"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,12"/>
+
+                <controls:BarsRenderer
+                    Grid.Row="1"
+                    Bars="{Binding Bars}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
+
+        <!-- Области изменения размера -->
+        <!-- Левая граница -->
+        <Border Width="6"
+                HorizontalAlignment="Left"
+                Background="Transparent"
+                Cursor="SizeWestEast"
+                WindowDecorationProperties.ElementRole="ResizeW"/>
+
+        <!-- Правая граница -->
+        <Border Width="6"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                Cursor="SizeWestEast"
+                WindowDecorationProperties.ElementRole="ResizeE"/>
+
+        <!-- Верхняя граница -->
+        <Border Height="6"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Cursor="SizeNorthSouth"
+                WindowDecorationProperties.ElementRole="ResizeN"/>
+
+        <!-- Нижняя граница -->
+        <Border Height="6"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                Cursor="SizeNorthSouth"
+                WindowDecorationProperties.ElementRole="ResizeS"/>
+
+        <!-- Углы окна -->
+        <Border Width="10" Height="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Cursor="TopLeftCorner"
+                WindowDecorationProperties.ElementRole="ResizeNW"/>
+
+        <Border Width="10" Height="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Cursor="TopRightCorner"
+                WindowDecorationProperties.ElementRole="ResizeNE"/>
+
+        <Border Width="10" Height="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                Cursor="BottomLeftCorner"
+                WindowDecorationProperties.ElementRole="ResizeSW"/>
+
+        <Border Width="10" Height="10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                Cursor="BottomRightCorner"
+                WindowDecorationProperties.ElementRole="ResizeSE"/>
 
     </Grid>
-
 </Window>

@@ -1,0 +1,117 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls">
+
+    <ControlTheme
+        x:Key="{x:Type controls:IconButton}"
+        TargetType="{x:Type controls:IconButton}">
+
+          <!-- Generic -->
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="RenderTransform" Value="translateY(0px)"/>
+
+        <!-- Transitions -->
+        <Setter Property="Transitions">
+            <Transitions>
+
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="BorderBrush"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="Foreground"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseOut"/>
+
+            </Transitions>
+        </Setter>
+
+        <!-- Default -->
+        <Setter Property="Background" Value="#242424"/>
+        <Setter Property="Foreground" Value="#CCCCEE"/>
+
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="50%,0%"
+                    EndPoint="50%,100%">
+
+                    <GradientStop Offset="0" Color="#353535"/>
+                    <GradientStop Offset="0.2" Color="#242424"/>
+                    <GradientStop Offset="0.8" Color="#242424"/>
+                    <GradientStop Offset="1" Color="#131313"/>
+
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Template -->
+        <Setter Property="Template">
+            <ControlTemplate>
+
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+
+                </Border>
+
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Hover -->
+        <Style Selector="^:pointerover">
+
+            <Setter Property="Background" Value="#242424"/>
+            <Setter Property="Foreground" Value="#8888EE"/>
+
+        </Style>
+
+        <!-- Pressed -->
+        <Style Selector="^:pressed">
+
+            <Setter Property="Background" Value="#212121"/>
+            <Setter Property="Foreground" Value="#8888EE"/>
+            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush
+                        StartPoint="50%,0%"
+                        EndPoint="50%,100%">
+
+                        <GradientStop Offset="0" Color="#131313"/>
+                        <GradientStop Offset="0.2" Color="#212121"/>
+                        <GradientStop Offset="0.8" Color="#212121"/>
+                        <GradientStop Offset="1" Color="#353535"/>
+
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </ControlTheme>
+
+</ResourceDictionary>

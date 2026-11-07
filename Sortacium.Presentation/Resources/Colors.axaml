@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color
+        x:Key="Color.WindowBackground">
+        
+        #191919
+
+    </Color>
+
+    <Color
+        x:Key="Color.TitleBarBackground">
+       
+        #1F1F1F
+
+    </Color>
+
+</ResourceDictionary>
