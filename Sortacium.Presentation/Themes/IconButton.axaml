@@ -12,6 +12,7 @@
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="RenderTransform" Value="translateY(0px)"/>
+        <Setter Property="Padding" Value="12"/>
 
         <!-- Transitions -->
         <Setter Property="Transitions">
@@ -67,13 +68,14 @@
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="{TemplateBinding Padding}">
 
-                    <ContentPresenter
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                    <Path Data="{TemplateBinding Icon}"
+                          Fill="{TemplateBinding Foreground}"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
 
                 </Border>
 

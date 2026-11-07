@@ -14,11 +14,35 @@
         WindowDecorations="None"
         ExtendClientAreaToDecorationsHint="True"
         CanResize="True"
-        Background="{StaticResource Brush.WindowBackground}">
+        Background="Transparent">
 
     <Design.DataContext>
         <vm:MainViewModel/>
     </Design.DataContext>
+
+    <Border CornerRadius="15"
+            Background="{StaticResource Brush.WindowBackground}"
+            BorderThickness="2">
+       <Border.BorderBrush>
+           
+           <LinearGradientBrush StartPoint="50%, 0%"
+                                EndPoint="50%, 100%">
+               
+               <GradientStop Color="#272727"
+                             Offset="0"/>
+
+               <GradientStop Color="{StaticResource Color.TitleBarBackground}"
+                             Offset="0.1"/>
+
+               <GradientStop Color="{StaticResource Color.WindowBackground}"
+                             Offset="0.9"/>
+
+               <GradientStop Color="#151515"
+                             Offset="1"/>
+
+           </LinearGradientBrush>
+
+       </Border.BorderBrush>
 
     <Grid>
 
@@ -29,45 +53,73 @@
                 Grid.Row="0"
                 Background="{StaticResource Brush.TitleBarBackground}"
                 WindowDecorationProperties.ElementRole="TitleBar"
-                Padding="10">
+                Padding="10"
+                CornerRadius="15, 15, 0, 0">
 
-                <DockPanel
-                    LastChildFill="True">
+                <Grid
+                    ColumnDefinitions="*,auto,*">
+                    
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                        
+                        <TextBlock Text="Sortacium"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Foreground="#88E"
+                                   VerticalAlignment="Center"/>
+
+                    </StackPanel>
 
                     <StackPanel
-                        DockPanel.Dock="Right"
+                        Spacing="10"
+                        Grid.Column="1"
                         Orientation="Horizontal"
-                        Spacing="10">
+                        WindowDecorationProperties.ElementRole="User">
 
                         <controls:IconButton
-                            Content="─"
+                            Icon="{StaticResource Icon.Shuffle}"/>
+
+                        <controls:IconButton Icon="{StaticResource Icon.Play}"/>
+                        <controls:IconButton Icon="{StaticResource Icon.Pause}"/>
+
+                        <controls:IconButton Icon="{StaticResource Icon.Force}"/>
+                        <controls:IconButton Icon="{StaticResource Icon.Previous}"/>
+                        <controls:IconButton Icon="{StaticResource Icon.Next}"/>
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Spacing="10"
+                        Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                        
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Settings}"
+                            WindowDecorationProperties.ElementRole="User"/>
+
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Minimize}"
                             Click="Minimize_Click"
                             WindowDecorationProperties.ElementRole="MinimizeButton"/>
 
                         <controls:IconButton
-                            Content="□"
+                            Icon="{StaticResource Icon.Maximize}"
                             Click="Maximize_Click"
                             WindowDecorationProperties.ElementRole="MaximizeButton"/>
 
                         <controls:IconButton
-                            Content="✕"
+                            Icon="{StaticResource Icon.Close}"
                             Click="Close_Click"
                             WindowDecorationProperties.ElementRole="CloseButton"/>
 
                     </StackPanel>
 
-                    <!-- Область заголовка -->
-                    <TextBlock Text="Sortacium"
-                               Margin="16,0"
-                               VerticalAlignment="Center"
-                               Foreground="White"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               IsHitTestVisible="False"/>
-                </DockPanel>
+                </Grid>
+
             </Border>
 
-            <!-- Содержимое Sortacium -->
             <Grid Grid.Row="1"
                   RowDefinitions="Auto,*"
                   Margin="16">
@@ -86,36 +138,30 @@
             </Grid>
         </Grid>
 
-        <!-- Области изменения размера -->
-        <!-- Левая граница -->
         <Border Width="6"
                 HorizontalAlignment="Left"
                 Background="Transparent"
                 Cursor="SizeWestEast"
                 WindowDecorationProperties.ElementRole="ResizeW"/>
 
-        <!-- Правая граница -->
         <Border Width="6"
                 HorizontalAlignment="Right"
                 Background="Transparent"
                 Cursor="SizeWestEast"
                 WindowDecorationProperties.ElementRole="ResizeE"/>
 
-        <!-- Верхняя граница -->
         <Border Height="6"
                 VerticalAlignment="Top"
                 Background="Transparent"
                 Cursor="SizeNorthSouth"
                 WindowDecorationProperties.ElementRole="ResizeN"/>
 
-        <!-- Нижняя граница -->
         <Border Height="6"
                 VerticalAlignment="Bottom"
                 Background="Transparent"
                 Cursor="SizeNorthSouth"
                 WindowDecorationProperties.ElementRole="ResizeS"/>
 
-        <!-- Углы окна -->
         <Border Width="10" Height="10"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -145,4 +191,6 @@
                 WindowDecorationProperties.ElementRole="ResizeSE"/>
 
     </Grid>
+
+    </Border>
 </Window>
