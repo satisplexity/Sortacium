@@ -1,0 +1,101 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+   
+ <ControlTheme
+    x:Key="{x:Type ToolTip}"
+    TargetType="ToolTip">
+
+    <Setter Property="Template">
+        <ControlTemplate>
+            <Border
+                x:Name="TooltipBody"
+                Background="#292929"
+                CornerRadius="10"
+                BorderThickness="1.5"
+                Padding="20,10"
+                Opacity="0"
+                RenderTransformOrigin="50%,100%">
+
+                <Border.RenderTransform>
+                    <ScaleTransform
+                        ScaleX="0.85"
+                        ScaleY="0.85" />
+                </Border.RenderTransform>
+
+                <Border.BorderBrush>
+                    <LinearGradientBrush
+                        StartPoint="50%,0%"
+                        EndPoint="50%,100%">
+
+                        <GradientStop
+                            Offset="0"
+                            Color="#2E2E2E" />
+
+                        <GradientStop
+                            Offset="1"
+                            Color="#212121" />
+
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+
+                <ContentPresenter
+                    Content="{TemplateBinding Content}"
+                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+
+            </Border>
+        </ControlTemplate>
+    </Setter>
+
+    <!-- Анимация открытия -->
+    <Style Selector="^:open /template/ Border#TooltipBody">
+        <Style.Animations>
+
+            <!-- Прозрачность -->
+            <Animation
+                Duration="0:0:0.1"
+                FillMode="Forward"
+                Easing="CubicEaseOut">
+
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                </KeyFrame>
+
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                </KeyFrame>
+
+            </Animation>
+
+            <!-- Увеличение -->
+            <Animation
+                Duration="0:0:0.2"
+                FillMode="Forward"
+                Easing="SineEaseOut">
+
+                <KeyFrame Cue="0%">
+                    <Setter
+                        Property="ScaleTransform.ScaleX"
+                        Value="0.85" />
+                    <Setter
+                        Property="ScaleTransform.ScaleY"
+                        Value="0.85" />
+                </KeyFrame>
+
+                <KeyFrame Cue="100%">
+                    <Setter
+                        Property="ScaleTransform.ScaleX"
+                        Value="1" />
+                    <Setter
+                        Property="ScaleTransform.ScaleY"
+                        Value="1" />
+                </KeyFrame>
+
+            </Animation>
+
+        </Style.Animations>
+    </Style>
+
+</ControlTheme>
+</ResourceDictionary>
