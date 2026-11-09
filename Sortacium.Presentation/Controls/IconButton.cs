@@ -33,7 +33,7 @@ public sealed class IconButton : Button
     {
         base.OnPointerReleased(e);
 
-        if (_stopwatch.ElapsedMilliseconds < 100)
+        if (_stopwatch.ElapsedMilliseconds < 150)
         {
             return;
         }

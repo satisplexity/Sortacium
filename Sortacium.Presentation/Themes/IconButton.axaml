@@ -7,12 +7,13 @@
         TargetType="{x:Type controls:IconButton}">
 
           <!-- Generic -->
-        <Setter Property="Width" Value="45"/>
-        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="RenderTransform" Value="translateY(0px)"/>
         <Setter Property="Padding" Value="12"/>
+        <Setter Property="Cursor" Value="Hand"/>
 
         <!-- Transitions -->
         <Setter Property="Transitions">
@@ -75,7 +76,8 @@
                           Fill="{TemplateBinding Foreground}"
                           Stretch="Uniform"
                           VerticalAlignment="Center"
-                          HorizontalAlignment="Center"/>
+                          HorizontalAlignment="Center"
+                          IsHitTestVisible="False"/>
 
                 </Border>
 
@@ -95,7 +97,7 @@
 
             <Setter Property="Background" Value="#212121"/>
             <Setter Property="Foreground" Value="#8888EE"/>
-            <Setter Property="RenderTransform" Value="translateY(-2px)"/>
+            <Setter Property="RenderTransform" Value="translateY(-1px)"/>
 
             <Setter Property="BorderBrush">
                 <Setter.Value>
