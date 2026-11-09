@@ -18,7 +18,9 @@
             Background="{StaticResource Brush.TitleBarBackground}"
             WindowDecorationProperties.ElementRole="TitleBar"
             Padding="10"
-            CornerRadius="15, 15, 0, 0">
+            CornerRadius="15, 15, 0, 0"
+            BorderThickness="0, 0, 0, 3"
+            BorderBrush="#171717">
 
             <Grid
                 ColumnDefinitions="*,auto,*">
@@ -99,17 +101,68 @@
 
         <Grid
             Grid.Row="1"
-            RowDefinitions="Auto,*"
-            Margin="16">
+            ColumnDefinitions="auto, *, auto">
+
+            <Border
+                CornerRadius="15"
+                Background="{StaticResource Brush.TitleBarBackground}"
+                Width="300"
+                Margin="10"
+                BorderThickness="1.5">
+
+                <Border.BorderBrush>
+
+                        <LinearGradientBrush
+                            StartPoint="50%, 0%"
+                            EndPoint="50%, 100%">
+
+                            <GradientStop
+                                Color="#272727"
+                                Offset="0"/>
+
+                            <GradientStop
+                                Color="{StaticResource Color.TitleBarBackground}"
+                                Offset="0.1"/>
+
+                            <GradientStop
+                                Color="{StaticResource Color.WindowBackground}"
+                                Offset="0.9"/>
+
+                            <GradientStop
+                                Color="#151515"
+                                Offset="1"/>
+
+                        </LinearGradientBrush>
+
+                    </Border.BorderBrush>
+
+                <StackPanel>
+
+                    <TextBlock Text="Selected sort"/>
+
+                </StackPanel>
+
+            </Border>
 
             <controls:BarsRenderer
-                Grid.Row="1"
+                Margin="15"
+                Grid.Column="1"
                 Bars="{Binding Bars}"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"/>
 
-            </Grid>
+            <Border
+                Grid.Column="2"
+                CornerRadius="15"
+                Background="{StaticResource Brush.TitleBarBackground}"
+                Width="300"
+                Margin="10">
+                
+            </Border
+>
 
         </Grid>
+
+    </Grid>
 
 </Window>
