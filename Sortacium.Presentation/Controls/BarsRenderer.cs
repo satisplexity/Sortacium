@@ -1,25 +1,36 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Media;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
+
+using Sortacium.Presentation.Components;
 using Sortacium.Presentation.Models;
 
 namespace Sortacium.Presentation.Controls;
 
 public sealed class BarsRenderer : Control
 {
-    public static readonly StyledProperty<IReadOnlyList<Bar>?>
-    BarsProperty =
-        AvaloniaProperty.Register<
-            BarsRenderer, IReadOnlyList<Bar>?>(nameof(Bars));
+    private const double GrowthSpeed = 1000.0;
+
+    private static EnchancedBackEaseOut GrowthEasing = new EnchancedBackEaseOut()
+    {
+        Amplitude = 0.2
+    };
+
+    public static readonly StyledProperty<IReadOnlyList<Bar>?> BarsProperty =
+        AvaloniaProperty.Register<BarsRenderer, IReadOnlyList<Bar>?>(nameof(Bars));
 
     public IReadOnlyList<Bar>? Bars
     {
         get => GetValue(BarsProperty);
         set => SetValue(BarsProperty, value);
     }
+
+    private const double AnimationDuration = 250;
+    private const double WidthFactor = 0.8;
 
     private sealed class VisualBar(Bar bar)
     {
@@ -37,12 +48,19 @@ public sealed class BarsRenderer : Control
 
         public TimeSpan StartTime;
         public bool Animating;
+
+        // Appearance animation
+        public double Growth = bar.State == BarState.Initialize ? 0 : 1;
+        public bool Growing = bar.State == BarState.Initialize;
+        public TimeSpan? GrowthStartTime;
+
+        public BarState LastState = bar.State;
+
+        public double GrowthDurationMs;
     }
 
     private readonly Dictionary<Bar, VisualBar> _visuals = new();
     private bool _frameQueued;
-
-    private const double AnimationMs = 250;
 
     private static Color GetColor(BarState state) => state switch
     {
@@ -74,6 +92,22 @@ public sealed class BarsRenderer : Control
         }
 
         InvalidateVisual();
+        RequestFrame();
+    }
+
+    protected override void OnAttachedToVisualTree(
+        VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        RequestFrame();
+    }
+
+    protected override void OnDetachedFromVisualTree(
+        VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+
+        _frameQueued = false;
     }
 
     private void OnBarChanged(
@@ -100,17 +134,29 @@ public sealed class BarsRenderer : Control
     private void OnFrame(TimeSpan time)
     {
         _frameQueued = false;
+
         bool anyAnimating = false;
 
         foreach (var (bar, visual) in _visuals)
         {
-            var targetColor = GetColor(bar.State);
+            // Restart appearance if the bar enters Initialize again.
+            if (bar.State == BarState.Initialize &&
+                visual.LastState != BarState.Initialize)
+            {
+                visual.Growth = 0;
+                visual.Growing = true;
+                visual.GrowthStartTime = null;
+            }
+
+            visual.LastState = bar.State;
+
+            // Update movement, value and color targets.
+            Color targetColor = GetColor(bar.State);
 
             if (visual.TargetX != bar.Index ||
                 visual.TargetValue != bar.Value ||
                 visual.TargetColor != targetColor)
             {
-                // Начинаем с текущего отображаемого положения.
                 visual.FromX = visual.X;
                 visual.FromValue = visual.Value;
                 visual.FromColor = visual.Color;
@@ -123,34 +169,103 @@ public sealed class BarsRenderer : Control
                 visual.Animating = true;
             }
 
-            if (!visual.Animating)
-                continue;
+            if (visual.Animating)
+            {
+                double t = Math.Clamp(
+                    (time - visual.StartTime).TotalMilliseconds
+                    / AnimationDuration,
+                    0,
+                    1);
 
-            double t = Math.Clamp(
-                (time - visual.StartTime).TotalMilliseconds
-                    / AnimationMs,
-                0, 1);
+                double eased = Smoothstep(t);
 
-            // Smoothstep
-            double eased = t * t * (3 - 2 * t);
+                visual.X = Lerp(
+                    visual.FromX,
+                    visual.TargetX,
+                    eased);
 
-            visual.X = Lerp(
-                visual.FromX, visual.TargetX, eased);
+                visual.Value = Lerp(
+                    visual.FromValue,
+                    visual.TargetValue,
+                    eased);
 
-            visual.Value = Lerp(
-                visual.FromValue, visual.TargetValue, eased);
+                visual.Color = LerpColor(
+                    visual.FromColor,
+                    visual.TargetColor,
+                    eased);
 
-            visual.Color = LerpColor(
-                visual.FromColor, visual.TargetColor, eased);
+                visual.Animating = t < 1;
+                anyAnimating |= visual.Animating;
+            }
 
-            visual.Animating = t < 1;
-            anyAnimating |= visual.Animating;
+            // Animate initial growth independently of Value.
+            if (visual.Growing)
+            {
+                if (Bars is not { Count: > 0 } bars ||
+                    Bounds.Width <= 0 ||
+                    Bounds.Height <= 0)
+                {
+                    anyAnimating = true;
+                    continue;
+                }
+
+                if (visual.GrowthStartTime is null)
+                {
+                    visual.GrowthStartTime = time;
+
+                    double targetHeight = CalculateBarHeight(
+                        visual.TargetValue,
+                        bars.Count);
+
+                    visual.GrowthDurationMs =
+                        Math.Max(1, targetHeight / GrowthSpeed * 1000);
+                }
+
+                double elapsedMs =
+                    (time - visual.GrowthStartTime.Value).TotalMilliseconds;
+
+                double t = Math.Clamp(
+                    elapsedMs / visual.GrowthDurationMs,
+                    0,
+                    1);
+
+                visual.Growth = GrowthEasing.Ease(t);
+
+                visual.Growing = t < 1;
+                anyAnimating |= visual.Growing;
+
+                if (!visual.Growing &&
+                    bar.State == BarState.Initialize)
+                {
+                    bar.State = BarState.Idle;
+                    visual.LastState = BarState.Idle;
+                }
+            }
         }
 
         InvalidateVisual();
 
         if (anyAnimating)
             RequestFrame();
+    }
+
+    private double CalculateBarHeight(double value, int count)
+    {
+        if (count <= 0)
+            return 0;
+
+        double barWidth = Bounds.Width / count * WidthFactor;
+
+        double minHeight = Math.Min(
+            barWidth,
+            Bounds.Height / 2);
+
+        double maxHeight = Math.Max(
+            minHeight,
+            Bounds.Height - barWidth);
+
+        return minHeight +
+               (maxHeight - minHeight) * Math.Clamp(value, 0, 1);
     }
 
     public override void Render(DrawingContext context)
@@ -160,44 +275,106 @@ public sealed class BarsRenderer : Control
         if (Bars is not { Count: > 0 } bars)
             return;
 
-        double step = Bounds.Width / bars.Count;
-        double barWidth = step * 0.8;
+        double containerWidth = Bounds.Width;
+        double containerHeight = Bounds.Height;
+
+        if (containerWidth <= 0 || containerHeight <= 0)
+            return;
+
+        double step = containerWidth / bars.Count;
+        double barWidth = step * WidthFactor;
+
+        // Keep a width-sized margin at the top.
+        // H = 500, W = 50:
+        // min = 50, max = 450, range = 400.
+        //
+        // In unusually short containers, clamp the values
+        // to keep the range non-negative.
+        double minHeight = Math.Min(
+            barWidth,
+            containerHeight / 2);
+
+        double maxHeight = Math.Max(
+            minHeight,
+            containerHeight - barWidth);
+
+        double heightRange = maxHeight - minHeight;
 
         foreach (var bar in bars)
         {
-            var visual = _visuals[bar];
+            if (!_visuals.TryGetValue(bar, out var visual))
+                continue;
 
-            double height = visual.Value * Bounds.Height;
-            double x = visual.X * step +
-                       (step - barWidth) / 2;
+            double targetHeight = CalculateBarHeight(
+    visual.Value,
+    bars.Count);
+
+            // During initialization Growth goes from 0 to 1.
+            double height = targetHeight * visual.Growth;
+
+            if (height <= 0)
+                continue;
+
+            double x =
+                visual.X * step +
+                (step - barWidth) / 2;
+
+            // Bottom-aligned: a growing bar moves upward.
             double y = Bounds.Height - height;
 
-            LinearGradientBrush borderBrush = new LinearGradientBrush()
-            {
-                StartPoint = new RelativePoint(0.5, 0, RelativeUnit.Relative),
-                EndPoint = new RelativePoint(0.5, 1, RelativeUnit.Relative),
-            };
+            double radius = Math.Min(
+                20,
+                Math.Min(barWidth, height) / 2);
 
             HsvColor hsv = visual.Color.ToHsv();
+
             double top = Math.Clamp(hsv.V + 0.2, 0, 1);
             double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
 
-            borderBrush.GradientStops.Add(new GradientStop(new HsvColor(1, hsv.H, hsv.S, top).ToRgb(), 0));
-            borderBrush.GradientStops.Add(new GradientStop(visual.Color, 0.2));
-            borderBrush.GradientStops.Add(new GradientStop(visual.Color, 0.8));
-            borderBrush.GradientStops.Add(new GradientStop(new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(), 1));
+            LinearGradientBrush borderBrush = new()
+            {
+                StartPoint = new RelativePoint(
+                    0.5, 0, RelativeUnit.Relative),
 
-            context.DrawRectangle(new SolidColorBrush(visual.Color), new Pen(borderBrush, 2), new Rect(x, y, barWidth, height), 20, 20);
+                EndPoint = new RelativePoint(
+                    0.5, 1, RelativeUnit.Relative)
+            };
+
+            borderBrush.GradientStops.Add(
+                new GradientStop(
+                    new HsvColor(1, hsv.H, hsv.S, top).ToRgb(),
+                    0));
+
+            borderBrush.GradientStops.Add(
+                new GradientStop(visual.Color, 0.2));
+
+            borderBrush.GradientStops.Add(
+                new GradientStop(visual.Color, 0.8));
+
+            borderBrush.GradientStops.Add(
+                new GradientStop(
+                    new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(),
+                    1));
+
+            context.DrawRectangle(
+                new SolidColorBrush(visual.Color),
+                new Pen(borderBrush, 2),
+                new Rect(x, y, barWidth, height),
+                radius,
+                radius);
         }
     }
+
+    private static double Smoothstep(double t)
+        => t * t * (3 - 2 * t);
 
     private static double Lerp(double a, double b, double t)
         => a + (b - a) * t;
 
     private static Color LerpColor(Color a, Color b, double t)
         => Color.FromArgb(
-            (byte)Math.Round(Lerp(a.A, b.A, t)),
-            (byte)Math.Round(Lerp(a.R, b.R, t)),
-            (byte)Math.Round(Lerp(a.G, b.G, t)),
-            (byte)Math.Round(Lerp(a.B, b.B, t)));
+            (byte) Math.Round(Lerp(a.A, b.A, t)),
+            (byte) Math.Round(Lerp(a.R, b.R, t)),
+            (byte) Math.Round(Lerp(a.G, b.G, t)),
+            (byte) Math.Round(Lerp(a.B, b.B, t)));
 }

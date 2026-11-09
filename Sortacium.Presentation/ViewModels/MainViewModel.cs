@@ -20,17 +20,21 @@ public partial class MainViewModel : ViewModelBase
         get => _count;
         set
         {
-            if (SetProperty(ref _count, value))
-            {
-                OnPropertyChanged(nameof(Bars));
-            }
+            int count = Math.Clamp(value, 5, 500);
 
-            ResetBars();
+            if (SetProperty(ref _count, count))
+                ResetBars();
         }
     }
 
+    
+    private IReadOnlyList<Bar> _bars = Array.Empty<Bar>();
     [ObservableProperty]
-    public IReadOnlyList<Bar> Bars { get; set;  } = new List<Bar>();
+    public IReadOnlyList<Bar> Bars
+    {
+        get => _bars;
+        private set => SetProperty(ref _bars, value);
+    }
 
     [RelayCommand]
     public async Task BubbleSortCommand()
@@ -45,8 +49,21 @@ public partial class MainViewModel : ViewModelBase
 
     private void ResetBars()
     {
+        double[] values = Enumerable.Range(1, Count)
+        .Select(i => (double) i / Count)
+        .ToArray();
+
+        // Fisher-Yates shuffle.
+        for (int i = values.Length - 1; i > 0; i--)
+        {
+            int j = Random.Shared.Next(i + 1);
+
+            (values[i], values[j]) =
+                (values[j], values[i]);
+        }
+
         List<Bar> newBars = Enumerable.Range(0, Count)
-            .Select(i => new Bar(i, Random.Shared.NextDouble()))
+            .Select(i => new Bar(i, values[i]))
             .ToList();
 
         Bars = newBars;
