@@ -61,6 +61,11 @@
                     Duration="0:0:0.15"
                     Easing="CubicEaseOut"/>
 
+                <ThicknessTransition
+                    Property="Padding"
+                    Duration="0:0:0.2"
+                    Easing="SineEaseOut"/>
+
             </Transitions>
 
         </Setter>
@@ -139,7 +144,11 @@
 
             <Setter
                 Property="Foreground"
-                Value="#8888EE"/>
+                Value="#AF4BE9"/>
+
+            <Setter
+                Property="Padding"
+                Value="11"/>
 
         </Style>
 
@@ -147,12 +156,16 @@
             Selector="^:pressed">
 
             <Setter
+                Property="Padding"
+                Value="11"/>
+
+            <Setter
                 Property="Background"
                 Value="#212121"/>
 
             <Setter
                 Property="Foreground"
-                Value="#8888EE"/>
+                Value="#AF4BE9"/>
 
             <Setter
                 Property="RenderTransform"

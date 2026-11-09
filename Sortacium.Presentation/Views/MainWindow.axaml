@@ -34,7 +34,7 @@
                         Text="Sortacium"
                         FontSize="26"
                         FontWeight="Bold"
-                        Foreground="#88E"
+                        Foreground="#AF4BE9"
                         VerticalAlignment="Center"/>
 
                 </StackPanel>
@@ -137,9 +137,19 @@
                     </Border.BorderBrush>
 
                 <StackPanel
-                    Margin="10">
+                    Margin="15"
+                    Spacing="10">
 
-                    <TextBlock Text="Selected sort"/>
+                    <TextBlock
+                        Text="Selected sorting algorithm"
+                        Foreground="#999"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Text="Bubble sort"
+                        FontSize="26"
+                        Foreground="#AF4BE9"
+                        FontWeight="Bold"/>
 
                     <Grid
                         ColumnDefinitions="*, *"
