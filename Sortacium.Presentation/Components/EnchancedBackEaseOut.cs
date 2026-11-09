@@ -1,5 +1,5 @@
-using System;
 using Avalonia.Animation.Easings;
+using System;
 
 namespace Sortacium.Presentation.Components;
 

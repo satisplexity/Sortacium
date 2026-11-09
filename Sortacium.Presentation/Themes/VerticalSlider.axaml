@@ -11,6 +11,7 @@
              Property="Template">
 
              <ControlTemplate>
+
                  <Border
                      Background="{TemplateBinding Background}" />
 
@@ -60,8 +61,68 @@
             <Setter.Value>
 
                 <LinearGradientBrush
-                                StartPoint="50%, 0%"
-                                EndPoint="50%, 100%">
+                    StartPoint="50%, 0%"
+                    EndPoint="50%, 100%">
+
+                    <GradientStop
+                        Color="#AF4BE9"
+                        Offset="0"/>
+
+                    <GradientStop
+                        Color="#8D40B9"
+                        Offset="0.3"/>
+
+                    <GradientStop
+                        Color="#8D40B9"
+                        Offset="0.7"/>
+
+                    <GradientStop
+                        Color="#5F2D7C"
+                        Offset="1"/>
+
+                </LinearGradientBrush>
+
+            </Setter.Value>
+
+        </Setter>
+
+        <Setter
+            Property="RenderTransform"
+            Value="translateY(0px)"/>
+
+        <Setter
+            Property="Background"
+            Value="#853CAE"/>
+
+        <Setter
+            Property="Height"
+            Value="36"/>
+
+        <Setter Property="Template">
+
+            <ControlTemplate>
+
+                <!-- Outer Border -->
+                <Border
+                    Background="#792FA4"
+                    BorderThickness="0,2,0,0"
+                    CornerRadius="10,10,0,0"
+                    BorderBrush="#8539B1">
+
+                    <!-- Inner Border -->
+                    <Border
+                        Name="PART_InnerBorder"
+                        Background="#853CAE"
+                        BorderThickness="1.5"
+                        CornerRadius="8"
+                        Margin="6"
+                        RenderTransform="translateY(0px)">
+
+                        <Border.BorderBrush>
+
+                            <LinearGradientBrush
+                                StartPoint="50%,0%"
+                                EndPoint="50%,100%">
 
                                 <GradientStop
                                     Color="#AF4BE9"
@@ -81,131 +142,89 @@
 
                             </LinearGradientBrush>
 
-            </Setter.Value>
+                        </Border.BorderBrush>
+
+                        <Border.Transitions>
+
+                            <Transitions>
+
+                                <BrushTransition
+                                    Property="Background"
+                                    Duration="0:0:0.2"
+                                    Easing="CubicEaseOut"/>
+
+                                <BrushTransition
+                                    Property="BorderBrush"
+                                    Duration="0:0:0.2"
+                                    Easing="CubicEaseOut"/>
+
+                                <TransformOperationsTransition
+                                    Property="RenderTransform"
+                                    Duration="0:0:0.15"
+                                    Easing="CubicEaseOut"/>
+
+                            </Transitions>
+
+                        </Border.Transitions>
+
+                    </Border>
+
+                </Border>
+
+            </ControlTemplate>
 
         </Setter>
 
-        <Setter
-            Property="RenderTransform"
-            Value="translateY(0px)"/>
+        <Style
+            Selector="^:pointerover">
 
-        <Setter
-            Property="Background"
-            Value="#853CAE"/>
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
 
-        <Setter
-            Property="Height"
-            Value="36"/>
+        </Style>
 
-        <Setter Property="Template">
-    <ControlTemplate>
+        <Style
+            Selector="^:pressed /template/ Border#PART_InnerBorder">
 
-        <!-- Outer Border -->
-        <Border
-            Background="#792FA4"
-            BorderThickness="0,2,0,0"
-            CornerRadius="10,10,0,0"
-            BorderBrush="#8539B1">
+            <Setter
+                Property="Background"
+                Value="#7B38A3"/>
 
-            <!-- Inner Border -->
-            <Border
-                Name="PART_InnerBorder"
-                Background="#853CAE"
-                BorderThickness="1.5"
-                CornerRadius="8"
-                Margin="6"
-                RenderTransform="translateY(0px)">
+            <Setter
+                Property="RenderTransform"
+                Value="translateY(-1px)"/>
 
-                <Border.BorderBrush>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+
                     <LinearGradientBrush
                         StartPoint="50%,0%"
                         EndPoint="50%,100%">
 
-                        <GradientStop Color="#AF4BE9" Offset="0"/>
-                        <GradientStop Color="#8D40B9" Offset="0.3"/>
-                        <GradientStop Color="#8D40B9" Offset="0.7"/>
-                        <GradientStop Color="#5F2D7C" Offset="1"/>
+                        <GradientStop
+                            Offset="0"
+                            Color="#4E1F69"/>
+
+                        <GradientStop
+                            Offset="0.2"
+                            Color="#713593"/>
+
+                        <GradientStop
+                            Offset="0.8"
+                            Color="#713593"/>
+
+                        <GradientStop
+                            Offset="1"
+                            Color="#9340C3"/>
 
                     </LinearGradientBrush>
-                </Border.BorderBrush>
 
-                <Border.Transitions>
-                    <Transitions>
+                </Setter.Value>
 
-                        <BrushTransition
-                            Property="Background"
-                            Duration="0:0:0.2"
-                            Easing="CubicEaseOut"/>
+            </Setter>
 
-                        <BrushTransition
-                            Property="BorderBrush"
-                            Duration="0:0:0.2"
-                            Easing="CubicEaseOut"/>
-
-                        <TransformOperationsTransition
-                            Property="RenderTransform"
-                            Duration="0:0:0.15"
-                            Easing="CubicEaseOut"/>
-
-                    </Transitions>
-                </Border.Transitions>
-
-            </Border>
-
-        </Border>
-
-    </ControlTemplate>
-</Setter>
-
-        <!-- Hover -->
-<Style Selector="^:pointerover">
-
-    <Setter
-        Property="Cursor"
-        Value="Hand"/>
-
-</Style>
-
-<!-- Pressed -->
-<Style Selector="^:pressed /template/ Border#PART_InnerBorder">
-
-    <Setter
-        Property="Background"
-        Value="#7B38A3"/>
-
-    <Setter
-        Property="RenderTransform"
-        Value="translateY(-1px)"/>
-
-    <Setter Property="BorderBrush">
-        <Setter.Value>
-
-            <LinearGradientBrush
-                StartPoint="50%,0%"
-                EndPoint="50%,100%">
-
-                <GradientStop
-                    Offset="0"
-                    Color="#4E1F69"/>
-
-                <GradientStop
-                    Offset="0.2"
-                    Color="#713593"/>
-
-                <GradientStop
-                    Offset="0.8"
-                    Color="#713593"/>
-
-                <GradientStop
-                    Offset="1"
-                    Color="#9340C3"/>
-
-            </LinearGradientBrush>
-
-        </Setter.Value>
-    </Setter>
-
-</Style>
+        </Style>
 
     </ControlTheme>
 
@@ -309,11 +328,11 @@
                                 Grid.Row="1"
                                 Orientation="Vertical"
                                 Minimum="{TemplateBinding Minimum}"
-                                   Maximum="{TemplateBinding Maximum}"
-                                   Value="{TemplateBinding Value, Mode=TwoWay}"
-                                   IsDirectionReversed="False">
+                                Maximum="{TemplateBinding Maximum}"
+                                Value="{TemplateBinding Value, Mode=TwoWay}"
+                                IsDirectionReversed="False">
 
-                                 <Track.DecreaseButton>
+                                <Track.DecreaseButton>
 
                                     <RepeatButton
                                         Name="PART_DecreaseButton"

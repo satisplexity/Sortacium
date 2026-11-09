@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System;
 
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia;
 
 using Sortacium.Presentation.Components;
 using Sortacium.Presentation.Models;

@@ -1,8 +1,10 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia;
+
 using Sortacium.Presentation.Services;
-using Avalonia.Input;
+
 using System.Diagnostics;
 
 namespace Sortacium.Presentation.Controls;
