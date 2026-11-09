@@ -140,6 +140,9 @@
 
                     <TextBlock Text="Selected sort"/>
 
+                    <controls:HorizontalSlider
+                        Title="Amount"/>
+
                 </StackPanel>
 
             </Border>

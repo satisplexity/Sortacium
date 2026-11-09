@@ -25,8 +25,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
         <Content Include="Assets/Sounds/*.wav" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="NewFolder\**" />
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>

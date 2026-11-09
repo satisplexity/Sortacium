@@ -1,4 +1,4 @@
-﻿<Application xmlns="https://github.com/avaloniaui"
+<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Sortacium.Presentation.App"
              RequestedThemeVariant="Default">
@@ -13,6 +13,7 @@
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/Icons.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/Colors.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/Brushes.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Resources/HorizontalSlider.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Window.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/IconButton.axaml"/>
             </ResourceDictionary.MergedDictionaries>
