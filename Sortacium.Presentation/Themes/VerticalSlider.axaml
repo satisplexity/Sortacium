@@ -73,6 +73,10 @@
         TargetType="{x:Type controls:VerticalSlider}">
 
         <Setter
+            Property="Orientation"
+            Value="Vertical"/>
+
+        <Setter
             Property="Template">
 
             <ControlTemplate>
@@ -154,7 +158,8 @@
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    IsHitTestVisible="False"/>
+                                    IsHitTestVisible="False"
+                                    Margin="0, 8, 0, 6"/>
 
                             </Border>
 
@@ -229,7 +234,8 @@
                                     Foreground="#EEE"
                                     FontWeight="Bold"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"/>
+                                    HorizontalAlignment="Center"
+                                    Margin="0, 6, 0, 8"/>
 
                             </Border>
 
