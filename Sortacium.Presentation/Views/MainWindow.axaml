@@ -136,14 +136,30 @@
 
                     </Border.BorderBrush>
 
-                <StackPanel>
+                <StackPanel
+                    Margin="10">
 
                     <TextBlock Text="Selected sort"/>
 
                     <controls:HorizontalSlider
                         Title="Amount"/>
 
-                </StackPanel>
+                    <Grid
+                        ColumnDefinitions="*, *"
+                        Height="300"
+                        ColumnSpacing="10">
+
+                        <controls:VerticalSlider
+                            Title="Count"/>
+
+                        <controls:VerticalSlider
+                            Title="Operations"
+                            Grid.Column="1"/>
+
+                    </Grid>
+
+                </StackPanel
+>
 
             </Border>
 

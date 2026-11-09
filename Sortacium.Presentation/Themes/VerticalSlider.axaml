@@ -1,0 +1,249 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Sortacium.Presentation.Controls">
+
+     <ControlTheme
+         x:Key="VerticalSlider.SegmentTheme"
+         TargetType="RepeatButton">
+
+         <Setter
+             Property="Template">
+
+             <ControlTemplate>
+                 <Border
+                     Background="{TemplateBinding Background}" />
+
+             </ControlTemplate>
+
+         </Setter>
+
+    </ControlTheme>
+
+    <!-- Thumb -->
+    <ControlTheme
+        x:Key="VerticalSlider.ThumbTheme"
+        TargetType="Thumb">
+
+        <Setter
+            Property="Height"
+            Value="36"/>
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <Border
+                    Background="#8844EE"
+                    BorderThickness="0, 2, 0, 0"
+                    CornerRadius="10, 10, 0, 0"
+                    BorderBrush="#9955EE">
+
+                    <Border
+                        Background="#9955EE"
+                        CornerRadius="8"
+                        Margin="6">
+
+                        <Border.BorderBrush>
+                            <LinearGradientBrush
+                                StartPoint="50%, 0%"
+                                EndPoint="50%, 100%">
+                                <GradientStop
+                                    Color="#9955EE"
+                                    Offset="0"/>
+                                <GradientStop
+                                    Color="#8844EE"
+                                    Offset="1"/>
+                            </LinearGradientBrush>
+                             </Border.BorderBrush>
+                    </Border
+>
+
+                </Border>
+
+            </ControlTemplate>
+
+        </Setter>
+
+    </ControlTheme>
+
+    <ControlTheme
+        x:Key="{x:Type controls:VerticalSlider}"
+        TargetType="{x:Type controls:VerticalSlider}">
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <Border
+                    Background="#292929"
+                    CornerRadius="16"
+                    BorderThickness="1.5"
+                    Padding="6">
+
+                    <Border.BorderBrush>
+
+                        <LinearGradientBrush
+                            StartPoint="50%, 0%"
+                            EndPoint="50%, 100%">
+
+                            <GradientStop
+                                Color="#353535"
+                                Offset="0"/>
+
+                            <GradientStop
+                                Color="#2B2B2B"
+                                Offset="0.1"/>
+
+                            <GradientStop
+                                Color="#2B2B2B"
+                                Offset="0.9"/>
+
+                            <GradientStop
+                                Color="#1B1B1B"
+                                Offset="1"/>
+
+                        </LinearGradientBrush>
+
+                    </Border.BorderBrush>
+
+                    <Border
+                        Background="#232323"
+                        BorderThickness="1.5"
+                        CornerRadius="14">
+
+                        <Border.BorderBrush>
+
+                              <LinearGradientBrush
+                                StartPoint="50%, 0%"
+                                EndPoint="50%, 100%">
+
+                                <GradientStop
+                                    Color="#1E1E1E"
+                                    Offset="0"/>
+
+                                <GradientStop
+                                    Color="#212121"
+                                    Offset="0.1"/>
+
+                                <GradientStop
+                                    Color="#212121"
+                                    Offset="0.9"/>
+
+                                <GradientStop
+                                    Color="#353535"
+                                    Offset="1"/>
+
+                            </LinearGradientBrush>
+
+                        </Border.BorderBrush>
+
+                        <Grid
+                            RowDefinitions="Auto, *, Auto">
+
+                            <Border
+                                Background="#3A3A3A"
+                                CornerRadius="14,14,0,0">
+
+                                <TextBlock
+                                    Text="{TemplateBinding Title}"
+                                    FontSize="16"
+                                    Foreground="#EEE"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    IsHitTestVisible="False"/>
+
+                            </Border>
+
+                            <Track
+                                Name="PART_Track"
+                                Grid.Row="1"
+                                Orientation="Vertical"
+                                Minimum="{TemplateBinding Minimum}"
+                                   Maximum="{TemplateBinding Maximum}"
+                                   Value="{TemplateBinding Value, Mode=TwoWay}"
+                                   IsDirectionReversed="False">
+
+                                 <Track.DecreaseButton>
+
+                                    <RepeatButton
+                                        Name="PART_DecreaseButton"
+                                        Theme="{StaticResource VerticalSlider.SegmentTheme}"
+                                        Focusable="False">
+
+                                        <RepeatButton.Background>
+
+                                            <LinearGradientBrush
+                                                StartPoint="50%,0%"
+                                                EndPoint="50%,100%">
+
+                                                <GradientStop
+                                                    Color="#84E"
+                                                    Offset="0" />
+
+                                                <GradientStop
+                                                    Color="#3A3A3A"
+                                                    Offset="1" />
+
+                                            </LinearGradientBrush>
+
+                                        </RepeatButton.Background>
+
+                                    </RepeatButton>
+
+                                </Track.DecreaseButton>
+
+                                  <Track.IncreaseButton>
+
+                                    <RepeatButton
+                                        Name="PART_IncreaseButton"
+                                        Theme="{StaticResource VerticalSlider.SegmentTheme}"
+                                        Background="#202020"
+                                        Focusable="False" />
+
+                                </Track.IncreaseButton>
+
+                                <Track.Thumb>
+
+                                    <Thumb
+                                        Name="PART_Thumb"
+                                        Theme="{StaticResource VerticalSlider.ThumbTheme}"/>
+
+                                </Track.Thumb>
+
+                            </Track>
+
+                            <Border
+                                Grid.Row="2"
+                                Background="#3A3A3A"
+                                CornerRadius="0,0,14,14">
+
+                                <TextBlock
+                                    Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
+                                           StringFormat='{}{0:F0}'}"
+                                    FontSize="16"
+                                    Foreground="#EEE"
+                                    FontWeight="Bold"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border
+>
+
+                </Border>
+
+            </ControlTemplate>
+
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

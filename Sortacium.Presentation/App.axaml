@@ -14,6 +14,7 @@
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/Colors.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/Brushes.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Resources/HorizontalSlider.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/VerticalSlider.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Window.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/IconButton.axaml"/>
             </ResourceDictionary.MergedDictionaries>
