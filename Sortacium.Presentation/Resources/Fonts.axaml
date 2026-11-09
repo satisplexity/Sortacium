@@ -5,7 +5,7 @@
     <FontFamily
         x:Key="Comfortaa">
 
-        //Assets/Fonts/Comfortaa.ttf#Comfortaa
+        avares://Sortacium.Presentation/Assets/Fonts/Comfortaa.ttf#Comfortaa
 
     </FontFamily
 >

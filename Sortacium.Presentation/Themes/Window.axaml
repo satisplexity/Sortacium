@@ -51,6 +51,10 @@
             Value="True"/>
 
         <Setter
+            Property="FontFamily"
+            Value="{StaticResource Comfortaa}"/>
+
+        <Setter
             Property="Template">
 
             <ControlTemplate>
