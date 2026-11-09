@@ -141,16 +141,16 @@
 
                     <TextBlock Text="Selected sort"/>
 
-                    <controls:HorizontalSlider
-                        Title="Amount"/>
-
                     <Grid
                         ColumnDefinitions="*, *"
                         Height="300"
                         ColumnSpacing="10">
 
                         <controls:VerticalSlider
-                            Title="Count"/>
+                            Title="Count"
+                            Minimum="5"
+                            Maximum="100"
+                            Value="{Binding Count}"/>
 
                         <controls:VerticalSlider
                             Title="Operations"

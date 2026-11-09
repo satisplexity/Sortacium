@@ -1,6 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Sortacium.Presentation.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -10,25 +12,44 @@ namespace Sortacium.Presentation.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    private int _count = 20;
+
     [ObservableProperty]
-    public IReadOnlyList<Bar> Bars { get; } = new List<Bar>
+    public int Count
     {
-        new Bar(0, 0.2),
-        new Bar(1, 0.5),
-        new Bar(2, 0.3),
-        new Bar(3, 0.8),
-        new Bar(4, 0.1),
-        new Bar(5, 0.6),
-        new Bar(6, 0.4),
-        new Bar(7, 0.9),
-        new Bar(8, 0.7),
-        new Bar(9, 1.0)
-    };
+        get => _count;
+        set
+        {
+            if (SetProperty(ref _count, value))
+            {
+                OnPropertyChanged(nameof(Bars));
+            }
+
+            ResetBars();
+        }
+    }
+
+    [ObservableProperty]
+    public IReadOnlyList<Bar> Bars { get; set;  } = new List<Bar>();
 
     [RelayCommand]
     public async Task BubbleSortCommand()
     {
         await BubbleSortAsync();
+    }
+
+    public MainViewModel()
+    {
+        ResetBars();
+    }
+
+    private void ResetBars()
+    {
+        List<Bar> newBars = Enumerable.Range(0, Count)
+            .Select(i => new Bar(i, Random.Shared.NextDouble()))
+            .ToList();
+
+        Bars = newBars;
     }
 
     public async Task BubbleSortAsync(
