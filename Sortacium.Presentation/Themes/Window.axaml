@@ -5,7 +5,51 @@
     <ControlTheme
         x:Key="{x:Type Window}"
         TargetType="{x:Type Window}">
-        
+
+        <Setter
+            Property="Title"
+            Value="Sortacium"/>
+
+        <Setter
+            Property="Icon"
+            Value="/Assets/avalonia-logo.ico"/>
+
+        <Setter
+            Property="Width"
+            Value="1200"/>
+
+        <Setter
+            Property="Height"
+            Value="1000"/>
+
+        <Setter
+            Property="MinWidth"
+            Value="800"/>
+
+        <Setter
+            Property="MinHeight"
+            Value="600"/>
+
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+
+        <Setter
+            Property="CanResize"
+            Value="True"/>
+
+        <Setter
+            Property="WindowStartupLocation"
+            Value="CenterScreen"/>
+
+        <Setter
+            Property="WindowDecorations"
+            Value="None"/>
+
+        <Setter
+            Property="ExtendClientAreaToDecorationsHint"
+            Value="True"/>
+
         <Setter
             Property="Template">
 
