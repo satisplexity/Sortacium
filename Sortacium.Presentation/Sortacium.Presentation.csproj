@@ -33,4 +33,12 @@
     <AvaloniaResource Remove="Assets\Sounds\pressed.wav" />
     <AvaloniaResource Remove="Assets\Sounds\released.wav" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="P:\Sortacium\Sortacium.Presentation\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="P:\Sortacium\Sortacium.Presentation\.editorconfig" />
+  </ItemGroup>
 </Project>
