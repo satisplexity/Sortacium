@@ -1,98 +1,120 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   
-    <ControlTheme x:Key="{x:Type Window}"
-                  TargetType="{x:Type Window}">
+    <ControlTheme
+        x:Key="{x:Type Window}"
+        TargetType="{x:Type Window}">
         
         <Setter
             Property="Template">
+
             <ControlTemplate>
                 
                 <Border CornerRadius="15"
-            Background="{StaticResource Brush.WindowBackground}"
-            BorderThickness="2">
+                        Background="{StaticResource Brush.WindowBackground}"
+                        BorderThickness="2">
                     
                     <Border.BorderBrush>
-           
-           <LinearGradientBrush StartPoint="50%, 0%"
-                                EndPoint="50%, 100%">
-               
-               <GradientStop Color="#272727"
-                             Offset="0"/>
 
-               <GradientStop Color="{StaticResource Color.TitleBarBackground}"
-                             Offset="0.1"/>
+                        <LinearGradientBrush
+                            StartPoint="50%, 0%"
+                            EndPoint="50%, 100%">
 
-               <GradientStop Color="{StaticResource Color.WindowBackground}"
-                             Offset="0.9"/>
+                            <GradientStop
+                                Color="#272727"
+                                Offset="0"/>
 
-               <GradientStop Color="#151515"
-                             Offset="1"/>
+                            <GradientStop
+                                Color="{StaticResource Color.TitleBarBackground}"
+                                Offset="0.1"/>
 
-           </LinearGradientBrush>
+                            <GradientStop
+                                Color="{StaticResource Color.WindowBackground}"
+                                Offset="0.9"/>
 
-       </Border.BorderBrush>
-<Grid>
+                            <GradientStop
+                                Color="#151515"
+                                Offset="1"/>
 
-    <ContentControl Content="{TemplateBinding Content}"/>
+                        </LinearGradientBrush>
 
-                    <Border Width="6"
-                HorizontalAlignment="Left"
-                Background="Transparent"
-                Cursor="SizeWestEast"
-                WindowDecorationProperties.ElementRole="ResizeW"/>
+                    </Border.BorderBrush>
 
-        <Border Width="6"
-                HorizontalAlignment="Right"
-                Background="Transparent"
-                Cursor="SizeWestEast"
-                WindowDecorationProperties.ElementRole="ResizeE"/>
+                    <Grid>
 
-        <Border Height="6"
-                VerticalAlignment="Top"
-                Background="Transparent"
-                Cursor="SizeNorthSouth"
-                WindowDecorationProperties.ElementRole="ResizeN"/>
+                        <ContentControl
+                            Content="{TemplateBinding Content}"/>
 
-        <Border Height="6"
-                VerticalAlignment="Bottom"
-                Background="Transparent"
-                Cursor="SizeNorthSouth"
-                WindowDecorationProperties.ElementRole="ResizeS"/>
+                        <Border
+                            Width="6"
+                            HorizontalAlignment="Left"
+                            Background="Transparent"
+                            Cursor="SizeWestEast"
+                            WindowDecorationProperties.ElementRole="ResizeW"/>
 
-        <Border Width="10" Height="10"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Cursor="TopLeftCorner"
-                WindowDecorationProperties.ElementRole="ResizeNW"/>
+                        <Border
+                            Width="6"
+                            HorizontalAlignment="Right"
+                            Background="Transparent"
+                            Cursor="SizeWestEast"
+                            WindowDecorationProperties.ElementRole="ResizeE"/>
 
-        <Border Width="10" Height="10"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Background="Transparent"
-                Cursor="TopRightCorner"
-                WindowDecorationProperties.ElementRole="ResizeNE"/>
+                        <Border
+                            Height="6"
+                            VerticalAlignment="Top"
+                            Background="Transparent"
+                            Cursor="SizeNorthSouth"
+                            WindowDecorationProperties.ElementRole="ResizeN"/>
 
-        <Border Width="10" Height="10"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Background="Transparent"
-                Cursor="BottomLeftCorner"
-                WindowDecorationProperties.ElementRole="ResizeSW"/>
+                        <Border
+                            Height="6"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Cursor="SizeNorthSouth"
+                            WindowDecorationProperties.ElementRole="ResizeS"/>
 
-        <Border Width="10" Height="10"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Background="Transparent"
-                Cursor="BottomRightCorner"
-                WindowDecorationProperties.ElementRole="ResizeSE"/>
+                        <Border
+                            Width="10"
+                            Height="10"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Cursor="TopLeftCorner"
+                            WindowDecorationProperties.ElementRole="ResizeNW"/>
 
-                </Grid>
+                        <Border
+                            Width="10"
+                            Height="10"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Background="Transparent"
+                            Cursor="TopRightCorner"
+                            WindowDecorationProperties.ElementRole="ResizeNE"/>
+
+                        <Border
+                            Width="10"
+                            Height="10"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Cursor="BottomLeftCorner"
+                            WindowDecorationProperties.ElementRole="ResizeSW"/>
+
+                        <Border
+                            Width="10"
+                            Height="10"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Cursor="BottomRightCorner"
+                            WindowDecorationProperties.ElementRole="ResizeSE"/>
+
+                    </Grid>
+
                 </Border>
 
-                
-
             </ControlTemplate>
+
         </Setter>
 
     </ControlTheme>
