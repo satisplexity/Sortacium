@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -8,6 +8,7 @@ namespace Sortacium.Presentation.Models;
 
 public enum BarState
 {
+    Initialize,
     Idle,
     Comparing,
     Swapping
@@ -17,7 +18,7 @@ public class Bar : INotifyPropertyChanged
 {
     private int _index;
     private double _value;
-    private BarState _state;
+    private BarState _state = BarState.Initialize;
 
     public Bar(int index, double value)
     {
