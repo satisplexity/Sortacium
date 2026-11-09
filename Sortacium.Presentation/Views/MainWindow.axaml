@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
     xmlns:controls="using:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components"
     x:Class="Sortacium.Presentation.Views.MainWindow"
     x:DataType="vm:MainViewModel">
 
@@ -10,19 +11,52 @@
         <vm:MainViewModel/>
     </Design.DataContext>
 
-    <Grid
-        RowDefinitions="auto,*">
 
-        <Border
-            Grid.Row="0"
-            Background="{StaticResource Brush.TitleBarBackground}"
-            WindowDecorationProperties.ElementRole="TitleBar"
-            Padding="10"
-            CornerRadius="15, 15, 0, 0"
-            BorderThickness="0, 0, 0, 3"
-            BorderBrush="#171717">
 
-            <Grid
+    <Window.Styles>
+
+        <!-- Затемнение фона -->
+    <Style Selector="Border#ModalOverlay">
+        <Setter Property="Opacity" Value="0" />
+    </Style>
+
+    <Style Selector="Border#ModalOverlay.open">
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <!-- Окно настроек -->
+    <Style Selector="Border#SettingsDialog">
+        <Setter Property="Opacity" Value="0" />
+        <Setter
+            Property="RenderTransform"
+            Value="scale(0.9) translateY(30px)" />
+    </Style>
+
+    <Style Selector="Border#SettingsDialog.open">
+        <Setter Property="Opacity" Value="1" />
+        <Setter
+            Property="RenderTransform"
+            Value="scale(1) translateY(0px)" />
+    </Style>
+
+    </Window.Styles>
+
+    <Grid>
+
+        <Grid
+            Name="MainContent"
+            RowDefinitions="auto,*">
+
+            <Border
+                Grid.Row="0"
+                Background="{StaticResource Brush.TitleBarBackground}"
+                WindowDecorationProperties.ElementRole="TitleBar"
+                Padding="10"
+                CornerRadius="15, 15, 0, 0"
+                BorderThickness="0, 0, 0, 3"
+                BorderBrush="#171717">
+
+                <Grid
                 ColumnDefinitions="*,auto,*">
 
                 <!-- Application title -->
@@ -47,7 +81,8 @@
                     WindowDecorationProperties.ElementRole="User">
 
                     <controls:IconButton
-                        Icon="{StaticResource Icon.Shuffle}"/>
+                        Icon="{StaticResource Icon.Shuffle}"
+                        ToolTip.Tip="Shuffle"/>
 
                     <controls:IconButton
                         Icon="{StaticResource Icon.Play}"
@@ -76,7 +111,8 @@
 
                     <controls:IconButton
                         Icon="{StaticResource Icon.Settings}"
-                        WindowDecorationProperties.ElementRole="User"/>
+                        WindowDecorationProperties.ElementRole="User"
+                        Click="OpenSettings_Click"/>
 
                     <controls:IconButton
                         Icon="{StaticResource Icon.Minimize}"
@@ -191,6 +227,102 @@
 >
 
         </Grid>
+
+        
+
+    </Grid>
+
+        <Border
+    x:Name="ModalOverlay"
+    Background="#55000000"
+    CornerRadius="15"
+    IsHitTestVisible="False">
+
+    <Border.Transitions>
+        <Transitions>
+            <DoubleTransition
+                Property="Opacity"
+                Duration="0:0:0.25"
+                Easing="CubicEaseOut" />
+        </Transitions>
+    </Border.Transitions>
+
+    <Border
+        x:Name="SettingsDialog"
+        Width="800"
+        Margin="50"
+        Padding="24"
+        CornerRadius="12"
+        Background="#242424"
+        HorizontalAlignment="Center"
+        RenderTransformOrigin="50%,50%"
+        BorderThickness="1.5">
+
+        <Border.BorderBrush>
+
+            <LinearGradientBrush
+                StartPoint="50%, 0%"
+                EndPoint="50%, 100%">
+
+                <GradientStop Color="#2E2E2E"
+                              Offset="0"/>
+
+                <GradientStop Color="#262626"
+                              Offset="0.2"/>
+
+                <GradientStop Color="#262626"
+                              Offset="0.8"/>
+
+                <GradientStop Color="#1E1E1E"
+                              Offset="1"/>
+
+            </LinearGradientBrush
+>
+
+        </Border.BorderBrush>
+
+        <Border.Transitions>
+            <Transitions>
+                <DoubleTransition
+                    Property="Opacity"
+                    Duration="0:0:0.25"
+                    Easing="CubicEaseOut" />
+
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.4">
+
+                <TransformOperationsTransition.Easing>
+        <components:EnchancedBackEaseOut
+            Amplitude="0.4" />
+    </TransformOperationsTransition.Easing>
+
+            </TransformOperationsTransition>
+            </Transitions>
+        </Border.Transitions>
+
+        <StackPanel Spacing="16">
+
+            <TextBlock
+                Text="Settings"
+                FontSize="24"
+                FontWeight="Bold" />
+
+            <TextBlock Text="Animation speed" />
+
+            <Slider
+                Minimum="0"
+                Maximum="100"
+                Value="50" />
+
+            <Button
+                Content="Close"
+                HorizontalAlignment="Right"
+                Click="CloseSettings_Click" />
+
+        </StackPanel>
+    </Border>
+</Border>
 
     </Grid>
 
