@@ -1,98 +1,115 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:Sortacium.Presentation.ViewModels"
-        xmlns:controls="using:Sortacium.Presentation.Controls"
-        x:Class="Sortacium.Presentation.Views.MainWindow"
-        x:DataType="vm:MainViewModel">
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Sortacium.Presentation.ViewModels"
+    xmlns:controls="using:Sortacium.Presentation.Controls"
+    x:Class="Sortacium.Presentation.Views.MainWindow"
+    x:DataType="vm:MainViewModel">
 
     <Design.DataContext>
         <vm:MainViewModel/>
     </Design.DataContext>
-    
-        <Grid
-            RowDefinitions="auto,*">
 
-            <Border
-                Grid.Row="0"
-                Background="{StaticResource Brush.TitleBarBackground}"
-                WindowDecorationProperties.ElementRole="TitleBar"
-                Padding="10"
-                CornerRadius="15, 15, 0, 0">
+    <Grid
+        RowDefinitions="auto,*">
 
-                <Grid
-                    ColumnDefinitions="*,auto,*">
-                    
-                    <StackPanel
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
-                        
-                        <TextBlock Text="Sortacium"
-                                   FontSize="26"
-                                   FontWeight="Bold"
-                                   Foreground="#88E"
-                                   VerticalAlignment="Center"/>
+        <Border
+            Grid.Row="0"
+            Background="{StaticResource Brush.TitleBarBackground}"
+            WindowDecorationProperties.ElementRole="TitleBar"
+            Padding="10"
+            CornerRadius="15, 15, 0, 0">
 
-                    </StackPanel>
+            <Grid
+                ColumnDefinitions="*,auto,*">
 
-                    <StackPanel
-                        Spacing="10"
-                        Grid.Column="1"
-                        Orientation="Horizontal"
-                        WindowDecorationProperties.ElementRole="User">
+                <!-- Application title -->
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
 
-                        <controls:IconButton
-                            Icon="{StaticResource Icon.Shuffle}"/>
+                    <TextBlock
+                        Text="Sortacium"
+                        FontSize="26"
+                        FontWeight="Bold"
+                        Foreground="#88E"
+                        VerticalAlignment="Center"/>
 
-                        <controls:IconButton Icon="{StaticResource Icon.Play}"
-                                             Command="{Binding BubbleSortCommand}"/>
-                        <controls:IconButton Icon="{StaticResource Icon.Pause}"/>
+                </StackPanel>
 
-                        <controls:IconButton Icon="{StaticResource Icon.Force}"/>
-                        <controls:IconButton Icon="{StaticResource Icon.Previous}"/>
-                        <controls:IconButton Icon="{StaticResource Icon.Next}"/>
+                <!-- Sorting controls -->
+                <StackPanel
+                    Spacing="10"
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    WindowDecorationProperties.ElementRole="User">
 
-                    </StackPanel>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Shuffle}"/>
 
-                    <StackPanel
-                        Spacing="10"
-                        Grid.Column="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                        
-                        <controls:IconButton
-                            Icon="{StaticResource Icon.Settings}"
-                            WindowDecorationProperties.ElementRole="User"/>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Play}"
+                        Command="{Binding BubbleSortCommand}"/>
 
-                        <controls:IconButton
-                            Icon="{StaticResource Icon.Minimize}"
-                            Click="Minimize_Click"
-                            WindowDecorationProperties.ElementRole="MinimizeButton"/>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Pause}"/>
 
-                        <controls:IconButton
-                            Icon="{StaticResource Icon.Maximize}"
-                            Click="Maximize_Click"
-                            WindowDecorationProperties.ElementRole="MaximizeButton"/>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Force}"/>
 
-                        <controls:IconButton
-                            Icon="{StaticResource Icon.Close}"
-                            Click="Close_Click"
-                            WindowDecorationProperties.ElementRole="CloseButton"/>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Previous}"/>
 
-                    </StackPanel>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Next}"/>
 
-                </Grid>
+                </StackPanel>
 
-            </Border>
+                <!-- Window controls -->
+                <StackPanel
+                    Spacing="10"
+                    Grid.Column="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
 
-            <Grid Grid.Row="1"
-                  RowDefinitions="Auto,*"
-                  Margin="16">
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Settings}"
+                        WindowDecorationProperties.ElementRole="User"/>
 
-                <controls:BarsRenderer
-                    Grid.Row="1"
-                    Bars="{Binding Bars}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"/>
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Minimize}"
+                        Click="Minimize_Click"
+                        WindowDecorationProperties.ElementRole="MinimizeButton"/>
+
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Maximize}"
+                        Click="Maximize_Click"
+                        WindowDecorationProperties.ElementRole="MaximizeButton"/>
+
+                    <controls:IconButton
+                        Icon="{StaticResource Icon.Close}"
+                        Click="Close_Click"
+                        WindowDecorationProperties.ElementRole="CloseButton"/>
+
+                </StackPanel>
+
             </Grid>
+
+        </Border>
+
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="Auto,*"
+            Margin="16">
+
+            <controls:BarsRenderer
+                Grid.Row="1"
+                Bars="{Binding Bars}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
+
+            </Grid>
+
         </Grid>
+
 </Window>
