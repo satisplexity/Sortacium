@@ -21,6 +21,11 @@ public sealed class BubbleSortAlgorithm
         {
             for (ushort j = 0; j < n - i - 1; j++)
             {
+                if(cancellationToken.IsCancellationRequested)
+                {
+                    return new SortingTrace(initial, actions.ToArray());
+                }
+
                 cancellationToken.ThrowIfCancellationRequested();
 
                 double left = working[j];

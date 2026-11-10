@@ -379,9 +379,7 @@ public sealed class BarsRenderer : Control
             // Bottom-aligned: a growing bar moves upward.
             double y = Bounds.Height - height;
 
-            double radius = Math.Min(
-                20,
-                Math.Min(barWidth, height) / 2);
+            double radius = barWidth / 4;
 
             if (bars.Count <= 50)
             {
@@ -424,14 +422,22 @@ public sealed class BarsRenderer : Control
             }
             else
             {
-                context.DrawRectangle(
-                    new SolidColorBrush(visual.Color),
-                    null,
-                    new Rect(x, y, barWidth, height),
-                    radius,
-                    radius);
-
-
+                if (radius > 2)
+                {
+                    context.DrawRectangle(
+                                        new SolidColorBrush(visual.Color),
+                                        null,
+                                        new Rect(x, y, barWidth, height),
+                                        radius,
+                                        radius);
+                }
+                else
+                {
+                    context.DrawRectangle(
+                                        new SolidColorBrush(visual.Color),
+                                        null,
+                                        new Rect(x, y, barWidth, height));
+                }
             }
         }
     }
