@@ -29,6 +29,18 @@ public sealed class BarsRenderer : Control
         set => SetValue(BarsProperty, value);
     }
 
+    public static readonly StyledProperty<int> SnapVersionProperty =
+    AvaloniaProperty.Register<BarsRenderer, int>(
+        nameof(SnapVersion));
+
+    public int SnapVersion
+    {
+        get => GetValue(SnapVersionProperty);
+        set => SetValue(SnapVersionProperty, value);
+    }
+
+    private bool _snapRequested;
+
     private const double AnimationDuration = 250;
     private const double WidthFactor = 0.8;
 
@@ -74,11 +86,22 @@ public sealed class BarsRenderer : Control
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property != BarsProperty)
+        if (change.Property == SnapVersionProperty)
+        {
+            _snapRequested = true;
+            RequestFrame();
             return;
+        }
+
+        if (change.Property != BarsProperty)
+        {
+            return;
+        }
 
         foreach (var bar in _visuals.Keys)
+        {
             bar.PropertyChanged -= OnBarChanged;
+        }   
 
         _visuals.Clear();
 
@@ -134,6 +157,40 @@ public sealed class BarsRenderer : Control
     private void OnFrame(TimeSpan time)
     {
         _frameQueued = false;
+
+        if (_snapRequested)
+        {
+            _snapRequested = false;
+
+            foreach (var (bar, visual) in _visuals)
+            {
+                Color color = GetColor(bar.State);
+
+                visual.X = bar.Index;
+                visual.FromX = bar.Index;
+                visual.TargetX = bar.Index;
+
+                visual.Value = bar.Value;
+                visual.FromValue = bar.Value;
+                visual.TargetValue = bar.Value;
+
+                visual.Color = color;
+                visual.FromColor = color;
+                visual.TargetColor = color;
+
+                visual.Animating = false;
+
+                visual.Growth = 1;
+                visual.Growing = false;
+                visual.GrowthStartTime = null;
+
+                visual.LastState = bar.State;
+            }
+
+            InvalidateVisual();
+
+            return;
+        }
 
         bool anyAnimating = false;
 

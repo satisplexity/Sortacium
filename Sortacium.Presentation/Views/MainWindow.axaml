@@ -81,24 +81,32 @@
                     WindowDecorationProperties.ElementRole="User">
 
                     <controls:IconButton
-                        Icon="{StaticResource Icon.Shuffle}"
-                        ToolTip.Tip="Shuffle"/>
+    Icon="{StaticResource Icon.Shuffle}"
+    Command="{Binding ShuffleCommand}" />
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Play}"
-                        Command="{Binding BubbleSortCommand}"/>
+<controls:IconButton
+    Icon="{StaticResource Icon.Play}"
+    Command="{Binding PlayCommand}"
+    IsEnabled="{Binding IsReady}" />
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Pause}"/>
+<controls:IconButton
+    Icon="{StaticResource Icon.Pause}"
+    Command="{Binding PauseCommand}" />
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Force}"/>
+<controls:IconButton
+    Icon="{StaticResource Icon.Force}"
+    Command="{Binding ForceToEndCommand}"
+    IsEnabled="{Binding IsReady}" />
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Previous}"/>
+<controls:IconButton
+    Icon="{StaticResource Icon.Previous}"
+    Command="{Binding PreviousStepCommand}"
+    IsEnabled="{Binding IsReady}" />
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Next}"/>
+<controls:IconButton
+    Icon="{StaticResource Icon.Next}"
+    Command="{Binding NextStepCommand}"
+    IsEnabled="{Binding IsReady}" />    
 
                 </StackPanel>
 
@@ -209,12 +217,46 @@
 
             </Border>
 
-            <controls:BarsRenderer
-                Margin="15"
-                Grid.Column="1"
-                Bars="{Binding Bars}"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
+            <Grid
+    Grid.Column="1"
+    Margin="15"
+    RowDefinitions="*,Auto,Auto"
+    RowSpacing="12">
+
+    <controls:BarsRenderer
+        Grid.Row="0"
+        Bars="{Binding Bars}"
+        SnapVersion="{Binding SnapVersion}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch" />
+
+    <Slider
+        Grid.Row="1"
+        Minimum="0"
+        Maximum="{Binding TotalSteps}"
+        Value="{Binding TimelinePosition, Mode=TwoWay}"
+        IsEnabled="{Binding IsReady}" />
+
+    <StackPanel
+        Grid.Row="2"
+        Orientation="Horizontal"
+        Spacing="8">
+
+        <TextBlock
+            Text="Step:" />
+
+        <TextBlock
+            Text="{Binding CurrentStep}" />
+
+        <TextBlock
+            Text="/" />
+
+        <TextBlock
+            Text="{Binding TotalSteps}" />
+
+    </StackPanel>
+
+</Grid>
 
             <Border
                 Grid.Column="2"
