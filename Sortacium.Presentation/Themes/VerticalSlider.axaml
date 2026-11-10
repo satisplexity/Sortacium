@@ -237,6 +237,18 @@
             Value="Vertical"/>
 
         <Setter
+            Property="Foreground"
+            Value="#EEE"/>
+
+        <Setter
+            Property="FontWeight"
+            Value="Medium"/>
+
+        <Setter
+            Property="FontSize"
+            Value="14"/>
+
+        <Setter
             Property="Template">
 
             <ControlTemplate>
@@ -313,13 +325,9 @@
 
                                 <TextBlock
                                     Text="{TemplateBinding Title}"
-                                    FontSize="16"
-                                    Foreground="#EEE"
-                                    FontWeight="Bold"
-                                    VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     IsHitTestVisible="False"
-                                    Margin="0, 8, 0, 6"/>
+                                    Margin="0, 8, 0, 8"/>
 
                             </Border>
 
@@ -390,12 +398,8 @@
                                     Text="{Binding Value,
                                            RelativeSource={RelativeSource TemplatedParent},
                                            StringFormat='{}{0:F0}'}"
-                                    FontSize="16"
-                                    Foreground="#EEE"
-                                    FontWeight="Bold"
-                                    VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Margin="0, 6, 0, 8"/>
+                                    Margin="0, 10, 0, 8"/>
 
                             </Border>
 
