@@ -40,4 +40,8 @@
   <ItemGroup>
     <None Include="P:\Sortacium\Sortacium.Presentation\.editorconfig" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sortacium.Core\Sortacium.Core.csproj" />
+  </ItemGroup>
 </Project>
