@@ -24,11 +24,11 @@
 
         <Setter
             Property="MinWidth"
-            Value="800"/>
+            Value="1200"/>
 
         <Setter
             Property="MinHeight"
-            Value="600"/>
+            Value="800"/>
 
         <Setter
             Property="Background"

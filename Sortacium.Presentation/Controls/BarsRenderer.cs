@@ -383,42 +383,56 @@ public sealed class BarsRenderer : Control
                 20,
                 Math.Min(barWidth, height) / 2);
 
-            HsvColor hsv = visual.Color.ToHsv();
-
-            double top = Math.Clamp(hsv.V + 0.2, 0, 1);
-            double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
-
-            LinearGradientBrush borderBrush = new()
+            if (bars.Count <= 50)
             {
-                StartPoint = new RelativePoint(
-                    0.5, 0, RelativeUnit.Relative),
+                HsvColor hsv = visual.Color.ToHsv();
 
-                EndPoint = new RelativePoint(
-                    0.5, 1, RelativeUnit.Relative)
-            };
+                double top = Math.Clamp(hsv.V + 0.2, 0, 1);
+                double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
 
-            borderBrush.GradientStops.Add(
-                new GradientStop(
-                    new HsvColor(1, hsv.H, hsv.S, top).ToRgb(),
-                    0));
+                LinearGradientBrush borderBrush = new()
+                {
+                    StartPoint = new RelativePoint(
+                        0.5, 0, RelativeUnit.Relative),
 
-            borderBrush.GradientStops.Add(
-                new GradientStop(visual.Color, 0.2));
+                    EndPoint = new RelativePoint(
+                        0.5, 1, RelativeUnit.Relative)
+                };
 
-            borderBrush.GradientStops.Add(
-                new GradientStop(visual.Color, 0.8));
+                borderBrush.GradientStops.Add(
+                    new GradientStop(
+                        new HsvColor(1, hsv.H, hsv.S, top).ToRgb(),
+                        0));
 
-            borderBrush.GradientStops.Add(
-                new GradientStop(
-                    new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(),
-                    1));
+                borderBrush.GradientStops.Add(
+                    new GradientStop(visual.Color, 0.2));
 
-            context.DrawRectangle(
-                new SolidColorBrush(visual.Color),
-                new Pen(borderBrush, 2),
-                new Rect(x, y, barWidth, height),
-                radius,
-                radius);
+                borderBrush.GradientStops.Add(
+                    new GradientStop(visual.Color, 0.8));
+
+                borderBrush.GradientStops.Add(
+                    new GradientStop(
+                        new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(),
+                        1));
+
+                context.DrawRectangle(
+                    new SolidColorBrush(visual.Color),
+                    new Pen(borderBrush, 2),
+                    new Rect(x, y, barWidth, height),
+                    radius,
+                    radius);
+            }
+            else
+            {
+                context.DrawRectangle(
+                    new SolidColorBrush(visual.Color),
+                    null,
+                    new Rect(x, y, barWidth, height),
+                    radius,
+                    radius);
+
+
+            }
         }
     }
 
