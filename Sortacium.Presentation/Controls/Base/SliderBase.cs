@@ -13,4 +13,13 @@ public class SliderBase : Slider
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
+
+    public static readonly StyledProperty<string> SuffixProperty =
+        AvaloniaProperty.Register<HorizontalSlider, string>(nameof(Suffix));
+
+    public string Suffix
+    {
+        get => GetValue(SuffixProperty);
+        set => SetValue(SuffixProperty, value);
+    }
 }

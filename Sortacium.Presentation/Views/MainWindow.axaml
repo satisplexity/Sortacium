@@ -230,31 +230,14 @@
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch" />
 
-    <Slider
+    <controls:HorizontalSlider
         Grid.Row="1"
         Minimum="0"
         Maximum="{Binding TotalSteps}"
         Value="{Binding TimelinePosition, Mode=TwoWay}"
+        Title="Step"
+        Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
         IsEnabled="{Binding IsReady}" />
-
-    <StackPanel
-        Grid.Row="2"
-        Orientation="Horizontal"
-        Spacing="8">
-
-        <TextBlock
-            Text="Step:" />
-
-        <TextBlock
-            Text="{Binding CurrentStep}" />
-
-        <TextBlock
-            Text="/" />
-
-        <TextBlock
-            Text="{Binding TotalSteps}" />
-
-    </StackPanel>
 
 </Grid>
 
