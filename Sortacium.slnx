@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Sortacium.Core/Sortacium.Core.csproj" Id="7c7ac1d9-a391-4625-85f3-c64d02758295" />
   <Project Path="Sortacium.Presentation/Sortacium.Presentation.csproj" Id="a640b2a3-3c7d-466b-9e99-fd0dfd4c108c" />
 </Solution>
