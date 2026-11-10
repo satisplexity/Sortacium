@@ -207,8 +207,9 @@
                             Value="{Binding Count}"/>
 
                         <controls:VerticalSlider
-                            Title="Operations"
-                            Grid.Column="1"/>
+                            Title="Speed"
+                            Grid.Column="1"
+                            Suffix=" op/s"/>
 
                     </Grid>
 
