@@ -44,7 +44,7 @@ public partial class MainViewModel : ViewModelBase
 
         set
         {
-            int count = Math.Clamp(value, 5, 500);
+            int count = Math.Clamp(value, 5, 5000);
 
             if (SetProperty(ref _count, count))
                 ResetBars();

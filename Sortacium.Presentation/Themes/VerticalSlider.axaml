@@ -320,8 +320,20 @@
                             RowDefinitions="Auto, *, Auto">
 
                             <Border
-                                Background="#313131"
+                                x:Name="PART_TitleBackgroundBorder"
                                 CornerRadius="13,13,0,0">
+                                <Border.Background>
+                                    <LinearGradientBrush
+                                        StartPoint="50%, 0%"
+                                        EndPoint="50%, 100%">
+                                        <GradientStop
+                                            Color="#313131"
+                                            Offset="0"/>
+                                        <GradientStop
+                                            Color="#313131"
+                                            Offset="1"/>
+                                        </LinearGradientBrush>
+                                </Border.Background>
 
                                 <TextBlock
                                     Text="{TemplateBinding Title}"
@@ -391,9 +403,21 @@
                             </Track>
 
                             <Border
+                                x:Name="PART_ValueBackgroundBorder"
                                 Grid.Row="2"
-                                Background="#313131"
                                 CornerRadius="0,0,13,13">
+                                 <Border.Background>
+                                    <LinearGradientBrush
+                                        StartPoint="50%, 0%"
+                                        EndPoint="50%, 100%">
+                                        <GradientStop
+                                            Color="#313131"
+                                            Offset="0"/>
+                                        <GradientStop
+                                            Color="#313131"
+                                            Offset="1"/>
+                                        </LinearGradientBrush>
+                                </Border.Background>
 
                                 <StackPanel
                                     Orientation="Horizontal"

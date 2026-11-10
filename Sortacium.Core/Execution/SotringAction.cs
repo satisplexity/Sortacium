@@ -6,8 +6,8 @@ public readonly record struct SortingAction(
     ushort Right,
     ushort I,
     ushort J,
-    double LeftValue,
-    double RightValue)
+    float LeftValue,
+    float RightValue)
 {
     public SortingCodePoint CodePoint
         => Kind == SortingActionKind.Compare

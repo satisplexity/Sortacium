@@ -28,8 +28,8 @@ public sealed class BubbleSortAlgorithm
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                double left = working[j];
-                double right = working[j + 1];
+                float left = (float)working[j];
+                float right = (float)working[j + 1];
 
                 actions.Add(new SortingAction(
                     SortingActionKind.Compare,

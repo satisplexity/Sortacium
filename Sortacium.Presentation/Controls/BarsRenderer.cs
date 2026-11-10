@@ -1,10 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System;
 
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia;
 
 using Sortacium.Presentation.Components;
 using Sortacium.Presentation.Models;
@@ -381,63 +381,68 @@ public sealed class BarsRenderer : Control
 
             double radius = barWidth / 4;
 
-            if (bars.Count <= 50)
+            DrawBar(context, visual, x, y, barWidth, height, radius);
+        }
+    }
+
+    private void DrawBar(DrawingContext context, VisualBar visual, double x, double y, double barWidth, double height, double radius)
+    {
+        if (radius >= 10)
+        {
+            HsvColor hsv = visual.Color.ToHsv();
+
+            double top = Math.Clamp(hsv.V + 0.2, 0, 1);
+            double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
+
+            LinearGradientBrush borderBrush = new()
             {
-                HsvColor hsv = visual.Color.ToHsv();
+                StartPoint = new RelativePoint(
+                    0.5, 0, RelativeUnit.Relative),
 
-                double top = Math.Clamp(hsv.V + 0.2, 0, 1);
-                double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
+                EndPoint = new RelativePoint(
+                    0.5, 1, RelativeUnit.Relative)
+            };
 
-                LinearGradientBrush borderBrush = new()
-                {
-                    StartPoint = new RelativePoint(
-                        0.5, 0, RelativeUnit.Relative),
+            borderBrush.GradientStops.Add(
+                new GradientStop(
+                    new HsvColor(1, hsv.H, hsv.S, top).ToRgb(),
+                    0));
 
-                    EndPoint = new RelativePoint(
-                        0.5, 1, RelativeUnit.Relative)
-                };
+            borderBrush.GradientStops.Add(
+                new GradientStop(visual.Color, 0.2));
 
-                borderBrush.GradientStops.Add(
-                    new GradientStop(
-                        new HsvColor(1, hsv.H, hsv.S, top).ToRgb(),
-                        0));
+            borderBrush.GradientStops.Add(
+                new GradientStop(visual.Color, 0.8));
 
-                borderBrush.GradientStops.Add(
-                    new GradientStop(visual.Color, 0.2));
+            borderBrush.GradientStops.Add(
+                new GradientStop(
+                    new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(),
+                    1));
 
-                borderBrush.GradientStops.Add(
-                    new GradientStop(visual.Color, 0.8));
-
-                borderBrush.GradientStops.Add(
-                    new GradientStop(
-                        new HsvColor(1, hsv.H, hsv.S, bottom).ToRgb(),
-                        1));
-
+            context.DrawRectangle(
+                new SolidColorBrush(visual.Color),
+                new Pen(borderBrush, 3),
+                new Rect(x, y, barWidth, height),
+                radius,
+                radius);
+        }
+        else
+        {
+            if (radius > 2)
+            {
                 context.DrawRectangle(
-                    new SolidColorBrush(visual.Color),
-                    new Pen(borderBrush, 2),
-                    new Rect(x, y, barWidth, height),
-                    radius,
-                    radius);
+                                    new SolidColorBrush(visual.Color),
+                                    null,
+                                    new Rect(x, y, barWidth, height),
+                                    radius,
+                                    radius);
             }
             else
             {
-                if (radius > 2)
-                {
-                    context.DrawRectangle(
-                                        new SolidColorBrush(visual.Color),
-                                        null,
-                                        new Rect(x, y, barWidth, height),
-                                        radius,
-                                        radius);
-                }
-                else
-                {
-                    context.DrawRectangle(
-                                        new SolidColorBrush(visual.Color),
-                                        null,
-                                        new Rect(x, y, barWidth, height));
-                }
+                context.DrawRectangle(
+                                    new SolidColorBrush(visual.Color),
+                                    null,
+                                    new Rect(x, y, barWidth, height));
             }
         }
     }
