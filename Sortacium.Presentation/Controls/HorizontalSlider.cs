@@ -1,16 +1,7 @@
-using Avalonia;
-using Avalonia.Controls;
+using Sortacium.Presentation.Controls.Base;
 
 namespace Sortacium.Presentation.Controls;
 
-public sealed class HorizontalSlider : Slider
+public sealed class HorizontalSlider : SliderBase
 {
-    public static readonly StyledProperty<string> TitleProperty =
-        AvaloniaProperty.Register<HorizontalSlider, string>(nameof(Title));
-
-    public string Title
-    {
-        get => GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
 }

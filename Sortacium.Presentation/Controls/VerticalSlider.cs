@@ -1,16 +1,7 @@
-using Avalonia.Controls;
-using Avalonia;
+using Sortacium.Presentation.Controls.Base;
 
 namespace Sortacium.Presentation.Controls;
 
-public sealed class VerticalSlider : Slider
+public sealed class VerticalSlider : SliderBase
 {
-    public static readonly StyledProperty<string> TitleProperty =
-        AvaloniaProperty.Register<VerticalSlider, string>(nameof(Title));
-
-    public string Title
-    {
-        get => GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
-    }
 }
