@@ -221,7 +221,7 @@
                             <controls:VerticalSlider
                                 Title="Count"
                                 Minimum="5"
-                                Maximum="5000"
+                                Maximum="100"
                                 Value="{Binding Count}"/>
 
                             <controls:VerticalSlider

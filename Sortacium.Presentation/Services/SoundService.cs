@@ -1,4 +1,4 @@
-﻿using SoundFlow.Abstracts.Devices;
+using SoundFlow.Abstracts.Devices;
 using SoundFlow.Backends.MiniAudio;
 using SoundFlow.Components;
 using SoundFlow.Providers;
@@ -15,6 +15,7 @@ public enum UiSound
 {
     Pressed,
     Released,
+    Tick
 }
 
 public sealed class SoundService : IDisposable
@@ -33,6 +34,7 @@ public sealed class SoundService : IDisposable
         [
             Load("pressed.wav"),
             Load("released.wav"),
+            Load("tick.wav")
         ];
 
         _engine = new MiniAudioEngine();
