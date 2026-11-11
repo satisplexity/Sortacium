@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 using Avalonia;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Media;
 
@@ -19,6 +20,8 @@ public sealed class BarsRenderer : Control
     {
         Amplitude = 0.2
     };
+
+    private static CircularEaseInOut SwapEase = new();
 
     public static readonly StyledProperty<IReadOnlyList<Bar>?> BarsProperty =
         AvaloniaProperty.Register<BarsRenderer, IReadOnlyList<Bar>?>(nameof(Bars));
@@ -260,7 +263,7 @@ public sealed class BarsRenderer : Control
                     0,
                     1);
 
-                double eased = Smoothstep(visual.AnimationProgress);
+                double eased = SwapEase.Ease(visual.AnimationProgress);
 
                 visual.X = Lerp(
                     visual.FromX,
