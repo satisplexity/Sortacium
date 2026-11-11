@@ -18,6 +18,28 @@ namespace Sortacium.Presentation.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    public IReadOnlyList<CodeLineViewModel> CodeLines { get; } =
+[
+    new(1, "void BubbleSort(double[] a)"),
+    new(2, "{"),
+    new(3, "    int n = a.Length;"),
+    new(4, "    for (int i = 0; i < n - 1; i++)"),
+    new(5, "    {"),
+    new(6, "        for (int j = 0; j < n - i - 1; j++)"),
+    new(7, "        {"),
+    new(8, "            if (a[j] > a[j + 1])",
+        SortingCodePoint.CompareAdjacent),
+    new(9, "            {"),
+    new(10, "                (a[j], a[j + 1]) =",
+        SortingCodePoint.SwapAdjacent),
+    new(11, "                    (a[j + 1], a[j]);",
+        SortingCodePoint.SwapAdjacent),
+    new(12, "            }"),
+    new(13, "        }"),
+    new(14, "    }"),
+    new(15, "}")
+];
+
     private readonly BubbleSortAlgorithm _algorithm = new();
 
     private SortingPlayer? _player;
@@ -160,6 +182,8 @@ public partial class MainViewModel : ViewModelBase
             generation,
             values,
             cts);
+
+        UpdateCodeHighlight(null);
     }
 
     private async Task BakeAsync(
@@ -372,6 +396,17 @@ public partial class MainViewModel : ViewModelBase
         PublishPlayerState(instant: true);
     }
 
+    private void UpdateCodeHighlight(
+    SortingCodePoint? codePoint)
+    {
+        foreach (var line in CodeLines)
+        {
+            line.IsActive =
+                codePoint.HasValue &&
+                line.CodePoint == codePoint;
+        }
+    }
+
     private void PublishPlayerState(bool instant)
     {
         if (_player is not { } player)
@@ -438,5 +473,7 @@ public partial class MainViewModel : ViewModelBase
         {
             SnapVersion++;
         }
+
+        UpdateCodeHighlight(action?.CodePoint);
     }
 }

@@ -57,6 +57,28 @@
 
         </Style>
 
+        <!-- Default code line -->
+<Style Selector="Border.code-line">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+</Style>
+
+<!-- Active code line -->
+<Style Selector="Border.code-line.active">
+    <Setter Property="Background" Value="#493322"/>
+    <Setter Property="BorderBrush" Value="#FFB45D"/>
+</Style>
+
+<!-- Default code text -->
+<Style Selector="TextBlock.code-text">
+    <Setter Property="Foreground" Value="#CCCCCC"/>
+</Style>
+
+<!-- Active code text -->
+<Style Selector="Border.code-line.active TextBlock.code-text">
+    <Setter Property="Foreground" Value="#FFD294"/>
+</Style>
+
     </Window.Styles>
 
     <Grid>
@@ -263,42 +285,141 @@
 
             </Grid>
 
-                <Border
-                    Grid.Column="2"
-                    CornerRadius="15"
-                    Background="{StaticResource Brush.TitleBarBackground}"
-                    Width="300"
-                    Margin="10"
-                    Padding="20">
+               <Border
+    Grid.Column="2"
+    Width="420"
+    Margin="10"
+    Padding="16"
+    CornerRadius="15"
+    Background="{StaticResource Brush.TitleBarBackground}"
+    BorderBrush="#303030"
+    BorderThickness="1.5">
 
-                    <StackPanel
-                        Spacing="5">
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="12">
 
-                        <TextBlock
-                            Text="Metadata"
-                            Foreground="#EEE"
-                            FontSize="20"
-                            FontWeight="Medium"/>
+        <!-- Header -->
+        <Grid ColumnDefinitions="*,Auto">
 
-                        <TextBlock
-                            Text="{Binding ComparisonCount, StringFormat='Compartisons {0}'}"
-                            Foreground="#EEE"/>
+            <TextBlock
+                Text="Bubble Sort"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="#AF4BE9"/>
 
-                        <TextBlock
-                            Text="{Binding SwapCount, StringFormat='Swaps {0}'}"
-                            Foreground="#EEE"/>
+            <TextBlock
+                Grid.Column="1"
+                Text="C#"
+                Foreground="#999999"
+                VerticalAlignment="Center"/>
 
-                        <TextBlock
-                            Text="{Binding ActiveCodePoint}"
-                            Foreground="#EEE"/>
+        </Grid>
 
-                        <TextBlock
-                            Text="{Binding VariablesDescription}"
-                            Foreground="#EEE"/>
+        <!-- Code viewer -->
+        <Border
+            Grid.Row="1"
+            Background="#1B1B1B"
+            CornerRadius="8"
+            Padding="8">
 
-                    </StackPanel>
+            <ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
 
-                </Border>
+                <ItemsControl ItemsSource="{Binding CodeLines}">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate x:DataType="vm:CodeLineViewModel">
+
+                            <Border
+                                Classes="code-line"
+                                Classes.active="{Binding IsActive}"
+                                CornerRadius="4"
+                                BorderThickness="3,0,0,0"
+                                Padding="5,7"
+                                Margin="0,1">
+
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <BrushTransition
+                                            Property="Background"
+                                            Duration="0:0:0.15"/>
+                                    </Transitions>
+                                </Border.Transitions>
+
+                                <Grid ColumnDefinitions="30,Auto">
+
+                                    <!-- Line number -->
+                                    <TextBlock
+                                        Text="{Binding Number}"
+                                        Foreground="#666666"
+                                        FontSize="12"
+                                        FontFamily="Consolas, Menlo, DejaVu Sans Mono"/>
+
+                                    <!-- Source code -->
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Classes="code-text"
+                                        Text="{Binding Text}"
+                                        FontSize="12"
+                                        FontFamily="Consolas, Menlo, DejaVu Sans Mono"
+                                        TextWrapping="NoWrap"/>
+
+                                </Grid>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </ScrollViewer>
+
+        </Border>
+
+        <!-- Statistics -->
+        <StackPanel
+            Grid.Row="2"
+            Spacing="8">
+
+            <Border
+                Background="#303030"
+                Height="1"/>
+
+            <TextBlock
+                Text="Execution details"
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="#EEEEEE"/>
+
+            <Grid ColumnDefinitions="*,*">
+
+                <TextBlock
+                    Text="{Binding ComparisonCount, StringFormat='Comparisons: {0}'}"
+                    Foreground="#CCCCCC"/>
+
+                <TextBlock
+                    Grid.Column="1"
+                    Text="{Binding SwapCount, StringFormat='Swaps: {0}'}"
+                    Foreground="#CCCCCC"/>
+
+            </Grid>
+
+            <TextBlock
+                Text="{Binding VariablesDescription}"
+                Foreground="#AAAAAA"
+                FontFamily="Consolas, Menlo, DejaVu Sans Mono"
+                FontSize="12"/>
+
+        </StackPanel>
+
+    </Grid>
+
+</Border>
 
             </Grid>
 
