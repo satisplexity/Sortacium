@@ -264,7 +264,35 @@
                     CornerRadius="15"
                     Background="{StaticResource Brush.TitleBarBackground}"
                     Width="300"
-                    Margin="10">
+                    Margin="10"
+                    Padding="20">
+
+                    <StackPanel
+                        Spacing="5">
+
+                        <TextBlock
+                            Text="Metadata"
+                            Foreground="#EEE"
+                            FontSize="20"
+                            FontWeight="Medium"/>
+
+                        <TextBlock
+                            Text="{Binding ComparisonCount, StringFormat='Compartisons {0}'}"
+                            Foreground="#EEE"/>
+
+                        <TextBlock
+                            Text="{Binding SwapCount, StringFormat='Swaps {0}'}"
+                            Foreground="#EEE"/>
+
+                        <TextBlock
+                            Text="{Binding ActiveCodePoint}"
+                            Foreground="#EEE"/>
+
+                        <TextBlock
+                            Text="{Binding VariablesDescription}"
+                            Foreground="#EEE"/>
+
+                    </StackPanel>
 
                 </Border>
 
