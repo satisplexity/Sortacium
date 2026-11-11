@@ -254,7 +254,7 @@
             <ControlTemplate>
 
                 <Border
-                    Background="#252525"
+                    Background="#232323"
                     CornerRadius="18"
                     BorderThickness="1.5"
                     Padding="6, 6, 6, 8">
@@ -380,7 +380,7 @@
                                                     Offset="0" />
 
                                                 <GradientStop
-                                                    Color="#2D2D2D"
+                                                    Color="#292929"
                                                     Offset="1" />
 
                                             </LinearGradientBrush>

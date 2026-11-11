@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,6 +49,16 @@ public partial class MainViewModel : ViewModelBase
             if (SetProperty(ref _count, count))
                 ResetBars();
         }
+    }
+
+    private double _speed = 5;
+
+    public double Speed
+    {
+        get => _speed;
+        set => SetProperty(
+            ref _speed,
+            Math.Clamp(value, 1, 100));
     }
 
     [ObservableProperty]
@@ -209,37 +220,70 @@ public partial class MainViewModel : ViewModelBase
     private async Task PlayAsync()
     {
         if (!IsReady || _playCts is not null)
-        {
             return;
-        }
-            
-        var player = _player!;
 
+        var player = _player!;
         var cts = new CancellationTokenSource();
 
         _playCts = cts;
         IsPlaying = true;
 
+        var stopwatch = Stopwatch.StartNew();
+
+        TimeSpan previousTime = stopwatch.Elapsed;
+
+        // Первую операцию выполняем сразу.
+        double accumulatedOperations = 1;
+
         try
         {
             while (!cts.IsCancellationRequested &&
                    ReferenceEquals(_player, player) &&
-                   player.Next())
+                   player.Position < player.TotalSteps)
             {
-                PublishPlayerState(instant: false);
+                TimeSpan currentTime = stopwatch.Elapsed;
 
-                if (player.Position == player.TotalSteps)
+                // Ограничиваем скачок времени после зависания UI.
+                double deltaTime = Math.Min(
+                    (currentTime - previousTime).TotalSeconds,
+                    0.25);
+
+                previousTime = currentTime;
+
+                // Speed читается заново на каждом обновлении.
+                accumulatedOperations += deltaTime * Speed;
+
+                int stepsToExecute = Math.Min(
+                    (int) Math.Floor(accumulatedOperations),
+                    64);
+
+                int executed = 0;
+
+                while (executed < stepsToExecute &&
+                       player.Next())
+                {
+                    executed++;
+                }
+
+                accumulatedOperations -= executed;
+
+                if (executed > 0)
+                    PublishPlayerState(instant: false);
+
+                if (player.Position >= player.TotalSteps)
                     break;
 
-                await Task.Delay(300, cts.Token);
+                await Task.Delay(16, cts.Token);
             }
         }
         catch (OperationCanceledException)
         {
-            // Остановка воспроизведения.
+            // Воспроизведение остановлено.
         }
         finally
         {
+            stopwatch.Stop();
+
             if (ReferenceEquals(_playCts, cts))
             {
                 _playCts = null;

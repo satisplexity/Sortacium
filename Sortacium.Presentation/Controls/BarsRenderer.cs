@@ -38,6 +38,17 @@ public sealed class BarsRenderer : Control
         set => SetValue(SnapVersionProperty, value);
     }
 
+    public static readonly StyledProperty<double>
+    OperationsPerSecondProperty =
+        AvaloniaProperty.Register<BarsRenderer, double>(
+            nameof(OperationsPerSecond), 5.0);
+
+    public double OperationsPerSecond
+    {
+        get => GetValue(OperationsPerSecondProperty);
+        set => SetValue(OperationsPerSecondProperty, value);
+    }
+
     private bool _snapRequested;
 
     private const double AnimationDuration = 250;
@@ -67,6 +78,9 @@ public sealed class BarsRenderer : Control
         public BarState LastState = bar.State;
 
         public double GrowthDurationMs;
+
+        public double AnimationProgress = 1;
+        public TimeSpan LastAnimationFrameTime;
     }
 
     private readonly Dictionary<Bar, VisualBar> _visuals = new();
@@ -184,6 +198,8 @@ public sealed class BarsRenderer : Control
                 visual.GrowthStartTime = null;
 
                 visual.LastState = bar.State;
+
+                visual.AnimationProgress = 1;
             }
 
             InvalidateVisual();
@@ -221,19 +237,30 @@ public sealed class BarsRenderer : Control
                 visual.TargetValue = bar.Value;
                 visual.TargetColor = targetColor;
 
-                visual.StartTime = time;
+                visual.AnimationProgress = 0;
+                visual.LastAnimationFrameTime = time;
                 visual.Animating = true;
             }
 
             if (visual.Animating)
             {
-                double delta = Math.Clamp(
-                    (time - visual.StartTime).TotalMilliseconds
-                    / AnimationDuration,
+                double deltaTime = Math.Max(
+                    0,
+                    (time - visual.LastAnimationFrameTime).TotalSeconds);
+
+                visual.LastAnimationFrameTime = time;
+
+                // Анимация занимает 80% времени одной операции.
+                const double animationFraction = 0.8;
+
+                visual.AnimationProgress = Math.Clamp(
+                    visual.AnimationProgress +
+                    deltaTime * Math.Max(1, OperationsPerSecond)
+                        / animationFraction,
                     0,
                     1);
 
-                double eased = Smoothstep(delta);
+                double eased = Smoothstep(visual.AnimationProgress);
 
                 visual.X = Lerp(
                     visual.FromX,
@@ -250,7 +277,8 @@ public sealed class BarsRenderer : Control
                     visual.TargetColor,
                     eased);
 
-                visual.Animating = delta < 1;
+                visual.Animating = visual.AnimationProgress < 1;
+
                 anyAnimating |= visual.Animating;
             }
 

@@ -227,6 +227,9 @@
                             <controls:VerticalSlider
                                 Title="Speed"
                                 Grid.Column="1"
+                                Minimum="1"
+                                Maximum="100"
+                                Value="{Binding Speed, Mode=TwoWay}"
                                 Suffix=" op/s"/>
 
                         </Grid>
@@ -245,6 +248,7 @@
                     Grid.Row="0"
                     Bars="{Binding Bars}"
                     SnapVersion="{Binding SnapVersion}"
+                    OperationsPerSecond="{Binding Speed}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch" />
 
