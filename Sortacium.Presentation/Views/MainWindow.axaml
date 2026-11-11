@@ -303,17 +303,21 @@
         <!-- Header -->
         <Grid ColumnDefinitions="*,Auto">
 
-            <TextBlock
-                Text="Bubble Sort"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="#AF4BE9"/>
+            <ComboBox
+    Grid.Column="1"
+    MinWidth="145"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Center"
+    ItemsSource="{Binding AvailableLanguages}"
+    SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
 
-            <TextBlock
-                Grid.Column="1"
-                Text="C#"
-                Foreground="#999999"
-                VerticalAlignment="Center"/>
+    <ComboBox.ItemTemplate>
+        <DataTemplate x:DataType="vm:CodeLanguageOption">
+            <TextBlock Text="{Binding DisplayName}" />
+        </DataTemplate>
+    </ComboBox.ItemTemplate>
+
+</ComboBox>
 
         </Grid>
 
@@ -324,16 +328,16 @@
             CornerRadius="8"
             Padding="8">
 
-            <controls:SortingCodeEditor
+           <controls:SortingCodeEditor
     x:Name="CodeEditor"
-    Language="csharp"
+    Language="{Binding SelectedLanguage.Id}"
     Document="{Binding CodeDocument}"
     HighlightedLines="{Binding HighlightedCodeLines}"
     Background="Transparent"
     Foreground="#CCCCCC"
     FontFamily="Consolas, Menlo, Monospace"
     FontSize="14"
-    LineNumbersForeground="#666666" />
+    LineNumbersForeground="#666666"/>
 
         </Border>
 

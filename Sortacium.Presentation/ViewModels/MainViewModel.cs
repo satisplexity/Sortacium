@@ -21,6 +21,40 @@ namespace Sortacium.Presentation.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    public IReadOnlyList<CodeLanguageOption> AvailableLanguages { get; } =
+[
+    new("pseudocode", "Pseudocode"),
+    new("c", "C"),
+    new("csharp", "C#"),
+    new("cpp", "C++"),
+    new("python", "Python"),
+    new("go", "Go"),
+    new("rust", "Rust"),
+    new("java", "Java"),
+    new("javascript", "JavaScript"),
+    new("assembly", "Assembly")
+];
+
+    [ObservableProperty]
+    private CodeLanguageOption _selectedLanguage =
+        new("csharp", "C#");
+
+    partial void OnSelectedLanguageChanged(CodeLanguageOption value)
+    {
+        LoadSelectedLanguageCode();
+    }
+
+    private void LoadSelectedLanguageCode()
+    {
+        var code = _codeService.GetCode(
+            "bubble-sort",
+            SelectedLanguage.Id);
+
+        CodeDocument = new TextDocument(code.Source);
+
+        UpdateCodeHighlight(_player?.CurrentAction?.CodePoint);
+    }
+
     public IReadOnlyList<CodeLineViewModel> CodeLines { get; } =
 [
     new(1, "void BubbleSort(double[] array)"),
@@ -132,12 +166,7 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        var code = _codeService.GetCode(
-        "bubble-sort",
-        "csharp");
-
-        CodeDocument = new TextDocument(code.Source);
-
+        LoadSelectedLanguageCode();
         ResetBars();
     }
 
@@ -427,7 +456,7 @@ public partial class MainViewModel : ViewModelBase
             ? []
             : _codeService.GetHighlightedLines(
                 "bubble-sort",
-                "csharp",
+                SelectedLanguage.Id,
                 mappingKey);
     }
 

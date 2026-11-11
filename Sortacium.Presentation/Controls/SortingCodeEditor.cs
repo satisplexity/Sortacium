@@ -15,6 +15,8 @@ namespace Sortacium.Presentation.Controls;
 
 public sealed class SortingCodeEditor : TextEditor
 {
+    protected override Type StyleKeyOverride => typeof(TextEditor);
+
     public static readonly StyledProperty<string> LanguageProperty =
         AvaloniaProperty.Register<SortingCodeEditor, string>(
             nameof(Language), "csharp");
@@ -91,10 +93,15 @@ public sealed class SortingCodeEditor : TextEditor
     {
         string? extension = Language switch
         {
+            "c" => ".c",
             "csharp" => ".cs",
-            "java" => ".java",
+            "cpp" => ".cpp",
             "python" => ".py",
+            "go" => ".go",
+            "rust" => ".rs",
+            "java" => ".java",
             "javascript" => ".js",
+            "assembly" => ".asm",
             _ => null
         };
 

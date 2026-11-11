@@ -3,36 +3,325 @@
         "bubble-sort": {
             "name": "Bubble Sort",
             "implementations": {
-                "csharp": {
+                "pseudocode": {
                     "lines": [
-                        "for (int i = 0; i < a.Length - 1; i++)",
+                        "PROCEDURE BubbleSort(A)",
+                        "    FOR i FROM 0 TO LENGTH(A) - 2",
+                        "        FOR j FROM 0 TO LENGTH(A) - i - 2",
+                        "            IF A[j] > A[j + 1] THEN",
+                        "                SWAP A[j], A[j + 1]"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            2
+                        ],
+                        "inner_loop": [
+                            3
+                        ],
+                        "compare": [
+                            4
+                        ],
+                        "swap": [
+                            5
+                        ]
+                    }
+                },
+                "c": {
+                    "lines": [
+                        "#include <stddef.h>",
+                        "",
+                        "void bubble_sort(double *a, size_t n)",
                         "{",
-                        "    for (int j = 0; j < a.Length - i - 1; j++)",
+                        "    for (size_t i = 0; i + 1 < n; ++i)",
                         "    {",
-                        "        if (a[j] > a[j + 1])",
-                        "            (a[j], a[j + 1]) = (a[j + 1], a[j]);",
+                        "        for (size_t j = 0; j + i + 1 < n; ++j)",
+                        "        {",
+                        "            if (a[j] > a[j + 1])",
+                        "            {",
+                        "                double temp = a[j];",
+                        "                a[j] = a[j + 1];",
+                        "                a[j + 1] = temp;",
+                        "            }",
+                        "        }",
                         "    }",
                         "}"
                     ],
                     "mapping": {
-                        "outer_loop": [ 1 ],
-                        "inner_loop": [ 3 ],
-                        "compare": [ 5 ],
-                        "swap": [ 6 ]
+                        "outer_loop": [
+                            5
+                        ],
+                        "inner_loop": [
+                            7
+                        ],
+                        "compare": [
+                            9
+                        ],
+                        "swap": [
+                            11,
+                            12,
+                            13
+                        ]
                     }
                 },
-                "pseudocode": {
+                "csharp": {
                     "lines": [
-                        "FOR i FROM 0 TO n - 2",
-                        "    FOR j FROM 0 TO n - i - 2",
-                        "        IF A[j] > A[j + 1]",
-                        "            SWAP A[j], A[j + 1]"
+                        "public static class BubbleSort",
+                        "{",
+                        "    public static void Sort(double[] a)",
+                        "    {",
+                        "        for (int i = 0; i < a.Length - 1; i++)",
+                        "        {",
+                        "            for (int j = 0; j < a.Length - i - 1; j++)",
+                        "            {",
+                        "                if (a[j] > a[j + 1])",
+                        "                {",
+                        "                    (a[j], a[j + 1]) = (a[j + 1], a[j]);",
+                        "                }",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
                     ],
                     "mapping": {
-                        "outer_loop": [ 1 ],
-                        "inner_loop": [ 2 ],
-                        "compare": [ 3 ],
-                        "swap": [ 4 ]
+                        "outer_loop": [
+                            5
+                        ],
+                        "inner_loop": [
+                            7
+                        ],
+                        "compare": [
+                            9
+                        ],
+                        "swap": [
+                            11
+                        ]
+                    }
+                },
+                "cpp": {
+                    "lines": [
+                        "#include <cstddef>",
+                        "#include <utility>",
+                        "#include <vector>",
+                        "",
+                        "void bubbleSort(std::vector<double>& a)",
+                        "{",
+                        "    for (std::size_t i = 0; i + 1 < a.size(); ++i)",
+                        "    {",
+                        "        for (std::size_t j = 0; j + i + 1 < a.size(); ++j)",
+                        "        {",
+                        "            if (a[j] > a[j + 1])",
+                        "            {",
+                        "                std::swap(a[j], a[j + 1]);",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            7
+                        ],
+                        "inner_loop": [
+                            9
+                        ],
+                        "compare": [
+                            11
+                        ],
+                        "swap": [
+                            13
+                        ]
+                    }
+                },
+                "python": {
+                    "lines": [
+                        "def bubble_sort(a: list[float]) -> None:",
+                        "    n = len(a)",
+                        "    for i in range(n - 1):",
+                        "        for j in range(n - i - 1):",
+                        "            if a[j] > a[j + 1]:",
+                        "                a[j], a[j + 1] = a[j + 1], a[j]"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            3
+                        ],
+                        "inner_loop": [
+                            4
+                        ],
+                        "compare": [
+                            5
+                        ],
+                        "swap": [
+                            6
+                        ]
+                    }
+                },
+                "go": {
+                    "lines": [
+                        "package sortacium",
+                        "",
+                        "func bubbleSort(a []float64) {",
+                        "    for i := 0; i < len(a)-1; i++ {",
+                        "        for j := 0; j < len(a)-i-1; j++ {",
+                        "            if a[j] > a[j+1] {",
+                        "                a[j], a[j+1] = a[j+1], a[j]",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            4
+                        ],
+                        "inner_loop": [
+                            5
+                        ],
+                        "compare": [
+                            6
+                        ],
+                        "swap": [
+                            7
+                        ]
+                    }
+                },
+                "rust": {
+                    "lines": [
+                        "fn bubble_sort(a: &mut [f64]) {",
+                        "    let n = a.len();",
+                        "    for i in 0..n.saturating_sub(1) {",
+                        "        for j in 0..(n - i - 1) {",
+                        "            if a[j] > a[j + 1] {",
+                        "                a.swap(j, j + 1);",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            3
+                        ],
+                        "inner_loop": [
+                            4
+                        ],
+                        "compare": [
+                            5
+                        ],
+                        "swap": [
+                            6
+                        ]
+                    }
+                },
+                "java": {
+                    "lines": [
+                        "public final class BubbleSort {",
+                        "    public static void sort(double[] a) {",
+                        "        for (int i = 0; i < a.length - 1; i++) {",
+                        "            for (int j = 0; j < a.length - i - 1; j++) {",
+                        "                if (a[j] > a[j + 1]) {",
+                        "                    double temp = a[j];",
+                        "                    a[j] = a[j + 1];",
+                        "                    a[j + 1] = temp;",
+                        "                }",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            3
+                        ],
+                        "inner_loop": [
+                            4
+                        ],
+                        "compare": [
+                            5
+                        ],
+                        "swap": [
+                            6,
+                            7,
+                            8
+                        ]
+                    }
+                },
+                "javascript": {
+                    "lines": [
+                        "function bubbleSort(a) {",
+                        "    for (let i = 0; i < a.length - 1; i++) {",
+                        "        for (let j = 0; j < a.length - i - 1; j++) {",
+                        "            if (a[j] > a[j + 1]) {",
+                        "                [a[j], a[j + 1]] = [a[j + 1], a[j]];",
+                        "            }",
+                        "        }",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            2
+                        ],
+                        "inner_loop": [
+                            3
+                        ],
+                        "compare": [
+                            4
+                        ],
+                        "swap": [
+                            5
+                        ]
+                    }
+                },
+                "assembly": {
+                    "lines": [
+                        "; x86-64 NASM, System V ABI",
+                        "; void bubble_sort(double* a, size_t n)",
+                        "global bubble_sort",
+                        "section .text",
+                        "bubble_sort:",
+                        "    cmp rsi, 2",
+                        "    jb .done",
+                        "    xor rcx, rcx",
+                        ".outer:",
+                        "    xor rdx, rdx",
+                        "    mov r8, rsi",
+                        "    sub r8, rcx",
+                        "    dec r8",
+                        ".inner:",
+                        "    movsd xmm0, [rdi + rdx*8]",
+                        "    movsd xmm1, [rdi + rdx*8 + 8]",
+                        "    ucomisd xmm0, xmm1",
+                        "    jbe .next",
+                        "    movsd [rdi + rdx*8], xmm1",
+                        "    movsd [rdi + rdx*8 + 8], xmm0",
+                        ".next:",
+                        "    inc rdx",
+                        "    cmp rdx, r8",
+                        "    jb .inner",
+                        "    inc rcx",
+                        "    mov r9, rsi",
+                        "    dec r9",
+                        "    cmp rcx, r9",
+                        "    jb .outer",
+                        ".done:",
+                        "    ret"
+                    ],
+                    "mapping": {
+                        "outer_loop": [
+                            9
+                        ],
+                        "inner_loop": [
+                            14
+                        ],
+                        "compare": [
+                            17,
+                            18
+                        ],
+                        "swap": [
+                            19,
+                            20
+                        ]
                     }
                 }
             }
