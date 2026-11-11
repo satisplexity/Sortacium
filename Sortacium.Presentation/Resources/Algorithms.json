@@ -1,0 +1,41 @@
+{
+    "algorithms": {
+        "bubble-sort": {
+            "name": "Bubble Sort",
+            "implementations": {
+                "csharp": {
+                    "lines": [
+                        "for (int i = 0; i < a.Length - 1; i++)",
+                        "{",
+                        "    for (int j = 0; j < a.Length - i - 1; j++)",
+                        "    {",
+                        "        if (a[j] > a[j + 1])",
+                        "            (a[j], a[j + 1]) = (a[j + 1], a[j]);",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "outer_loop": [ 1 ],
+                        "inner_loop": [ 3 ],
+                        "compare": [ 5 ],
+                        "swap": [ 6 ]
+                    }
+                },
+                "pseudocode": {
+                    "lines": [
+                        "FOR i FROM 0 TO n - 2",
+                        "    FOR j FROM 0 TO n - i - 2",
+                        "        IF A[j] > A[j + 1]",
+                        "            SWAP A[j], A[j + 1]"
+                    ],
+                    "mapping": {
+                        "outer_loop": [ 1 ],
+                        "inner_loop": [ 2 ],
+                        "compare": [ 3 ],
+                        "swap": [ 4 ]
+                    }
+                }
+            }
+        }
+    }
+}

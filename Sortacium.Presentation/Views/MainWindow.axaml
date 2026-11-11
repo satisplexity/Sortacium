@@ -59,14 +59,14 @@
 
         <!-- Default code line -->
 <Style Selector="Border.code-line">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Background" Value="#003D204D"/>
+    <Setter Property="BorderBrush" Value="#00AF4BE9"/>
 </Style>
 
 <!-- Active code line -->
 <Style Selector="Border.code-line.active">
-    <Setter Property="Background" Value="#493322"/>
-    <Setter Property="BorderBrush" Value="#FFB45D"/>
+    <Setter Property="Background" Value="#3D204D"/>
+    <Setter Property="BorderBrush" Value="#AF4BE9"/>
 </Style>
 
 <!-- Default code text -->
@@ -76,7 +76,7 @@
 
 <!-- Active code text -->
 <Style Selector="Border.code-line.active TextBlock.code-text">
-    <Setter Property="Foreground" Value="#FFD294"/>
+    <Setter Property="Foreground" Value="#C18DDF"/>
 </Style>
 
     </Window.Styles>
@@ -337,8 +337,8 @@
                                 Classes="code-line"
                                 Classes.active="{Binding IsActive}"
                                 CornerRadius="4"
-                                BorderThickness="3,0,0,0"
-                                Padding="5,7"
+                                BorderThickness="4,1,1,1"
+                                Padding="8,1"
                                 Margin="0,1">
 
                                 <Border.Transitions>
@@ -355,16 +355,19 @@
                                     <TextBlock
                                         Text="{Binding Number}"
                                         Foreground="#666666"
-                                        FontSize="12"
-                                        FontFamily="Consolas, Menlo, DejaVu Sans Mono"/>
+                                        FontSize="14"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource RedHat}"/>
 
                                     <!-- Source code -->
                                     <TextBlock
                                         Grid.Column="1"
                                         Classes="code-text"
                                         Text="{Binding Text}"
-                                        FontSize="12"
-                                        FontFamily="Consolas, Menlo, DejaVu Sans Mono"
+                                        LineSpacing="0"
+                                        FontSize="14"
+                                        VerticalAlignment="Center"
+                                        FontFamily="{StaticResource RedHat}"
                                         TextWrapping="NoWrap"/>
 
                                 </Grid>

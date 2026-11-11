@@ -38,6 +38,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Algorithms.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Resources\Algorithms.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="P:\Sortacium\Sortacium.Presentation\.editorconfig" />
   </ItemGroup>
 
