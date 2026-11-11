@@ -80,8 +80,7 @@ public sealed class SoundService : IDisposable
             {
                 player.Play();
 
-                // Для звуков продолжительностью до 250 мс.
-                await Task.Delay(100);
+                await Task.Delay((int)(player.Duration * 1000));
             }
             finally
             {
