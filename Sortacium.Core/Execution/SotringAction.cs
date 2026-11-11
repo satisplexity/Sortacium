@@ -2,12 +2,12 @@
 
 public readonly record struct SortingAction(
     SortingActionKind Kind,
-    ushort Left,
-    ushort Right,
-    ushort I,
-    ushort J,
-    float LeftValue,
-    float RightValue)
+    int Left,
+    int Right,
+    int I,
+    int J,
+    double LeftValue,
+    double RightValue)
 {
     public SortingCodePoint CodePoint
         => Kind == SortingActionKind.Compare

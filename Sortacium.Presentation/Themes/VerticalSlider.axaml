@@ -254,7 +254,7 @@
             <ControlTemplate>
 
                 <Border
-                    Background="#292929"
+                    Background="#252525"
                     CornerRadius="18"
                     BorderThickness="1.5"
                     Padding="6, 6, 6, 8">
@@ -321,20 +321,29 @@
 
                             <Border
                                 x:Name="PART_TitleBackgroundBorder"
-                                CornerRadius="13,13,0,0">
+                                CornerRadius="13,13,0,0"
+                                BorderBrush="#292929"
+                                BorderThickness="0,0,0,2">
                                 <Border.Background>
                                     <LinearGradientBrush
-                                        StartPoint="50%, 0%"
-                                        EndPoint="50%, 100%">
+                                        StartPoint="50%, 100%"
+                                        EndPoint="50%, 0%">
                                         <GradientStop
                                             Color="#313131"
                                             Offset="0"/>
                                         <GradientStop
                                             Color="#313131"
-                                            Offset="1"/>
+                                            Offset="0.5"/>
                                         </LinearGradientBrush>
                                 </Border.Background>
-
+                                 <Border.Transitions>
+        <Transitions>
+            <BrushTransition
+                Property="Background"
+                Duration="0:0:0.3"
+                Easing="CubicEaseOut"/>
+        </Transitions>
+    </Border.Transitions>
                                 <TextBlock
                                     Text="{TemplateBinding Title}"
                                     HorizontalAlignment="Center"
@@ -371,7 +380,7 @@
                                                     Offset="0" />
 
                                                 <GradientStop
-                                                    Color="#313131"
+                                                    Color="#2D2D2D"
                                                     Offset="1" />
 
                                             </LinearGradientBrush>
@@ -405,7 +414,9 @@
                             <Border
                                 x:Name="PART_ValueBackgroundBorder"
                                 Grid.Row="2"
-                                CornerRadius="0,0,13,13">
+                                CornerRadius="0,0,13,13"
+                                BorderThickness="0, 2, 0, 0"
+                                BorderBrush="#393939">
                                  <Border.Background>
                                     <LinearGradientBrush
                                         StartPoint="50%, 0%"
@@ -415,10 +426,17 @@
                                             Offset="0"/>
                                         <GradientStop
                                             Color="#313131"
-                                            Offset="1"/>
+                                            Offset="0.5"/>
                                         </LinearGradientBrush>
                                 </Border.Background>
-
+                                 <Border.Transitions>
+        <Transitions>
+            <BrushTransition
+                Property="Background"
+                Duration="0:0:0.3"
+                Easing="CubicEaseOut"/>
+        </Transitions>
+    </Border.Transitions>
                                 <StackPanel
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center"

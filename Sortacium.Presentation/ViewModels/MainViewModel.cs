@@ -27,7 +27,6 @@ public partial class MainViewModel : ViewModelBase
     private int _generation;
     private int _count = 20;
 
-    // ID элемента соответствует его исходной позиции.
     private Bar[] _barsById = [];
 
     private IReadOnlyList<Bar> _bars = Array.Empty<Bar>();
@@ -92,10 +91,6 @@ public partial class MainViewModel : ViewModelBase
         ResetBars();
     }
 
-    // --------------------------------------------------
-    // Array generation
-    // --------------------------------------------------
-
     [RelayCommand]
     private void Shuffle()
     {
@@ -117,7 +112,6 @@ public partial class MainViewModel : ViewModelBase
             .Select(i => (double) i / Count)
             .ToArray();
 
-        // Fisher-Yates shuffle.
         for (int i = values.Length - 1; i > 0; i--)
         {
             int j = Random.Shared.Next(i + 1);
@@ -128,7 +122,7 @@ public partial class MainViewModel : ViewModelBase
 
         _barsById = Enumerable
             .Range(0, values.Length)
-            .Select(i => new Bar(i, values[i]))
+            .Select(i => new Bar((ushort)i, (float)values[i]))
             .ToArray();
 
         Bars = _barsById;
@@ -157,10 +151,6 @@ public partial class MainViewModel : ViewModelBase
             cts);
     }
 
-    // --------------------------------------------------
-    // Baking
-    // --------------------------------------------------
-
     private async Task BakeAsync(
         int generation,
         double[] values,
@@ -185,8 +175,6 @@ public partial class MainViewModel : ViewModelBase
             error = ex.Message;
         }
 
-        // Все свойства ViewModel и Bar изменяем
-        // исключительно из UI-потока.
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
             if (!ReferenceEquals(_bakeCts, cts))
@@ -217,16 +205,14 @@ public partial class MainViewModel : ViewModelBase
         cts.Dispose();
     }
 
-    // --------------------------------------------------
-    // Playback
-    // --------------------------------------------------
-
     [RelayCommand]
     private async Task PlayAsync()
     {
         if (!IsReady || _playCts is not null)
+        {
             return;
-
+        }
+            
         var player = _player!;
 
         var cts = new CancellationTokenSource();
@@ -322,10 +308,6 @@ public partial class MainViewModel : ViewModelBase
         PublishPlayerState(instant: true);
     }
 
-    // --------------------------------------------------
-    // Timeline
-    // --------------------------------------------------
-
     partial void OnTimelinePositionChanged(double value)
     {
         if (!IsReady)
@@ -346,16 +328,11 @@ public partial class MainViewModel : ViewModelBase
         PublishPlayerState(instant: true);
     }
 
-    // --------------------------------------------------
-    // Presentation
-    // --------------------------------------------------
-
     private void PublishPlayerState(bool instant)
     {
         if (_player is not { } player)
             return;
 
-        // Восстанавливаем порядок элементов.
         for (int position = 0; position < player.Count; position++)
         {
             int elementId = player.ElementAt(position);
@@ -363,13 +340,11 @@ public partial class MainViewModel : ViewModelBase
             _barsById[elementId].Index = position;
         }
 
-        // Сбрасываем визуальные состояния.
         foreach (Bar bar in _barsById)
             bar.State = BarState.Idle;
 
         var action = player.CurrentAction;
 
-        // Подсветка текущей операции.
         if (player.Position > 0 &&
             player.Position < player.TotalSteps &&
             action is { } current)
@@ -392,7 +367,6 @@ public partial class MainViewModel : ViewModelBase
             _barsById[rightId].State = state;
         }
 
-        // Информация о выполнении.
         CurrentStep = player.Position;
         TotalSteps = player.TotalSteps;
 
@@ -414,11 +388,11 @@ public partial class MainViewModel : ViewModelBase
             VariablesDescription = "";
         }
 
-        // Синхронизация ползунка.
         TimelinePosition = player.Position;
 
-        // Сигнал визуализатору пропустить интерполяцию.
         if (instant)
+        {
             SnapVersion++;
+        }
     }
 }

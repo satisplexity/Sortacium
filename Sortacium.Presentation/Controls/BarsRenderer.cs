@@ -13,7 +13,7 @@ namespace Sortacium.Presentation.Controls;
 
 public sealed class BarsRenderer : Control
 {
-    private const double GrowthSpeed = 1000.0;
+    private const double GrowthSpeed = 1000.0f;
 
     private static EnchancedBackEaseOut GrowthEasing = new EnchancedBackEaseOut()
     {
@@ -30,8 +30,7 @@ public sealed class BarsRenderer : Control
     }
 
     public static readonly StyledProperty<int> SnapVersionProperty =
-    AvaloniaProperty.Register<BarsRenderer, int>(
-        nameof(SnapVersion));
+        AvaloniaProperty.Register<BarsRenderer, int>(nameof(SnapVersion));
 
     public int SnapVersion
     {
@@ -42,7 +41,7 @@ public sealed class BarsRenderer : Control
     private bool _snapRequested;
 
     private const double AnimationDuration = 250;
-    private const double WidthFactor = 0.8;
+    private const double WidthFactor = 0.8f;
 
     private sealed class VisualBar(Bar bar)
     {
@@ -61,7 +60,6 @@ public sealed class BarsRenderer : Control
         public TimeSpan StartTime;
         public bool Animating;
 
-        // Appearance animation
         public double Growth = bar.State == BarState.Initialize ? 0 : 1;
         public bool Growing = bar.State == BarState.Initialize;
         public TimeSpan? GrowthStartTime;
@@ -107,7 +105,7 @@ public sealed class BarsRenderer : Control
 
         if (Bars is not null)
         {
-            foreach (var bar in Bars)
+            foreach (Bar bar in Bars)
             {
                 _visuals.Add(bar, new VisualBar(bar));
                 bar.PropertyChanged += OnBarChanged;
@@ -118,24 +116,21 @@ public sealed class BarsRenderer : Control
         RequestFrame();
     }
 
-    protected override void OnAttachedToVisualTree(
-        VisualTreeAttachmentEventArgs e)
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+
         RequestFrame();
     }
 
-    protected override void OnDetachedFromVisualTree(
-        VisualTreeAttachmentEventArgs e)
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
 
         _frameQueued = false;
     }
 
-    private void OnBarChanged(
-        object? sender,
-        PropertyChangedEventArgs e)
+    private void OnBarChanged(object? sender, PropertyChangedEventArgs e)
     {
         RequestFrame();
     }
@@ -143,13 +138,17 @@ public sealed class BarsRenderer : Control
     private void RequestFrame()
     {
         if (_frameQueued)
+        {
             return;
-
+        }
+            
         var topLevel = TopLevel.GetTopLevel(this);
 
         if (topLevel is null)
+        {
             return;
-
+        }
+            
         _frameQueued = true;
         topLevel.RequestAnimationFrame(OnFrame);
     }
@@ -228,13 +227,13 @@ public sealed class BarsRenderer : Control
 
             if (visual.Animating)
             {
-                double t = Math.Clamp(
+                double delta = Math.Clamp(
                     (time - visual.StartTime).TotalMilliseconds
                     / AnimationDuration,
                     0,
                     1);
 
-                double eased = Smoothstep(t);
+                double eased = Smoothstep(delta);
 
                 visual.X = Lerp(
                     visual.FromX,
@@ -251,7 +250,7 @@ public sealed class BarsRenderer : Control
                     visual.TargetColor,
                     eased);
 
-                visual.Animating = t < 1;
+                visual.Animating = delta < 1;
                 anyAnimating |= visual.Animating;
             }
 
@@ -303,13 +302,17 @@ public sealed class BarsRenderer : Control
         InvalidateVisual();
 
         if (anyAnimating)
+        {
             RequestFrame();
+        }   
     }
 
     private double CalculateBarHeight(double value, int count)
     {
         if (count <= 0)
+        {
             return 0;
+        }
 
         double barWidth = Bounds.Width / count * WidthFactor;
 
@@ -341,12 +344,6 @@ public sealed class BarsRenderer : Control
         double step = containerWidth / bars.Count;
         double barWidth = step * WidthFactor;
 
-        // Keep a width-sized margin at the top.
-        // H = 500, W = 50:
-        // min = 50, max = 450, range = 400.
-        //
-        // In unusually short containers, clamp the values
-        // to keep the range non-negative.
         double minHeight = Math.Min(
             barWidth,
             containerHeight / 2);
@@ -366,7 +363,6 @@ public sealed class BarsRenderer : Control
     visual.Value,
     bars.Count);
 
-            // During initialization Growth goes from 0 to 1.
             double height = targetHeight * visual.Growth;
 
             if (height <= 0)
@@ -376,7 +372,6 @@ public sealed class BarsRenderer : Control
                 visual.X * step +
                 (step - barWidth) / 2;
 
-            // Bottom-aligned: a growing bar moves upward.
             double y = Bounds.Height - height;
 
             double radius = barWidth / 4;
@@ -391,8 +386,8 @@ public sealed class BarsRenderer : Control
         {
             HsvColor hsv = visual.Color.ToHsv();
 
-            double top = Math.Clamp(hsv.V + 0.2, 0, 1);
-            double bottom = Math.Clamp(hsv.V - 0.2, 0, 1);
+            double top = (float)Math.Clamp(hsv.V + 0.2, 0, 1);
+            double bottom = (float)Math.Clamp(hsv.V - 0.2, 0, 1);
 
             LinearGradientBrush borderBrush = new()
             {

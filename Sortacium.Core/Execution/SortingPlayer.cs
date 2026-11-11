@@ -29,9 +29,9 @@ public sealed class SortingPlayer
 
     private readonly List<Checkpoint> _checkpoints = [];
 
-    private readonly ushort _checkpointInterval;
+    private readonly int _checkpointInterval;
 
-    public SortingPlayer(SortingTrace trace, ushort checkpointInterval = 256)
+    public SortingPlayer(SortingTrace trace, int checkpointInterval = 256)
     {
         _trace = trace;
         _checkpointInterval = checkpointInterval;

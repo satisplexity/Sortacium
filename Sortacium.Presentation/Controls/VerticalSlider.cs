@@ -4,4 +4,5 @@ namespace Sortacium.Presentation.Controls;
 
 public sealed class VerticalSlider : SliderBase
 {
+
 }

@@ -15,11 +15,11 @@ public sealed class BubbleSortAlgorithm
 
         var actions = new List<SortingAction>();
 
-        ushort n = (ushort)working.Length;
+        int n = working.Length;
 
-        for (ushort i = 0; i < n - 1; i++)
+        for (int i = 0; i < n - 1; i++)
         {
-            for (ushort j = 0; j < n - i - 1; j++)
+            for (int j = 0; j < n - i - 1; j++)
             {
                 if(cancellationToken.IsCancellationRequested)
                 {
@@ -28,13 +28,13 @@ public sealed class BubbleSortAlgorithm
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                float left = (float)working[j];
-                float right = (float)working[j + 1];
+                double left = working[j];
+                double right = working[j + 1];
 
                 actions.Add(new SortingAction(
                     SortingActionKind.Compare,
                     j,
-                    (ushort)(j + 1),
+                    j + 1,
                     i,
                     j,
                     left,
@@ -48,7 +48,7 @@ public sealed class BubbleSortAlgorithm
                 actions.Add(new SortingAction(
                     SortingActionKind.Swap,
                     j,
-                    (ushort)(j + 1),
+                    j + 1,
                     i,
                     j,
                     left,
