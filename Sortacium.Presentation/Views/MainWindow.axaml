@@ -1,5 +1,6 @@
 <Window
     xmlns="https://github.com/avaloniaui"
+    xmlns:avaloniaedit="https://github.com/avaloniaui/avaloniaedit"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
     xmlns:controls="using:Sortacium.Presentation.Controls"
@@ -323,64 +324,16 @@
             CornerRadius="8"
             Padding="8">
 
-            <ScrollViewer
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto">
-
-                <ItemsControl ItemsSource="{Binding CodeLines}">
-
-                    <ItemsControl.ItemTemplate>
-
-                        <DataTemplate x:DataType="vm:CodeLineViewModel">
-
-                            <Border
-                                Classes="code-line"
-                                Classes.active="{Binding IsActive}"
-                                CornerRadius="4"
-                                BorderThickness="4,1,1,1"
-                                Padding="8,1"
-                                Margin="0,1">
-
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <BrushTransition
-                                            Property="Background"
-                                            Duration="0:0:0.15"/>
-                                    </Transitions>
-                                </Border.Transitions>
-
-                                <Grid ColumnDefinitions="30,Auto">
-
-                                    <!-- Line number -->
-                                    <TextBlock
-                                        Text="{Binding Number}"
-                                        Foreground="#666666"
-                                        FontSize="14"
-                                        VerticalAlignment="Center"
-                                        FontFamily="{StaticResource RedHat}"/>
-
-                                    <!-- Source code -->
-                                    <TextBlock
-                                        Grid.Column="1"
-                                        Classes="code-text"
-                                        Text="{Binding Text}"
-                                        LineSpacing="0"
-                                        FontSize="14"
-                                        VerticalAlignment="Center"
-                                        FontFamily="{StaticResource RedHat}"
-                                        TextWrapping="NoWrap"/>
-
-                                </Grid>
-
-                            </Border>
-
-                        </DataTemplate>
-
-                    </ItemsControl.ItemTemplate>
-
-                </ItemsControl>
-
-            </ScrollViewer>
+            <controls:SortingCodeEditor
+    x:Name="CodeEditor"
+    Language="csharp"
+    Document="{Binding CodeDocument}"
+    HighlightedLines="{Binding HighlightedCodeLines}"
+    Background="Transparent"
+    Foreground="#CCCCCC"
+    FontFamily="Consolas, Menlo, Monospace"
+    FontSize="14"
+    LineNumbersForeground="#666666" />
 
         </Border>
 

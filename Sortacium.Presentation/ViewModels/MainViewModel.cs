@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 using Avalonia.Threading;
 
+using AvaloniaEdit.Document;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using Sortacium.Core.Algorithms;
 using Sortacium.Core.Execution;
 using Sortacium.Presentation.Models;
+using Sortacium.Presentation.Services;
 
 namespace Sortacium.Presentation.ViewModels;
 
@@ -73,6 +76,14 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
+    private readonly AlgorithmCodeService _codeService = new();
+
+    [ObservableProperty]
+    private TextDocument _codeDocument = new();
+
+    [ObservableProperty]
+    private int[] _highlightedCodeLines = [];
+
     private double _speed = 5;
 
     public double Speed
@@ -121,6 +132,12 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+        var code = _codeService.GetCode(
+        "bubble-sort",
+        "csharp");
+
+        CodeDocument = new TextDocument(code.Source);
+
         ResetBars();
     }
 
@@ -399,12 +416,19 @@ public partial class MainViewModel : ViewModelBase
     private void UpdateCodeHighlight(
     SortingCodePoint? codePoint)
     {
-        foreach (var line in CodeLines)
+        string? mappingKey = codePoint switch
         {
-            line.IsActive =
-                codePoint.HasValue &&
-                line.CodePoint == codePoint;
-        }
+            SortingCodePoint.CompareAdjacent => "compare",
+            SortingCodePoint.SwapAdjacent => "swap",
+            _ => null
+        };
+
+        HighlightedCodeLines = mappingKey is null
+            ? []
+            : _codeService.GetHighlightedLines(
+                "bubble-sort",
+                "csharp",
+                mappingKey);
     }
 
     private void PublishPlayerState(bool instant)

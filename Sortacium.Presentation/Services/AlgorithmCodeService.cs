@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 using Avalonia.Platform;
@@ -14,9 +15,11 @@ public sealed class AlgorithmCodeService
 
     public AlgorithmCodeService()
     {
+        using Stream stream = AssetLoader.Open(new Uri("avares://Sortacium.Presentation/Resources/Algorithms.json"));
+
         _catalog =
             JsonSerializer.Deserialize<AlgorithmCatalog>(
-                AssetLoader.Open(new Uri("avares://Sortacium/Resources/Algorithms.json")),
+                stream,
                 new JsonSerializerOptions(JsonSerializerDefaults.Web))
             ?? throw new InvalidOperationException("Failed to load algorithms.");
     }
