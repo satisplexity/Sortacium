@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls">
+    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
         x:Key="{x:Type controls:IconButton}"
@@ -17,7 +18,7 @@
 
         <Setter
             Property="CornerRadius"
-            Value="15"/>
+            Value="12"/>
 
         <Setter
             Property="BorderThickness"
@@ -119,7 +120,8 @@
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{TemplateBinding CornerRadius}"
-                    Padding="{TemplateBinding Padding}">
+                    Padding="{TemplateBinding Padding}"
+                    components:StrokeGradientAdapter.Enable="True">
 
                     <Path
                         Data="{TemplateBinding Icon}"

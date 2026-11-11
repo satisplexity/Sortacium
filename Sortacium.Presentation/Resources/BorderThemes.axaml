@@ -1,0 +1,112 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="using:Sortacium.Presentation.Components">
+
+    <ControlTheme
+        x:Key="ContentContainer"
+        TargetType="{x:Type Border}">
+
+        <Setter
+            Property="CornerRadius"
+            Value="15"/>
+
+        <Setter
+            Property="Background"
+            Value="#222222"/>
+
+        <Setter
+            Property="Padding"
+            Value="15"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="2"/>
+
+        <Setter
+            Property="components:StrokeGradientAdapter.Enable"
+            Value="True"/>
+
+        <Setter
+            Property="BorderBrush">
+
+            <LinearGradientBrush
+                StartPoint="50%, 0%"
+                EndPoint="50%, 100%">
+
+                <GradientStop
+                    Color="#2F2F2F"
+                    Offset="0"/>
+
+                <GradientStop
+                    Color="#262626"
+                    Offset="0.1"/>
+
+                <GradientStop
+                    Color="#262626"
+                    Offset="0.9"/>
+
+                <GradientStop
+                    Color="#1F1F1F"
+                    Offset="1"/>
+
+            </LinearGradientBrush>
+
+        </Setter>
+
+    </ControlTheme>
+
+    <ControlTheme
+        x:Key="TextEditorContainer"
+        TargetType="{x:Type Border}">
+
+        <Setter
+            Property="CornerRadius"
+            Value="12"/>
+
+        <Setter
+            Property="Background"
+            Value="#191919"/>
+
+        <Setter
+            Property="Padding"
+            Value="15"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="2"/>
+
+        <Setter
+            Property="components:StrokeGradientAdapter.Enable"
+            Value="True"/>
+
+        <Setter
+            Property="BorderBrush">
+
+            <LinearGradientBrush
+                StartPoint="50%, 0%"
+                EndPoint="50%, 100%">
+
+                <GradientStop
+                    Color="#151515"
+                    Offset="0"/>
+
+                <GradientStop
+                    Color="#222222"
+                    Offset="0.1"/>
+
+                <GradientStop
+                    Color="#222222"
+                    Offset="0.9"/>
+
+                <GradientStop
+                    Color="#2F2F2F"
+                    Offset="1"/>
+
+            </LinearGradientBrush>
+
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

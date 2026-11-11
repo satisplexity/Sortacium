@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Sortacium.Presentation.Controls">
+    xmlns:controls="using:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
         x:Key="VerticalSlider.SegmentTheme"
@@ -117,7 +118,8 @@
                         BorderThickness="1.5"
                         CornerRadius="8"
                         Margin="6"
-                        RenderTransform="translateY(0px)">
+                        RenderTransform="translateY(0px)"
+                        components:StrokeGradientAdapter.Enable="True">
 
                         <Border.BorderBrush>
 
@@ -256,10 +258,11 @@
             <ControlTemplate>
 
                 <Border
-                    Background="#232323"
+                    Background="#262626"
                     CornerRadius="18"
                     BorderThickness="1.5"
-                    Padding="6, 6, 6, 8">
+                    Padding="6, 6, 6, 8"
+                    components:StrokeGradientAdapter.Enable="True">
 
                     <Border.BorderBrush>
 
@@ -272,11 +275,11 @@
                                 Offset="0"/>
 
                             <GradientStop
-                                Color="#2B2B2B"
+                                Color="#262626"
                                 Offset="0.1"/>
 
                             <GradientStop
-                                Color="#2B2B2B"
+                                Color="#262626"
                                 Offset="0.9"/>
 
                             <GradientStop
@@ -288,9 +291,10 @@
                     </Border.BorderBrush>
 
                     <Border
-                        Background="#232323"
+                        Background="#151515"
                         BorderThickness="1.5"
-                        CornerRadius="14">
+                        CornerRadius="14"
+                        components:StrokeGradientAdapter.Enable="True">
 
                         <Border.BorderBrush>
 
@@ -299,7 +303,7 @@
                                 EndPoint="50%, 100%">
 
                                 <GradientStop
-                                    Color="#212121"
+                                    Color="#1E1E1E"
                                     Offset="0"/>
 
                                 <GradientStop
@@ -324,33 +328,9 @@
                             <Border
                                 x:Name="PART_TitleBackgroundBorder"
                                 CornerRadius="13,13,0,0"
-                                BorderBrush="#292929"
+                                Background="#2F2F2F"
+                                BorderBrush="#252525"
                                 BorderThickness="0,0,0,2">
-
-                                <Border.Background>
-                                    <LinearGradientBrush
-                                        StartPoint="50%, 100%"
-                                        EndPoint="50%, 0%">
-
-                                        <GradientStop
-                                            Color="#313131"
-                                            Offset="0"/>
-
-                                        <GradientStop
-                                            Color="#313131"
-                                            Offset="0.5"/>
-
-                                    </LinearGradientBrush>
-                                </Border.Background>
-
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <BrushTransition
-                                            Property="Background"
-                                            Duration="0:0:0.3"
-                                            Easing="CubicEaseOut"/>
-                                    </Transitions>
-                                </Border.Transitions>
 
                                 <TextBlock
                                     Text="{TemplateBinding Title}"
@@ -388,7 +368,7 @@
                                                     Offset="0"/>
 
                                                 <GradientStop
-                                                    Color="#292929"
+                                                    Color="#262626"
                                                     Offset="1"/>
 
                                             </LinearGradientBrush>
@@ -404,7 +384,7 @@
                                     <RepeatButton
                                         Name="PART_IncreaseButton"
                                         Theme="{StaticResource VerticalSlider.SegmentTheme}"
-                                        Background="#202020"
+                                        Background="#1C1C1C"
                                         Focusable="False"/>
 
                                 </Track.IncreaseButton>
@@ -424,32 +404,8 @@
                                 Grid.Row="2"
                                 CornerRadius="0,0,13,13"
                                 BorderThickness="0, 2, 0, 0"
-                                BorderBrush="#393939">
-
-                                <Border.Background>
-                                    <LinearGradientBrush
-                                        StartPoint="50%, 0%"
-                                        EndPoint="50%, 100%">
-
-                                        <GradientStop
-                                            Color="#313131"
-                                            Offset="0"/>
-
-                                        <GradientStop
-                                            Color="#313131"
-                                            Offset="0.5"/>
-
-                                    </LinearGradientBrush>
-                                </Border.Background>
-
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <BrushTransition
-                                            Property="Background"
-                                            Duration="0:0:0.3"
-                                            Easing="CubicEaseOut"/>
-                                    </Transitions>
-                                </Border.Transitions>
+                                BorderBrush="#363636"
+                                Background="#2F2F2F">
 
                                 <StackPanel
                                     Orientation="Horizontal"
@@ -457,8 +413,8 @@
                                     Margin="0, 10, 0, 8">
 
                                     <TextBlock
-                                        Text="{Binding Value,
-                                           RelativeSource={RelativeSource TemplatedParent},
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
                                            StringFormat='{}{0:F0}'}"
                                         HorizontalAlignment="Center"/>
 

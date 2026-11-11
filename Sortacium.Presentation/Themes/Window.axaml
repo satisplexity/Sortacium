@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
         x:Key="{x:Type Window}"
@@ -62,7 +63,8 @@
                 <Border
                     CornerRadius="15"
                     Background="{StaticResource Brush.WindowBackground}"
-                    BorderThickness="2">
+                    BorderThickness="2"
+                    components:StrokeGradientAdapter.Enable="True">
 
                     <Border.BorderBrush>
 
@@ -71,7 +73,7 @@
                             EndPoint="50%, 100%">
 
                             <GradientStop
-                                Color="#272727"
+                                Color="#2A2A2A"
                                 Offset="0"/>
 
                             <GradientStop

@@ -207,41 +207,13 @@
             </Border>
 
             <Grid
+                Margin="10"
                 Grid.Row="1"
                 ColumnDefinitions="auto, *, auto">
 
                 <Border
-                    CornerRadius="15"
-                    Background="{StaticResource Brush.TitleBarBackground}"
-                    Width="300"
-                    Margin="10"
-                    BorderThickness="1.5">
-
-                    <Border.BorderBrush>
-
-                        <LinearGradientBrush
-                            StartPoint="50%, 0%"
-                            EndPoint="50%, 100%">
-
-                            <GradientStop
-                                Color="#272727"
-                                Offset="0"/>
-
-                            <GradientStop
-                                Color="{StaticResource Color.TitleBarBackground}"
-                                Offset="0.1"/>
-
-                            <GradientStop
-                                Color="{StaticResource Color.WindowBackground}"
-                                Offset="0.9"/>
-
-                            <GradientStop
-                                Color="#151515"
-                                Offset="1"/>
-
-                        </LinearGradientBrush>
-
-                    </Border.BorderBrush>
+                    Theme="{StaticResource ContentContainer}"
+                    Width="300">
 
                     <StackPanel
                         Margin="15"
@@ -311,12 +283,7 @@
                 <Border
                     Grid.Column="2"
                     Width="420"
-                    Margin="10"
-                    Padding="16"
-                    CornerRadius="15"
-                    Background="{StaticResource Brush.TitleBarBackground}"
-                    BorderBrush="#303030"
-                    BorderThickness="1.5">
+                    Theme="{StaticResource ContentContainer}">
 
                     <Grid
                         RowDefinitions="Auto,*,Auto"
@@ -349,9 +316,7 @@
                         <!-- Code viewer -->
                         <Border
                             Grid.Row="1"
-                            Background="#1B1B1B"
-                            CornerRadius="8"
-                            Padding="8">
+                            Theme="{StaticResource TextEditorContainer}">
 
                             <controls:SortingCodeEditor
                                 x:Name="CodeEditor"

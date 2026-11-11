@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls">
+    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
         x:Key="HorizontalSlider.SegmentTheme"
@@ -117,7 +118,8 @@
                         BorderThickness="1.5"
                         CornerRadius="8"
                         Margin="6"
-                        RenderTransform="translateY(0px)">
+                        RenderTransform="translateY(0px)"
+                        components:StrokeGradientAdapter.Enable="True">
 
                         <Border.BorderBrush>
 
@@ -255,7 +257,8 @@
                     Background="#292929"
                     CornerRadius="18"
                     BorderThickness="1.5"
-                    Padding="6, 6, 6, 7">
+                    Padding="6, 6, 6, 7"
+                    components:StrokeGradientAdapter.Enable="True">
 
                     <Border.BorderBrush>
 
@@ -286,7 +289,8 @@
                     <Border
                         Background="#232323"
                         BorderThickness="1.5"
-                        CornerRadius="14">
+                        CornerRadius="14"
+                        components:StrokeGradientAdapter.Enable="True">
 
                         <Border.BorderBrush>
 
@@ -395,8 +399,8 @@
                                     Orientation="Horizontal">
 
                                     <TextBlock
-                                        Text="{Binding Value,
-                                           RelativeSource={RelativeSource TemplatedParent},
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
                                            StringFormat='{}{0:F0}'}"
                                         Margin="10, 7, 0, 7"/>
 

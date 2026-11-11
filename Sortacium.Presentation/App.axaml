@@ -32,6 +32,9 @@
                     Source="avares://Sortacium.Presentation/Resources/Brushes.axaml"/>
 
                 <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Resources/BorderThemes.axaml"/>
+
+                <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/ToolTip.axaml"/>
 
                 <ResourceInclude
