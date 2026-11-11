@@ -3,21 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:Sortacium.Presentation.Controls">
 
-     <ControlTheme
-         x:Key="VerticalSlider.SegmentTheme"
-         TargetType="RepeatButton">
+    <ControlTheme
+        x:Key="VerticalSlider.SegmentTheme"
+        TargetType="RepeatButton">
 
-         <Setter
-             Property="Template">
+        <Setter
+            Property="Template">
 
-             <ControlTemplate>
+            <ControlTemplate>
 
-                 <Border
-                     Background="{TemplateBinding Background}" />
+                <Border
+                    Background="{TemplateBinding Background}"/>
 
-             </ControlTemplate>
+            </ControlTemplate>
 
-         </Setter>
+        </Setter>
 
     </ControlTheme>
 
@@ -98,7 +98,8 @@
             Property="Height"
             Value="36"/>
 
-        <Setter Property="Template">
+        <Setter
+            Property="Template">
 
             <ControlTemplate>
 
@@ -195,7 +196,8 @@
                 Property="RenderTransform"
                 Value="translateY(-1px)"/>
 
-            <Setter Property="BorderBrush">
+            <Setter
+                Property="BorderBrush">
                 <Setter.Value>
 
                     <LinearGradientBrush
@@ -292,7 +294,7 @@
 
                         <Border.BorderBrush>
 
-                              <LinearGradientBrush
+                            <LinearGradientBrush
                                 StartPoint="50%, 0%"
                                 EndPoint="50%, 100%">
 
@@ -324,26 +326,32 @@
                                 CornerRadius="13,13,0,0"
                                 BorderBrush="#292929"
                                 BorderThickness="0,0,0,2">
+
                                 <Border.Background>
                                     <LinearGradientBrush
                                         StartPoint="50%, 100%"
                                         EndPoint="50%, 0%">
+
                                         <GradientStop
                                             Color="#313131"
                                             Offset="0"/>
+
                                         <GradientStop
                                             Color="#313131"
                                             Offset="0.5"/>
-                                        </LinearGradientBrush>
+
+                                    </LinearGradientBrush>
                                 </Border.Background>
-                                 <Border.Transitions>
-        <Transitions>
-            <BrushTransition
-                Property="Background"
-                Duration="0:0:0.3"
-                Easing="CubicEaseOut"/>
-        </Transitions>
-    </Border.Transitions>
+
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <BrushTransition
+                                            Property="Background"
+                                            Duration="0:0:0.3"
+                                            Easing="CubicEaseOut"/>
+                                    </Transitions>
+                                </Border.Transitions>
+
                                 <TextBlock
                                     Text="{TemplateBinding Title}"
                                     HorizontalAlignment="Center"
@@ -377,11 +385,11 @@
 
                                                 <GradientStop
                                                     Color="#792FA4"
-                                                    Offset="0" />
+                                                    Offset="0"/>
 
                                                 <GradientStop
                                                     Color="#292929"
-                                                    Offset="1" />
+                                                    Offset="1"/>
 
                                             </LinearGradientBrush>
 
@@ -391,13 +399,13 @@
 
                                 </Track.DecreaseButton>
 
-                                  <Track.IncreaseButton>
+                                <Track.IncreaseButton>
 
                                     <RepeatButton
                                         Name="PART_IncreaseButton"
                                         Theme="{StaticResource VerticalSlider.SegmentTheme}"
                                         Background="#202020"
-                                        Focusable="False" />
+                                        Focusable="False"/>
 
                                 </Track.IncreaseButton>
 
@@ -417,42 +425,48 @@
                                 CornerRadius="0,0,13,13"
                                 BorderThickness="0, 2, 0, 0"
                                 BorderBrush="#393939">
-                                 <Border.Background>
+
+                                <Border.Background>
                                     <LinearGradientBrush
                                         StartPoint="50%, 0%"
                                         EndPoint="50%, 100%">
+
                                         <GradientStop
                                             Color="#313131"
                                             Offset="0"/>
+
                                         <GradientStop
                                             Color="#313131"
                                             Offset="0.5"/>
-                                        </LinearGradientBrush>
+
+                                    </LinearGradientBrush>
                                 </Border.Background>
-                                 <Border.Transitions>
-        <Transitions>
-            <BrushTransition
-                Property="Background"
-                Duration="0:0:0.3"
-                Easing="CubicEaseOut"/>
-        </Transitions>
-    </Border.Transitions>
+
+                                <Border.Transitions>
+                                    <Transitions>
+                                        <BrushTransition
+                                            Property="Background"
+                                            Duration="0:0:0.3"
+                                            Easing="CubicEaseOut"/>
+                                    </Transitions>
+                                </Border.Transitions>
+
                                 <StackPanel
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center"
                                     Margin="0, 10, 0, 8">
-                                    <TextBlock
-                                    Text="{Binding Value,
-                                           RelativeSource={RelativeSource TemplatedParent},
-                                           StringFormat='{}{0:F0}'}"
-                                    HorizontalAlignment="Center"/>
-                                    <TextBlock
-                                    Text="{TemplateBinding Suffix}"
-                                    HorizontalAlignment="Center"/>
-                                </StackPanel
->
 
-                                
+                                    <TextBlock
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
+                                           StringFormat='{}{0:F0}'}"
+                                        HorizontalAlignment="Center"/>
+
+                                    <TextBlock
+                                        Text="{TemplateBinding Suffix}"
+                                        HorizontalAlignment="Center"/>
+
+                                </StackPanel>
 
                             </Border>
 

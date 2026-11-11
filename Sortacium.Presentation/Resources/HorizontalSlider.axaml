@@ -4,44 +4,57 @@
     xmlns:controls="using:Sortacium.Presentation.Controls">
 
     <!-- Track segments -->
-    <ControlTheme x:Key="SliderSegmentTheme"
-                  TargetType="RepeatButton">
-        <Setter Property="Template">
+    <ControlTheme
+        x:Key="SliderSegmentTheme"
+        TargetType="RepeatButton">
+        <Setter
+            Property="Template">
             <ControlTemplate>
-                <Border Background="{TemplateBinding Background}" />
+                <Border
+                    Background="{TemplateBinding Background}"/>
             </ControlTemplate>
         </Setter>
     </ControlTheme>
 
     <!-- Thumb -->
-    <ControlTheme x:Key="SliderThumbTheme"
-                  TargetType="Thumb">
-        <Setter Property="Template">
+    <ControlTheme
+        x:Key="SliderThumbTheme"
+        TargetType="Thumb">
+        <Setter
+            Property="Template">
             <ControlTemplate>
-                <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="10" />
+                <Border
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="10"/>
             </ControlTemplate>
         </Setter>
     </ControlTheme>
 
     <!-- Slider -->
-    <ControlTheme x:Key="{x:Type controls:HorizontalSlider}"
-                  TargetType="controls:HorizontalSlider">
+    <ControlTheme
+        x:Key="{x:Type controls:HorizontalSlider}"
+        TargetType="controls:HorizontalSlider">
 
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="Margin"
-                Value="5"/>
+        <Setter
+            Property="Foreground"
+            Value="White"/>
 
-        <Setter Property="Template">
+        <Setter
+            Property="Margin"
+            Value="5"/>
+
+        <Setter
+            Property="Template">
             <ControlTemplate>
 
                 <!-- Outer Border -->
-                <Border Background="#292929"
-                        BorderThickness="1.5"
-                        CornerRadius="10"
-                        Padding="4">
+                <Border
+                    Background="#292929"
+                    BorderThickness="1.5"
+                    CornerRadius="10"
+                    Padding="4">
 
                     <Border.BorderBrush>
 
@@ -70,10 +83,11 @@
                     </Border.BorderBrush>
 
                     <!-- Inner Border -->
-                    <Border Background="#232323"
-                            BorderThickness="1.5"
-                            CornerRadius="8"
-                            ClipToBounds="True">
+                    <Border
+                        Background="#232323"
+                        BorderThickness="1.5"
+                        CornerRadius="8"
+                        ClipToBounds="True">
 
                         <Border.BorderBrush>
 
@@ -97,67 +111,81 @@
                                     Color="#2B2B2B"
                                     Offset="1"/>
 
-                            </LinearGradientBrush
->
+                            </LinearGradientBrush>
 
                         </Border.BorderBrush>
 
-                        <Grid ColumnDefinitions="Auto,*,auto">
+                        <Grid
+                            ColumnDefinitions="Auto,*,auto">
 
                             <!-- Track -->
-                            <Track Name="PART_Track"
-                                   Grid.Column="1"
-                                   Orientation="Horizontal"
-                                   Minimum="{TemplateBinding Minimum}"
-                                   Maximum="{TemplateBinding Maximum}"
-                                   Value="{TemplateBinding Value, Mode=TwoWay}"
-                                   IsDirectionReversed="{TemplateBinding IsDirectionReversed}">
+                            <Track
+                                Name="PART_Track"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Minimum="{TemplateBinding Minimum}"
+                                Maximum="{TemplateBinding Maximum}"
+                                Value="{TemplateBinding Value, Mode=TwoWay}"
+                                IsDirectionReversed="{TemplateBinding IsDirectionReversed}">
 
                                 <Track.DecreaseButton>
-                                    <RepeatButton Name="PART_DecreaseButton"
-                                                  Theme="{StaticResource SliderSegmentTheme}"
-                                                  Focusable="False">
+                                    <RepeatButton
+                                        Name="PART_DecreaseButton"
+                                        Theme="{StaticResource SliderSegmentTheme}"
+                                        Focusable="False">
                                         <RepeatButton.Background>
-                                            <LinearGradientBrush StartPoint="0%,50%"
-                                                                 EndPoint="100%,50%">
-                                                <GradientStop Color="#373737" Offset="0" />
-                                                <GradientStop Color="#8025A6" Offset="1" />
+                                            <LinearGradientBrush
+                                                StartPoint="0%,50%"
+                                                EndPoint="100%,50%">
+
+                                                <GradientStop
+                                                    Color="#373737"
+                                                    Offset="0"/>
+
+                                                <GradientStop
+                                                    Color="#8025A6"
+                                                    Offset="1"/>
+
                                             </LinearGradientBrush>
                                         </RepeatButton.Background>
                                     </RepeatButton>
                                 </Track.DecreaseButton>
 
                                 <Track.IncreaseButton>
-                                    <RepeatButton Name="PART_IncreaseButton"
-                                                  Theme="{StaticResource SliderSegmentTheme}"
-                                                  Background="#202020"
-                                                  Focusable="False" />
+                                    <RepeatButton
+                                        Name="PART_IncreaseButton"
+                                        Theme="{StaticResource SliderSegmentTheme}"
+                                        Background="#202020"
+                                        Focusable="False"/>
                                 </Track.IncreaseButton>
 
                                 <Track.Thumb>
-                                    <Thumb Name="PART_Thumb"
-                                           Theme="{StaticResource SliderThumbTheme}"
-                                           Background="#8734AC"
-                                           BorderBrush="#A34BC4"
-                                           Width="16"/>
+                                    <Thumb
+                                        Name="PART_Thumb"
+                                        Theme="{StaticResource SliderThumbTheme}"
+                                        Background="#8734AC"
+                                        BorderBrush="#A34BC4"
+                                        Width="16"/>
                                 </Track.Thumb>
 
                             </Track>
 
                             <!-- Title -->
-                            <TextBlock Grid.Column="0"
-                                       Text="{TemplateBinding Title}"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontSize="16"
-                                       Margin="5"
-                                       VerticalAlignment="Center"
-                                       IsHitTestVisible="False" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="{TemplateBinding Title}"
+                                Foreground="{TemplateBinding Foreground}"
+                                FontSize="16"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                IsHitTestVisible="False"/>
 
                             <!-- Value -->
-                            <Border Grid.Column="2"
-                                    Background="#393939"
-                                    BorderBrush="#1E1E1E"
-                                    BorderThickness="1,0,0,0">
+                            <Border
+                                Grid.Column="2"
+                                Background="#393939"
+                                BorderBrush="#1E1E1E"
+                                BorderThickness="1,0,0,0">
 
                                 <TextBlock
                                     Text="{Binding Value,
@@ -166,24 +194,32 @@
                                     Foreground="{TemplateBinding Foreground}"
                                     FontSize="16"
                                     HorizontalAlignment="Center"
-                                    VerticalAlignment="Center" />
+                                    VerticalAlignment="Center"/>
                             </Border>
 
                         </Grid>
+
                     </Border>
+
                 </Border>
 
             </ControlTemplate>
         </Setter>
 
         <!-- Hover -->
-        <Style Selector="^:pointerover /template/ Thumb">
-            <Setter Property="Background" Value="#9945BE" />
+        <Style
+            Selector="^:pointerover /template/ Thumb">
+            <Setter
+                Property="Background"
+                Value="#9945BE"/>
         </Style>
 
         <!-- Disabled -->
-        <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45" />
+        <Style
+            Selector="^:disabled">
+            <Setter
+                Property="Opacity"
+                Value="0.45"/>
         </Style>
 
     </ControlTheme>

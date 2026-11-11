@@ -4,20 +4,20 @@
     xmlns:controls="clr-namespace:Sortacium.Presentation.Controls">
 
     <ControlTheme
-         x:Key="HorizontalSlider.SegmentTheme"
-         TargetType="RepeatButton">
+        x:Key="HorizontalSlider.SegmentTheme"
+        TargetType="RepeatButton">
 
-         <Setter
-             Property="Template">
+        <Setter
+            Property="Template">
 
-             <ControlTemplate>
+            <ControlTemplate>
 
-                 <Border
-                     Background="{TemplateBinding Background}" />
+                <Border
+                    Background="{TemplateBinding Background}"/>
 
-             </ControlTemplate>
+            </ControlTemplate>
 
-         </Setter>
+        </Setter>
 
     </ControlTheme>
 
@@ -98,7 +98,8 @@
             Property="Width"
             Value="60"/>
 
-        <Setter Property="Template">
+        <Setter
+            Property="Template">
 
             <ControlTemplate>
 
@@ -195,7 +196,8 @@
                 Property="RenderTransform"
                 Value="translateY(-1px)"/>
 
-            <Setter Property="BorderBrush">
+            <Setter
+                Property="BorderBrush">
                 <Setter.Value>
 
                     <LinearGradientBrush
@@ -288,7 +290,7 @@
 
                         <Border.BorderBrush>
 
-                              <LinearGradientBrush
+                            <LinearGradientBrush
                                 StartPoint="50%, 0%"
                                 EndPoint="50%, 100%">
 
@@ -350,11 +352,11 @@
 
                                                 <GradientStop
                                                     Color="#792FA4"
-                                                    Offset="0" />
+                                                    Offset="0"/>
 
                                                 <GradientStop
                                                     Color="#313131"
-                                                    Offset="1" />
+                                                    Offset="1"/>
 
                                             </LinearGradientBrush>
 
@@ -364,13 +366,13 @@
 
                                 </Track.DecreaseButton>
 
-                                  <Track.IncreaseButton>
+                                <Track.IncreaseButton>
 
                                     <RepeatButton
                                         Name="PART_IncreaseButton"
                                         Theme="{StaticResource HorizontalSlider.SegmentTheme}"
                                         Background="#202020"
-                                        Focusable="False" />
+                                        Focusable="False"/>
 
                                 </Track.IncreaseButton>
 
@@ -393,17 +395,16 @@
                                     Orientation="Horizontal">
 
                                     <TextBlock
-                                    Text="{Binding Value,
-                                           RelativeSource={RelativeSource TemplatedParent},
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
                                            StringFormat='{}{0:F0}'}"
-                                    Margin="10, 7, 0, 7"/>
+                                        Margin="10, 7, 0, 7"/>
 
                                     <TextBlock
-                                    Text="{TemplateBinding Suffix}"
-                                    Margin="0, 7, 10, 7"/>
+                                        Text="{TemplateBinding Suffix}"
+                                        Margin="0, 7, 10, 7"/>
 
-                                </StackPanel
->
+                                </StackPanel>
 
                             </Border>
 
@@ -418,4 +419,5 @@
         </Setter>
 
     </ControlTheme>
+
 </ResourceDictionary>

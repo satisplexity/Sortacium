@@ -37,7 +37,7 @@
 
             <Setter
                 Property="Opacity"
-                Value="0" />
+                Value="0"/>
 
             <Setter
                 Property="RenderTransform"
@@ -59,26 +59,48 @@
         </Style>
 
         <!-- Default code line -->
-<Style Selector="Border.code-line">
-    <Setter Property="Background" Value="#003D204D"/>
-    <Setter Property="BorderBrush" Value="#00AF4BE9"/>
-</Style>
+        <Style
+            Selector="Border.code-line">
 
-<!-- Active code line -->
-<Style Selector="Border.code-line.active">
-    <Setter Property="Background" Value="#3D204D"/>
-    <Setter Property="BorderBrush" Value="#AF4BE9"/>
-</Style>
+            <Setter
+                Property="Background"
+                Value="#003D204D"/>
 
-<!-- Default code text -->
-<Style Selector="TextBlock.code-text">
-    <Setter Property="Foreground" Value="#CCCCCC"/>
-</Style>
+            <Setter
+                Property="BorderBrush"
+                Value="#00AF4BE9"/>
 
-<!-- Active code text -->
-<Style Selector="Border.code-line.active TextBlock.code-text">
-    <Setter Property="Foreground" Value="#C18DDF"/>
-</Style>
+        </Style>
+
+        <!-- Active code line -->
+        <Style
+            Selector="Border.code-line.active">
+
+            <Setter
+                Property="Background"
+                Value="#3D204D"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="#AF4BE9"/>
+
+        </Style>
+
+        <!-- Default code text -->
+        <Style
+            Selector="TextBlock.code-text">
+            <Setter
+                Property="Foreground"
+                Value="#CCCCCC"/>
+        </Style>
+
+        <!-- Active code text -->
+        <Style
+            Selector="Border.code-line.active TextBlock.code-text">
+            <Setter
+                Property="Foreground"
+                Value="#C18DDF"/>
+        </Style>
 
     </Window.Styles>
 
@@ -123,7 +145,7 @@
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Shuffle}"
-                            Command="{Binding ShuffleCommand}" />
+                            Command="{Binding ShuffleCommand}"/>
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Play}"
@@ -132,22 +154,22 @@
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Pause}"
-                            Command="{Binding PauseCommand}" />
+                            Command="{Binding PauseCommand}"/>
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Force}"
                             Command="{Binding ForceToEndCommand}"
-                            IsEnabled="{Binding IsReady}" />
+                            IsEnabled="{Binding IsReady}"/>
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Previous}"
                             Command="{Binding PreviousStepCommand}"
-                            IsEnabled="{Binding IsReady}" />
+                            IsEnabled="{Binding IsReady}"/>
 
                         <controls:IconButton
                             Icon="{StaticResource Icon.Next}"
                             Command="{Binding NextStepCommand}"
-                            IsEnabled="{Binding IsReady}" />
+                            IsEnabled="{Binding IsReady}"/>
 
                     </StackPanel>
 
@@ -261,125 +283,129 @@
 
                 </Border>
 
-            <Grid
-                Grid.Column="1"
-                Margin="15"
-                RowDefinitions="*,Auto,Auto"
-                RowSpacing="12">
-
-                <controls:BarsRenderer
-                    Grid.Row="0"
-                    Bars="{Binding Bars}"
-                    SnapVersion="{Binding SnapVersion}"
-                    OperationsPerSecond="{Binding Speed}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
-
-                <controls:HorizontalSlider
-                    Grid.Row="1"
-                    Minimum="0"
-                    Maximum="{Binding TotalSteps}"
-                    Value="{Binding TimelinePosition, Mode=TwoWay}"
-                    Title="Step"
-                    Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
-                    IsEnabled="{Binding IsReady}" />
-
-            </Grid>
-
-               <Border
-    Grid.Column="2"
-    Width="420"
-    Margin="10"
-    Padding="16"
-    CornerRadius="15"
-    Background="{StaticResource Brush.TitleBarBackground}"
-    BorderBrush="#303030"
-    BorderThickness="1.5">
-
-    <Grid
-        RowDefinitions="Auto,*,Auto"
-        RowSpacing="12">
-
-        <!-- Header -->
-        <Grid ColumnDefinitions="*,Auto">
-
-            <ComboBox
-    Grid.Column="1"
-    MinWidth="145"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Center"
-    ItemsSource="{Binding AvailableLanguages}"
-    SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
-
-    <ComboBox.ItemTemplate>
-        <DataTemplate x:DataType="vm:CodeLanguageOption">
-            <TextBlock Text="{Binding DisplayName}" />
-        </DataTemplate>
-    </ComboBox.ItemTemplate>
-
-</ComboBox>
-
-        </Grid>
-
-        <!-- Code viewer -->
-        <Border
-            Grid.Row="1"
-            Background="#1B1B1B"
-            CornerRadius="8"
-            Padding="8">
-
-           <controls:SortingCodeEditor
-    x:Name="CodeEditor"
-    Language="{Binding SelectedLanguage.Id}"
-    Document="{Binding CodeDocument}"
-    HighlightedLines="{Binding HighlightedCodeLines}"
-    Background="Transparent"
-    Foreground="#CCCCCC"
-    FontFamily="Consolas, Menlo, Monospace"
-    FontSize="14"
-    LineNumbersForeground="#666666"/>
-
-        </Border>
-
-        <!-- Statistics -->
-        <StackPanel
-            Grid.Row="2"
-            Spacing="8">
-
-            <Border
-                Background="#303030"
-                Height="1"/>
-
-            <TextBlock
-                Text="Execution details"
-                FontSize="16"
-                FontWeight="Medium"
-                Foreground="#EEEEEE"/>
-
-            <Grid ColumnDefinitions="*,*">
-
-                <TextBlock
-                    Text="{Binding ComparisonCount, StringFormat='Comparisons: {0}'}"
-                    Foreground="#CCCCCC"/>
-
-                <TextBlock
+                <Grid
                     Grid.Column="1"
-                    Text="{Binding SwapCount, StringFormat='Swaps: {0}'}"
-                    Foreground="#CCCCCC"/>
+                    Margin="15"
+                    RowDefinitions="*,Auto,Auto"
+                    RowSpacing="12">
 
-            </Grid>
+                    <controls:BarsRenderer
+                        Grid.Row="0"
+                        Bars="{Binding Bars}"
+                        SnapVersion="{Binding SnapVersion}"
+                        OperationsPerSecond="{Binding Speed}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
 
-            <TextBlock
-                Text="{Binding VariablesDescription}"
-                Foreground="#AAAAAA"
-                FontFamily="Consolas, Menlo, DejaVu Sans Mono"
-                FontSize="12"/>
+                    <controls:HorizontalSlider
+                        Grid.Row="1"
+                        Minimum="0"
+                        Maximum="{Binding TotalSteps}"
+                        Value="{Binding TimelinePosition, Mode=TwoWay}"
+                        Title="Step"
+                        Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
+                        IsEnabled="{Binding IsReady}"/>
 
-        </StackPanel>
+                </Grid>
 
-    </Grid>
+                <Border
+                    Grid.Column="2"
+                    Width="420"
+                    Margin="10"
+                    Padding="16"
+                    CornerRadius="15"
+                    Background="{StaticResource Brush.TitleBarBackground}"
+                    BorderBrush="#303030"
+                    BorderThickness="1.5">
 
-</Border>
+                    <Grid
+                        RowDefinitions="Auto,*,Auto"
+                        RowSpacing="12">
+
+                        <!-- Header -->
+                        <Grid
+                            ColumnDefinitions="*,Auto">
+
+                            <ComboBox
+                                Grid.Column="1"
+                                MinWidth="145"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                ItemsSource="{Binding AvailableLanguages}"
+                                SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate
+                                        x:DataType="vm:CodeLanguageOption">
+                                        <TextBlock
+                                            Text="{Binding DisplayName}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+
+                            </ComboBox>
+
+                        </Grid>
+
+                        <!-- Code viewer -->
+                        <Border
+                            Grid.Row="1"
+                            Background="#1B1B1B"
+                            CornerRadius="8"
+                            Padding="8">
+
+                            <controls:SortingCodeEditor
+                                x:Name="CodeEditor"
+                                Language="{Binding SelectedLanguage.Id}"
+                                Document="{Binding CodeDocument}"
+                                HighlightedLines="{Binding HighlightedCodeLines}"
+                                Background="Transparent"
+                                Foreground="#CCCCCC"
+                                FontFamily="Consolas, Menlo, Monospace"
+                                FontSize="14"
+                                LineNumbersForeground="#666666"/>
+
+                        </Border>
+
+                        <!-- Statistics -->
+                        <StackPanel
+                            Grid.Row="2"
+                            Spacing="8">
+
+                            <Border
+                                Background="#303030"
+                                Height="1"/>
+
+                            <TextBlock
+                                Text="Execution details"
+                                FontSize="16"
+                                FontWeight="Medium"
+                                Foreground="#EEEEEE"/>
+
+                            <Grid
+                                ColumnDefinitions="*,*">
+
+                                <TextBlock
+                                    Text="{Binding ComparisonCount, StringFormat='Comparisons: {0}'}"
+                                    Foreground="#CCCCCC"/>
+
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Text="{Binding SwapCount, StringFormat='Swaps: {0}'}"
+                                    Foreground="#CCCCCC"/>
+
+                            </Grid>
+
+                            <TextBlock
+                                Text="{Binding VariablesDescription}"
+                                Foreground="#AAAAAA"
+                                FontFamily="Consolas, Menlo, DejaVu Sans Mono"
+                                FontSize="12"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
 
             </Grid>
 
@@ -448,7 +474,7 @@
                         <DoubleTransition
                             Property="Opacity"
                             Duration="0:0:0.25"
-                            Easing="CubicEaseOut" />
+                            Easing="CubicEaseOut"/>
 
                         <TransformOperationsTransition
                             Property="RenderTransform"
@@ -467,12 +493,13 @@
 
                 </Border.Transitions>
 
-                <StackPanel Spacing="16">
+                <StackPanel
+                    Spacing="16">
 
                     <TextBlock
                         Text="Settings"
                         FontSize="24"
-                        FontWeight="Bold" />
+                        FontWeight="Bold"/>
 
                     <TextBlock
                         Text="Animation speed"/>
@@ -485,7 +512,7 @@
                     <Button
                         Content="Close"
                         HorizontalAlignment="Right"
-                        Click="CloseSettings_Click" />
+                        Click="CloseSettings_Click"/>
 
                 </StackPanel>
 
