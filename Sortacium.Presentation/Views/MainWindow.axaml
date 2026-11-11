@@ -11,33 +11,51 @@
         <vm:MainViewModel/>
     </Design.DataContext>
 
-
-
     <Window.Styles>
 
-        <!-- Затемнение фона -->
-    <Style Selector="Border#ModalOverlay">
-        <Setter Property="Opacity" Value="0" />
-    </Style>
+        <Style
+            Selector="Border#ModalOverlay">
 
-    <Style Selector="Border#ModalOverlay.open">
-        <Setter Property="Opacity" Value="1" />
-    </Style>
+            <Setter
+                Property="Opacity"
+                Value="0"/>
 
-    <!-- Окно настроек -->
-    <Style Selector="Border#SettingsDialog">
-        <Setter Property="Opacity" Value="0" />
-        <Setter
-            Property="RenderTransform"
-            Value="scale(0.9) translateY(30px)" />
-    </Style>
+        </Style>
 
-    <Style Selector="Border#SettingsDialog.open">
-        <Setter Property="Opacity" Value="1" />
-        <Setter
-            Property="RenderTransform"
-            Value="scale(1) translateY(0px)" />
-    </Style>
+        <Style
+            Selector="Border#ModalOverlay.open">
+
+            <Setter
+                Property="Opacity"
+                Value="1"/>
+
+        </Style>
+
+        <Style
+            Selector="Border#SettingsDialog">
+
+            <Setter
+                Property="Opacity"
+                Value="0" />
+
+            <Setter
+                Property="RenderTransform"
+                Value="scale(0.9) translateY(30px)"/>
+
+        </Style>
+
+        <Style
+            Selector="Border#SettingsDialog.open">
+
+            <Setter
+                Property="Opacity"
+                Value="1"/>
+
+            <Setter
+                Property="RenderTransform"
+                Value="scale(1) translateY(0px)"/>
+
+        </Style>
 
     </Window.Styles>
 
@@ -57,104 +75,104 @@
                 BorderBrush="#171717">
 
                 <Grid
-                ColumnDefinitions="*,auto,*">
+                    ColumnDefinitions="*,auto,*">
 
-                <!-- Application title -->
-                <StackPanel
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center">
+                    <!-- Application title -->
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
 
-                    <TextBlock
-                        Text="Sortacium"
-                        FontSize="26"
-                        FontWeight="Bold"
-                        Foreground="#AF4BE9"
-                        VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="Sortacium"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="#AF4BE9"
+                            VerticalAlignment="Center"/>
 
-                </StackPanel>
+                    </StackPanel>
 
-                <!-- Sorting controls -->
-                <StackPanel
-                    Spacing="10"
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    WindowDecorationProperties.ElementRole="User">
+                    <!-- Sorting controls -->
+                    <StackPanel
+                        Spacing="10"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        WindowDecorationProperties.ElementRole="User">
 
-                    <controls:IconButton
-    Icon="{StaticResource Icon.Shuffle}"
-    Command="{Binding ShuffleCommand}" />
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Shuffle}"
+                            Command="{Binding ShuffleCommand}" />
 
-<controls:IconButton
-    Icon="{StaticResource Icon.Play}"
-    Command="{Binding PlayCommand}"
-    IsEnabled="{Binding IsReady}" />
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Play}"
+                            Command="{Binding PlayCommand}"
+                            IsEnabled="{Binding IsReady}"/>
 
-<controls:IconButton
-    Icon="{StaticResource Icon.Pause}"
-    Command="{Binding PauseCommand}" />
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Pause}"
+                            Command="{Binding PauseCommand}" />
 
-<controls:IconButton
-    Icon="{StaticResource Icon.Force}"
-    Command="{Binding ForceToEndCommand}"
-    IsEnabled="{Binding IsReady}" />
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Force}"
+                            Command="{Binding ForceToEndCommand}"
+                            IsEnabled="{Binding IsReady}" />
 
-<controls:IconButton
-    Icon="{StaticResource Icon.Previous}"
-    Command="{Binding PreviousStepCommand}"
-    IsEnabled="{Binding IsReady}" />
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Previous}"
+                            Command="{Binding PreviousStepCommand}"
+                            IsEnabled="{Binding IsReady}" />
 
-<controls:IconButton
-    Icon="{StaticResource Icon.Next}"
-    Command="{Binding NextStepCommand}"
-    IsEnabled="{Binding IsReady}" />    
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Next}"
+                            Command="{Binding NextStepCommand}"
+                            IsEnabled="{Binding IsReady}" />
 
-                </StackPanel>
+                    </StackPanel>
 
-                <!-- Window controls -->
-                <StackPanel
-                    Spacing="10"
-                    Grid.Column="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
+                    <!-- Window controls -->
+                    <StackPanel
+                        Spacing="10"
+                        Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Settings}"
-                        WindowDecorationProperties.ElementRole="User"
-                        Click="OpenSettings_Click"/>
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Settings}"
+                            WindowDecorationProperties.ElementRole="User"
+                            Click="OpenSettings_Click"/>
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Minimize}"
-                        Click="Minimize_Click"
-                        WindowDecorationProperties.ElementRole="MinimizeButton"/>
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Minimize}"
+                            Click="Minimize_Click"
+                            WindowDecorationProperties.ElementRole="MinimizeButton"/>
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Maximize}"
-                        Click="Maximize_Click"
-                        WindowDecorationProperties.ElementRole="MaximizeButton"/>
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Maximize}"
+                            Click="Maximize_Click"
+                            WindowDecorationProperties.ElementRole="MaximizeButton"/>
 
-                    <controls:IconButton
-                        Icon="{StaticResource Icon.Close}"
-                        Click="Close_Click"
-                        WindowDecorationProperties.ElementRole="CloseButton"/>
+                        <controls:IconButton
+                            Icon="{StaticResource Icon.Close}"
+                            Click="Close_Click"
+                            WindowDecorationProperties.ElementRole="CloseButton"/>
 
-                </StackPanel>
+                    </StackPanel>
 
-            </Grid>
+                </Grid>
 
-        </Border>
+            </Border>
 
-        <Grid
-            Grid.Row="1"
-            ColumnDefinitions="auto, *, auto">
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="auto, *, auto">
 
-            <Border
-                CornerRadius="15"
-                Background="{StaticResource Brush.TitleBarBackground}"
-                Width="300"
-                Margin="10"
-                BorderThickness="1.5">
+                <Border
+                    CornerRadius="15"
+                    Background="{StaticResource Brush.TitleBarBackground}"
+                    Width="300"
+                    Margin="10"
+                    BorderThickness="1.5">
 
-                <Border.BorderBrush>
+                    <Border.BorderBrush>
 
                         <LinearGradientBrush
                             StartPoint="50%, 0%"
@@ -180,175 +198,187 @@
 
                     </Border.BorderBrush>
 
-                <StackPanel
-                    Margin="15"
-                    Spacing="10">
+                    <StackPanel
+                        Margin="15"
+                        Spacing="10">
 
-                    <TextBlock
-                        Text="Selected sorting algorithm"
-                        Foreground="#999"
-                        FontWeight="Bold"/>
+                        <TextBlock
+                            Text="Selected sorting algorithm"
+                            Foreground="#999"
+                            FontWeight="Bold"/>
 
-                    <TextBlock
-                        Text="Bubble sort"
-                        FontSize="26"
-                        Foreground="#AF4BE9"
-                        FontWeight="Bold"/>
+                        <TextBlock
+                            Text="Bubble sort"
+                            FontSize="26"
+                            Foreground="#AF4BE9"
+                            FontWeight="Bold"/>
 
-                    <Grid
-                        ColumnDefinitions="*, *"
-                        Height="300"
-                        ColumnSpacing="10">
+                        <Grid
+                            ColumnDefinitions="*, *"
+                            Height="300"
+                            ColumnSpacing="10">
 
-                        <controls:VerticalSlider
-                            Title="Count"
-                            Minimum="5"
-                            Maximum="5000"
-                            Value="{Binding Count}"/>
+                            <controls:VerticalSlider
+                                Title="Count"
+                                Minimum="5"
+                                Maximum="5000"
+                                Value="{Binding Count}"/>
 
-                        <controls:VerticalSlider
-                            Title="Speed"
-                            Grid.Column="1"
-                            Suffix=" op/s"/>
+                            <controls:VerticalSlider
+                                Title="Speed"
+                                Grid.Column="1"
+                                Suffix=" op/s"/>
 
-                    </Grid>
+                        </Grid>
 
-                </StackPanel
->
+                    </StackPanel>
 
-            </Border>
+                </Border>
 
             <Grid
-    Grid.Column="1"
-    Margin="15"
-    RowDefinitions="*,Auto,Auto"
-    RowSpacing="12">
+                Grid.Column="1"
+                Margin="15"
+                RowDefinitions="*,Auto,Auto"
+                RowSpacing="12">
 
-    <controls:BarsRenderer
-        Grid.Row="0"
-        Bars="{Binding Bars}"
-        SnapVersion="{Binding SnapVersion}"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch" />
+                <controls:BarsRenderer
+                    Grid.Row="0"
+                    Bars="{Binding Bars}"
+                    SnapVersion="{Binding SnapVersion}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
 
-    <controls:HorizontalSlider
-        Grid.Row="1"
-        Minimum="0"
-        Maximum="{Binding TotalSteps}"
-        Value="{Binding TimelinePosition, Mode=TwoWay}"
-        Title="Step"
-        Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
-        IsEnabled="{Binding IsReady}" />
+                <controls:HorizontalSlider
+                    Grid.Row="1"
+                    Minimum="0"
+                    Maximum="{Binding TotalSteps}"
+                    Value="{Binding TimelinePosition, Mode=TwoWay}"
+                    Title="Step"
+                    Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
+                    IsEnabled="{Binding IsReady}" />
 
-</Grid>
+            </Grid>
 
-            <Border
-                Grid.Column="2"
-                CornerRadius="15"
-                Background="{StaticResource Brush.TitleBarBackground}"
-                Width="300"
-                Margin="10">
-                
-            </Border
->
+                <Border
+                    Grid.Column="2"
+                    CornerRadius="15"
+                    Background="{StaticResource Brush.TitleBarBackground}"
+                    Width="300"
+                    Margin="10">
+
+                </Border>
+
+            </Grid>
 
         </Grid>
 
-        
-
-    </Grid>
-
         <Border
-    x:Name="ModalOverlay"
-    Background="#55000000"
-    CornerRadius="15"
-    IsHitTestVisible="False">
+            x:Name="ModalOverlay"
+            Background="#55000000"
+            CornerRadius="15"
+            IsHitTestVisible="False">
 
-    <Border.Transitions>
-        <Transitions>
-            <DoubleTransition
-                Property="Opacity"
-                Duration="0:0:0.25"
-                Easing="CubicEaseOut" />
-        </Transitions>
-    </Border.Transitions>
+            <Border.Transitions>
 
-    <Border
-        x:Name="SettingsDialog"
-        Width="800"
-        Margin="50"
-        Padding="24"
-        CornerRadius="12"
-        Background="#242424"
-        HorizontalAlignment="Center"
-        RenderTransformOrigin="50%,50%"
-        BorderThickness="1.5">
+                <Transitions>
 
-        <Border.BorderBrush>
+                    <DoubleTransition
+                        Property="Opacity"
+                        Duration="0:0:0.25"
+                        Easing="CubicEaseOut"/>
 
-            <LinearGradientBrush
-                StartPoint="50%, 0%"
-                EndPoint="50%, 100%">
+                </Transitions>
 
-                <GradientStop Color="#2E2E2E"
-                              Offset="0"/>
+            </Border.Transitions>
 
-                <GradientStop Color="#262626"
-                              Offset="0.2"/>
+            <Border
+                x:Name="SettingsDialog"
+                Width="800"
+                Margin="50"
+                Padding="24"
+                CornerRadius="12"
+                Background="#242424"
+                HorizontalAlignment="Center"
+                RenderTransformOrigin="50%,50%"
+                BorderThickness="1.5">
 
-                <GradientStop Color="#262626"
-                              Offset="0.8"/>
+                <Border.BorderBrush>
 
-                <GradientStop Color="#1E1E1E"
-                              Offset="1"/>
+                    <LinearGradientBrush
+                        StartPoint="50%, 0%"
+                        EndPoint="50%, 100%">
 
-            </LinearGradientBrush
->
+                        <GradientStop
+                            Color="#2E2E2E"
+                            Offset="0"/>
 
-        </Border.BorderBrush>
+                        <GradientStop
+                            Color="#262626"
+                            Offset="0.2"/>
 
-        <Border.Transitions>
-            <Transitions>
-                <DoubleTransition
-                    Property="Opacity"
-                    Duration="0:0:0.25"
-                    Easing="CubicEaseOut" />
+                        <GradientStop
+                            Color="#262626"
+                            Offset="0.8"/>
 
-                <TransformOperationsTransition
-                    Property="RenderTransform"
-                    Duration="0:0:0.4">
+                        <GradientStop
+                            Color="#1E1E1E"
+                            Offset="1"/>
 
-                <TransformOperationsTransition.Easing>
-        <components:EnchancedBackEaseOut
-            Amplitude="0.4" />
-    </TransformOperationsTransition.Easing>
+                    </LinearGradientBrush>
 
-            </TransformOperationsTransition>
-            </Transitions>
-        </Border.Transitions>
+                </Border.BorderBrush>
 
-        <StackPanel Spacing="16">
+                <Border.Transitions>
 
-            <TextBlock
-                Text="Settings"
-                FontSize="24"
-                FontWeight="Bold" />
+                    <Transitions>
 
-            <TextBlock Text="Animation speed" />
+                        <DoubleTransition
+                            Property="Opacity"
+                            Duration="0:0:0.25"
+                            Easing="CubicEaseOut" />
 
-            <Slider
-                Minimum="0"
-                Maximum="100"
-                Value="50" />
+                        <TransformOperationsTransition
+                            Property="RenderTransform"
+                            Duration="0:0:0.4">
 
-            <Button
-                Content="Close"
-                HorizontalAlignment="Right"
-                Click="CloseSettings_Click" />
+                            <TransformOperationsTransition.Easing>
 
-        </StackPanel>
-    </Border>
-</Border>
+                                <components:EnchancedBackEaseOut
+                                    Amplitude="0.4"/>
+
+                            </TransformOperationsTransition.Easing>
+
+                        </TransformOperationsTransition>
+
+                    </Transitions>
+
+                </Border.Transitions>
+
+                <StackPanel Spacing="16">
+
+                    <TextBlock
+                        Text="Settings"
+                        FontSize="24"
+                        FontWeight="Bold" />
+
+                    <TextBlock
+                        Text="Animation speed"/>
+
+                    <Slider
+                        Minimum="0"
+                        Maximum="100"
+                        Value="50"/>
+
+                    <Button
+                        Content="Close"
+                        HorizontalAlignment="Right"
+                        Click="CloseSettings_Click" />
+
+                </StackPanel>
+
+            </Border>
+
+        </Border>
 
     </Grid>
 
