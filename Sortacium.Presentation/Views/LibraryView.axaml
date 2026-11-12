@@ -1,0 +1,348 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Sortacium.Presentation.Views.LibraryView"
+             xmlns:vm="using:Sortacium.Presentation.ViewModels"
+    xmlns:models="using:Sortacium.Presentation.Models"
+    xmlns:controls="using:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components"
+    x:DataType="vm:MainViewModel">
+    <UserControl.Styles>
+        <Style
+            Selector="ListBox.algorithm-list">
+
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="0"/>
+
+        </Style>
+
+        <Style
+            Selector="ListBox.algorithm-list ListBoxItem">
+
+            <Setter
+                Property="Background"
+                Value="#292929"/>
+
+            <Setter
+                Property="Foreground"
+                Value="#DDDDDD"/>
+
+            <Setter
+                Property="Padding"
+                Value="14"/>
+
+            <Setter
+                Property="Margin"
+                Value="0,0,0,8"/>
+
+            <Setter
+                Property="CornerRadius"
+                Value="8"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="1"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="#363636"/>
+
+        </Style>
+
+        <Style
+            Selector="ListBox.algorithm-list ListBoxItem:pointerover">
+            <Setter
+                Property="Background"
+                Value="#353038"/>
+        </Style>
+
+        <Style
+            Selector="ListBox.algorithm-list ListBoxItem:selected">
+
+            <Setter
+                Property="Background"
+                Value="#382746"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="#AF4BE9"/>
+
+            <Setter
+                Property="Foreground"
+                Value="#D8A8F4"/>
+
+        </Style>
+    </UserControl.Styles>
+
+    <Grid
+                        RowDefinitions="auto, *, auto"
+                        RowSpacing="10">
+
+                        <TextBlock
+                            Text="Select algorithm"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="#EEE"/>
+
+                        <controls:IconButton
+                            Click="Close_Click"
+                            HorizontalAlignment="Right"
+                            Icon="{StaticResource Icon.Close}"/>
+
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="*, 500">
+
+                            <Border
+                                Background="#191919"
+                                CornerRadius="15"
+                                BorderThickness="3"
+                                components:StrokeGradientAdapter.Enable="True">
+
+                                <Border.BorderBrush>
+
+                                    <LinearGradientBrush
+                                        StartPoint="50%, 0%"
+                                        EndPoint="50%, 100%">
+
+                                        <GradientStop
+                                            Color="#141414"
+                                            Offset="0"/>
+
+                                        <GradientStop
+                                            Color="#1A1A1A"
+                                            Offset="0.2"/>
+
+                                        <GradientStop
+                                            Color="#1A1A1A"
+                                            Offset="0.8"/>
+
+                                        <GradientStop
+                                            Color="#2F2F2F"
+                                            Offset="1"/>
+
+                                    </LinearGradientBrush>
+
+                                </Border.BorderBrush>
+
+                                <ListBox
+                                    Classes="algorithm-list"
+                                    ItemsSource="{Binding AvailableAlgorithms}"
+                                    SelectedItem="{Binding PreviewAlgorithm, Mode=TwoWay}">
+
+                                    <ListBox.ItemTemplate>
+
+                                        <DataTemplate
+                                            x:DataType="models:AlgorithmOption">
+
+                                            <StackPanel
+                                                Spacing="5">
+
+                                                <TextBlock
+                                                    Text="{Binding Name}"
+                                                    FontWeight="Bold"
+                                                    FontSize="16"/>
+
+                                                <TextBlock
+                                                    Text="{Binding Description}"
+                                                    Foreground="#999999"
+                                                    FontSize="11"
+                                                    TextWrapping="Wrap"
+                                                    MaxLines="2"/>
+
+                                            </StackPanel>
+
+                                        </DataTemplate>
+
+                                    </ListBox.ItemTemplate>
+
+                                </ListBox>
+
+                            </Border>
+
+                            <Grid
+                                Grid.Column="1"
+                                RowDefinitions="Auto,Auto,Auto,*"
+                                RowSpacing="14">
+
+                                <TextBlock
+                                    Text="{Binding PreviewAlgorithm.Name}"
+                                    Foreground="#AF4BE9"
+                                    FontSize="26"
+                                    FontWeight="Bold"/>
+
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Text="{Binding PreviewAlgorithm.Description}"
+                                    TextWrapping="Wrap"
+                                    Foreground="#BBBBBB"/>
+
+                                <!-- Complexity and history -->
+                                <Grid
+                                    Grid.Row="2"
+                                    ColumnDefinitions="*,*"
+                                    RowDefinitions="Auto,Auto,Auto,Auto"
+                                    ColumnSpacing="18"
+                                    RowSpacing="8">
+
+                                    <TextBlock
+                                        Text="Author / origin"
+                                        Foreground="#888888"/>
+
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Text="{Binding PreviewAlgorithm.Author}"
+                                        Foreground="#DDDDDD"/>
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Text="Year"
+                                        Foreground="#888888"/>
+
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding PreviewAlgorithm.Year}"
+                                        Foreground="#DDDDDD"/>
+
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Text="Time: best / average / worst"
+                                        Foreground="#888888"/>
+
+                                    <StackPanel
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Spacing="8">
+
+                                        <TextBlock
+                                            Text="{Binding PreviewAlgorithm.BestTime}"
+                                            Foreground="#A7D6A4"/>
+
+                                        <TextBlock
+                                            Text="{Binding PreviewAlgorithm.AverageTime}"
+                                            Foreground="#DDDDDD"/>
+
+                                        <TextBlock
+                                            Text="{Binding PreviewAlgorithm.WorstTime}"
+                                            Foreground="#D9A1A1"/>
+
+                                    </StackPanel>
+
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Text="Space complexity"
+                                        Foreground="#888888"/>
+
+                                    <StackPanel
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        Spacing="14">
+
+                                        <TextBlock
+                                            Text="{Binding PreviewAlgorithm.SpaceComplexity}"
+                                            Foreground="#DDDDDD"/>
+
+                                        <TextBlock
+                                            Text="{Binding PreviewAlgorithm.Stability}"
+                                            Foreground="#AF4BE9"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Code viewer -->
+                                <Grid
+                                    Grid.Row="3"
+                                    RowDefinitions="Auto,*"
+                                    RowSpacing="8">
+
+                                    <Grid
+                                        ColumnDefinitions="*,Auto">
+
+                                        <TextBlock
+                                            Text="Implementation"
+                                            FontSize="16"
+                                            FontWeight="Medium"
+                                            VerticalAlignment="Center"/>
+
+                                        <ComboBox
+                                            Grid.Column="1"
+                                            Width="145"
+                                            ItemsSource="{Binding PreviewAvailableLanguages}"
+                                            SelectedItem="{Binding PreviewLanguage, Mode=TwoWay}">
+
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate
+                                                    x:DataType="vm:CodeLanguageOption">
+                                                    <TextBlock
+                                                        Text="{Binding DisplayName}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+
+                                        </ComboBox>
+
+                                    </Grid>
+
+                                    <Border
+                                        Grid.Row="1"
+                                        Background="#191919"
+                                        CornerRadius="8"
+                                        ClipToBounds="True">
+
+                                        <controls:SortingCodeEditor
+                                            Language="{Binding PreviewLanguage.Id}"
+                                            Document="{Binding PreviewCodeDocument}"
+                                            Background="Transparent"
+                                            Foreground="#CCCCCC"
+                                            FontFamily="Consolas, Menlo, Monospace"
+                                            FontSize="13"
+                                            LineNumbersForeground="#666666"/>
+
+                                    </Border>
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+
+                        <!-- Footer -->
+                        <Grid
+                            Grid.Row="2"
+                            ColumnDefinitions="*,Auto">
+
+                            <TextBlock
+                                Text="Changing the algorithm resets the current execution."
+                                Foreground="#777777"
+                                VerticalAlignment="Center"
+                                FontSize="12"/>
+
+                            <Button
+                                Grid.Column="1"
+                                Width="300"
+                                Foreground="#EEE"
+                                Background="#88E"
+                                CornerRadius="15"
+                                FontWeight="Bold"
+                                FontSize="16"
+                                HorizontalContentAlignment="Center"
+                                Padding="10"
+                                Content="Switch"
+                                HorizontalAlignment="Right"
+                                Click="Apply_Click"/>
+
+                        </Grid>
+
+                    </Grid>
+
+</UserControl>
