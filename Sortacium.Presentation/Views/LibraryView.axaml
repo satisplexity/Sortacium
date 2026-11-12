@@ -101,7 +101,7 @@
 
         <Grid
             Grid.Row="1"
-            ColumnDefinitions="*, 600"
+            ColumnDefinitions="*, 700"
             ColumnSpacing="10">
 
             <Border
@@ -359,19 +359,14 @@
                 VerticalAlignment="Center"
                 FontSize="12"/>
 
-            <Button
-                Grid.Column="1"
-                Width="300"
-                Foreground="#EEE"
-                Background="#88E"
-                CornerRadius="15"
-                FontWeight="Bold"
-                FontSize="16"
-                HorizontalContentAlignment="Center"
-                Padding="10"
-                Content="Switch"
+            <controls:IconButton
+                Text="Use selected algorithm"
+                Icon="{StaticResource Icon.Check}"
                 HorizontalAlignment="Right"
-                Click="Apply_Click"/>
+                Click="Apply_Click"
+                FontSize="14"
+                FontWeight="Bold"
+                Height="50"/>
 
         </Grid>
 

@@ -286,10 +286,11 @@
 
                         </StackPanel>
 
-                        <Button
+                        <controls:IconButton
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
-                            Content="Select algrorithm"
+                            Text="Select algrorithm"
+                            Icon="{StaticResource Icon.Change}"
                             Foreground="#EEE"
                             Padding="20"
                             HorizontalContentAlignment="Center"

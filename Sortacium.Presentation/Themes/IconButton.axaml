@@ -10,7 +10,7 @@
 
         <Setter
             Property="Width"
-            Value="40"/>
+            Value="{Binding Height, RelativeSource={RelativeSource Self}}"/>
 
         <Setter
             Property="Height"
@@ -123,19 +123,46 @@
                     Padding="{TemplateBinding Padding}"
                     components:StrokeGradientAdapter.Enable="True">
 
-                    <Path
-                        Data="{TemplateBinding Icon}"
-                        Fill="{TemplateBinding Foreground}"
-                        Stretch="Uniform"
-                        VerticalAlignment="Center"
+                    <Grid
+                        ColumnDefinitions="Auto,Auto"
                         HorizontalAlignment="Center"
-                        IsHitTestVisible="False"/>
+                        VerticalAlignment="Center"
+                        IsHitTestVisible="False">
+
+                        <Path
+                            Width="12"
+                            Height="12"
+                            Data="{TemplateBinding Icon}"
+                            Fill="{TemplateBinding Foreground}"
+                            Stretch="Uniform"
+                            VerticalAlignment="Center"/>
+
+                        <TextBlock
+                            Name="PART_Text"
+                            Grid.Column="1"
+                            Margin="8,0,0,0"
+                            Text="{TemplateBinding Text}"
+                            Foreground="{TemplateBinding Foreground}"
+                            VerticalAlignment="Center"/>
+
+                    </Grid>
 
                 </Border>
 
             </ControlTemplate>
 
         </Setter>
+
+        <Style Selector="^:has-text">
+            <Setter Property="Width" Value="NaN"/>
+            <Setter Property="Height" Value="NaN"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="Padding" Value="12,6"/>
+        </Style>
+
+        <Style Selector="^:not(:has-text) /template/ TextBlock#PART_Text">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
 
         <Style
             Selector="^:pointerover">
@@ -204,6 +231,10 @@
 
             </Setter>
 
+        </Style>
+
+        <Style Selector="^:has-text:pointerover, ^:has-text:pressed">
+            <Setter Property="Padding" Value="11,6"/>
         </Style>
 
     </ControlTheme>
