@@ -1,18 +1,14 @@
-using System;
-
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia;
+using System;
 
 namespace Sortacium.Presentation.Components;
 
 public sealed class StrokeGradientAdapter : AvaloniaObject
 {
     public static readonly AttachedProperty<bool> EnableProperty =
-        AvaloniaProperty.RegisterAttached<
-            StrokeGradientAdapter,
-            Border,
-            bool>("Enable");
+        AvaloniaProperty.RegisterAttached<StrokeGradientAdapter, Border, bool>("Enable");
 
     static StrokeGradientAdapter()
     {
@@ -36,19 +32,21 @@ public sealed class StrokeGradientAdapter : AvaloniaObject
         border.PropertyChanged -= OnBorderPropertyChanged;
 
         if (!args.GetNewValue<bool>())
+        {
             return;
+        }
 
         border.PropertyChanged += OnBorderPropertyChanged;
 
         UpdateGradient(border);
     }
 
-    private static void OnBorderPropertyChanged(
-        object? sender,
-        AvaloniaPropertyChangedEventArgs args)
+    private static void OnBorderPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs args)
     {
         if (sender is not Border border)
+        {
             return;
+        }
 
         if (args.Property == Visual.BoundsProperty ||
             args.Property == Border.CornerRadiusProperty ||
@@ -61,31 +59,31 @@ public sealed class StrokeGradientAdapter : AvaloniaObject
     private static void UpdateGradient(Border border)
     {
         if (border.BorderBrush is not LinearGradientBrush gradient)
+        {
             return;
+        }
 
         if (gradient.GradientStops.Count != 4)
+        {
             return;
+        }   
 
         double height = border.Bounds.Height;
 
         if (!double.IsFinite(height) || height <= 0)
+        {
             return;
+        }
 
         CornerRadius radius = border.CornerRadius;
 
-        double topRadius = Math.Max(
-            radius.TopLeft,
-            radius.TopRight);
+        double topRadius =Math.Max(radius.TopLeft, radius.TopRight);
 
-        double bottomRadius = Math.Max(
-            radius.BottomLeft,
-            radius.BottomRight);
+        double bottomRadius = Math.Max(radius.BottomLeft, radius.BottomRight);
 
-        double topOffset = Math.Clamp(
-            topRadius / height, 0, 0.5);
+        double topOffset = Math.Clamp(topRadius / height, 0, 0.5);
 
-        double bottomOffset = 1 - Math.Clamp(
-            bottomRadius / height, 0, 0.5);
+        double bottomOffset = 1 - Math.Clamp(bottomRadius / height, 0, 0.5);
 
         gradient.GradientStops[1].Offset = topOffset;
         gradient.GradientStops[2].Offset = bottomOffset;

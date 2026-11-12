@@ -24,6 +24,14 @@
 
             <ResourceDictionary.MergedDictionaries>
 
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Palettes/Dark.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Common/Brushes.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Common/Dimensions.axaml"/>
+
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/BeveledBorder.axaml"/>
+
+
+
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Resources/Fonts.axaml"/>
 
