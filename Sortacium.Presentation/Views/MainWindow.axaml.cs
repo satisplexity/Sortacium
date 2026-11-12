@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
+using Sortacium.Presentation.ViewModels;
+
 namespace Sortacium.Presentation.Views;
 
 public partial class MainWindow : Window
@@ -72,5 +74,18 @@ public partial class MainWindow : Window
         AlgorithmSelectionDialog.Classes.Remove("open");
         SettingsDialog.IsVisible = true;
         ModalOverlay.IsHitTestVisible = false;
+    }
+
+    private void SwitchAlgorithm_Click(
+    object? sender,
+    RoutedEventArgs e)
+    {
+        if (DataContext is not MainViewModel vm)
+            return;
+
+        if (!vm.SwitchAlgorithm())
+            return;
+
+        CloseAlgrorithmSelection_Click(sender, e);
     }
 }

@@ -708,14 +708,14 @@
                 RowSpacing="14">
 
                 <TextBlock
-                    Text="{Binding SelectedAlgorithm.Name}"
+                    Text="{Binding PreviewAlgorithm.Name}"
                     Foreground="#AF4BE9"
                     FontSize="26"
                     FontWeight="Bold"/>
 
                 <TextBlock
                     Grid.Row="1"
-                    Text="{Binding SelectedAlgorithm.Description}"
+                    Text="{Binding PreviewAlgorithm.Description}"
                     TextWrapping="Wrap"
                     Foreground="#BBBBBB"/>
 
@@ -733,7 +733,7 @@
 
                     <TextBlock
                         Grid.Column="1"
-                        Text="{Binding SelectedAlgorithm.Author}"
+                        Text="{Binding PreviewAlgorithm.Author}"
                         Foreground="#DDDDDD"/>
 
                     <TextBlock
@@ -744,7 +744,7 @@
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
-                        Text="{Binding SelectedAlgorithm.Year}"
+                        Text="{Binding PreviewAlgorithm.Year}"
                         Foreground="#DDDDDD"/>
 
                     <TextBlock
@@ -759,15 +759,15 @@
                         Spacing="8">
 
                         <TextBlock
-                            Text="{Binding SelectedAlgorithm.BestTime}"
+                            Text="{Binding PreviewAlgorithm.BestTime}"
                             Foreground="#A7D6A4"/>
 
                         <TextBlock
-                            Text="{Binding SelectedAlgorithm.AverageTime}"
+                            Text="{Binding PreviewAlgorithm.AverageTime}"
                             Foreground="#DDDDDD"/>
 
                         <TextBlock
-                            Text="{Binding SelectedAlgorithm.WorstTime}"
+                            Text="{Binding PreviewAlgorithm.WorstTime}"
                             Foreground="#D9A1A1"/>
 
                     </StackPanel>
@@ -784,11 +784,11 @@
                         Spacing="14">
 
                         <TextBlock
-                            Text="{Binding SelectedAlgorithm.SpaceComplexity}"
+                            Text="{Binding PreviewAlgorithm.SpaceComplexity}"
                             Foreground="#DDDDDD"/>
 
                         <TextBlock
-                            Text="{Binding SelectedAlgorithm.Stability}"
+                            Text="{Binding PreviewAlgorithm.Stability}"
                             Foreground="#AF4BE9"/>
 
                     </StackPanel>
@@ -810,22 +810,18 @@
                             VerticalAlignment="Center"/>
 
                         <ComboBox
-                            Grid.Column="1"
-                            Width="145"
-                            ItemsSource="{Binding AvailableLanguages}"
-                            SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+    Grid.Column="1"
+    Width="145"
+    ItemsSource="{Binding PreviewAvailableLanguages}"
+    SelectedItem="{Binding PreviewLanguage, Mode=TwoWay}">
 
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate
-                                    x:DataType="vm:CodeLanguageOption">
+    <ComboBox.ItemTemplate>
+        <DataTemplate x:DataType="vm:CodeLanguageOption">
+            <TextBlock Text="{Binding DisplayName}"/>
+        </DataTemplate>
+    </ComboBox.ItemTemplate>
 
-                                    <TextBlock
-                                        Text="{Binding DisplayName}"/>
-
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-
-                        </ComboBox>
+</ComboBox>
 
                     </Grid>
 
@@ -835,15 +831,14 @@
                         CornerRadius="8"
                         ClipToBounds="True">
 
-                        <controls:SortingCodeEditor
-                            Language="{Binding SelectedLanguage.Id}"
-                            Document="{Binding CodeDocument}"
-                            HighlightedLines="{Binding HighlightedCodeLines}"
-                            Background="Transparent"
-                            Foreground="#CCCCCC"
-                            FontFamily="Consolas, Menlo, Monospace"
-                            FontSize="13"
-                            LineNumbersForeground="#666666"/>
+                       <controls:SortingCodeEditor
+    Language="{Binding PreviewLanguage.Id}"
+    Document="{Binding PreviewCodeDocument}"
+    Background="Transparent"
+    Foreground="#CCCCCC"
+    FontFamily="Consolas, Menlo, Monospace"
+    FontSize="13"
+    LineNumbersForeground="#666666"/>
 
                     </Border>
 
@@ -866,17 +861,19 @@
                 Foreground="#777777"
                 VerticalAlignment="Center"
                 FontSize="12"/>
-<Button Width="300"
-         Grid.Row="2"
-                                Foreground="#EEE"
-                                Background="#88E"
-                                CornerRadius="15"
-                                FontWeight="Bold"
-                                FontSize="16"
-                                HorizontalContentAlignment="Center"
-                                Padding="10"
-                                Content="Select"
-                                HorizontalAlignment="Right"/>
+<Button
+    Grid.Column="1"
+    Width="300"
+    Foreground="#EEE"
+    Background="#88E"
+    CornerRadius="15"
+    FontWeight="Bold"
+    FontSize="16"
+    HorizontalContentAlignment="Center"
+    Padding="10"
+    Content="Switch"
+    HorizontalAlignment="Right"
+    Click="SwitchAlgorithm_Click"/>
                 </Grid>
 
         </Grid>

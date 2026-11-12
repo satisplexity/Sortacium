@@ -45,50 +45,174 @@ public partial class MainViewModel : ViewModelBase
     private IReadOnlyList<CodeLanguageOption> _availableLanguages = [];
 
     [ObservableProperty]
-    private CodeLanguageOption _selectedLanguage =
-        new("csharp", "C#");
+    private CodeLanguageOption? _selectedLanguage =
+    new("csharp", "C#");
+
+    [ObservableProperty]
+    private AlgorithmOption? _previewAlgorithm;
+
+    [ObservableProperty]
+    private IReadOnlyList<CodeLanguageOption> _previewAvailableLanguages = [];
+
+    [ObservableProperty]
+    private CodeLanguageOption? _previewLanguage;
+
+    [ObservableProperty]
+    private TextDocument _previewCodeDocument = new();
 
     partial void OnSelectedAlgorithmChanged(AlgorithmOption value)
     {
-        // Сохраняем язык, если он поддерживается новым алгоритмом.
-        string preferredLanguage = SelectedLanguage.Id;
+        // Получаем языки, поддерживаемые новым алгоритмом.
+        IReadOnlyList<CodeLanguageOption> languages =
+            GetLanguageOptions(value.Id);
 
-        IReadOnlyCollection<string> supported =
-            _codeService.GetLanguages(value.Id);
+        string? preferredLanguage = SelectedLanguage?.Id;
 
-        AvailableLanguages = AllLanguages
-            .Where(language => supported.Contains(language.Id))
-            .ToArray();
+        AvailableLanguages = languages;
 
-        SelectedLanguage =
-            AvailableLanguages.FirstOrDefault(
-                language => language.Id == preferredLanguage)
-            ?? AvailableLanguages.First();
+        // Если предыдущий язык недоступен,
+        // выбираем первый поддерживаемый.
+        SelectedLanguage = languages.FirstOrDefault(
+            language => language.Id == preferredLanguage)
+            ?? languages.FirstOrDefault();
 
         LoadSelectedLanguageCode();
 
-        // Пересоздаём трассу для выбранного алгоритма.
+        // Только изменение активного алгоритма
+        // запускает новую сортировку.
         ResetBars();
     }
 
-    partial void OnSelectedLanguageChanged(CodeLanguageOption value)
+    private IReadOnlyList<CodeLanguageOption> GetLanguageOptions(
+    string algorithmId)
     {
-        if (SelectedAlgorithm is not null)
-            LoadSelectedLanguageCode();
+        IReadOnlyCollection<string> supported =
+            _codeService.GetLanguages(algorithmId);
+
+        return AllLanguages
+            .Where(language => supported.Contains(language.Id))
+            .ToArray();
+    }
+
+    public void BeginAlgorithmSelection()
+    {
+        // При каждом открытии начинаем с активного алгоритма.
+        PreviewAlgorithm = SelectedAlgorithm;
+        PreviewLanguage = SelectedLanguage;
+
+        RefreshPreviewLanguages();
+    }
+
+    partial void OnPreviewAlgorithmChanged(AlgorithmOption? value)
+    {
+        RefreshPreviewLanguages();
+    }
+
+    partial void OnPreviewLanguageChanged(CodeLanguageOption? value)
+    {
+        LoadPreviewCode();
+    }
+
+    private void RefreshPreviewLanguages()
+    {
+        if (PreviewAlgorithm is not { } algorithm)
+        {
+            PreviewAvailableLanguages = [];
+            PreviewLanguage = null;
+            PreviewCodeDocument = new TextDocument();
+            return;
+        }
+
+        string? preferredLanguage = PreviewLanguage?.Id;
+
+        IReadOnlyList<CodeLanguageOption> languages =
+            GetLanguageOptions(algorithm.Id);
+
+        PreviewAvailableLanguages = languages;
+
+        PreviewLanguage = languages.FirstOrDefault(
+            language => language.Id == preferredLanguage)
+            ?? languages.FirstOrDefault();
+
+        LoadPreviewCode();
+    }
+
+    public bool SwitchAlgorithm()
+    {
+        if (PreviewAlgorithm is not { } algorithm ||
+            PreviewLanguage is not { } language)
+        {
+            return false;
+        }
+
+        if (!_codeService.GetLanguages(algorithm.Id)
+            .Contains(language.Id))
+        {
+            return false;
+        }
+
+        // Изменение SelectedAlgorithm вызовет
+        // OnSelectedAlgorithmChanged и ResetBars.
+        SelectedAlgorithm = algorithm;
+
+        // Применяем выбранный язык из диалога.
+        SelectedLanguage = AvailableLanguages.FirstOrDefault(
+            item => item.Id == language.Id);
+
+        LoadSelectedLanguageCode();
+
+        return true;
+    }
+
+    private void LoadPreviewCode()
+    {
+        if (PreviewAlgorithm is not { } algorithm ||
+            PreviewLanguage is not { } language)
+        {
+            return;
+        }
+
+        if (!_codeService.GetLanguages(algorithm.Id)
+            .Contains(language.Id))
+        {
+            return;
+        }
+
+        CodeImplementation implementation = _codeService.GetCode(
+            algorithm.Id,
+            language.Id);
+
+        PreviewCodeDocument =
+            new TextDocument(implementation.Source);
     }
 
     private void LoadSelectedLanguageCode()
     {
-        if (SelectedAlgorithm is null)
+        if (SelectedAlgorithm is not { } algorithm ||
+            SelectedLanguage is not { } language)
+        {
             return;
+        }
+
+        if (!_codeService.GetLanguages(algorithm.Id)
+            .Contains(language.Id))
+        {
+            return;
+        }
 
         CodeImplementation code = _codeService.GetCode(
-            SelectedAlgorithm.Id,
-            SelectedLanguage.Id);
+            algorithm.Id,
+            language.Id);
 
         CodeDocument = new TextDocument(code.Source);
 
         UpdateCodeHighlight(_player?.CurrentAction?.CodePoint);
+    }
+
+    partial void OnSelectedLanguageChanged(CodeLanguageOption? value)
+    {
+        if (value is not null)
+            LoadSelectedLanguageCode();
     }
 
     private SortingPlayer? _player;
@@ -476,10 +600,11 @@ public partial class MainViewModel : ViewModelBase
         PublishPlayerState(instant: true);
     }
 
-    private void UpdateCodeHighlight(
-    SortingCodePoint? codePoint)
+    private void UpdateCodeHighlight(SortingCodePoint? codePoint)
     {
-        if (SelectedAlgorithm is null)
+        if (SelectedAlgorithm is not { } algorithm ||
+            SelectedLanguage is not { } language ||
+            !_codeService.GetLanguages(algorithm.Id).Contains(language.Id))
         {
             HighlightedCodeLines = [];
             return;
@@ -495,8 +620,8 @@ public partial class MainViewModel : ViewModelBase
         HighlightedCodeLines = mappingKey is null
             ? []
             : _codeService.GetHighlightedLines(
-                SelectedAlgorithm.Id,
-                SelectedLanguage.Id,
+                algorithm.Id,
+                language.Id,
                 mappingKey);
     }
 
