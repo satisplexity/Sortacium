@@ -30,7 +30,7 @@
 
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/BeveledBorder.axaml"/>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/Border.axaml"/>
-
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/Window.axaml"/>
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Resources/Fonts.axaml"/>
@@ -55,9 +55,6 @@
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/HorizontalSlider.axaml"/>
-
-                <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/Window.axaml"/>
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/IconButton.axaml"/>
