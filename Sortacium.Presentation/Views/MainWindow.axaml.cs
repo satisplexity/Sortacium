@@ -47,12 +47,23 @@ public partial class MainWindow : Window
     }
 
     private void OpenAlgrorithmSelection_Click(
-     object? sender,
-     RoutedEventArgs e)
+    object? sender,
+    RoutedEventArgs e)
     {
-        ModalOverlay.IsHitTestVisible = true;
+        if (DataContext is not MainViewModel vm)
+            return;
+
+        // Инициализация предварительного выбора.
+        vm.BeginAlgorithmSelection();
+
+        SettingsDialog.Classes.Remove("open");
         SettingsDialog.IsVisible = false;
+
+        AlgorithmSelectionDialog.IsVisible = true;
+
+        ModalOverlay.IsHitTestVisible = true;
         ModalOverlay.Classes.Add("open");
+
         AlgorithmSelectionDialog.Classes.Add("open");
     }
 
@@ -67,12 +78,12 @@ public partial class MainWindow : Window
     }
 
     private void CloseAlgrorithmSelection_Click(
-        object? sender,
-        RoutedEventArgs e)
+    object? sender,
+    RoutedEventArgs e)
     {
-        ModalOverlay.Classes.Remove("open");
         AlgorithmSelectionDialog.Classes.Remove("open");
-        SettingsDialog.IsVisible = true;
+        ModalOverlay.Classes.Remove("open");
+
         ModalOverlay.IsHitTestVisible = false;
     }
 
