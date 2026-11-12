@@ -166,4 +166,27 @@
 
     </ControlTheme>
 
+    <ControlTheme x:Key="Border.WindowTitleBar"
+                  TargetType="Border">
+
+        <Setter Property="CornerRadius"
+                Value="{StaticResource CornerRadius.WindowTitleBar}"/>
+
+        <Setter Property="Background"
+                Value="{StaticResource Brush.Panel.Surface}"/>
+
+        <Setter Property="BorderBrush"
+                Value="{StaticResource Brush.Panel.Shadow}"/>
+
+        <Setter Property="BorderThickness"
+                Value="{StaticResource Thickness.Border.WindowTitleBar}"/>
+
+        <Setter Property="Padding"
+                Value="{StaticResource Thickness.Panel.Padding}"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="TitleBar"/>
+
+    </ControlTheme>
+
 </ResourceDictionary>

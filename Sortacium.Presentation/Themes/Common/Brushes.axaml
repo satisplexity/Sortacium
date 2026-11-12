@@ -5,4 +5,10 @@
     <SolidColorBrush x:Key="Brush.Window.Surface"
                      Color="{DynamicResource Color.Window.Surface}"/>
 
+    <SolidColorBrush x:Key="Brush.Panel.Surface"
+                     Color="{DynamicResource Color.Panel.Surface}"/>
+
+    <SolidColorBrush x:Key="Brush.Panel.Shadow"
+                     Color="{DynamicResource Color.Panel.Shadow}"/>
+
 </ResourceDictionary>
