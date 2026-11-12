@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:Sortacium.Presentation.Controls">
+    xmlns:controls="using:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
         x:Key="BeveledBorder.Window"
@@ -44,6 +45,47 @@
 
         <Setter Property="StrokeShadowColor"
                 Value="{DynamicResource Color.Panel.Shadow}"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="BeveledBorder.DialogPanel"
+                  TargetType="controls:BeveledBorder"
+                  BasedOn="{StaticResource BeveledBorder.Panel}">
+
+        <Setter Property="Padding"
+                Value="{StaticResource Thickness.ModalPanel.Padding}"/>
+
+        <Setter Property="RenderTransformOrigin"
+                Value="50%, 50%"/>
+
+        <Setter Property="MaxWidth"
+                Value="1000"/>
+
+        <Setter Property="Transitions">
+
+            <Transitions>
+
+                <DoubleTransition
+                    Property="Opacity"
+                    Duration="0:0:0.25"
+                    Easing="CubicEaseOut"/>
+
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.4">
+
+                    <TransformOperationsTransition.Easing>
+
+                        <components:EnchancedBackEaseOut
+                            Amplitude="0.4"/>
+
+                    </TransformOperationsTransition.Easing>
+
+                </TransformOperationsTransition>
+
+            </Transitions>
+
+        </Setter>
 
     </ControlTheme>
 

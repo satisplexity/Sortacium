@@ -437,40 +437,13 @@
 
             </Border.Transitions>
 
-            <Grid>
+            <Grid Margin="50">
 
                 <controls:BeveledBorder
                     x:Name="SettingsDialog"
-                    Width="800"
-                    Margin="50"
-                    Theme="{StaticResource BeveledBorder.Panel}"
-                    RenderTransformOrigin="50%,50%">
-
-                    <Border.Transitions>
-
-                        <Transitions>
-
-                            <DoubleTransition
-                                Property="Opacity"
-                                Duration="0:0:0.25"
-                                Easing="CubicEaseOut"/>
-
-                            <TransformOperationsTransition
-                                Property="RenderTransform"
-                                Duration="0:0:0.4">
-
-                                <TransformOperationsTransition.Easing>
-
-                                    <components:EnchancedBackEaseOut
-                                        Amplitude="0.4"/>
-
-                                </TransformOperationsTransition.Easing>
-
-                            </TransformOperationsTransition>
-
-                        </Transitions>
-
-                    </Border.Transitions>
+                    Theme="{StaticResource BeveledBorder.DialogPanel}"
+                    Margin="0, 0, 200, 0"
+                    HorizontalAlignment="Right">
 
                     <views:SettingsView
                         CloseRequested="SettingsView_CloseRequested"/>
@@ -479,36 +452,9 @@
 
                 <controls:BeveledBorder
                     x:Name="AlgorithmSelectionDialog"
-                    MaxWidth="1000"
-                    Margin="50"
-                    Theme="{StaticResource BeveledBorder.Panel}"
-                    RenderTransformOrigin="50%,50%">
-
-                    <Border.Transitions>
-
-                        <Transitions>
-
-                            <DoubleTransition
-                                Property="Opacity"
-                                Duration="0:0:0.25"
-                                Easing="CubicEaseOut"/>
-
-                            <TransformOperationsTransition
-                                Property="RenderTransform"
-                                Duration="0:0:0.4">
-
-                                <TransformOperationsTransition.Easing>
-
-                                    <components:EnchancedBackEaseOut
-                                        Amplitude="0.4"/>
-
-                                </TransformOperationsTransition.Easing>
-
-                            </TransformOperationsTransition>
-
-                        </Transitions>
-
-                    </Border.Transitions>
+                    Theme="{StaticResource BeveledBorder.DialogPanel}"
+                    Margin="200, 0, 0, 0"
+                    HorizontalAlignment="Left">
 
                     <views:LibraryView
                         DataContext="{Binding Library}"
