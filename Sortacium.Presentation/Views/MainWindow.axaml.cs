@@ -1,3 +1,5 @@
+using System;
+
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -12,91 +14,94 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void Minimize_Click(
-       object? sender,
-       RoutedEventArgs e)
+    private void Minimize_Click(object? sender, RoutedEventArgs e)
     {
         WindowState = WindowState.Minimized;
     }
 
-    private void Maximize_Click(
-        object? sender,
-        RoutedEventArgs e)
+    private void Maximize_Click(object? sender, RoutedEventArgs e)
     {
         WindowState = WindowState == WindowState.Maximized
             ? WindowState.Normal
             : WindowState.Maximized;
     }
 
-    private void Close_Click(
-        object? sender,
-        RoutedEventArgs e)
+    private void Close_Click(object? sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    private void OpenSettings_Click(
-     object? sender,
-     RoutedEventArgs e)
+    private void OpenDialog(Border dialog)
     {
-        ModalOverlay.IsHitTestVisible = true;
-
-        ModalOverlay.Classes.Add("open");
-        AlgorithmSelectionDialog.IsVisible = false;
-        SettingsDialog.Classes.Add("open");
-    }
-
-    private void OpenAlgrorithmSelection_Click(
-    object? sender,
-    RoutedEventArgs e)
-    {
-        if (DataContext is not MainViewModel vm)
-            return;
-
-        // Инициализация предварительного выбора.
-        vm.BeginAlgorithmSelection();
-
+        // Сбрасываем состояние обоих диалогов.
         SettingsDialog.Classes.Remove("open");
-        SettingsDialog.IsVisible = false;
+        AlgorithmSelectionDialog.Classes.Remove("open");
 
-        AlgorithmSelectionDialog.IsVisible = true;
+        SettingsDialog.IsVisible =
+            ReferenceEquals(dialog, SettingsDialog);
+
+        AlgorithmSelectionDialog.IsVisible =
+            ReferenceEquals(dialog, AlgorithmSelectionDialog);
 
         ModalOverlay.IsHitTestVisible = true;
         ModalOverlay.Classes.Add("open");
 
-        AlgorithmSelectionDialog.Classes.Add("open");
+        dialog.Classes.Add("open");
     }
 
-    private void CloseSettings_Click(
+    private void CloseDialog()
+    {
+        SettingsDialog.Classes.Remove("open");
+        AlgorithmSelectionDialog.Classes.Remove("open");
+
+        ModalOverlay.Classes.Remove("open");
+        ModalOverlay.IsHitTestVisible = false;
+
+        // IsVisible здесь не выключаем:
+        // существующие анимации закрытия должны завершиться.
+    }
+
+    private void OpenSettings_Click(
         object? sender,
         RoutedEventArgs e)
     {
-        ModalOverlay.Classes.Remove("open");
-        SettingsDialog.Classes.Remove("open");
-        AlgorithmSelectionDialog.IsVisible = true;
-        ModalOverlay.IsHitTestVisible = false;
+        OpenDialog(SettingsDialog);
     }
 
-    private void CloseAlgrorithmSelection_Click(
-    object? sender,
-    RoutedEventArgs e)
-    {
-        AlgorithmSelectionDialog.Classes.Remove("open");
-        ModalOverlay.Classes.Remove("open");
-
-        ModalOverlay.IsHitTestVisible = false;
-    }
-
-    private void SwitchAlgorithm_Click(
-    object? sender,
-    RoutedEventArgs e)
+    private void OpenAlgorithmSelection_Click(
+        object? sender,
+        RoutedEventArgs e)
     {
         if (DataContext is not MainViewModel vm)
             return;
 
-        if (!vm.SwitchAlgorithm())
+        vm.BeginAlgorithmSelection();
+
+        OpenDialog(AlgorithmSelectionDialog);
+    }
+
+    private void SettingsView_CloseRequested(
+        object? sender,
+        EventArgs e)
+    {
+        CloseDialog();
+    }
+
+    private void AlgorithmSelectionView_CloseRequested(
+        object? sender,
+        EventArgs e)
+    {
+        CloseDialog();
+    }
+
+    private void AlgorithmSelectionView_ApplyRequested(
+        object? sender,
+        EventArgs e)
+    {
+        if (DataContext is not MainViewModel vm)
             return;
 
-        CloseAlgrorithmSelection_Click(sender, e);
+        if (vm.SwitchAlgorithm())
+            CloseDialog();
     }
 }

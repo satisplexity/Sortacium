@@ -6,6 +6,7 @@
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components"
     xmlns:models="using:Sortacium.Presentation.Models"
+    xmlns:views="using:Sortacium.Presentation.Views"
     x:Class="Sortacium.Presentation.Views.MainWindow"
     x:DataType="vm:MainViewModel">
 
@@ -294,7 +295,7 @@
                             HorizontalContentAlignment="Center"
                             CornerRadius="10"
                             FontSize="14"
-                            Click="OpenAlgrorithmSelection_Click"/>
+                            Click="OpenAlgorithmSelection_Click"/>
 
                     </Grid>
 
@@ -506,28 +507,8 @@
 
                     </Border.Transitions>
 
-                    <StackPanel
-                        Spacing="16">
-
-                        <TextBlock
-                            Text="Settings"
-                            FontSize="24"
-                            FontWeight="Bold"/>
-
-                        <TextBlock
-                            Text="Animation speed"/>
-
-                        <Slider
-                            Minimum="0"
-                            Maximum="100"
-                            Value="50"/>
-
-                        <Button
-                            Content="Close"
-                            HorizontalAlignment="Right"
-                            Click="CloseSettings_Click"/>
-
-                    </StackPanel>
+                    <views:SettingsView
+                        CloseRequested="SettingsView_CloseRequested"/>
 
                 </Border>
 
@@ -595,269 +576,10 @@
 
                     </Border.Transitions>
 
-                    <Grid
-                        RowDefinitions="auto, *, auto"
-                        RowSpacing="10">
-
-                        <TextBlock
-                            Text="Select algorithm"
-                            FontSize="24"
-                            FontWeight="Bold"
-                            Foreground="#EEE"/>
-
-                        <controls:IconButton
-                            Click="CloseAlgrorithmSelection_Click"
-                            HorizontalAlignment="Right"
-                            Icon="{StaticResource Icon.Close}"/>
-
-                        <Grid
-                            Grid.Row="1"
-                            ColumnDefinitions="*, 500">
-
-                            <Border
-                                Background="#191919"
-                                CornerRadius="15"
-                                BorderThickness="3"
-                                components:StrokeGradientAdapter.Enable="True">
-
-                                <Border.BorderBrush>
-
-                                    <LinearGradientBrush
-                                        StartPoint="50%, 0%"
-                                        EndPoint="50%, 100%">
-
-                                        <GradientStop
-                                            Color="#141414"
-                                            Offset="0"/>
-
-                                        <GradientStop
-                                            Color="#1A1A1A"
-                                            Offset="0.2"/>
-
-                                        <GradientStop
-                                            Color="#1A1A1A"
-                                            Offset="0.8"/>
-
-                                        <GradientStop
-                                            Color="#2F2F2F"
-                                            Offset="1"/>
-
-                                    </LinearGradientBrush>
-
-                                </Border.BorderBrush>
-
-                                <ListBox
-                                    Classes="algorithm-list"
-                                    ItemsSource="{Binding AvailableAlgorithms}"
-                                    SelectedItem="{Binding PreviewAlgorithm, Mode=TwoWay}">
-
-                                    <ListBox.ItemTemplate>
-
-                                        <DataTemplate
-                                            x:DataType="models:AlgorithmOption">
-
-                                            <StackPanel
-                                                Spacing="5">
-
-                                                <TextBlock
-                                                    Text="{Binding Name}"
-                                                    FontWeight="Bold"
-                                                    FontSize="16"/>
-
-                                                <TextBlock
-                                                    Text="{Binding Description}"
-                                                    Foreground="#999999"
-                                                    FontSize="11"
-                                                    TextWrapping="Wrap"
-                                                    MaxLines="2"/>
-
-                                            </StackPanel>
-
-                                        </DataTemplate>
-
-                                    </ListBox.ItemTemplate>
-
-                                </ListBox>
-
-                            </Border>
-
-                            <Grid
-                                Grid.Column="1"
-                                RowDefinitions="Auto,Auto,Auto,*"
-                                RowSpacing="14">
-
-                                <TextBlock
-                                    Text="{Binding PreviewAlgorithm.Name}"
-                                    Foreground="#AF4BE9"
-                                    FontSize="26"
-                                    FontWeight="Bold"/>
-
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Text="{Binding PreviewAlgorithm.Description}"
-                                    TextWrapping="Wrap"
-                                    Foreground="#BBBBBB"/>
-
-                                <!-- Complexity and history -->
-                                <Grid
-                                    Grid.Row="2"
-                                    ColumnDefinitions="*,*"
-                                    RowDefinitions="Auto,Auto,Auto,Auto"
-                                    ColumnSpacing="18"
-                                    RowSpacing="8">
-
-                                    <TextBlock
-                                        Text="Author / origin"
-                                        Foreground="#888888"/>
-
-                                    <TextBlock
-                                        Grid.Column="1"
-                                        Text="{Binding PreviewAlgorithm.Author}"
-                                        Foreground="#DDDDDD"/>
-
-                                    <TextBlock
-                                        Grid.Row="1"
-                                        Text="Year"
-                                        Foreground="#888888"/>
-
-                                    <TextBlock
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        Text="{Binding PreviewAlgorithm.Year}"
-                                        Foreground="#DDDDDD"/>
-
-                                    <TextBlock
-                                        Grid.Row="2"
-                                        Text="Time: best / average / worst"
-                                        Foreground="#888888"/>
-
-                                    <StackPanel
-                                        Grid.Row="2"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-
-                                        <TextBlock
-                                            Text="{Binding PreviewAlgorithm.BestTime}"
-                                            Foreground="#A7D6A4"/>
-
-                                        <TextBlock
-                                            Text="{Binding PreviewAlgorithm.AverageTime}"
-                                            Foreground="#DDDDDD"/>
-
-                                        <TextBlock
-                                            Text="{Binding PreviewAlgorithm.WorstTime}"
-                                            Foreground="#D9A1A1"/>
-
-                                    </StackPanel>
-
-                                    <TextBlock
-                                        Grid.Row="3"
-                                        Text="Space complexity"
-                                        Foreground="#888888"/>
-
-                                    <StackPanel
-                                        Grid.Row="3"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        Spacing="14">
-
-                                        <TextBlock
-                                            Text="{Binding PreviewAlgorithm.SpaceComplexity}"
-                                            Foreground="#DDDDDD"/>
-
-                                        <TextBlock
-                                            Text="{Binding PreviewAlgorithm.Stability}"
-                                            Foreground="#AF4BE9"/>
-
-                                    </StackPanel>
-
-                                </Grid>
-
-                                <!-- Code viewer -->
-                                <Grid
-                                    Grid.Row="3"
-                                    RowDefinitions="Auto,*"
-                                    RowSpacing="8">
-
-                                    <Grid
-                                        ColumnDefinitions="*,Auto">
-
-                                        <TextBlock
-                                            Text="Implementation"
-                                            FontSize="16"
-                                            FontWeight="Medium"
-                                            VerticalAlignment="Center"/>
-
-                                        <ComboBox
-                                            Grid.Column="1"
-                                            Width="145"
-                                            ItemsSource="{Binding PreviewAvailableLanguages}"
-                                            SelectedItem="{Binding PreviewLanguage, Mode=TwoWay}">
-
-                                            <ComboBox.ItemTemplate>
-                                                <DataTemplate
-                                                    x:DataType="vm:CodeLanguageOption">
-                                                    <TextBlock
-                                                        Text="{Binding DisplayName}"/>
-                                                </DataTemplate>
-                                            </ComboBox.ItemTemplate>
-
-                                        </ComboBox>
-
-                                    </Grid>
-
-                                    <Border
-                                        Grid.Row="1"
-                                        Background="#191919"
-                                        CornerRadius="8"
-                                        ClipToBounds="True">
-
-                                        <controls:SortingCodeEditor
-                                            Language="{Binding PreviewLanguage.Id}"
-                                            Document="{Binding PreviewCodeDocument}"
-                                            Background="Transparent"
-                                            Foreground="#CCCCCC"
-                                            FontFamily="Consolas, Menlo, Monospace"
-                                            FontSize="13"
-                                            LineNumbersForeground="#666666"/>
-
-                                    </Border>
-
-                                </Grid>
-
-                            </Grid>
-
-                        </Grid>
-
-                        <!-- Footer -->
-                        <Grid
-                            Grid.Row="2"
-                            ColumnDefinitions="*,Auto">
-
-                            <TextBlock
-                                Text="Changing the algorithm resets the current execution."
-                                Foreground="#777777"
-                                VerticalAlignment="Center"
-                                FontSize="12"/>
-
-                            <Button
-                                Grid.Column="1"
-                                Width="300"
-                                Foreground="#EEE"
-                                Background="#88E"
-                                CornerRadius="15"
-                                FontWeight="Bold"
-                                FontSize="16"
-                                HorizontalContentAlignment="Center"
-                                Padding="10"
-                                Content="Switch"
-                                HorizontalAlignment="Right"
-                                Click="SwitchAlgorithm_Click"/>
-
-                        </Grid>
-
-                    </Grid>
+                    <views:LibraryView
+                        DataContext="{Binding Library}"
+                        CloseRequested="AlgorithmSelectionView_CloseRequested"
+                        ApplyRequested="AlgorithmSelectionView_ApplyRequested"/>
 
                 </Border>
 

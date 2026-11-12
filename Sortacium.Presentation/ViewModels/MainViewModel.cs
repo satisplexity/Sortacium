@@ -21,19 +21,21 @@ namespace Sortacium.Presentation.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    public LibraryViewModel Library { get; }
+
     private static readonly CodeLanguageOption[] AllLanguages =
-[
-    new("pseudocode", "Pseudocode"),
-    new("c", "C"),
-    new("csharp", "C#"),
-    new("cpp", "C++"),
-    new("python", "Python"),
-    new("go", "Go"),
-    new("rust", "Rust"),
-    new("java", "Java"),
-    new("javascript", "JavaScript"),
-    new("assembly", "Assembly")
-];
+    [
+        new("pseudocode", "Pseudocode"),
+        new("c", "C"),
+        new("csharp", "C#"),
+        new("cpp", "C++"),
+        new("python", "Python"),
+        new("go", "Go"),
+        new("rust", "Rust"),
+        new("java", "Java"),
+        new("javascript", "JavaScript"),
+        new("assembly", "Assembly")
+    ];
 
     public IReadOnlyList<AlgorithmOption> AvailableAlgorithms
     { get; }
@@ -42,23 +44,11 @@ public partial class MainViewModel : ViewModelBase
     private AlgorithmOption _selectedAlgorithm = null!;
 
     [ObservableProperty]
-    private IReadOnlyList<CodeLanguageOption> _availableLanguages = [];
-
-    [ObservableProperty]
     private CodeLanguageOption? _selectedLanguage =
     new("csharp", "C#");
 
     [ObservableProperty]
-    private AlgorithmOption? _previewAlgorithm;
-
-    [ObservableProperty]
-    private IReadOnlyList<CodeLanguageOption> _previewAvailableLanguages = [];
-
-    [ObservableProperty]
-    private CodeLanguageOption? _previewLanguage;
-
-    [ObservableProperty]
-    private TextDocument _previewCodeDocument = new();
+    private IReadOnlyList<CodeLanguageOption> _availableLanguages = [];
 
     partial void OnSelectedAlgorithmChanged(AlgorithmOption value)
     {
@@ -96,94 +86,26 @@ public partial class MainViewModel : ViewModelBase
 
     public void BeginAlgorithmSelection()
     {
-        // При каждом открытии начинаем с активного алгоритма.
-        PreviewAlgorithm = SelectedAlgorithm;
-        PreviewLanguage = SelectedLanguage;
-
-        RefreshPreviewLanguages();
-    }
-
-    partial void OnPreviewAlgorithmChanged(AlgorithmOption? value)
-    {
-        RefreshPreviewLanguages();
-    }
-
-    partial void OnPreviewLanguageChanged(CodeLanguageOption? value)
-    {
-        LoadPreviewCode();
-    }
-
-    private void RefreshPreviewLanguages()
-    {
-        if (PreviewAlgorithm is not { } algorithm)
-        {
-            PreviewAvailableLanguages = [];
-            PreviewLanguage = null;
-            PreviewCodeDocument = new TextDocument();
-            return;
-        }
-
-        string? preferredLanguage = PreviewLanguage?.Id;
-
-        IReadOnlyList<CodeLanguageOption> languages =
-            GetLanguageOptions(algorithm.Id);
-
-        PreviewAvailableLanguages = languages;
-
-        PreviewLanguage = languages.FirstOrDefault(
-            language => language.Id == preferredLanguage)
-            ?? languages.FirstOrDefault();
-
-        LoadPreviewCode();
+        Library.BeginSelection(
+            SelectedAlgorithm,
+            SelectedLanguage);
     }
 
     public bool SwitchAlgorithm()
     {
-        if (PreviewAlgorithm is not { } algorithm ||
-            PreviewLanguage is not { } language)
-        {
+        if (Library.GetSelection() is not { } selection)
             return false;
-        }
 
-        if (!_codeService.GetLanguages(algorithm.Id)
-            .Contains(language.Id))
-        {
-            return false;
-        }
+        // Только MainViewModel меняет активный алгоритм.
+        // Существующий OnSelectedAlgorithmChanged вызовет ResetBars().
+        SelectedAlgorithm = selection.Algorithm;
 
-        // Изменение SelectedAlgorithm вызовет
-        // OnSelectedAlgorithmChanged и ResetBars.
-        SelectedAlgorithm = algorithm;
-
-        // Применяем выбранный язык из диалога.
         SelectedLanguage = AvailableLanguages.FirstOrDefault(
-            item => item.Id == language.Id);
+            language => language.Id == selection.Language.Id);
 
         LoadSelectedLanguageCode();
 
         return true;
-    }
-
-    private void LoadPreviewCode()
-    {
-        if (PreviewAlgorithm is not { } algorithm ||
-            PreviewLanguage is not { } language)
-        {
-            return;
-        }
-
-        if (!_codeService.GetLanguages(algorithm.Id)
-            .Contains(language.Id))
-        {
-            return;
-        }
-
-        CodeImplementation implementation = _codeService.GetCode(
-            algorithm.Id,
-            language.Id);
-
-        PreviewCodeDocument =
-            new TextDocument(implementation.Source);
     }
 
     private void LoadSelectedLanguageCode()
@@ -304,16 +226,17 @@ public partial class MainViewModel : ViewModelBase
     {
         AvailableAlgorithms = _codeService.GetAlgorithms();
 
+        Library = new LibraryViewModel(
+            _codeService,
+            AvailableAlgorithms,
+            AllLanguages);
+
         // Устанавливаем начальный алгоритм без повторной
         // генерации последовательности операций.
         _selectedAlgorithm = AvailableAlgorithms.First(
             algorithm => algorithm.Id == "bubble-sort");
 
-        AvailableLanguages = AllLanguages
-            .Where(language =>
-                _codeService.GetLanguages(
-                    SelectedAlgorithm.Id).Contains(language.Id))
-            .ToArray();
+        AvailableLanguages = GetLanguageOptions(SelectedAlgorithm.Id);
 
         _selectedLanguage = AvailableLanguages.First(
             language => language.Id == "csharp");
