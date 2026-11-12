@@ -24,4 +24,27 @@
 
     </ControlTheme>
 
+    <ControlTheme x:Key="BeveledBorder.Panel"
+                  TargetType="controls:BeveledBorder">
+
+        <Setter Property="CornerRadius"
+                Value="{StaticResource CornerRadius.Panel}"/>
+
+        <Setter Property="BorderThickness"
+                Value="{StaticResource Thickness.Border.Generic}"/>
+
+        <Setter Property="Padding"
+                Value="{StaticResource Thickness.Panel.Padding}"/>
+
+        <Setter Property="Background"
+                Value="{StaticResource Brush.Panel.Surface}"/>
+
+        <Setter Property="StrokeHighlightColor"
+                Value="{DynamicResource Color.Panel.Highlight}"/>
+
+        <Setter Property="StrokeShadowColor"
+                Value="{DynamicResource Color.Panel.Shadow}"/>
+
+    </ControlTheme>
+
 </ResourceDictionary>

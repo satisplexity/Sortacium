@@ -35,7 +35,7 @@
         </Style>
 
         <Style
-            Selector="Border#SettingsDialog">
+            Selector="controls|BeveledBorder#SettingsDialog">
 
             <Setter
                 Property="Opacity"
@@ -48,7 +48,7 @@
         </Style>
 
         <Style
-            Selector="Border#SettingsDialog.open">
+            Selector="controls|BeveledBorder#SettingsDialog.open">
 
             <Setter
                 Property="Opacity"
@@ -61,7 +61,7 @@
         </Style>
 
         <Style
-            Selector="Border#AlgorithmSelectionDialog">
+            Selector="controls|BeveledBorder#AlgorithmSelectionDialog">
 
             <Setter
                 Property="Opacity"
@@ -74,7 +74,7 @@
         </Style>
 
         <Style
-            Selector="Border#AlgorithmSelectionDialog.open">
+            Selector="controls|BeveledBorder#AlgorithmSelectionDialog.open">
 
             <Setter
                 Property="Opacity"
@@ -233,8 +233,8 @@
                 ColumnDefinitions="auto, *, auto">
 
                 <!-- Control panel -->
-                <Border
-                    Theme="{StaticResource ContentContainer}"
+                <controls:BeveledBorder
+                    Theme="{StaticResource BeveledBorder.Panel}"
                     Width="300">
 
                     <Grid
@@ -294,7 +294,7 @@
 
                     </Grid>
 
-                </Border>
+                </controls:BeveledBorder>
 
                 <Grid
                     Grid.Column="1"
@@ -321,10 +321,10 @@
 
                 </Grid>
 
-                <Border
+                <controls:BeveledBorder
                     Grid.Column="2"
                     Width="420"
-                    Theme="{StaticResource ContentContainer}">
+                    Theme="{StaticResource BeveledBorder.Panel}">
 
                     <Grid
                         RowDefinitions="Auto,*,Auto"
@@ -412,7 +412,7 @@
 
                     </Grid>
 
-                </Border>
+                </controls:BeveledBorder>
 
             </Grid>
 
@@ -439,43 +439,12 @@
 
             <Grid>
 
-                <Border
+                <controls:BeveledBorder
                     x:Name="SettingsDialog"
                     Width="800"
                     Margin="50"
-                    Padding="24"
-                    CornerRadius="12"
-                    Background="{DynamicResource Palette.Brush.242424}"
-                    HorizontalAlignment="Center"
-                    RenderTransformOrigin="50%,50%"
-                    BorderThickness="1.5"
-                    components:StrokeGradientAdapter.Enable="True">
-
-                    <Border.BorderBrush>
-
-                        <LinearGradientBrush
-                            StartPoint="50%, 0%"
-                            EndPoint="50%, 100%">
-
-                            <GradientStop
-                                Color="{Binding Colors[2E2E2E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.2"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.8"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="1"/>
-
-                        </LinearGradientBrush>
-
-                    </Border.BorderBrush>
+                    Theme="{StaticResource BeveledBorder.Panel}"
+                    RenderTransformOrigin="50%,50%">
 
                     <Border.Transitions>
 
@@ -506,45 +475,14 @@
                     <views:SettingsView
                         CloseRequested="SettingsView_CloseRequested"/>
 
-                </Border>
+                </controls:BeveledBorder>
 
-                <Border
+                <controls:BeveledBorder
                     x:Name="AlgorithmSelectionDialog"
                     MaxWidth="1000"
                     Margin="50"
-                    Padding="24"
-                    CornerRadius="12"
-                    Background="{DynamicResource Palette.Brush.1E1E1E}"
-                    HorizontalAlignment="Stretch"
-                    RenderTransformOrigin="50%,50%"
-                    BorderThickness="3"
-                    components:StrokeGradientAdapter.Enable="True">
-
-                    <Border.BorderBrush>
-
-                        <LinearGradientBrush
-                            StartPoint="50%, 0%"
-                            EndPoint="50%, 100%">
-
-                            <GradientStop
-                                Color="{Binding Colors[2E2E2E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.2"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.8"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[151515], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="1"/>
-
-                        </LinearGradientBrush>
-
-                    </Border.BorderBrush>
+                    Theme="{StaticResource BeveledBorder.Panel}"
+                    RenderTransformOrigin="50%,50%">
 
                     <Border.Transitions>
 
@@ -577,7 +515,7 @@
                         CloseRequested="AlgorithmSelectionView_CloseRequested"
                         ApplyRequested="AlgorithmSelectionView_ApplyRequested"/>
 
-                </Border>
+                </controls:BeveledBorder>
 
             </Grid>
 

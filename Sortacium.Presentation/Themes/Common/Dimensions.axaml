@@ -5,6 +5,8 @@
     <CornerRadius x:Key="CornerRadius.Window">15</CornerRadius>
     <CornerRadius x:Key="CornerRadius.WindowTitleBar">15, 15, 0, 0</CornerRadius>
 
+    <CornerRadius x:Key="CornerRadius.Panel">15</CornerRadius>
+
     <Thickness x:Key="Thickness.Border.Generic">2, 3</Thickness>
     <Thickness x:Key="Thickness.Border.WindowTitleBar">0, 0, 0, 3</Thickness>
 

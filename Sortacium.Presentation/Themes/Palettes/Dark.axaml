@@ -7,7 +7,7 @@
     <Color x:Key="Color.Window.Shadow">#FF141414</Color>
 
     <Color x:Key="Color.Panel.Surface">#FF242424</Color>
-    <Color x:Key="Color.Panel.HightLight">#FFF</Color>
+    <Color x:Key="Color.Panel.Highlight">#FF353535</Color>
     <Color x:Key="Color.Panel.Shadow">#FF151515</Color>
 
     <Color x:Key="Color.RecessedPanel.Surface">#AAA</Color>
