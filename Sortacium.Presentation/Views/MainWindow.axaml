@@ -5,6 +5,7 @@
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components"
+    xmlns:models="using:Sortacium.Presentation.Models"
     x:Class="Sortacium.Presentation.Views.MainWindow"
     x:DataType="vm:MainViewModel">
 
@@ -13,6 +14,32 @@
     </Design.DataContext>
 
     <Window.Styles>
+
+        <!-- Algorithm selection cards -->
+<Style Selector="ListBox.algorithm-list">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+</Style>
+
+<Style Selector="ListBox.algorithm-list ListBoxItem">
+    <Setter Property="Background" Value="#292929"/>
+    <Setter Property="Foreground" Value="#DDDDDD"/>
+    <Setter Property="Padding" Value="14"/>
+    <Setter Property="Margin" Value="0,0,0,8"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="BorderBrush" Value="#363636"/>
+</Style>
+
+<Style Selector="ListBox.algorithm-list ListBoxItem:pointerover">
+    <Setter Property="Background" Value="#353038"/>
+</Style>
+
+<Style Selector="ListBox.algorithm-list ListBoxItem:selected">
+    <Setter Property="Background" Value="#382746"/>
+    <Setter Property="BorderBrush" Value="#AF4BE9"/>
+    <Setter Property="Foreground" Value="#D8A8F4"/>
+</Style>
 
         <Style
             Selector="Border#ModalOverlay">
@@ -41,7 +68,7 @@
 
             <Setter
                 Property="RenderTransform"
-                Value="scale(0.9) translateY(30px)"/>
+                Value="scale(0.9) translateY(-70px) translateX(70px)"/>
 
         </Style>
 
@@ -54,7 +81,33 @@
 
             <Setter
                 Property="RenderTransform"
-                Value="scale(1) translateY(0px)"/>
+                Value="scale(1) translateY(0px) translateX(0px)"/>
+
+        </Style>
+
+        <Style
+            Selector="Border#AlgorithmSelectionDialog">
+
+            <Setter
+                Property="Opacity"
+                Value="0"/>
+
+            <Setter
+                Property="RenderTransform"
+                Value="scale(0.9) translateY(200px) translateX(-100px)"/>
+
+        </Style>
+
+        <Style
+            Selector="Border#AlgorithmSelectionDialog.open">
+
+            <Setter
+                Property="Opacity"
+                Value="1"/>
+
+            <Setter
+                Property="RenderTransform"
+                Value="scale(1) translateY(0px) translateX(0px)"/>
 
         </Style>
 
@@ -196,7 +249,7 @@
                             WindowDecorationProperties.ElementRole="MaximizeButton"/>
 
                         <controls:IconButton
-                            Icon="{StaticResource Icon.Close}"
+                            Icon="{StaticResource Icon.PowerOff}"
                             Click="Close_Click"
                             WindowDecorationProperties.ElementRole="CloseButton"/>
 
@@ -211,11 +264,13 @@
                 Grid.Row="1"
                 ColumnDefinitions="auto, *, auto">
 
+                <!-- Control panel -->
                 <Border
                     Theme="{StaticResource ContentContainer}"
                     Width="300">
 
-                    <StackPanel
+                    <Grid RowDefinitions="*, auto">
+                        <StackPanel
                         Margin="15"
                         Spacing="10">
 
@@ -225,10 +280,12 @@
                             FontWeight="Bold"/>
 
                         <TextBlock
-                            Text="Bubble sort"
-                            FontSize="26"
-                            Foreground="#AF4BE9"
-                            FontWeight="Bold"/>
+        Text="{Binding SelectedAlgorithm.Name}"
+        FontSize="24"
+        Foreground="#AF4BE9"
+        FontWeight="Bold"
+        TextWrapping="Wrap"
+        VerticalAlignment="Center"/>
 
                         <Grid
                             ColumnDefinitions="*, *"
@@ -252,6 +309,20 @@
                         </Grid>
 
                     </StackPanel>
+
+                        <Button Grid.Row="1"
+                                HorizontalAlignment="Stretch"
+                                Content="Select algrorithm"
+                                Foreground="#EEE"
+                                Padding="20"
+                                HorizontalContentAlignment="Center"
+                                CornerRadius="10"
+                                FontSize="14"
+                                Click="OpenAlgrorithmSelection_Click"/>
+
+                    </Grid>
+
+                    
 
                 </Border>
 
@@ -395,7 +466,8 @@
 
             </Border.Transitions>
 
-            <Border
+            <Grid>
+                 <Border
                 x:Name="SettingsDialog"
                 Width="800"
                 Margin="50"
@@ -404,7 +476,8 @@
                 Background="#242424"
                 HorizontalAlignment="Center"
                 RenderTransformOrigin="50%,50%"
-                BorderThickness="1.5">
+                BorderThickness="1.5"
+                components:StrokeGradientAdapter.Enable="True">
 
                 <Border.BorderBrush>
 
@@ -482,6 +555,339 @@
                 </StackPanel>
 
             </Border>
+
+                <Border
+                x:Name="AlgorithmSelectionDialog"
+                MaxWidth="1000"
+                Margin="50"
+                Padding="24"
+                CornerRadius="12"
+                Background="#1E1E1E"
+                HorizontalAlignment="Stretch"
+                RenderTransformOrigin="50%,50%"
+                BorderThickness="3"
+                components:StrokeGradientAdapter.Enable="True">
+
+                <Border.BorderBrush>
+
+                    <LinearGradientBrush
+                        StartPoint="50%, 0%"
+                        EndPoint="50%, 100%">
+
+                        <GradientStop
+                            Color="#2E2E2E"
+                            Offset="0"/>
+
+                        <GradientStop
+                            Color="#1E1E1E"
+                            Offset="0.2"/>
+
+                        <GradientStop
+                            Color="#1E1E1E"
+                            Offset="0.8"/>
+
+                        <GradientStop
+                            Color="#151515"
+                            Offset="1"/>
+
+                    </LinearGradientBrush>
+
+                </Border.BorderBrush>
+
+                <Border.Transitions>
+
+                    <Transitions>
+
+                        <DoubleTransition
+                            Property="Opacity"
+                            Duration="0:0:0.25"
+                            Easing="CubicEaseOut"/>
+
+                        <TransformOperationsTransition
+                            Property="RenderTransform"
+                            Duration="0:0:0.4">
+
+                            <TransformOperationsTransition.Easing>
+
+                                <components:EnchancedBackEaseOut
+                                    Amplitude="0.4"/>
+
+                            </TransformOperationsTransition.Easing>
+
+                        </TransformOperationsTransition>
+
+                    </Transitions>
+
+                </Border.Transitions>
+
+                <Grid RowDefinitions="auto, *, auto"
+                      RowSpacing="10">
+
+                    <TextBlock
+                        Text="Select algorithm"
+                        FontSize="24"
+                        FontWeight="Bold"
+                        Foreground="#EEE"/>
+
+                    <controls:IconButton
+                        Click="CloseAlgrorithmSelection_Click"
+                        HorizontalAlignment="Right"
+                        Icon="{StaticResource Icon.Close}"/>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="*, 500">
+
+                        <Border Background="#191919"
+                                CornerRadius="15"
+                                BorderThickness="3"
+                                components:StrokeGradientAdapter.Enable="True">
+                            <Border.BorderBrush>
+
+                    <LinearGradientBrush
+                        StartPoint="50%, 0%"
+                        EndPoint="50%, 100%">
+
+                        <GradientStop
+                            Color="#141414"
+                            Offset="0"/>
+
+                        <GradientStop
+                            Color="#1A1A1A"
+                            Offset="0.2"/>
+
+                        <GradientStop
+                            Color="#1A1A1A"
+                            Offset="0.8"/>
+
+                        <GradientStop
+                            Color="#2F2F2F"
+                            Offset="1"/>
+
+                    </LinearGradientBrush>
+
+                </Border.BorderBrush>
+
+<ListBox
+                    Classes="algorithm-list"
+                    ItemsSource="{Binding AvailableAlgorithms}"
+                    SelectedItem="{Binding SelectedAlgorithm, Mode=TwoWay}">
+
+                    <ListBox.ItemTemplate>
+
+                        <DataTemplate x:DataType="models:AlgorithmOption">
+
+                            <StackPanel Spacing="5">
+
+                                <TextBlock
+                                    Text="{Binding Name}"
+                                    FontWeight="Bold"
+                                    FontSize="16"/>
+
+                                <TextBlock
+                                    Text="{Binding Description}"
+                                    Foreground="#999999"
+                                    FontSize="11"
+                                    TextWrapping="Wrap"
+                                    MaxLines="2"/>
+
+                            </StackPanel>
+
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+
+                        </Border>
+
+                        
+
+                        <Grid
+                Grid.Column="1"
+                RowDefinitions="Auto,Auto,Auto,*"
+                RowSpacing="14">
+
+                <TextBlock
+                    Text="{Binding SelectedAlgorithm.Name}"
+                    Foreground="#AF4BE9"
+                    FontSize="26"
+                    FontWeight="Bold"/>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Text="{Binding SelectedAlgorithm.Description}"
+                    TextWrapping="Wrap"
+                    Foreground="#BBBBBB"/>
+
+                <!-- Complexity and history -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="Auto,Auto,Auto,Auto"
+                    ColumnSpacing="18"
+                    RowSpacing="8">
+
+                    <TextBlock
+                        Text="Author / origin"
+                        Foreground="#888888"/>
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="{Binding SelectedAlgorithm.Author}"
+                        Foreground="#DDDDDD"/>
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Text="Year"
+                        Foreground="#888888"/>
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding SelectedAlgorithm.Year}"
+                        Foreground="#DDDDDD"/>
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Text="Time: best / average / worst"
+                        Foreground="#888888"/>
+
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Spacing="8">
+
+                        <TextBlock
+                            Text="{Binding SelectedAlgorithm.BestTime}"
+                            Foreground="#A7D6A4"/>
+
+                        <TextBlock
+                            Text="{Binding SelectedAlgorithm.AverageTime}"
+                            Foreground="#DDDDDD"/>
+
+                        <TextBlock
+                            Text="{Binding SelectedAlgorithm.WorstTime}"
+                            Foreground="#D9A1A1"/>
+
+                    </StackPanel>
+
+                    <TextBlock
+                        Grid.Row="3"
+                        Text="Space complexity"
+                        Foreground="#888888"/>
+
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        Spacing="14">
+
+                        <TextBlock
+                            Text="{Binding SelectedAlgorithm.SpaceComplexity}"
+                            Foreground="#DDDDDD"/>
+
+                        <TextBlock
+                            Text="{Binding SelectedAlgorithm.Stability}"
+                            Foreground="#AF4BE9"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- Code viewer -->
+                <Grid
+                    Grid.Row="3"
+                    RowDefinitions="Auto,*"
+                    RowSpacing="8">
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <TextBlock
+                            Text="Implementation"
+                            FontSize="16"
+                            FontWeight="Medium"
+                            VerticalAlignment="Center"/>
+
+                        <ComboBox
+                            Grid.Column="1"
+                            Width="145"
+                            ItemsSource="{Binding AvailableLanguages}"
+                            SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate
+                                    x:DataType="vm:CodeLanguageOption">
+
+                                    <TextBlock
+                                        Text="{Binding DisplayName}"/>
+
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                        </ComboBox>
+
+                    </Grid>
+
+                    <Border
+                        Grid.Row="1"
+                        Background="#191919"
+                        CornerRadius="8"
+                        ClipToBounds="True">
+
+                        <controls:SortingCodeEditor
+                            Language="{Binding SelectedLanguage.Id}"
+                            Document="{Binding CodeDocument}"
+                            HighlightedLines="{Binding HighlightedCodeLines}"
+                            Background="Transparent"
+                            Foreground="#CCCCCC"
+                            FontFamily="Consolas, Menlo, Monospace"
+                            FontSize="13"
+                            LineNumbersForeground="#666666"/>
+
+                    </Border>
+
+                </Grid>
+
+            </Grid>
+
+
+                       
+
+                    </Grid>
+
+                    <!-- Footer -->
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,Auto">
+
+            <TextBlock
+                Text="Changing the algorithm resets the current execution."
+                Foreground="#777777"
+                VerticalAlignment="Center"
+                FontSize="12"/>
+<Button Width="300"
+         Grid.Row="2"
+                                Foreground="#EEE"
+                                Background="#88E"
+                                CornerRadius="15"
+                                FontWeight="Bold"
+                                FontSize="16"
+                                HorizontalContentAlignment="Center"
+                                Padding="10"
+                                Content="Select"
+                                HorizontalAlignment="Right"/>
+                </Grid>
+
+        </Grid>
+
+ 
+
+            </Border>
+
+            </Grid>
+
+           
 
         </Border>
 

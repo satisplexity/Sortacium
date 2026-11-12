@@ -2,7 +2,7 @@
 
 namespace Sortacium.Core.Algorithms;
 
-public sealed class BubbleSortAlgorithm
+public sealed class BubbleSortAlgorithm : ISortingAlgorithm
 {
     public SortingTrace Bake(
         IReadOnlyList<double> values,

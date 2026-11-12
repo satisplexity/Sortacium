@@ -1,6 +1,8 @@
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 using Avalonia.Platform;
@@ -15,27 +17,56 @@ public sealed class AlgorithmCodeService
 
     public AlgorithmCodeService()
     {
-        using Stream stream = AssetLoader.Open(new Uri("avares://Sortacium.Presentation/Resources/Algorithms.json"));
+        using Stream stream = AssetLoader.Open(
+            new Uri("avares://Sortacium.Presentation/Resources/Algorithms.json"));
 
-        _catalog =
-            JsonSerializer.Deserialize<AlgorithmCatalog>(
-                stream,
-                new JsonSerializerOptions(JsonSerializerDefaults.Web))
-            ?? throw new InvalidOperationException("Failed to load algorithms.");
+        _catalog = JsonSerializer.Deserialize<AlgorithmCatalog>(
+            stream,
+            new JsonSerializerOptions(JsonSerializerDefaults.Web))
+            ?? throw new InvalidOperationException(
+                "Failed to load algorithms.");
     }
 
-    public CodeImplementation GetCode(string algorithmId, string language)
+    public IReadOnlyList<AlgorithmOption> GetAlgorithms()
+    {
+        return _catalog.Algorithms
+            .Select(pair => new AlgorithmOption(
+                pair.Key,
+                pair.Value))
+            .ToArray();
+    }
+
+    public IReadOnlyCollection<string> GetLanguages(string algorithmId)
+    {
+        return GetAlgorithm(algorithmId)
+            .Implementations.Keys.ToArray();
+    }
+
+    public AlgorithmDefinition GetAlgorithm(string algorithmId)
     {
         if (!_catalog.Algorithms.TryGetValue(
-                algorithmId, out AlgorithmDefinition? algorithm))
+                algorithmId,
+                out AlgorithmDefinition? algorithm))
         {
-            throw new KeyNotFoundException($"Algorithm '{algorithmId}' not found.");
+            throw new KeyNotFoundException(
+                $"Algorithm '{algorithmId}' not found.");
         }
 
+        return algorithm;
+    }
+
+    public CodeImplementation GetCode(
+        string algorithmId,
+        string language)
+    {
+        AlgorithmDefinition algorithm = GetAlgorithm(algorithmId);
+
         if (!algorithm.Implementations.TryGetValue(
-                language, out CodeImplementation? implementation))
+                language,
+                out CodeImplementation? implementation))
         {
-            throw new KeyNotFoundException($"Language '{language}' not found.");
+            throw new KeyNotFoundException(
+                $"Language '{language}' not found.");
         }
 
         return implementation;
@@ -46,10 +77,12 @@ public sealed class AlgorithmCodeService
         string language,
         string codePointId)
     {
-        var code = GetCode(algorithmId, language);
+        CodeImplementation code = GetCode(algorithmId, language);
 
-        return code.Mapping.TryGetValue(codePointId, out var lines)
-            ? lines
-            : [];
+        return code.Mapping.TryGetValue(
+            codePointId,
+            out int[]? lines)
+                ? lines
+                : [];
     }
 }

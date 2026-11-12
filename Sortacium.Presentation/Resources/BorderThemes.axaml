@@ -21,7 +21,7 @@
 
         <Setter
             Property="BorderThickness"
-            Value="2"/>
+            Value="2, 3"/>
 
         <Setter
             Property="components:StrokeGradientAdapter.Enable"
@@ -39,11 +39,11 @@
                     Offset="0"/>
 
                 <GradientStop
-                    Color="#262626"
+                    Color="#232323"
                     Offset="0.1"/>
 
                 <GradientStop
-                    Color="#262626"
+                    Color="#232323"
                     Offset="0.9"/>
 
                 <GradientStop
@@ -74,7 +74,7 @@
 
         <Setter
             Property="BorderThickness"
-            Value="2"/>
+            Value="1, 3"/>
 
         <Setter
             Property="components:StrokeGradientAdapter.Enable"
@@ -92,11 +92,11 @@
                     Offset="0"/>
 
                 <GradientStop
-                    Color="#222222"
+                    Color="#1A1A1A"
                     Offset="0.1"/>
 
                 <GradientStop
-                    Color="#222222"
+                    Color="#1A1A1A"
                     Offset="0.9"/>
 
                 <GradientStop

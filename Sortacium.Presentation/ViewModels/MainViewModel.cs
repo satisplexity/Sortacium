@@ -21,7 +21,7 @@ namespace Sortacium.Presentation.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    public IReadOnlyList<CodeLanguageOption> AvailableLanguages { get; } =
+    private static readonly CodeLanguageOption[] AllLanguages =
 [
     new("pseudocode", "Pseudocode"),
     new("c", "C"),
@@ -35,49 +35,61 @@ public partial class MainViewModel : ViewModelBase
     new("assembly", "Assembly")
 ];
 
+    public IReadOnlyList<AlgorithmOption> AvailableAlgorithms
+    { get; }
+
+    [ObservableProperty]
+    private AlgorithmOption _selectedAlgorithm = null!;
+
+    [ObservableProperty]
+    private IReadOnlyList<CodeLanguageOption> _availableLanguages = [];
+
     [ObservableProperty]
     private CodeLanguageOption _selectedLanguage =
         new("csharp", "C#");
 
+    partial void OnSelectedAlgorithmChanged(AlgorithmOption value)
+    {
+        // Сохраняем язык, если он поддерживается новым алгоритмом.
+        string preferredLanguage = SelectedLanguage.Id;
+
+        IReadOnlyCollection<string> supported =
+            _codeService.GetLanguages(value.Id);
+
+        AvailableLanguages = AllLanguages
+            .Where(language => supported.Contains(language.Id))
+            .ToArray();
+
+        SelectedLanguage =
+            AvailableLanguages.FirstOrDefault(
+                language => language.Id == preferredLanguage)
+            ?? AvailableLanguages.First();
+
+        LoadSelectedLanguageCode();
+
+        // Пересоздаём трассу для выбранного алгоритма.
+        ResetBars();
+    }
+
     partial void OnSelectedLanguageChanged(CodeLanguageOption value)
     {
-        LoadSelectedLanguageCode();
+        if (SelectedAlgorithm is not null)
+            LoadSelectedLanguageCode();
     }
 
     private void LoadSelectedLanguageCode()
     {
-        var code = _codeService.GetCode(
-            "bubble-sort",
+        if (SelectedAlgorithm is null)
+            return;
+
+        CodeImplementation code = _codeService.GetCode(
+            SelectedAlgorithm.Id,
             SelectedLanguage.Id);
 
         CodeDocument = new TextDocument(code.Source);
 
         UpdateCodeHighlight(_player?.CurrentAction?.CodePoint);
     }
-
-    public IReadOnlyList<CodeLineViewModel> CodeLines { get; } =
-[
-    new(1, "void BubbleSort(double[] array)"),
-    new(2, "{"),
-    new(3, "    int size = a.Length;"),
-    new(4, "    for (int i = 0; i < size - 1; i++)"),
-    new(5, "    {"),
-    new(6, "        for (int j = 0; j < size - i - 1; j++)"),
-    new(7, "        {"),
-    new(8, "            if (array[j] > array[j + 1])",
-        SortingCodePoint.CompareAdjacent),
-    new(9, "            {"),
-    new(10, "                (array[j], array[j + 1]) =",
-        SortingCodePoint.SwapAdjacent),
-    new(11, "                    (array[j + 1], array[j]);",
-        SortingCodePoint.SwapAdjacent),
-    new(12, "            }"),
-    new(13, "        }"),
-    new(14, "    }"),
-    new(15, "}")
-];
-
-    private readonly BubbleSortAlgorithm _algorithm = new();
 
     private SortingPlayer? _player;
 
@@ -166,7 +178,24 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+        AvailableAlgorithms = _codeService.GetAlgorithms();
+
+        // Устанавливаем начальный алгоритм без повторной
+        // генерации последовательности операций.
+        _selectedAlgorithm = AvailableAlgorithms.First(
+            algorithm => algorithm.Id == "bubble-sort");
+
+        AvailableLanguages = AllLanguages
+            .Where(language =>
+                _codeService.GetLanguages(
+                    SelectedAlgorithm.Id).Contains(language.Id))
+            .ToArray();
+
+        _selectedLanguage = AvailableLanguages.First(
+            language => language.Id == "csharp");
+
         LoadSelectedLanguageCode();
+
         ResetBars();
     }
 
@@ -224,18 +253,23 @@ public partial class MainViewModel : ViewModelBase
 
         _bakeCts = cts;
 
+        ISortingAlgorithm algorithm =
+    SortingAlgorithmFactory.Create(SelectedAlgorithm.Id);
+
         _ = BakeAsync(
             generation,
             values,
-            cts);
+            cts,
+            algorithm);
 
         UpdateCodeHighlight(null);
     }
 
     private async Task BakeAsync(
-        int generation,
-        double[] values,
-        CancellationTokenSource cts)
+    int generation,
+    double[] values,
+    CancellationTokenSource cts,
+    ISortingAlgorithm algorithm)
     {
         SortingTrace? trace = null;
         string? error = null;
@@ -243,7 +277,7 @@ public partial class MainViewModel : ViewModelBase
         try
         {
             trace = await Task.Run(
-                () => _algorithm.Bake(values, cts.Token),
+                () => algorithm.Bake(values, cts.Token),
                 cts.Token
             ).ConfigureAwait(false);
         }
@@ -445,6 +479,12 @@ public partial class MainViewModel : ViewModelBase
     private void UpdateCodeHighlight(
     SortingCodePoint? codePoint)
     {
+        if (SelectedAlgorithm is null)
+        {
+            HighlightedCodeLines = [];
+            return;
+        }
+
         string? mappingKey = codePoint switch
         {
             SortingCodePoint.CompareAdjacent => "compare",
@@ -455,7 +495,7 @@ public partial class MainViewModel : ViewModelBase
         HighlightedCodeLines = mappingKey is null
             ? []
             : _codeService.GetHighlightedLines(
-                "bubble-sort",
+                SelectedAlgorithm.Id,
                 SelectedLanguage.Id,
                 mappingKey);
     }

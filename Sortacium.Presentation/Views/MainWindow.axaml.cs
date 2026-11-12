@@ -40,7 +40,18 @@ public partial class MainWindow : Window
         ModalOverlay.IsHitTestVisible = true;
 
         ModalOverlay.Classes.Add("open");
+        AlgorithmSelectionDialog.IsVisible = false;
         SettingsDialog.Classes.Add("open");
+    }
+
+    private void OpenAlgrorithmSelection_Click(
+     object? sender,
+     RoutedEventArgs e)
+    {
+        ModalOverlay.IsHitTestVisible = true;
+        SettingsDialog.IsVisible = false;
+        ModalOverlay.Classes.Add("open");
+        AlgorithmSelectionDialog.Classes.Add("open");
     }
 
     private void CloseSettings_Click(
@@ -49,7 +60,17 @@ public partial class MainWindow : Window
     {
         ModalOverlay.Classes.Remove("open");
         SettingsDialog.Classes.Remove("open");
+        AlgorithmSelectionDialog.IsVisible = true;
+        ModalOverlay.IsHitTestVisible = false;
+    }
 
+    private void CloseAlgrorithmSelection_Click(
+        object? sender,
+        RoutedEventArgs e)
+    {
+        ModalOverlay.Classes.Remove("open");
+        AlgorithmSelectionDialog.Classes.Remove("open");
+        SettingsDialog.IsVisible = true;
         ModalOverlay.IsHitTestVisible = false;
     }
 }

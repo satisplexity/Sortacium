@@ -2,6 +2,14 @@
     "algorithms": {
         "bubble-sort": {
             "name": "Bubble Sort",
+            "description": "A simple comparison sort that repeatedly exchanges adjacent elements when they are out of order.",
+            "author": "No single confirmed inventor",
+            "year": "1950s",
+            "bestTime": "O(n²)",
+            "averageTime": "O(n²)",
+            "worstTime": "O(n²)",
+            "spaceComplexity": "O(1)",
+            "isStable": true,
             "implementations": {
                 "pseudocode": {
                     "lines": [
@@ -322,6 +330,193 @@
                             19,
                             20
                         ]
+                    }
+                }
+            }
+        },
+
+        "selection-sort": {
+            "name": "Selection Sort",
+            "description": "Finds the minimum element in the unsorted region and moves it into its final position.",
+            "author": "Traditional algorithm; no single credited inventor",
+            "year": "Historical; exact origin unknown",
+            "bestTime": "O(n²)",
+            "averageTime": "O(n²)",
+            "worstTime": "O(n²)",
+            "spaceComplexity": "O(1)",
+            "isStable": false,
+            "implementations": {
+                "pseudocode": {
+                    "lines": [
+                        "PROCEDURE SelectionSort(A)",
+                        "    FOR i FROM 0 TO LENGTH(A) - 2",
+                        "        minIndex = i",
+                        "        FOR j FROM i + 1 TO LENGTH(A) - 1",
+                        "            IF A[j] < A[minIndex]",
+                        "                minIndex = j",
+                        "        IF minIndex != i",
+                        "            SWAP A[i], A[minIndex]"
+                    ],
+                    "mapping": {
+                        "compare": [ 5 ],
+                        "swap": [ 8 ]
+                    }
+                },
+                "csharp": {
+                    "lines": [
+                        "public static void SelectionSort(double[] a)",
+                        "{",
+                        "    for (int i = 0; i < a.Length - 1; i++)",
+                        "    {",
+                        "        int minIndex = i;",
+                        "        for (int j = i + 1; j < a.Length; j++)",
+                        "        {",
+                        "            if (a[j] < a[minIndex])",
+                        "                minIndex = j;",
+                        "        }",
+                        "        if (minIndex != i)",
+                        "            (a[i], a[minIndex]) = (a[minIndex], a[i]);",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "compare": [ 8 ],
+                        "swap": [ 12 ]
+                    }
+                }
+            }
+        },
+
+        "merge-sort": {
+            "name": "Merge Sort",
+            "description": "A divide-and-conquer algorithm that recursively sorts two halves and merges them into an ordered sequence.",
+            "author": "John von Neumann",
+            "year": "1945",
+            "bestTime": "O(n log n)",
+            "averageTime": "O(n log n)",
+            "worstTime": "O(n log n)",
+            "spaceComplexity": "O(n)",
+            "isStable": true,
+            "implementations": {
+                "pseudocode": {
+                    "lines": [
+                        "PROCEDURE MergeSort(A, left, right)",
+                        "    IF left >= right THEN RETURN",
+                        "    mid = (left + right) / 2",
+                        "    MergeSort(A, left, mid)",
+                        "    MergeSort(A, mid + 1, right)",
+                        "    Merge(A, left, mid, right)",
+                        "",
+                        "PROCEDURE Merge(A, left, mid, right)",
+                        "    COPY left and right halves",
+                        "    WHILE both halves have elements",
+                        "        COMPARE next left and right values",
+                        "        APPEND smaller element to result",
+                        "    APPEND remaining elements",
+                        "    FOR each target position",
+                        "        SWAP desired element into position"
+                    ],
+                    "mapping": {
+                        "compare": [ 11 ],
+                        "swap": [ 15 ]
+                    }
+                },
+                "csharp": {
+                    "lines": [
+                        "public static void MergeSort(double[] a, int left, int right)",
+                        "{",
+                        "    if (left >= right) return;",
+                        "    int mid = left + (right - left) / 2;",
+                        "    MergeSort(a, left, mid);",
+                        "    MergeSort(a, mid + 1, right);",
+                        "    Merge(a, left, mid, right);",
+                        "}",
+                        "",
+                        "private static void Merge(double[] a, int left, int mid, int right)",
+                        "{",
+                        "    double[] l = a[left..(mid + 1)];",
+                        "    double[] r = a[(mid + 1)..(right + 1)];",
+                        "    var result = new List<double>();",
+                        "    int i = 0, j = 0;",
+                        "    while (i < l.Length && j < r.Length)",
+                        "    {",
+                        "        if (l[i] <= r[j])",
+                        "            result.Add(l[i++]);",
+                        "        else",
+                        "            result.Add(r[j++]);",
+                        "    }",
+                        "    while (i < l.Length) result.Add(l[i++]);",
+                        "    while (j < r.Length) result.Add(r[j++]);",
+                        "    for (int k = 0; k < result.Count; k++)",
+                        "    {",
+                        "        int target = left + k;",
+                        "        int source = Array.IndexOf(a, result[k], target, right - target + 1);",
+                        "        if (target != source)",
+                        "            (a[target], a[source]) = (a[source], a[target]);",
+                        "    }",
+                        "}"
+                    ],
+                    "mapping": {
+                        "compare": [ 18 ],
+                        "swap": [ 30 ]
+                    }
+                }
+            }
+        },
+
+        "quick-sort": {
+            "name": "Quick Sort",
+            "description": "A divide-and-conquer algorithm that partitions an array around a pivot and recursively sorts the partitions.",
+            "author": "Tony Hoare",
+            "year": "1959–1961",
+            "bestTime": "O(n log n)",
+            "averageTime": "O(n log n)",
+            "worstTime": "O(n²)",
+            "spaceComplexity": "O(log n) average; O(n) worst",
+            "isStable": false,
+            "implementations": {
+                "pseudocode": {
+                    "lines": [
+                        "PROCEDURE QuickSort(A, low, high)",
+                        "    IF low >= high THEN RETURN",
+                        "    pivot = A[high]",
+                        "    i = low",
+                        "    FOR j FROM low TO high - 1",
+                        "        IF A[j] < pivot",
+                        "            SWAP A[i], A[j]",
+                        "            i = i + 1",
+                        "    SWAP A[i], A[high]",
+                        "    QuickSort(A, low, i - 1)",
+                        "    QuickSort(A, i + 1, high)"
+                    ],
+                    "mapping": {
+                        "compare": [ 6 ],
+                        "swap": [ 7, 9 ]
+                    }
+                },
+                "csharp": {
+                    "lines": [
+                        "public static void QuickSort(double[] a, int low, int high)",
+                        "{",
+                        "    if (low >= high) return;",
+                        "    double pivot = a[high];",
+                        "    int i = low;",
+                        "    for (int j = low; j < high; j++)",
+                        "    {",
+                        "        if (a[j] < pivot)",
+                        "        {",
+                        "            (a[i], a[j]) = (a[j], a[i]);",
+                        "            i++;",
+                        "        }",
+                        "    }",
+                        "    (a[i], a[high]) = (a[high], a[i]);",
+                        "    QuickSort(a, low, i - 1);",
+                        "    QuickSort(a, i + 1, high);",
+                        "}"
+                    ],
+                    "mapping": {
+                        "compare": [ 8 ],
+                        "swap": [ 10, 14 ]
                     }
                 }
             }
