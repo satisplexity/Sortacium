@@ -1,8 +1,6 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:appearance="using:Sortacium.Presentation.Services"
-    xmlns:components="using:Sortacium.Presentation.Components"
     xmlns:controls="using:Sortacium.Presentation.Controls">
 
     <ControlTheme
@@ -70,67 +68,28 @@
                             Content="{TemplateBinding Content}"/>
 
                         <Border
-                            Width="6"
-                            HorizontalAlignment="Left"
-                            Background="Transparent"
-                            Cursor="SizeWestEast"
-                            WindowDecorationProperties.ElementRole="ResizeW"/>
+                            Theme="{StaticResource Border.Resize.W}"/>
 
                         <Border
-                            Width="6"
-                            HorizontalAlignment="Right"
-                            Background="Transparent"
-                            Cursor="SizeWestEast"
-                            WindowDecorationProperties.ElementRole="ResizeE"/>
+                            Theme="{StaticResource Border.Resize.E}"/>
 
                         <Border
-                            Height="6"
-                            VerticalAlignment="Top"
-                            Background="Transparent"
-                            Cursor="SizeNorthSouth"
-                            WindowDecorationProperties.ElementRole="ResizeN"/>
+                            Theme="{StaticResource Border.Resize.N}"/>
 
                         <Border
-                            Height="6"
-                            VerticalAlignment="Bottom"
-                            Background="Transparent"
-                            Cursor="SizeNorthSouth"
-                            WindowDecorationProperties.ElementRole="ResizeS"/>
+                            Theme="{StaticResource Border.Resize.S}"/>
 
                         <Border
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Cursor="TopLeftCorner"
-                            WindowDecorationProperties.ElementRole="ResizeNW"/>
+                            Theme="{StaticResource Border.Resize.NW}"/>
 
                         <Border
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="Transparent"
-                            Cursor="TopRightCorner"
-                            WindowDecorationProperties.ElementRole="ResizeNE"/>
+                            Theme="{StaticResource Border.Resize.NE}"/>
 
                         <Border
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Background="Transparent"
-                            Cursor="BottomLeftCorner"
-                            WindowDecorationProperties.ElementRole="ResizeSW"/>
+                            Theme="{StaticResource Border.Resize.SW}"/>
 
                         <Border
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Background="Transparent"
-                            Cursor="BottomRightCorner"
-                            WindowDecorationProperties.ElementRole="ResizeSE"/>
+                            Theme="{StaticResource Border.Resize.SE}"/>
 
                     </Grid>
 

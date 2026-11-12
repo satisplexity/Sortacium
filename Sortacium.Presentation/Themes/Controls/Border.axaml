@@ -1,0 +1,169 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTheme x:Key="Border.Resize.Base"
+                  TargetType="Border">
+
+        <Setter Property="Background"
+                Value="Transparent"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.Horizontal"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Base}">
+
+        <Setter Property="Height"
+                Value="{StaticResource Double.ResizeBorder.Side}"/>
+
+        <Setter Property="Cursor"
+                Value="SizeNorthSouth"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.Vertical"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Base}">
+
+        <Setter Property="Width"
+                Value="{StaticResource Double.ResizeBorder.Side}"/>
+
+        <Setter Property="Cursor"
+                Value="SizeWestEast"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.Corner"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Base}">
+
+        <Setter Property="Width"
+                Value="{StaticResource Double.ResizeBorder.Corner}"/>
+
+        <Setter Property="Height"
+                Value="{StaticResource Double.ResizeBorder.Corner}"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.W"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Vertical}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeW"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.E"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Vertical}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Right"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeE"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.N"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Horizontal}">
+
+        <Setter Property="VerticalAlignment"
+                Value="Top"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeN"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.S"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Horizontal}">
+
+        <Setter Property="VerticalAlignment"
+                Value="Bottom"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeS"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.NW"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Corner}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left"/>
+
+        <Setter Property="VerticalAlignment"
+                Value="Top"/>
+
+        <Setter Property="Cursor"
+                Value="TopLeftCorner"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeNW"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.NE"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Corner}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Right"/>
+
+        <Setter Property="VerticalAlignment"
+                Value="Top"/>
+
+        <Setter Property="Cursor"
+                Value="TopRightCorner"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeNE"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.SW"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Corner}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left"/>
+
+        <Setter Property="VerticalAlignment"
+                Value="Bottom"/>
+
+        <Setter Property="Cursor"
+                Value="BottomLeftCorner"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeSW"/>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="Border.Resize.SE"
+                  TargetType="Border"
+                  BasedOn="{StaticResource Border.Resize.Corner}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Right"/>
+
+        <Setter Property="VerticalAlignment"
+                Value="Bottom"/>
+
+        <Setter Property="Cursor"
+                Value="BottomRightCorner"/>
+
+        <Setter Property="WindowDecorationProperties.ElementRole"
+                Value="ResizeSE"/>
+
+    </ControlTheme>
+
+</ResourceDictionary>
