@@ -8,7 +8,7 @@ namespace Sortacium.Presentation.Controls;
 public sealed class BeveledBorder : Border
 {
     public static readonly StyledProperty<Color> StrokeHighlightColorProperty =
-        AvaloniaProperty.Register<BeveledBorder, Color>(nameof(StrokeHighlightColor), Colors.Transparent);
+        AvaloniaProperty.Register<BeveledBorder, Color>(nameof(StrokeHighlightColor),Colors.Transparent);
 
     public Color StrokeHighlightColor
     {
@@ -17,9 +17,7 @@ public sealed class BeveledBorder : Border
     }
 
     public static readonly StyledProperty<Color> StrokeShadowColorProperty =
-        AvaloniaProperty.Register<BeveledBorder, Color>(
-            nameof(StrokeShadowColor),
-            Colors.Transparent);
+        AvaloniaProperty.Register<BeveledBorder, Color>(nameof(StrokeShadowColor), Colors.Transparent);
 
     public Color StrokeShadowColor
     {
@@ -50,8 +48,7 @@ public sealed class BeveledBorder : Border
         UpdateOffsets();
     }
 
-    protected override void OnPropertyChanged(
-        AvaloniaPropertyChangedEventArgs change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
 
@@ -61,7 +58,8 @@ public sealed class BeveledBorder : Border
         }
 
         if (change.Property == StrokeHighlightColorProperty ||
-            change.Property == StrokeShadowColorProperty)
+            change.Property == StrokeShadowColorProperty ||
+            change.Property == BackgroundProperty)
         {
             UpdateColors();
         }
@@ -98,23 +96,11 @@ public sealed class BeveledBorder : Border
             return;
         }
 
-        double topRadius = Math.Max(
-            CornerRadius.TopLeft,
-            CornerRadius.TopRight);
+        double topRadius = Math.Max(CornerRadius.TopLeft, CornerRadius.TopRight);
+        double bottomRadius = Math.Max(CornerRadius.BottomLeft, CornerRadius.BottomRight);
 
-        double bottomRadius = Math.Max(
-            CornerRadius.BottomLeft,
-            CornerRadius.BottomRight);
-
-        double topOffset = Math.Clamp(
-            topRadius / height,
-            0,
-            0.5);
-
-        double bottomOffset = 1 - Math.Clamp(
-            bottomRadius / height,
-            0,
-            0.5);
+        double topOffset = Math.Clamp(topRadius / height, 0, 0.5);
+        double bottomOffset = 1 - Math.Clamp(bottomRadius / height, 0, 0.5);
 
         _gradient.GradientStops[1].Offset = topOffset;
         _gradient.GradientStops[2].Offset = bottomOffset;
