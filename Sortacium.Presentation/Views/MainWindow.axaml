@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:avaloniaedit="https://github.com/avaloniaui/avaloniaedit"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components"
@@ -91,11 +92,11 @@
 
             <Setter
                 Property="Background"
-                Value="#003D204D"/>
+                Value="{DynamicResource Palette.Brush.003D204D}"/>
 
             <Setter
                 Property="BorderBrush"
-                Value="#00AF4BE9"/>
+                Value="{DynamicResource Palette.Brush.00AF4BE9}"/>
 
         </Style>
 
@@ -105,11 +106,11 @@
 
             <Setter
                 Property="Background"
-                Value="#3D204D"/>
+                Value="{DynamicResource Palette.Brush.3D204D}"/>
 
             <Setter
                 Property="BorderBrush"
-                Value="#AF4BE9"/>
+                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
 
         </Style>
 
@@ -118,7 +119,7 @@
             Selector="TextBlock.code-text">
             <Setter
                 Property="Foreground"
-                Value="#CCCCCC"/>
+                Value="{DynamicResource Palette.Brush.CCCCCC}"/>
         </Style>
 
         <!-- Active code text -->
@@ -126,7 +127,7 @@
             Selector="Border.code-line.active TextBlock.code-text">
             <Setter
                 Property="Foreground"
-                Value="#C18DDF"/>
+                Value="{DynamicResource Palette.Brush.C18DDF}"/>
         </Style>
 
     </Window.Styles>
@@ -144,7 +145,7 @@
                 Padding="10"
                 CornerRadius="15, 15, 0, 0"
                 BorderThickness="0, 0, 0, 3"
-                BorderBrush="#171717">
+                BorderBrush="{DynamicResource Palette.Brush.171717}">
 
                 <Grid
                     ColumnDefinitions="*,auto,*">
@@ -158,7 +159,7 @@
                             Text="Sortacium"
                             FontSize="26"
                             FontWeight="Bold"
-                            Foreground="#AF4BE9"
+                            Foreground="{DynamicResource Palette.Brush.AF4BE9}"
                             VerticalAlignment="Center"/>
 
                     </StackPanel>
@@ -251,14 +252,14 @@
                             Spacing="10">
 
                             <TextBlock
-                                Text="Selected sorting algorithm"
-                                Foreground="#999"
+                                Text="{DynamicResource L.SelectedAlgorithm}"
+                                Foreground="{DynamicResource Palette.Brush.999999}"
                                 FontWeight="Bold"/>
 
                             <TextBlock
                                 Text="{Binding SelectedAlgorithm.Name}"
                                 FontSize="24"
-                                Foreground="#AF4BE9"
+                                Foreground="{DynamicResource Palette.Brush.AF4BE9}"
                                 FontWeight="Bold"
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"/>
@@ -269,18 +270,18 @@
                                 ColumnSpacing="10">
 
                                 <controls:VerticalSlider
-                                    Title="Count"
+                                    Title="{DynamicResource L.Count}"
                                     Minimum="5"
                                     Maximum="100"
                                     Value="{Binding Count}"/>
 
                                 <controls:VerticalSlider
-                                    Title="Speed"
+                                    Title="{DynamicResource L.Speed}"
                                     Grid.Column="1"
                                     Minimum="1"
                                     Maximum="100"
                                     Value="{Binding Speed, Mode=TwoWay}"
-                                    Suffix=" op/s"/>
+                                    Suffix="{DynamicResource L.OpsPerSecond}"/>
 
                             </Grid>
 
@@ -289,9 +290,9 @@
                         <controls:IconButton
                             Grid.Row="1"
                             HorizontalAlignment="Stretch"
-                            Text="Select algrorithm"
+                            Text="{DynamicResource L.SelectAlgorithm}"
                             Icon="{StaticResource Icon.Change}"
-                            Foreground="#EEE"
+                            Foreground="{DynamicResource Palette.Brush.EEEEEE}"
                             Padding="20"
                             HorizontalContentAlignment="Center"
                             CornerRadius="10"
@@ -321,7 +322,7 @@
                         Minimum="0"
                         Maximum="{Binding TotalSteps}"
                         Value="{Binding TimelinePosition, Mode=TwoWay}"
-                        Title="Step"
+                        Title="{DynamicResource L.Step}"
                         Suffix="{Binding TotalSteps, StringFormat=' / {0}'}"
                         IsEnabled="{Binding IsReady}"/>
 
@@ -371,10 +372,10 @@
                                 Document="{Binding CodeDocument}"
                                 HighlightedLines="{Binding HighlightedCodeLines}"
                                 Background="Transparent"
-                                Foreground="#CCCCCC"
+                                Foreground="{DynamicResource Palette.Brush.CCCCCC}"
                                 FontFamily="Consolas, Menlo, Monospace"
                                 FontSize="14"
-                                LineNumbersForeground="#666666"/>
+                                LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
 
                         </Border>
 
@@ -384,32 +385,33 @@
                             Spacing="8">
 
                             <Border
-                                Background="#303030"
+                                Background="{DynamicResource Palette.Brush.303030}"
                                 Height="1"/>
 
                             <TextBlock
-                                Text="Execution details"
+                                Text="{DynamicResource L.ExecutionDetails}"
                                 FontSize="16"
                                 FontWeight="Medium"
-                                Foreground="#EEEEEE"/>
+                                Foreground="{DynamicResource Palette.Brush.EEEEEE}"/>
 
                             <Grid
                                 ColumnDefinitions="*,*">
 
-                                <TextBlock
-                                    Text="{Binding ComparisonCount, StringFormat='Comparisons: {0}'}"
-                                    Foreground="#CCCCCC"/>
+                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                    <TextBlock Text="{DynamicResource L.Comparisons}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                    <TextBlock Text="{Binding ComparisonCount}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                </StackPanel>
 
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Text="{Binding SwapCount, StringFormat='Swaps: {0}'}"
-                                    Foreground="#CCCCCC"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                                    <TextBlock Text="{DynamicResource L.Swaps}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                    <TextBlock Text="{Binding SwapCount}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                </StackPanel>
 
                             </Grid>
 
                             <TextBlock
                                 Text="{Binding VariablesDescription}"
-                                Foreground="#AAAAAA"
+                                Foreground="{DynamicResource Palette.Brush.AAAAAA}"
                                 FontFamily="Consolas, Menlo, DejaVu Sans Mono"
                                 FontSize="12"/>
 
@@ -425,7 +427,7 @@
 
         <Border
             x:Name="ModalOverlay"
-            Background="#55000000"
+            Background="{DynamicResource Palette.Brush.55000000}"
             CornerRadius="15"
             IsHitTestVisible="False">
 
@@ -450,7 +452,7 @@
                     Margin="50"
                     Padding="24"
                     CornerRadius="12"
-                    Background="#242424"
+                    Background="{DynamicResource Palette.Brush.242424}"
                     HorizontalAlignment="Center"
                     RenderTransformOrigin="50%,50%"
                     BorderThickness="1.5"
@@ -463,19 +465,19 @@
                             EndPoint="50%, 100%">
 
                             <GradientStop
-                                Color="#2E2E2E"
+                                Color="{Binding Colors[2E2E2E], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0"/>
 
                             <GradientStop
-                                Color="#262626"
+                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.2"/>
 
                             <GradientStop
-                                Color="#262626"
+                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.8"/>
 
                             <GradientStop
-                                Color="#1E1E1E"
+                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="1"/>
 
                         </LinearGradientBrush>
@@ -519,7 +521,7 @@
                     Margin="50"
                     Padding="24"
                     CornerRadius="12"
-                    Background="#1E1E1E"
+                    Background="{DynamicResource Palette.Brush.1E1E1E}"
                     HorizontalAlignment="Stretch"
                     RenderTransformOrigin="50%,50%"
                     BorderThickness="3"
@@ -532,19 +534,19 @@
                             EndPoint="50%, 100%">
 
                             <GradientStop
-                                Color="#2E2E2E"
+                                Color="{Binding Colors[2E2E2E], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0"/>
 
                             <GradientStop
-                                Color="#1E1E1E"
+                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.2"/>
 
                             <GradientStop
-                                Color="#1E1E1E"
+                                Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.8"/>
 
                             <GradientStop
-                                Color="#151515"
+                                Color="{Binding Colors[151515], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="1"/>
 
                         </LinearGradientBrush>

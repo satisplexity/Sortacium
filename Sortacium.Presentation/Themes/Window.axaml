@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
@@ -73,19 +74,19 @@
                             EndPoint="50%, 100%">
 
                             <GradientStop
-                                Color="#2A2A2A"
+                                Color="{Binding Colors[2A2A2A], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0"/>
 
                             <GradientStop
-                                Color="{StaticResource Color.TitleBarBackground}"
+                                Color="{DynamicResource Color.TitleBarBackground}"
                                 Offset="0.1"/>
 
                             <GradientStop
-                                Color="{StaticResource Color.WindowBackground}"
+                                Color="{DynamicResource Color.WindowBackground}"
                                 Offset="0.9"/>
 
                             <GradientStop
-                                Color="#151515"
+                                Color="{Binding Colors[151515], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="1"/>
 
                         </LinearGradientBrush>

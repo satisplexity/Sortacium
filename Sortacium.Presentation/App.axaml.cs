@@ -11,6 +11,7 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        Services.SettingsService.Instance.Initialize();
     }
 
     public override void OnFrameworkInitializationCompleted()

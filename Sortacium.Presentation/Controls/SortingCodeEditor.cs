@@ -9,6 +9,7 @@ using AvaloniaEdit.Rendering;
 using AvaloniaEdit.TextMate;
 
 using TextMateSharp.Grammars;
+using Sortacium.Presentation.Services;
 
 
 namespace Sortacium.Presentation.Controls;
@@ -59,6 +60,32 @@ public sealed class SortingCodeEditor : TextEditor
         _installation = this.InstallTextMate(_registry);
 
         ApplyLanguage();
+    }
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+        AppearanceService.Instance.Changed += OnAppearanceChanged;
+        OnAppearanceChanged(this, EventArgs.Empty);
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        AppearanceService.Instance.Changed -= OnAppearanceChanged;
+        base.OnDetachedFromVisualTree(e);
+    }
+
+    private bool? _darkTheme;
+    private void OnAppearanceChanged(object? sender, EventArgs e)
+    {
+        var appearance = AppearanceService.Instance;
+        if (_darkTheme != appearance.IsDark)
+        {
+            _darkTheme = appearance.IsDark;
+            _installation.SetTheme(_registry.LoadTheme(appearance.IsDark ? ThemeName.DarkPlus : ThemeName.LightPlus));
+        }
+        _renderer.SetColor(appearance.Resolve(Color.Parse("#3D204D")));
+        TextArea.TextView.Redraw();
     }
 
     protected override void OnPropertyChanged(
@@ -126,8 +153,10 @@ public sealed class SortingCodeEditor : TextEditor
     {
         private int[] _lines = [];
 
-        private readonly IBrush _background =
+        private IBrush _background =
             new SolidColorBrush(Color.Parse("#3D204D"));
+
+        public void SetColor(Color color) => _background = new SolidColorBrush(color);
 
         public KnownLayer Layer => KnownLayer.Background;
 

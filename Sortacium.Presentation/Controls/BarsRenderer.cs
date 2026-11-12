@@ -9,6 +9,7 @@ using Avalonia.Media;
 
 using Sortacium.Presentation.Components;
 using Sortacium.Presentation.Models;
+using Sortacium.Presentation.Services;
 
 namespace Sortacium.Presentation.Controls;
 
@@ -93,7 +94,7 @@ public sealed class BarsRenderer : Control
     {
         BarState.Comparing => Colors.Orange,
         BarState.Swapping => Colors.Red,
-        _ => Colors.MediumPurple
+        _ => AppearanceService.Instance.Accent
     };
 
     protected override void OnPropertyChanged(
@@ -136,6 +137,7 @@ public sealed class BarsRenderer : Control
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
+        AppearanceService.Instance.Changed += OnAppearanceChanged;
 
         RequestFrame();
     }
@@ -143,6 +145,7 @@ public sealed class BarsRenderer : Control
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
+        AppearanceService.Instance.Changed -= OnAppearanceChanged;
 
         _frameQueued = false;
     }
@@ -151,6 +154,8 @@ public sealed class BarsRenderer : Control
     {
         RequestFrame();
     }
+
+    private void OnAppearanceChanged(object? sender, EventArgs e) => RequestFrame();
 
     private void RequestFrame()
     {

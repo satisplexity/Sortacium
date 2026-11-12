@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services">
 
     <ControlTheme
         x:Key="{x:Type ToolTip}"
@@ -11,7 +12,7 @@
             <ControlTemplate>
                 <Border
                     x:Name="TooltipBody"
-                    Background="#292929"
+                    Background="{DynamicResource Palette.Brush.292929}"
                     CornerRadius="10"
                     BorderThickness="1.5"
                     Padding="20,10"
@@ -31,11 +32,11 @@
 
                             <GradientStop
                                 Offset="0"
-                                Color="#2E2E2E"/>
+                                Color="{Binding Colors[2E2E2E], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                             <GradientStop
                                 Offset="1"
-                                Color="#212121"/>
+                                Color="{Binding Colors[212121], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         </LinearGradientBrush>
                     </Border.BorderBrush>

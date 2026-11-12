@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:components="using:Sortacium.Presentation.Components">
 
     <ControlTheme
@@ -13,7 +14,7 @@
 
         <Setter
             Property="Background"
-            Value="#222222"/>
+            Value="{DynamicResource Palette.Brush.222222}"/>
 
         <Setter
             Property="Padding"
@@ -35,19 +36,19 @@
                 EndPoint="50%, 100%">
 
                 <GradientStop
-                    Color="#2F2F2F"
+                    Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0"/>
 
                 <GradientStop
-                    Color="#232323"
+                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0.1"/>
 
                 <GradientStop
-                    Color="#232323"
+                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0.9"/>
 
                 <GradientStop
-                    Color="#1F1F1F"
+                    Color="{Binding Colors[1F1F1F], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="1"/>
 
             </LinearGradientBrush>
@@ -66,7 +67,7 @@
 
         <Setter
             Property="Background"
-            Value="#191919"/>
+            Value="{DynamicResource Palette.Brush.191919}"/>
 
         <Setter
             Property="Padding"
@@ -88,19 +89,19 @@
                 EndPoint="50%, 100%">
 
                 <GradientStop
-                    Color="#151515"
+                    Color="{Binding Colors[151515], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0"/>
 
                 <GradientStop
-                    Color="#1A1A1A"
+                    Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0.1"/>
 
                 <GradientStop
-                    Color="#1A1A1A"
+                    Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="0.9"/>
 
                 <GradientStop
-                    Color="#2F2F2F"
+                    Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
                     Offset="1"/>
 
             </LinearGradientBrush>

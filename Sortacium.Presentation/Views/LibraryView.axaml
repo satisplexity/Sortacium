@@ -1,6 +1,7 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
@@ -18,10 +19,10 @@
         RowSpacing="10">
 
         <TextBlock
-            Text="Select algorithm"
+            Text="{DynamicResource L.SelectAlgorithm}"
             FontSize="24"
             FontWeight="Bold"
-            Foreground="#EEE"/>
+            Foreground="{DynamicResource Palette.Brush.EEEEEE}"/>
 
         <controls:IconButton
             Click="Close_Click"
@@ -34,7 +35,7 @@
             ColumnSpacing="10">
 
             <Border
-                Background="#191919"
+                Background="{DynamicResource Palette.Brush.191919}"
                 CornerRadius="15"
                 BorderThickness="3"
                 Padding="10"
@@ -47,19 +48,19 @@
                         EndPoint="50%, 100%">
 
                         <GradientStop
-                            Color="#141414"
+                            Color="{Binding Colors[141414], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0"/>
 
                         <GradientStop
-                            Color="#1A1A1A"
+                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0.2"/>
 
                         <GradientStop
-                            Color="#1A1A1A"
+                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0.8"/>
 
                         <GradientStop
-                            Color="#2F2F2F"
+                            Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="1"/>
 
                     </LinearGradientBrush>
@@ -82,12 +83,13 @@
 
                                 <TextBlock
                                     Text="{Binding Name}"
+                                    TextWrapping="Wrap"
                                     FontWeight="Bold"
                                     FontSize="16"/>
 
                                 <TextBlock
                                     Text="{Binding Description}"
-                                    Foreground="#999999"
+                                    Foreground="{DynamicResource Palette.Brush.999999}"
                                     FontSize="11"
                                     TextWrapping="Wrap"
                                     MaxLines="2"/>
@@ -109,7 +111,7 @@
 
                 <TextBlock
                     Text="{Binding PreviewAlgorithm.Name}"
-                    Foreground="#AF4BE9"
+                    Foreground="{DynamicResource Palette.Brush.AF4BE9}"
                     FontSize="26"
                     FontWeight="Bold"/>
 
@@ -117,7 +119,7 @@
                     Grid.Row="1"
                     Text="{Binding PreviewAlgorithm.Description}"
                     TextWrapping="Wrap"
-                    Foreground="#BBBBBB"/>
+                    Foreground="{DynamicResource Palette.Brush.BBBBBB}"/>
 
                 <!-- Complexity and history -->
                 <Grid
@@ -128,29 +130,29 @@
                     RowSpacing="8">
 
                     <TextBlock
-                        Text="Author / origin"
-                        Foreground="#888888"/>
+                        Text="{DynamicResource L.Author}"
+                        Foreground="{DynamicResource Palette.Brush.888888}"/>
 
                     <TextBlock
                         Grid.Column="1"
                         Text="{Binding PreviewAlgorithm.Author}"
-                        Foreground="#DDDDDD"/>
+                        Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
 
                     <TextBlock
                         Grid.Row="1"
-                        Text="Year"
-                        Foreground="#888888"/>
+                        Text="{DynamicResource L.Year}"
+                        Foreground="{DynamicResource Palette.Brush.888888}"/>
 
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
                         Text="{Binding PreviewAlgorithm.Year}"
-                        Foreground="#DDDDDD"/>
+                        Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
 
                     <TextBlock
                         Grid.Row="2"
-                        Text="Time: best / average / worst"
-                        Foreground="#888888"/>
+                        Text="{DynamicResource L.TimeComplexity}"
+                        Foreground="{DynamicResource Palette.Brush.888888}"/>
 
                     <StackPanel
                         Grid.Row="2"
@@ -160,22 +162,22 @@
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.BestTime}"
-                            Foreground="#A7D6A4"/>
+                            Foreground="{DynamicResource Palette.Brush.A7D6A4}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.AverageTime}"
-                            Foreground="#DDDDDD"/>
+                            Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.WorstTime}"
-                            Foreground="#D9A1A1"/>
+                            Foreground="{DynamicResource Palette.Brush.D9A1A1}"/>
 
                     </StackPanel>
 
                     <TextBlock
                         Grid.Row="3"
-                        Text="Space complexity"
-                        Foreground="#888888"/>
+                        Text="{DynamicResource L.SpaceComplexity}"
+                        Foreground="{DynamicResource Palette.Brush.888888}"/>
 
                     <StackPanel
                         Grid.Row="3"
@@ -185,11 +187,11 @@
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.SpaceComplexity}"
-                            Foreground="#DDDDDD"/>
+                            Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.Stability}"
-                            Foreground="#AF4BE9"/>
+                            Foreground="{DynamicResource Palette.Brush.AF4BE9}"/>
 
                     </StackPanel>
 
@@ -205,7 +207,7 @@
                         ColumnDefinitions="*,Auto">
 
                         <TextBlock
-                            Text="Implementation"
+                            Text="{DynamicResource L.Implementation}"
                             FontSize="16"
                             FontWeight="Medium"
                             VerticalAlignment="Center"/>
@@ -230,7 +232,7 @@
 
                     <Border
                         Grid.Row="1"
-                        Background="#191919"
+                        Background="{DynamicResource Palette.Brush.191919}"
                         CornerRadius="15"
                         ClipToBounds="True"
                         Padding="10"
@@ -243,19 +245,19 @@
                         EndPoint="50%, 100%">
 
                         <GradientStop
-                            Color="#141414"
+                            Color="{Binding Colors[141414], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0"/>
 
                         <GradientStop
-                            Color="#1A1A1A"
+                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0.2"/>
 
                         <GradientStop
-                            Color="#1A1A1A"
+                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="0.8"/>
 
                         <GradientStop
-                            Color="#2F2F2F"
+                            Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
                             Offset="1"/>
 
                     </LinearGradientBrush>
@@ -265,10 +267,10 @@
                             Language="{Binding PreviewLanguage.Id}"
                             Document="{Binding PreviewCodeDocument}"
                             Background="Transparent"
-                            Foreground="#CCCCCC"
+                            Foreground="{DynamicResource Palette.Brush.CCCCCC}"
                             FontFamily="Consolas, Menlo, Monospace"
                             FontSize="13"
-                            LineNumbersForeground="#666666"/>
+                            LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
 
                     </Border>
 
@@ -284,13 +286,16 @@
             ColumnDefinitions="*,Auto">
 
             <TextBlock
-                Text="Changing the algorithm resets the current execution."
-                Foreground="#777777"
+                Text="{DynamicResource L.ResetWarning}"
+                TextWrapping="Wrap"
+                Margin="0,0,16,0"
+                Foreground="{DynamicResource Palette.Brush.777777}"
                 VerticalAlignment="Center"
                 FontSize="12"/>
 
             <controls:IconButton
-                Text="Use selected algorithm"
+                Grid.Column="1"
+                Text="{DynamicResource L.UseAlgorithm}"
                 Icon="{StaticResource Icon.Check}"
                 HorizontalAlignment="Right"
                 Click="Apply_Click"

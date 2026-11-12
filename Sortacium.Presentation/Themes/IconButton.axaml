@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:controls="clr-namespace:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components">
 
@@ -73,11 +74,11 @@
 
         <Setter
             Property="Background"
-            Value="#242424"/>
+            Value="{DynamicResource Palette.Brush.242424}"/>
 
         <Setter
             Property="Foreground"
-            Value="#CCCCEE"/>
+            Value="{DynamicResource Palette.Brush.CCCCEE}"/>
 
         <Setter
             Property="BorderBrush">
@@ -90,19 +91,19 @@
 
                     <GradientStop
                         Offset="0"
-                        Color="#353535"/>
+                        Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                     <GradientStop
                         Offset="0.2"
-                        Color="#242424"/>
+                        Color="{Binding Colors[242424], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                     <GradientStop
                         Offset="0.8"
-                        Color="#242424"/>
+                        Color="{Binding Colors[242424], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                     <GradientStop
                         Offset="1"
-                        Color="#131313"/>
+                        Color="{Binding Colors[131313], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                 </LinearGradientBrush>
 
@@ -169,11 +170,11 @@
 
             <Setter
                 Property="Background"
-                Value="#242424"/>
+                Value="{DynamicResource Palette.Brush.242424}"/>
 
             <Setter
                 Property="Foreground"
-                Value="#AF4BE9"/>
+                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
 
             <Setter
                 Property="Padding"
@@ -190,11 +191,11 @@
 
             <Setter
                 Property="Background"
-                Value="#212121"/>
+                Value="{DynamicResource Palette.Brush.212121}"/>
 
             <Setter
                 Property="Foreground"
-                Value="#AF4BE9"/>
+                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
 
             <Setter
                 Property="RenderTransform"
@@ -211,19 +212,19 @@
 
                         <GradientStop
                             Offset="0"
-                            Color="#131313"/>
+                            Color="{Binding Colors[131313], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="0.2"
-                            Color="#212121"/>
+                            Color="{Binding Colors[212121], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="0.8"
-                            Color="#212121"/>
+                            Color="{Binding Colors[212121], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="1"
-                            Color="#353535"/>
+                            Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                     </LinearGradientBrush>
 

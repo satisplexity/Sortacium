@@ -8,6 +8,8 @@
 
         <FluentTheme/>
 
+        <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml"/>
+
         <StyleInclude
             Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
 
@@ -60,6 +62,8 @@
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/StyledListBox.axaml"/>
+
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Settings.axaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

@@ -22,6 +22,17 @@ public sealed class AlgorithmDefinition
 
     public bool IsStable { get; init; }
 
+    public Dictionary<string, AlgorithmTranslation> Translations { get; init; } = [];
+
     public Dictionary<string, CodeImplementation> Implementations
     { get; init; } = [];
+}
+
+public sealed class AlgorithmTranslation
+{
+    public string? Name { get; init; }
+    public string? Description { get; init; }
+    public string? Author { get; init; }
+    public string? Year { get; init; }
+    public string? SpaceComplexity { get; init; }
 }

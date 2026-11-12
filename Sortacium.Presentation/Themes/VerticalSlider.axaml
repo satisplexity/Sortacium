@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components">
 
@@ -66,19 +67,19 @@
                     EndPoint="50%, 100%">
 
                     <GradientStop
-                        Color="#AF4BE9"
+                        Color="{Binding Colors[AF4BE9], Source={x:Static appearance:AppearanceService.Instance}}"
                         Offset="0"/>
 
                     <GradientStop
-                        Color="#8D40B9"
+                        Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
                         Offset="0.3"/>
 
                     <GradientStop
-                        Color="#8D40B9"
+                        Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
                         Offset="0.7"/>
 
                     <GradientStop
-                        Color="#5F2D7C"
+                        Color="{Binding Colors[5F2D7C], Source={x:Static appearance:AppearanceService.Instance}}"
                         Offset="1"/>
 
                 </LinearGradientBrush>
@@ -93,7 +94,7 @@
 
         <Setter
             Property="Background"
-            Value="#853CAE"/>
+            Value="{DynamicResource Palette.Brush.853CAE}"/>
 
         <Setter
             Property="Height"
@@ -106,15 +107,15 @@
 
                 <!-- Outer Border -->
                 <Border
-                    Background="#792FA4"
+                    Background="{DynamicResource Palette.Brush.792FA4}"
                     BorderThickness="0,2,0,0"
                     CornerRadius="10,10,0,0"
-                    BorderBrush="#8539B1">
+                    BorderBrush="{DynamicResource Palette.Brush.8539B1}">
 
                     <!-- Inner Border -->
                     <Border
                         Name="PART_InnerBorder"
-                        Background="#853CAE"
+                        Background="{DynamicResource Palette.Brush.853CAE}"
                         BorderThickness="1.5"
                         CornerRadius="8"
                         Margin="6"
@@ -128,19 +129,19 @@
                                 EndPoint="50%,100%">
 
                                 <GradientStop
-                                    Color="#AF4BE9"
+                                    Color="{Binding Colors[AF4BE9], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0"/>
 
                                 <GradientStop
-                                    Color="#8D40B9"
+                                    Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0.3"/>
 
                                 <GradientStop
-                                    Color="#8D40B9"
+                                    Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0.7"/>
 
                                 <GradientStop
-                                    Color="#5F2D7C"
+                                    Color="{Binding Colors[5F2D7C], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="1"/>
 
                             </LinearGradientBrush>
@@ -192,7 +193,7 @@
 
             <Setter
                 Property="Background"
-                Value="#7B38A3"/>
+                Value="{DynamicResource Palette.Brush.7B38A3}"/>
 
             <Setter
                 Property="RenderTransform"
@@ -208,19 +209,19 @@
 
                         <GradientStop
                             Offset="0"
-                            Color="#4E1F69"/>
+                            Color="{Binding Colors[4E1F69], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="0.2"
-                            Color="#713593"/>
+                            Color="{Binding Colors[713593], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="0.8"
-                            Color="#713593"/>
+                            Color="{Binding Colors[713593], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                         <GradientStop
                             Offset="1"
-                            Color="#9340C3"/>
+                            Color="{Binding Colors[9340C3], Source={x:Static appearance:AppearanceService.Instance}}"/>
 
                     </LinearGradientBrush>
 
@@ -242,7 +243,7 @@
 
         <Setter
             Property="Foreground"
-            Value="#EEE"/>
+            Value="{DynamicResource Palette.Brush.EEEEEE}"/>
 
         <Setter
             Property="FontWeight"
@@ -258,7 +259,7 @@
             <ControlTemplate>
 
                 <Border
-                    Background="#262626"
+                    Background="{DynamicResource Palette.Brush.262626}"
                     CornerRadius="18"
                     BorderThickness="1.5"
                     Padding="6, 6, 6, 8"
@@ -271,19 +272,19 @@
                             EndPoint="50%, 100%">
 
                             <GradientStop
-                                Color="#353535"
+                                Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0"/>
 
                             <GradientStop
-                                Color="#262626"
+                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.1"/>
 
                             <GradientStop
-                                Color="#262626"
+                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="0.9"/>
 
                             <GradientStop
-                                Color="#1B1B1B"
+                                Color="{Binding Colors[1B1B1B], Source={x:Static appearance:AppearanceService.Instance}}"
                                 Offset="1"/>
 
                         </LinearGradientBrush>
@@ -291,7 +292,7 @@
                     </Border.BorderBrush>
 
                     <Border
-                        Background="#151515"
+                        Background="{DynamicResource Palette.Brush.151515}"
                         BorderThickness="1.5"
                         CornerRadius="14"
                         components:StrokeGradientAdapter.Enable="True">
@@ -303,19 +304,19 @@
                                 EndPoint="50%, 100%">
 
                                 <GradientStop
-                                    Color="#1E1E1E"
+                                    Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0"/>
 
                                 <GradientStop
-                                    Color="#232323"
+                                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0.1"/>
 
                                 <GradientStop
-                                    Color="#232323"
+                                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="0.95"/>
 
                                 <GradientStop
-                                    Color="#363636"
+                                    Color="{Binding Colors[363636], Source={x:Static appearance:AppearanceService.Instance}}"
                                     Offset="1"/>
 
                             </LinearGradientBrush>
@@ -328,8 +329,8 @@
                             <Border
                                 x:Name="PART_TitleBackgroundBorder"
                                 CornerRadius="13,13,0,0"
-                                Background="#2F2F2F"
-                                BorderBrush="#252525"
+                                Background="{DynamicResource Palette.Brush.2F2F2F}"
+                                BorderBrush="{DynamicResource Palette.Brush.252525}"
                                 BorderThickness="0,0,0,2">
 
                                 <TextBlock
@@ -364,11 +365,11 @@
                                                 EndPoint="50%,100%">
 
                                                 <GradientStop
-                                                    Color="#792FA4"
+                                                    Color="{Binding Colors[792FA4], Source={x:Static appearance:AppearanceService.Instance}}"
                                                     Offset="0"/>
 
                                                 <GradientStop
-                                                    Color="#262626"
+                                                    Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
                                                     Offset="1"/>
 
                                             </LinearGradientBrush>
@@ -384,7 +385,7 @@
                                     <RepeatButton
                                         Name="PART_IncreaseButton"
                                         Theme="{StaticResource VerticalSlider.SegmentTheme}"
-                                        Background="#1C1C1C"
+                                        Background="{DynamicResource Palette.Brush.1C1C1C}"
                                         Focusable="False"/>
 
                                 </Track.IncreaseButton>
@@ -404,8 +405,8 @@
                                 Grid.Row="2"
                                 CornerRadius="0,0,13,13"
                                 BorderThickness="0, 2, 0, 0"
-                                BorderBrush="#363636"
-                                Background="#2F2F2F">
+                                BorderBrush="{DynamicResource Palette.Brush.363636}"
+                                Background="{DynamicResource Palette.Brush.2F2F2F}">
 
                                 <StackPanel
                                     Orientation="Horizontal"
@@ -413,8 +414,8 @@
                                     Margin="0, 10, 0, 8">
 
                                     <TextBlock
-                                        Text="{Binding Value,
-                                           RelativeSource={RelativeSource TemplatedParent},
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
                                            StringFormat='{}{0:F0}'}"
                                         HorizontalAlignment="Center"/>
 

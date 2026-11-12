@@ -10,6 +10,43 @@
             "worstTime": "O(n²)",
             "spaceComplexity": "O(1)",
             "isStable": true,
+            "translations": {
+              "en": {
+                "name": "Bubble Sort",
+                "description": "A simple comparison sort that repeatedly exchanges adjacent elements when they are out of order.",
+                "author": "No single confirmed inventor",
+                "year": "1950s",
+                "spaceComplexity": "O(1)"
+              },
+              "ru": {
+                "name": "Пузырьковая сортировка",
+                "description": "Простой алгоритм сравнения: соседние элементы меняются местами, если расположены в неверном порядке. Проходы повторяются до завершения сортировки.",
+                "author": "Единственный автор не установлен",
+                "year": "1950-е годы",
+                "spaceComplexity": "O(1)"
+              },
+              "uk": {
+                "name": "Бульбашкове сортування",
+                "description": "Простий алгоритм порівняння: сусідні елементи міняються місцями, якщо розташовані в неправильному порядку. Проходи повторюються до завершення сортування.",
+                "author": "Єдиного автора не встановлено",
+                "year": "1950-ті роки",
+                "spaceComplexity": "O(1)"
+              },
+              "de": {
+                "name": "Bubblesort",
+                "description": "Ein einfacher Vergleichsalgorithmus, der benachbarte Elemente wiederholt vertauscht, wenn sie in der falschen Reihenfolge stehen.",
+                "author": "Kein eindeutig belegter Erfinder",
+                "year": "1950er-Jahre",
+                "spaceComplexity": "O(1)"
+              },
+              "fr": {
+                "name": "Tri à bulles",
+                "description": "Un tri par comparaison simple qui échange de manière répétée les éléments voisins lorsqu'ils sont dans le mauvais ordre.",
+                "author": "Aucun inventeur unique confirmé",
+                "year": "Années 1950",
+                "spaceComplexity": "O(1)"
+              }
+            },
             "implementations": {
                 "pseudocode": {
                     "lines": [
@@ -345,6 +382,43 @@
             "worstTime": "O(n²)",
             "spaceComplexity": "O(1)",
             "isStable": false,
+            "translations": {
+              "en": {
+                "name": "Selection Sort",
+                "description": "Finds the minimum element in the unsorted region and moves it into its final position.",
+                "author": "Traditional algorithm; no single credited inventor",
+                "year": "Historical; exact origin unknown",
+                "spaceComplexity": "O(1)"
+              },
+              "ru": {
+                "name": "Сортировка выбором",
+                "description": "Находит минимальный элемент в неотсортированной части и перемещает его на окончательную позицию.",
+                "author": "Классический алгоритм; единственный автор не установлен",
+                "year": "Точное время появления неизвестно",
+                "spaceComplexity": "O(1)"
+              },
+              "uk": {
+                "name": "Сортування вибором",
+                "description": "Знаходить найменший елемент у невідсортованій частині та переміщує його на остаточну позицію.",
+                "author": "Класичний алгоритм; єдиного автора не встановлено",
+                "year": "Точний час появи невідомий",
+                "spaceComplexity": "O(1)"
+              },
+              "de": {
+                "name": "Selectionsort",
+                "description": "Sucht das kleinste Element im unsortierten Bereich und verschiebt es an seine endgültige Position.",
+                "author": "Traditioneller Algorithmus; kein einzelner Erfinder bekannt",
+                "year": "Historisch; genauer Ursprung unbekannt",
+                "spaceComplexity": "O(1)"
+              },
+              "fr": {
+                "name": "Tri par sélection",
+                "description": "Recherche le plus petit élément dans la partie non triée et le place à sa position définitive.",
+                "author": "Algorithme traditionnel ; aucun inventeur unique reconnu",
+                "year": "Origine historique exacte inconnue",
+                "spaceComplexity": "O(1)"
+              }
+            },
             "implementations": {
                 "pseudocode": {
                     "lines": [
@@ -397,6 +471,43 @@
             "worstTime": "O(n log n)",
             "spaceComplexity": "O(n)",
             "isStable": true,
+            "translations": {
+              "en": {
+                "name": "Merge Sort",
+                "description": "A divide-and-conquer algorithm that recursively sorts two halves and merges them into an ordered sequence.",
+                "author": "John von Neumann",
+                "year": "1945",
+                "spaceComplexity": "O(n)"
+              },
+              "ru": {
+                "name": "Сортировка слиянием",
+                "description": "Алгоритм «разделяй и властвуй»: рекурсивно сортирует две половины массива и объединяет их в упорядоченную последовательность.",
+                "author": "Джон фон Нейман",
+                "year": "1945",
+                "spaceComplexity": "O(n)"
+              },
+              "uk": {
+                "name": "Сортування злиттям",
+                "description": "Алгоритм «розділяй і володарюй»: рекурсивно сортує дві половини масиву та об'єднує їх у впорядковану послідовність.",
+                "author": "Джон фон Нейман",
+                "year": "1945",
+                "spaceComplexity": "O(n)"
+              },
+              "de": {
+                "name": "Mergesort",
+                "description": "Ein Teile-und-herrsche-Algorithmus, der zwei Hälften rekursiv sortiert und zu einer geordneten Folge zusammenführt.",
+                "author": "John von Neumann",
+                "year": "1945",
+                "spaceComplexity": "O(n)"
+              },
+              "fr": {
+                "name": "Tri fusion",
+                "description": "Un algorithme « diviser pour régner » qui trie récursivement deux moitiés et les fusionne en une séquence ordonnée.",
+                "author": "John von Neumann",
+                "year": "1945",
+                "spaceComplexity": "O(n)"
+              }
+            },
             "implementations": {
                 "pseudocode": {
                     "lines": [
@@ -474,6 +585,43 @@
             "worstTime": "O(n²)",
             "spaceComplexity": "O(log n) average; O(n) worst",
             "isStable": false,
+            "translations": {
+              "en": {
+                "name": "Quick Sort",
+                "description": "A divide-and-conquer algorithm that partitions an array around a pivot and recursively sorts the partitions.",
+                "author": "Tony Hoare",
+                "year": "1959–1961",
+                "spaceComplexity": "O(log n) average; O(n) worst"
+              },
+              "ru": {
+                "name": "Быстрая сортировка",
+                "description": "Алгоритм «разделяй и властвуй»: разбивает массив относительно опорного элемента и рекурсивно сортирует полученные части.",
+                "author": "Тони Хоар",
+                "year": "1959–1961",
+                "spaceComplexity": "O(log n) в среднем; O(n) в худшем случае"
+              },
+              "uk": {
+                "name": "Швидке сортування",
+                "description": "Алгоритм «розділяй і володарюй»: ділить масив відносно опорного елемента та рекурсивно сортує отримані частини.",
+                "author": "Тоні Гоар",
+                "year": "1959–1961",
+                "spaceComplexity": "O(log n) у середньому; O(n) у найгіршому випадку"
+              },
+              "de": {
+                "name": "Quicksort",
+                "description": "Ein Teile-und-herrsche-Algorithmus, der ein Array anhand eines Pivotelements aufteilt und die Teilbereiche rekursiv sortiert.",
+                "author": "Tony Hoare",
+                "year": "1959–1961",
+                "spaceComplexity": "O(log n) im Mittel; O(n) im schlechtesten Fall"
+              },
+              "fr": {
+                "name": "Tri rapide",
+                "description": "Un algorithme « diviser pour régner » qui partitionne un tableau autour d'un pivot et trie récursivement les partitions.",
+                "author": "Tony Hoare",
+                "year": "1959–1961",
+                "spaceComplexity": "O(log n) en moyenne ; O(n) dans le pire cas"
+              }
+            },
             "implementations": {
                 "pseudocode": {
                     "lines": [

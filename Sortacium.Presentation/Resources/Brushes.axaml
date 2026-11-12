@@ -4,10 +4,10 @@
 
     <SolidColorBrush
         x:Key="Brush.WindowBackground"
-        Color="{StaticResource Color.WindowBackground}"/>
+        Color="{DynamicResource Color.WindowBackground}"/>
 
     <SolidColorBrush
         x:Key="Brush.TitleBarBackground"
-        Color="{StaticResource Color.TitleBarBackground}"/>
+        Color="{DynamicResource Color.TitleBarBackground}"/>
 
 </ResourceDictionary>

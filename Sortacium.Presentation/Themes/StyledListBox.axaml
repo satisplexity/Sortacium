@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:components="using:Sortacium.Presentation.Components">
     <ControlTheme x:Key="StyledListBox.Item" TargetType="ListBoxItem">
-        <Setter Property="Background" Value="#242424"/>
-        <Setter Property="Foreground" Value="#CCCCEE"/>
+        <Setter Property="Background" Value="{DynamicResource Palette.Brush.242424}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Palette.Brush.CCCCEE}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.Border}"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="CornerRadius" Value="12"/>
@@ -36,24 +36,24 @@
             </ControlTemplate>
         </Setter>
         <Style Selector="^:pointerover, ^:focus-visible">
-            <Setter Property="Background" Value="#302638"/>
+            <Setter Property="Background" Value="{DynamicResource Palette.Brush.302638}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.AccentBorder}"/>
-            <Setter Property="Foreground" Value="#D8A8F4"/>
+            <Setter Property="Foreground" Value="{DynamicResource Palette.Brush.D8A8F4}"/>
         </Style>
         <Style Selector="^:selected">
-            <Setter Property="Background" Value="#382746"/>
+            <Setter Property="Background" Value="{DynamicResource Palette.Brush.382746}"/>
             <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.AccentBorder}"/>
-            <Setter Property="Foreground" Value="#EEE"/>
+            <Setter Property="Foreground" Value="{DynamicResource Palette.Brush.EEEEEE}"/>
         </Style>
         <Style Selector="^:selected:pointerover, ^:selected:focus-visible">
-            <Setter Property="Background" Value="#512766"/>
+            <Setter Property="Background" Value="{DynamicResource Palette.Brush.512766}"/>
         </Style>
-        <Style Selector="^:pressed"><Setter Property="Background" Value="#452453"/></Style>
+        <Style Selector="^:pressed"><Setter Property="Background" Value="{DynamicResource Palette.Brush.452453}"/></Style>
         <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.45"/></Style>
     </ControlTheme>
     <ControlTheme x:Key="StyledListBox" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#CCCCEE"/>
+        <Setter Property="Foreground" Value="{DynamicResource Palette.Brush.CCCCEE}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="ItemContainerTheme" Value="{StaticResource StyledListBox.Item}"/>

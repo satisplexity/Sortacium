@@ -12,6 +12,7 @@ public partial class SettingsView : UserControl
     public SettingsView()
     {
         InitializeComponent();
+        DataContext = Services.SettingsService.Instance;
     }
 
     private void Close_Click(object? sender, RoutedEventArgs e)
