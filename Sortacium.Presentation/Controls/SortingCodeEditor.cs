@@ -47,6 +47,7 @@ public sealed class SortingCodeEditor : TextEditor
 
     public SortingCodeEditor()
     {
+        Classes.Add("sorting-code-editor");
         IsReadOnly = true;
         ShowLineNumbers = true;
         WordWrap = false;

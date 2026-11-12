@@ -340,7 +340,7 @@
                         <Grid
                             ColumnDefinitions="*,Auto">
 
-                            <ComboBox
+                            <controls:StyledComboBox
                                 Grid.Column="1"
                                 MinWidth="145"
                                 HorizontalAlignment="Right"
@@ -348,15 +348,15 @@
                                 ItemsSource="{Binding AvailableLanguages}"
                                 SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
 
-                                <ComboBox.ItemTemplate>
+                                <controls:StyledComboBox.ItemTemplate>
                                     <DataTemplate
                                         x:DataType="vm:CodeLanguageOption">
                                         <TextBlock
                                             Text="{Binding DisplayName}"/>
                                     </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                                </controls:StyledComboBox.ItemTemplate>
 
-                            </ComboBox>
+                            </controls:StyledComboBox>
 
                         </Grid>
 

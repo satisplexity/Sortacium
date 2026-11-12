@@ -11,6 +11,9 @@
         <StyleInclude
             Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
 
+        <StyleInclude
+            Source="avares://Sortacium.Presentation/Themes/SortingCodeEditor.axaml"/>
+
     </Application.Styles>
 
     <Application.Resources>
@@ -48,6 +51,15 @@
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/IconButton.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/StyledComboBox.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/StyledScrollBar.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/StyledListBox.axaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

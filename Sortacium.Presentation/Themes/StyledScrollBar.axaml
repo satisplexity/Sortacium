@@ -1,0 +1,92 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:components="using:Sortacium.Presentation.Components">
+    <LinearGradientBrush x:Key="ScrollSurface.Border" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#353535"/>
+        <GradientStop Offset="0.2" Color="#242424"/>
+        <GradientStop Offset="0.8" Color="#242424"/>
+        <GradientStop Offset="1" Color="#131313"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ScrollSurface.AccentBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="#AF4BE9"/>
+        <GradientStop Offset="0.2" Color="#8D40B9"/>
+        <GradientStop Offset="0.8" Color="#8D40B9"/>
+        <GradientStop Offset="1" Color="#5F2D7C"/>
+    </LinearGradientBrush>
+    <ControlTheme x:Key="StyledScrollBar.Page" TargetType="RepeatButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <ControlTemplate><Border Background="{TemplateBinding Background}"/></ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="StyledScrollBar.Thumb" TargetType="Thumb">
+        <Setter Property="Background" Value="#853CAE"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.AccentBorder}"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Background" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+            </Transitions>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        components:StrokeGradientAdapter.Enable="True"/>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover"><Setter Property="Background" Value="#9747C4"/></Style>
+        <Style Selector="^:pressed"><Setter Property="Background" Value="#713593"/></Style>
+    </ControlTheme>
+    <ControlTheme x:Key="StyledScrollBar" TargetType="ScrollBar">
+        <Setter Property="AllowAutoHide" Value="False"/>
+        <Setter Property="Background" Value="#151515"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="2" components:StrokeGradientAdapter.Enable="True">
+                    <Track Name="PART_Track"
+                           Orientation="{TemplateBinding Orientation}"
+                           Minimum="{TemplateBinding Minimum}"
+                           Maximum="{TemplateBinding Maximum}"
+                           ViewportSize="{TemplateBinding ViewportSize}"
+                           Value="{TemplateBinding Value, Mode=TwoWay}"
+                           DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}">
+                        <Track.DecreaseButton>
+                            <RepeatButton Name="PART_PageUpButton" Theme="{StaticResource StyledScrollBar.Page}"/>
+                        </Track.DecreaseButton>
+                        <Track.IncreaseButton>
+                            <RepeatButton Name="PART_PageDownButton" Theme="{StaticResource StyledScrollBar.Page}"/>
+                        </Track.IncreaseButton>
+                        <Track.Thumb><Thumb Theme="{StaticResource StyledScrollBar.Thumb}"/></Track.Thumb>
+                    </Track>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:vertical">
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
+        </Style>
+        <Style Selector="^:horizontal">
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+        <Style Selector="^:vertical /template/ Track#PART_Track">
+            <Setter Property="IsDirectionReversed" Value="True"/>
+        </Style>
+        <Style Selector="^:vertical /template/ Thumb"><Setter Property="MinHeight" Value="24"/></Style>
+        <Style Selector="^:horizontal /template/ Thumb"><Setter Property="MinWidth" Value="24"/></Style>
+        <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4"/></Style>
+    </ControlTheme>
+</ResourceDictionary>
