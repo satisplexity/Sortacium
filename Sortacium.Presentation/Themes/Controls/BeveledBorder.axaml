@@ -59,7 +59,7 @@
                 Value="50%, 50%"/>
 
         <Setter Property="MaxWidth"
-                Value="1000"/>
+                Value="1200"/>
 
         <Setter Property="Transitions">
 
@@ -86,6 +86,29 @@
             </Transitions>
 
         </Setter>
+
+    </ControlTheme>
+
+    <ControlTheme x:Key="BeveledBorder.RecessedPanel"
+                  TargetType="controls:BeveledBorder">
+
+        <Setter Property="CornerRadius"
+                Value="{StaticResource CornerRadius.RecessedPanel}"/>
+
+        <Setter Property="BorderThickness"
+                Value="{StaticResource Thickness.Border.Generic}"/>
+
+        <Setter Property="Background"
+                Value="{StaticResource Brush.RecessedPanel.Surface}"/>
+
+        <Setter Property="StrokeHighlightColor"
+                Value="{StaticResource Color.RecessedPanel.Highlight}"/>
+
+        <Setter Property="StrokeShadowColor"
+                Value="{StaticResource Color.RecessedPanel.Shadow}"/>
+
+        <Setter Property="Padding"
+                Value="{StaticResource Thickness.Panel.Padding}"/>
 
     </ControlTheme>
 

@@ -241,7 +241,6 @@
                         RowDefinitions="*, auto">
 
                         <StackPanel
-                            Margin="15"
                             Spacing="10">
 
                             <TextBlock
@@ -355,9 +354,9 @@
                         </Grid>
 
                         <!-- Code viewer -->
-                        <Border
+                        <controls:BeveledBorder
                             Grid.Row="1"
-                            Theme="{StaticResource TextEditorContainer}">
+                            Theme="{StaticResource BeveledBorder.RecessedPanel}">
 
                             <controls:SortingCodeEditor
                                 x:Name="CodeEditor"
@@ -370,7 +369,7 @@
                                 FontSize="14"
                                 LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
 
-                        </Border>
+                        </controls:BeveledBorder>
 
                         <!-- Statistics -->
                         <StackPanel
@@ -421,7 +420,7 @@
         <Border
             x:Name="ModalOverlay"
             Background="{DynamicResource Palette.Brush.55000000}"
-            CornerRadius="15"
+            CornerRadius="{StaticResource CornerRadius.Window}"
             IsHitTestVisible="False">
 
             <Border.Transitions>
@@ -441,9 +440,7 @@
 
                 <controls:BeveledBorder
                     x:Name="SettingsDialog"
-                    Theme="{StaticResource BeveledBorder.DialogPanel}"
-                    Margin="0, 0, 200, 0"
-                    HorizontalAlignment="Right">
+                    Theme="{StaticResource BeveledBorder.DialogPanel}">
 
                     <views:SettingsView
                         CloseRequested="SettingsView_CloseRequested"/>
@@ -452,9 +449,7 @@
 
                 <controls:BeveledBorder
                     x:Name="AlgorithmSelectionDialog"
-                    Theme="{StaticResource BeveledBorder.DialogPanel}"
-                    Margin="200, 0, 0, 0"
-                    HorizontalAlignment="Left">
+                    Theme="{StaticResource BeveledBorder.DialogPanel}">
 
                     <views:LibraryView
                         DataContext="{Binding Library}"

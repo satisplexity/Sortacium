@@ -32,40 +32,9 @@
         <Grid
             Grid.Row="1"
             ColumnDefinitions="*, 700"
-            ColumnSpacing="10">
+            ColumnSpacing="20">
 
-            <Border
-                Background="{DynamicResource Palette.Brush.191919}"
-                CornerRadius="15"
-                BorderThickness="3"
-                Padding="10"
-                components:StrokeGradientAdapter.Enable="True">
-
-                <Border.BorderBrush>
-
-                    <LinearGradientBrush
-                        StartPoint="50%, 0%"
-                        EndPoint="50%, 100%">
-
-                        <GradientStop
-                            Color="{Binding Colors[141414], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0.2"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0.8"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="1"/>
-
-                    </LinearGradientBrush>
-
-                </Border.BorderBrush>
+            <controls:BeveledBorder Theme="{StaticResource BeveledBorder.RecessedPanel}">
 
                 <ListBox
                     Classes="algorithm-list"
@@ -102,7 +71,7 @@
 
                 </ListBox>
 
-            </Border>
+            </controls:BeveledBorder>
 
             <Grid
                 Grid.Column="1"
@@ -230,38 +199,9 @@
 
                     </Grid>
 
-                    <Border
+                    <controls:BeveledBorder Theme="{StaticResource BeveledBorder.RecessedPanel}"
                         Grid.Row="1"
-                        Background="{DynamicResource Palette.Brush.191919}"
-                        CornerRadius="15"
-                        ClipToBounds="True"
-                        Padding="10"
-                        BorderThickness="2, 3"
-                        components:StrokeGradientAdapter.Enable="True">
-
-                        <Border.BorderBrush>
-                            <LinearGradientBrush
-                        StartPoint="50%, 0%"
-                        EndPoint="50%, 100%">
-
-                        <GradientStop
-                            Color="{Binding Colors[141414], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0.2"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[1A1A1A], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="0.8"/>
-
-                        <GradientStop
-                            Color="{Binding Colors[2F2F2F], Source={x:Static appearance:AppearanceService.Instance}}"
-                            Offset="1"/>
-
-                    </LinearGradientBrush>
-                        </Border.BorderBrush>
+                        ClipToBounds="True">
 
                         <controls:SortingCodeEditor
                             Language="{Binding PreviewLanguage.Id}"
@@ -272,7 +212,7 @@
                             FontSize="13"
                             LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
 
-                    </Border>
+                    </controls:BeveledBorder>
 
                 </Grid>
 

@@ -4,6 +4,7 @@
 
     <CornerRadius x:Key="CornerRadius.Window">15</CornerRadius>
     <CornerRadius x:Key="CornerRadius.WindowTitleBar">15, 15, 0, 0</CornerRadius>
+    <CornerRadius x:Key="CornerRadius.RecessedPanel">10</CornerRadius>
 
     <CornerRadius x:Key="CornerRadius.Panel">15</CornerRadius>
 

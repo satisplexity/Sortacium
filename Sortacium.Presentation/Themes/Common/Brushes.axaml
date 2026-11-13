@@ -8,6 +8,9 @@
     <SolidColorBrush x:Key="Brush.Panel.Surface"
                      Color="{DynamicResource Color.Panel.Surface}"/>
 
+    <SolidColorBrush x:Key="Brush.RecessedPanel.Surface"
+                     Color="{DynamicResource Color.RecessedPanel.Surface}"/>
+
     <SolidColorBrush x:Key="Brush.Panel.Shadow"
                      Color="{DynamicResource Color.Panel.Shadow}"/>
 

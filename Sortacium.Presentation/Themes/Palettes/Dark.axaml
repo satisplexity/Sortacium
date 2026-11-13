@@ -6,12 +6,12 @@
     <Color x:Key="Color.Window.Highlight">#FF353535</Color>
     <Color x:Key="Color.Window.Shadow">#FF141414</Color>
 
-    <Color x:Key="Color.Panel.Surface">#FF242424</Color>
+    <Color x:Key="Color.Panel.Surface">#FF222222</Color>
     <Color x:Key="Color.Panel.Highlight">#FF353535</Color>
     <Color x:Key="Color.Panel.Shadow">#FF151515</Color>
 
-    <Color x:Key="Color.RecessedPanel.Surface">#AAA</Color>
-    <Color x:Key="Color.RecessedPanel.Highlight">#AAA</Color>
-    <Color x:Key="Color.RecessedPanel.Shadow">#AAA</Color>
+    <Color x:Key="Color.RecessedPanel.Surface">#191919</Color>
+    <Color x:Key="Color.RecessedPanel.Highlight">#FF141414</Color>
+    <Color x:Key="Color.RecessedPanel.Shadow">#FF353535</Color>
 
 </ResourceDictionary>
