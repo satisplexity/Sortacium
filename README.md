@@ -52,7 +52,7 @@ Under the hood, each comparison and swap is recorded as an individual action. Th
 
 The code highlighting and execution statistics follow along. For the current operation, you can also inspect the involved indices and values. The point is to understand the decisions an algorithm makes, not just watch it reach the right result.
 
-![Step-by-step sorting with code highlighting and execution details](docs/screenshots/step-by-step.png)
+![Step-by-step sorting with code highlighting and execution details](docs/screenshots/step-by-step1.png)
 
 ### An interface with some personality
 
