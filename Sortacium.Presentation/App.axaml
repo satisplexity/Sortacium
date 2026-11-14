@@ -21,24 +21,46 @@
         <ResourceDictionary>
 
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Dark">
+
+                <ResourceDictionary
+                    x:Key="Dark">
+
                     <ResourceDictionary.MergedDictionaries>
-                        <MergeResourceInclude Source="/Themes/Palettes/Dark.axaml"/>
+
+                        <MergeResourceInclude
+                            Source="/Themes/Palettes/Dark.axaml"/>
+
                     </ResourceDictionary.MergedDictionaries>
+
                 </ResourceDictionary>
-                <ResourceDictionary x:Key="Light">
+
+                <ResourceDictionary
+                    x:Key="Light">
+
                     <ResourceDictionary.MergedDictionaries>
-                        <MergeResourceInclude Source="/Themes/Palettes/Light.axaml"/>
+
+                        <MergeResourceInclude
+                            Source="/Themes/Palettes/Light.axaml"/>
+
                     </ResourceDictionary.MergedDictionaries>
+
                 </ResourceDictionary>
+
             </ResourceDictionary.ThemeDictionaries>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Common/Dimensions.axaml"/>
 
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/BeveledBorder.axaml"/>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Border.axaml"/>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Window.axaml"/>
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/Common/Dimensions.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/Control/BeveledBorder.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/Control/Border.axaml"/>
+
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/Control/Window.axaml"/>
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Resources/Fonts.axaml"/>
@@ -67,7 +89,8 @@
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Themes/Control/StyledListBox.axaml"/>
 
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Settings.axaml"/>
+                <ResourceInclude
+                    Source="avares://Sortacium.Presentation/Themes/Control/Settings.axaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

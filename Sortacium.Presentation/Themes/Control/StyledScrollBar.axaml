@@ -1,80 +1,245 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:components="using:Sortacium.Presentation.Components">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="using:Sortacium.Presentation.Components">
 
-    <ControlTheme x:Key="StyledScrollBar.Page" TargetType="RepeatButton">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Focusable" Value="False"/>
-        <Setter Property="Template">
-            <ControlTemplate><Border Background="{TemplateBinding Background}"/></ControlTemplate>
+    <ControlTheme
+        x:Key="StyledScrollBar.Page"
+        TargetType="RepeatButton">
+
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+
+        <Setter
+            Property="Focusable"
+            Value="False"/>
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <Border
+                    Background="{TemplateBinding Background}"/>
+
+            </ControlTemplate>
+
         </Setter>
+
     </ControlTheme>
-    <ControlTheme x:Key="StyledScrollBar.Thumb" TargetType="Thumb">
-        <Setter Property="Background" Value="{DynamicResource Brush.Accent.Control}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="CornerRadius" Value="6"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Transitions">
+
+    <ControlTheme
+        x:Key="StyledScrollBar.Thumb"
+        TargetType="Thumb">
+
+        <Setter
+            Property="Background"
+            Value="{DynamicResource Brush.Accent.Control}"/>
+
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="1.5"/>
+
+        <Setter
+            Property="CornerRadius"
+            Value="6"/>
+
+        <Setter
+            Property="Cursor"
+            Value="Hand"/>
+
+        <Setter
+            Property="Transitions">
+
             <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.15" Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseOut"/>
+
             </Transitions>
+
         </Setter>
-        <Setter Property="Template">
+
+        <Setter
+            Property="Template">
+
             <ControlTemplate>
-                <Border Background="{TemplateBinding Background}"
-                        components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                <Border
+                    Background="{TemplateBinding Background}"
+                    components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"/>
+
             </ControlTemplate>
+
         </Setter>
-        <Style Selector="^:pointerover"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Control.Hover}"/></Style>
-        <Style Selector="^:pressed"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Control.Pressed}"/></Style>
+
+        <Style
+            Selector="^:pointerover">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Control.Hover}"/>
+
+        </Style>
+
+        <Style
+            Selector="^:pressed">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Control.Pressed}"/>
+
+        </Style>
+
     </ControlTheme>
-    <ControlTheme x:Key="StyledScrollBar" TargetType="ScrollBar">
-        <Setter Property="AllowAutoHide" Value="False"/>
-        <Setter Property="Background" Value="{DynamicResource Brush.ScrollBar.Background}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.Border}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Template">
+
+    <ControlTheme
+        x:Key="StyledScrollBar"
+        TargetType="ScrollBar">
+
+        <Setter
+            Property="AllowAutoHide"
+            Value="False"/>
+
+        <Setter
+            Property="Background"
+            Value="{DynamicResource Brush.ScrollBar.Background}"/>
+
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource ScrollSurface.Border}"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="1"/>
+
+        <Setter
+            Property="CornerRadius"
+            Value="8"/>
+
+        <Setter
+            Property="Template">
+
             <ControlTemplate>
-                <Border Background="{TemplateBinding Background}"
-                        components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        Padding="2">
-                    <Track Name="PART_Track"
-                           Orientation="{TemplateBinding Orientation}"
-                           Minimum="{TemplateBinding Minimum}"
-                           Maximum="{TemplateBinding Maximum}"
-                           ViewportSize="{TemplateBinding ViewportSize}"
-                           Value="{TemplateBinding Value, Mode=TwoWay}"
-                           DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}">
+
+                <Border
+                    Background="{TemplateBinding Background}"
+                    components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="2">
+
+                    <Track
+                        Name="PART_Track"
+                        Orientation="{TemplateBinding Orientation}"
+                        Minimum="{TemplateBinding Minimum}"
+                        Maximum="{TemplateBinding Maximum}"
+                        ViewportSize="{TemplateBinding ViewportSize}"
+                        Value="{TemplateBinding Value, Mode=TwoWay}"
+                        DeferThumbDrag="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}">
+
                         <Track.DecreaseButton>
-                            <RepeatButton Name="PART_PageUpButton" Theme="{StaticResource StyledScrollBar.Page}"/>
+
+                            <RepeatButton
+                                Name="PART_PageUpButton"
+                                Theme="{StaticResource StyledScrollBar.Page}"/>
+
                         </Track.DecreaseButton>
+
                         <Track.IncreaseButton>
-                            <RepeatButton Name="PART_PageDownButton" Theme="{StaticResource StyledScrollBar.Page}"/>
+
+                            <RepeatButton
+                                Name="PART_PageDownButton"
+                                Theme="{StaticResource StyledScrollBar.Page}"/>
+
                         </Track.IncreaseButton>
-                        <Track.Thumb><Thumb Theme="{StaticResource StyledScrollBar.Thumb}"/></Track.Thumb>
+
+                        <Track.Thumb>
+
+                            <Thumb
+                                Theme="{StaticResource StyledScrollBar.Thumb}"/>
+
+                        </Track.Thumb>
+
                     </Track>
+
                 </Border>
+
             </ControlTemplate>
+
         </Setter>
-        <Style Selector="^:vertical">
-            <Setter Property="Width" Value="16"/>
-            <Setter Property="Margin" Value="4,0,0,0"/>
+
+        <Style
+            Selector="^:vertical">
+
+            <Setter
+                Property="Width"
+                Value="16"/>
+
+            <Setter
+                Property="Margin"
+                Value="4,0,0,0"/>
+
         </Style>
-        <Style Selector="^:horizontal">
-            <Setter Property="Height" Value="16"/>
-            <Setter Property="Margin" Value="0,4,0,0"/>
+
+        <Style
+            Selector="^:horizontal">
+
+            <Setter
+                Property="Height"
+                Value="16"/>
+
+            <Setter
+                Property="Margin"
+                Value="0,4,0,0"/>
+
         </Style>
-        <Style Selector="^:vertical /template/ Track#PART_Track">
-            <Setter Property="IsDirectionReversed" Value="True"/>
+
+        <Style
+            Selector="^:vertical /template/ Track#PART_Track">
+
+            <Setter
+                Property="IsDirectionReversed"
+                Value="True"/>
+
         </Style>
-        <Style Selector="^:vertical /template/ Thumb"><Setter Property="MinHeight" Value="24"/></Style>
-        <Style Selector="^:horizontal /template/ Thumb"><Setter Property="MinWidth" Value="24"/></Style>
-        <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.4"/></Style>
+
+        <Style
+            Selector="^:vertical /template/ Thumb">
+
+            <Setter
+                Property="MinHeight"
+                Value="24"/>
+
+        </Style>
+
+        <Style
+            Selector="^:horizontal /template/ Thumb">
+
+            <Setter
+                Property="MinWidth"
+                Value="24"/>
+
+        </Style>
+
+        <Style
+            Selector="^:disabled">
+
+            <Setter
+                Property="Opacity"
+                Value="0.4"/>
+
+        </Style>
+
     </ControlTheme>
+
 </ResourceDictionary>

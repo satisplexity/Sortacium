@@ -15,10 +15,7 @@ public partial class CodeLineViewModel : ObservableObject
     [ObservableProperty]
     private bool _isActive;
 
-    public CodeLineViewModel(
-        int number,
-        string text,
-        SortingCodePoint? codePoint = null)
+    public CodeLineViewModel(int number, string text, SortingCodePoint? codePoint = null)
     {
         Number = number;
         Text = text;

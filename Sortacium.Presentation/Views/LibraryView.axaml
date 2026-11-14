@@ -33,7 +33,8 @@
             ColumnDefinitions="*, 700"
             ColumnSpacing="20">
 
-            <controls:BeveledBorder Theme="{StaticResource BeveledBorder.RecessedPanel}">
+            <controls:BeveledBorder
+                Theme="{StaticResource BeveledBorder.RecessedPanel}">
 
                 <ListBox
                     Classes="algorithm-list"
@@ -187,18 +188,23 @@
                             SelectedItem="{Binding PreviewLanguage, Mode=TwoWay}">
 
                             <controls:StyledComboBox.ItemTemplate>
+
                                 <DataTemplate
                                     x:DataType="vm:CodeLanguageOption">
+
                                     <TextBlock
                                         Text="{Binding DisplayName}"/>
+
                                 </DataTemplate>
+
                             </controls:StyledComboBox.ItemTemplate>
 
                         </controls:StyledComboBox>
 
                     </Grid>
 
-                    <controls:BeveledBorder Theme="{StaticResource BeveledBorder.RecessedPanel}"
+                    <controls:BeveledBorder
+                        Theme="{StaticResource BeveledBorder.RecessedPanel}"
                         Grid.Row="1"
                         ClipToBounds="True">
 

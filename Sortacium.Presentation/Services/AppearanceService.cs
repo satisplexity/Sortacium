@@ -29,12 +29,16 @@ public sealed class AppearanceService
     public static string ResolveAccentId(string? saved)
     {
         if (saved is not null && AccentIds.Contains(saved, StringComparer.Ordinal))
+        {
             return saved;
-
+        }
+            
         if (Color.TryParse(saved, out var legacy))
         {
             var palette = Instance;
-            return AccentIds.MinBy(id => ColorDistance(legacy, ReadColor(
+
+            return AccentIds
+                .MinBy(id => ColorDistance(legacy, ReadColor(
                 palette.LoadAccent(id), "Color.Accent.Primary", ThemeVariant.Dark)))!;
         }
 
@@ -44,14 +48,20 @@ public sealed class AppearanceService
     public void Apply(bool dark, string accentId)
     {
         IsDark = dark;
+
         var accent = LoadAccent(AccentIds.Contains(accentId, StringComparer.Ordinal) ? accentId : DefaultAccent);
+
         if (Application.Current is { } app)
         {
             var resources = app.Resources;
+
             if (_applicationResources != resources || _activeAccent != accent)
             {
                 if (_activeAccent is not null)
+                {
                     _applicationResources?.MergedDictionaries.Remove(_activeAccent);
+                }
+
                 resources.MergedDictionaries.Add(accent);
                 _applicationResources = resources;
             }

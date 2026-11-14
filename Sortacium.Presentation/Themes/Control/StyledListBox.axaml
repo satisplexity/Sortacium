@@ -1,62 +1,191 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:components="using:Sortacium.Presentation.Components">
-    <ControlTheme x:Key="StyledListBox.Item" TargetType="ListBoxItem">
-        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Control}"/>
-        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.Border}"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="14"/>
-        <Setter Property="Margin" Value="0,0,0,8"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Transitions">
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="using:Sortacium.Presentation.Components">
+
+    <ControlTheme
+        x:Key="StyledListBox.Item"
+        TargetType="ListBoxItem">
+
+        <Setter
+            Property="Background"
+            Value="{DynamicResource Brush.Surface.Control}"/>
+
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource ScrollSurface.Border}"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="2"/>
+
+        <Setter
+            Property="CornerRadius"
+            Value="12"/>
+
+        <Setter
+            Property="Padding"
+            Value="14"/>
+
+        <Setter
+            Property="Margin"
+            Value="0,0,0,8"/>
+
+        <Setter
+            Property="HorizontalContentAlignment"
+            Value="Stretch"/>
+
+        <Setter
+            Property="VerticalContentAlignment"
+            Value="Center"/>
+
+        <Setter
+            Property="Cursor"
+            Value="Hand"/>
+
+        <Setter
+            Property="Transitions">
+
             <Transitions>
-                <BrushTransition Property="Background" Duration="0:0:0.2" Easing="CubicEaseOut"/>
-                <BrushTransition Property="BorderBrush" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="BorderBrush"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
             </Transitions>
+
         </Setter>
-        <Setter Property="Template">
+
+        <Setter
+            Property="Template">
+
             <ControlTemplate>
-                <Border Background="{TemplateBinding Background}"
-                        components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{TemplateBinding CornerRadius}"
-                        Padding="{TemplateBinding Padding}">
-                    <ContentPresenter Name="PART_ContentPresenter"
-                                      Content="{TemplateBinding Content}"
-                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                      Foreground="{TemplateBinding Foreground}"
-                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                <Border
+                    Background="{TemplateBinding Background}"
+                    components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="{TemplateBinding Padding}">
+
+                    <ContentPresenter
+                        Name="PART_ContentPresenter"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Foreground="{TemplateBinding Foreground}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
                 </Border>
+
             </ControlTemplate>
+
         </Setter>
-        <Style Selector="^:pointerover, ^:focus-visible">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.Hover}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Accent.Text.Selected}"/>
+
+        <Style
+            Selector="^:pointerover, ^:focus-visible">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.Hover}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Accent.Text.Selected}"/>
+
         </Style>
-        <Style Selector="^:selected">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.Selected}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Strong}"/>
+
+        <Style
+            Selector="^:selected">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.Selected}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Text.Strong}"/>
+
         </Style>
-        <Style Selector="^:selected:pointerover, ^:selected:focus-visible">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.SelectedHover}"/>
+
+        <Style
+            Selector="^:selected:pointerover, ^:selected:focus-visible">
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.SelectedHover}"/>
         </Style>
-        <Style Selector="^:pressed"><Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.Pressed}"/></Style>
-        <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.45"/></Style>
+
+        <Style
+            Selector="^:pressed">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.Pressed}"/>
+
+        </Style>
+
+        <Style
+            Selector="^:disabled">
+
+            <Setter
+                Property="Opacity"
+                Value="0.45"/>
+
+        </Style>
+
     </ControlTheme>
-    <ControlTheme x:Key="StyledListBox" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="ItemContainerTheme" Value="{StaticResource StyledListBox.Item}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+
+    <ControlTheme
+        x:Key="StyledListBox"
+        TargetType="ListBox"
+        BasedOn="{StaticResource {x:Type ListBox}}">
+
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="0"/>
+
+        <Setter
+            Property="Padding"
+            Value="0"/>
+
+        <Setter
+            Property="ItemContainerTheme"
+            Value="{StaticResource StyledListBox.Item}"/>
+
+        <Setter
+            Property="ScrollViewer.HorizontalScrollBarVisibility"
+            Value="Disabled"/>
+
+        <Setter
+            Property="ScrollViewer.VerticalScrollBarVisibility"
+            Value="Auto"/>
+
     </ControlTheme>
+
 </ResourceDictionary>

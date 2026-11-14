@@ -2,18 +2,14 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily
-        x:Key="Comfortaa">
-
-        avares://Sortacium.Presentation/Assets/Fonts/Comfortaa.ttf#Comfortaa
-
+    <FontFamily
+        x:Key="Comfortaa">
+        avares://Sortacium.Presentation/Assets/Fonts/Comfortaa.ttf#Comfortaa
     </FontFamily>
 
-    <FontFamily
-        x:Key="RedHat">
-
-        avares://Sortacium.Presentation/Assets/Fonts/RedHat.ttf
-
+    <FontFamily
+        x:Key="RedHat">
+        avares://Sortacium.Presentation/Assets/Fonts/RedHat.ttf
     </FontFamily>
 
 </ResourceDictionary>

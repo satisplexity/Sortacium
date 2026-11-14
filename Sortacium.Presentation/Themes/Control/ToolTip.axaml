@@ -16,15 +16,14 @@
                     BorderThickness="1.5"
                     Padding="20,10"
                     Opacity="0"
-                    RenderTransformOrigin="50%,100%" BorderBrush="{DynamicResource ToolTip.Border}">
+                    RenderTransformOrigin="50%,100%"
+                    BorderBrush="{DynamicResource ToolTip.Border}">
 
                     <Border.RenderTransform>
                         <ScaleTransform
                             ScaleX="0.85"
                             ScaleY="0.85"/>
                     </Border.RenderTransform>
-
-                    
 
                     <ContentPresenter
                         Content="{TemplateBinding Content}"
@@ -47,16 +46,20 @@
 
                     <KeyFrame
                         Cue="0%">
+
                         <Setter
                             Property="Opacity"
                             Value="0"/>
+
                     </KeyFrame>
 
                     <KeyFrame
                         Cue="100%">
+
                         <Setter
                             Property="Opacity"
                             Value="1"/>
+
                     </KeyFrame>
 
                 </Animation>
@@ -96,7 +99,9 @@
                 </Animation>
 
             </Style.Animations>
+
         </Style>
 
     </ControlTheme>
+
 </ResourceDictionary>

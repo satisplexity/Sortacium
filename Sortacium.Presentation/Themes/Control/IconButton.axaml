@@ -115,15 +115,34 @@
 
         </Setter>
 
-        <Style Selector="^:has-text">
-            <Setter Property="Width" Value="NaN"/>
-            <Setter Property="Height" Value="NaN"/>
-            <Setter Property="MinHeight" Value="40"/>
-            <Setter Property="Padding" Value="12,6"/>
+        <Style
+            Selector="^:has-text">
+
+            <Setter
+                Property="Width"
+                Value="NaN"/>
+
+            <Setter
+                Property="Height"
+                Value="NaN"/>
+
+            <Setter
+                Property="MinHeight"
+                Value="40"/>
+
+            <Setter
+                Property="Padding"
+                Value="12,6"/>
+
         </Style>
 
-        <Style Selector="^:not(:has-text) /template/ TextBlock#PART_Text">
-            <Setter Property="IsVisible" Value="False"/>
+        <Style
+            Selector="^:not(:has-text) /template/ TextBlock#PART_Text">
+
+            <Setter
+                Property="IsVisible"
+                Value="False"/>
+
         </Style>
 
         <Style
@@ -164,7 +183,8 @@
 
         </Style>
 
-        <Style Selector="^:disabled">
+        <Style
+            Selector="^:disabled">
 
             <Setter
                 Property="Background"
@@ -176,29 +196,71 @@
 
         </Style>
 
-        <Style Selector="^ /template/ controls|BeveledBorder#PART_Border">
-            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Default}"/>
-            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Default}"/>
-            <Setter Property="Transitions">
+        <Style
+            Selector="^ /template/ controls|BeveledBorder#PART_Border">
+
+            <Setter
+                Property="StrokeHighlightColor"
+                Value="{DynamicResource Color.Button.Stroke.Highlight.Default}"/>
+
+            <Setter
+                Property="StrokeShadowColor"
+                Value="{DynamicResource Color.Button.Stroke.Shadow.Default}"/>
+
+            <Setter
+                Property="Transitions">
+
                 <Transitions>
-                    <ColorTransition Property="StrokeHighlightColor" Duration="0:0:0.2" Easing="SineEaseOut"/>
-                    <ColorTransition Property="StrokeShadowColor" Duration="0:0:0.2" Easing="SineEaseOut"/>
+
+                    <ColorTransition
+                        Property="StrokeHighlightColor"
+                        Duration="0:0:0.2"
+                        Easing="SineEaseOut"/>
+
+                    <ColorTransition
+                        Property="StrokeShadowColor"
+                        Duration="0:0:0.2"
+                        Easing="SineEaseOut"/>
+
                 </Transitions>
+
             </Setter>
+
         </Style>
 
-        <Style Selector="^:pressed /template/ controls|BeveledBorder#PART_Border">
-            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Pressed}"/>
-            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Pressed}"/>
+        <Style
+            Selector="^:pressed /template/ controls|BeveledBorder#PART_Border">
+
+            <Setter
+                Property="StrokeHighlightColor"
+                Value="{DynamicResource Color.Button.Stroke.Highlight.Pressed}"/>
+
+            <Setter
+                Property="StrokeShadowColor"
+                Value="{DynamicResource Color.Button.Stroke.Shadow.Pressed}"/>
+
         </Style>
 
-        <Style Selector="^:disabled /template/ controls|BeveledBorder#PART_Border">
-            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Disabled}"/>
-            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Disabled}"/>
+        <Style
+            Selector="^:disabled /template/ controls|BeveledBorder#PART_Border">
+
+            <Setter
+                Property="StrokeHighlightColor"
+                Value="{DynamicResource Color.Button.Stroke.Highlight.Disabled}"/>
+
+            <Setter
+                Property="StrokeShadowColor"
+                Value="{DynamicResource Color.Button.Stroke.Shadow.Disabled}"/>
+
         </Style>
 
-        <Style Selector="^:has-text:pointerover, ^:has-text:pressed">
-            <Setter Property="Padding" Value="11,6"/>
+        <Style
+            Selector="^:has-text:pointerover, ^:has-text:pressed">
+
+            <Setter
+                Property="Padding"
+                Value="11,6"/>
+
         </Style>
 
     </ControlTheme>

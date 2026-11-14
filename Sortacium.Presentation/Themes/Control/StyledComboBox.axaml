@@ -4,17 +4,47 @@
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components">
 
-    <ControlTheme x:Key="StyledComboBox.Item" TargetType="ComboBoxItem">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
-        <Setter Property="Padding" Value="12,8"/>
-        <Setter Property="Margin" Value="0,2"/>
-        <Setter Property="MinHeight" Value="36"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Template">
+    <ControlTheme
+        x:Key="StyledComboBox.Item"
+        TargetType="ComboBoxItem">
+
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Setter
+            Property="Padding"
+            Value="12,8"/>
+
+        <Setter
+            Property="Margin"
+            Value="0,2"/>
+
+        <Setter
+            Property="MinHeight"
+            Value="36"/>
+
+        <Setter
+            Property="CornerRadius"
+            Value="8"/>
+
+        <Setter
+            Property="HorizontalContentAlignment"
+            Value="Stretch"/>
+
+        <Setter
+            Property="VerticalContentAlignment"
+            Value="Center"/>
+
+        <Setter
+            Property="Template">
+
             <ControlTemplate>
+
                 <ContentPresenter
                     Name="PART_ContentPresenter"
                     Content="{TemplateBinding Content}"
@@ -25,135 +55,341 @@
                     Padding="{TemplateBinding Padding}"
                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
             </ControlTemplate>
+
         </Setter>
-        <Style Selector="^:pointerover, ^:focus-visible">
-            <Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}"/>
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Accent.Text.Hover}"/>
+
+        <Style
+            Selector="^:pointerover, ^:focus-visible">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Surface.Hover}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Accent.Text.Hover}"/>
+
         </Style>
-        <Style Selector="^:selected">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.SelectedHover}"/>
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Strong}"/>
+
+        <Style
+            Selector="^:selected">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.SelectedHover}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Text.Strong}"/>
+
         </Style>
-        <Style Selector="^:selected:pointerover, ^:selected:focus-visible">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Control.Pressed}"/>
+
+        <Style
+            Selector="^:selected:pointerover, ^:selected:focus-visible">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Control.Pressed}"/>
+
         </Style>
-        <Style Selector="^:pressed">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Stroke.Shadow}"/>
+
+        <Style
+            Selector="^:pressed">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Stroke.Shadow}"/>
+
         </Style>
-        <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45"/>
+
+        <Style
+            Selector="^:disabled">
+
+            <Setter
+                Property="Opacity"
+                Value="0.45"/>
+
         </Style>
+
     </ControlTheme>
 
-    <!-- Reuse ComboBox defaults and input behavior with a custom visual template. -->
     <ControlTheme
         x:Key="{x:Type controls:StyledComboBox}"
         TargetType="controls:StyledComboBox"
         BasedOn="{StaticResource {x:Type ComboBox}}">
-        <Setter Property="MinHeight" Value="40"/>
-        <Setter Property="Padding" Value="12,8"/>
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="BorderThickness" Value="2"/>
-        <Setter Property="Background" Value="{DynamicResource Brush.ComboBox.Background}"/>
-        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource StyledComboBox.Border}"/>
-        <Setter Property="PlaceholderForeground" Value="{DynamicResource Brush.Text.Placeholder}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="MaxDropDownHeight" Value="320"/>
-        <Setter Property="ItemContainerTheme" Value="{StaticResource StyledComboBox.Item}"/>
-        <Setter Property="Template">
+
+        <Setter
+            Property="MinHeight"
+            Value="40"/>
+
+        <Setter
+            Property="Padding"
+            Value="12,8"/>
+
+        <Setter
+            Property="CornerRadius"
+            Value="12"/>
+
+        <Setter
+            Property="BorderThickness"
+            Value="2"/>
+
+        <Setter
+            Property="Background"
+            Value="{DynamicResource Brush.ComboBox.Background}"/>
+
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource StyledComboBox.Border}"/>
+
+        <Setter
+            Property="PlaceholderForeground"
+            Value="{DynamicResource Brush.Text.Placeholder}"/>
+
+        <Setter
+            Property="Cursor"
+            Value="Hand"/>
+
+        <Setter
+            Property="MaxDropDownHeight"
+            Value="320"/>
+
+        <Setter
+            Property="ItemContainerTheme"
+            Value="{StaticResource StyledComboBox.Item}"/>
+
+        <Setter
+            Property="Template">
+
             <ControlTemplate>
+
                 <DataValidationErrors>
-                    <Grid ColumnDefinitions="*,32">
-                        <Border Name="Background" Grid.ColumnSpan="2"
-                                Background="{TemplateBinding Background}"
-                                components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"/>
-                        <ContentControl Name="ContentPresenter"
-                                        Margin="{TemplateBinding Padding}"
-                                        Content="{TemplateBinding SelectionBoxItem}"
-                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        <TextBlock Text="{TemplateBinding PlaceholderText}"
-                                   Foreground="{TemplateBinding PlaceholderForeground}"
-                                   Margin="{TemplateBinding Padding}"
-                                   VerticalAlignment="Center"
-                                   IsVisible="{Binding SelectionBoxItem, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNull}}"/>
-                        <PathIcon Name="DropDownGlyph" Grid.Column="1"
-                                  Width="12" Height="12" Margin="0,0,12,0"
-                                  VerticalAlignment="Center" IsHitTestVisible="False"
-                                  Data="M 0,0 L 6,6 L 12,0 L 10,0 L 6,4 L 2,0 Z"/>
-                        <Popup Name="PART_Popup"
-                               IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
-                               PlacementTarget="Background"
-                               MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                               MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                               IsLightDismissEnabled="True"
-                               WindowManagerAddShadowHint="False">
-                            <Border Name="PopupBorder">
-                                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                                              VerticalScrollBarVisibility="Auto"
-                                              IsScrollChainingEnabled="False">
+
+                    <Grid
+                        ColumnDefinitions="*,32">
+
+                        <Border
+                            Name="Background"
+                            Grid.ColumnSpan="2"
+                            Background="{TemplateBinding Background}"
+                            components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"/>
+
+                        <ContentControl
+                            Name="ContentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        <TextBlock
+                            Text="{TemplateBinding PlaceholderText}"
+                            Foreground="{TemplateBinding PlaceholderForeground}"
+                            Margin="{TemplateBinding Padding}"
+                            VerticalAlignment="Center"
+                            IsVisible="{Binding SelectionBoxItem, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNull}}"/>
+
+                        <PathIcon
+                            Name="DropDownGlyph"
+                            Grid.Column="1"
+                            Width="12"
+                            Height="12"
+                            Margin="0,0,12,0"
+                            VerticalAlignment="Center"
+                            IsHitTestVisible="False"
+                            Data="M 0,0 L 6,6 L 12,0 L 10,0 L 6,4 L 2,0 Z"/>
+
+                        <Popup
+                            Name="PART_Popup"
+                            IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+                            PlacementTarget="Background"
+                            MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                            MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                            IsLightDismissEnabled="True"
+                            WindowManagerAddShadowHint="False">
+
+                            <Border
+                                Name="PopupBorder">
+
+                                <ScrollViewer
+                                    HorizontalScrollBarVisibility="Disabled"
+                                    VerticalScrollBarVisibility="Auto"
+                                    IsScrollChainingEnabled="False">
+
                                     <ScrollViewer.Styles>
-                                        <Style Selector="ScrollViewer /template/ ScrollBar">
-                                            <Setter Property="Theme" Value="{DynamicResource StyledScrollBar}"/>
+
+                                        <Style
+                                            Selector="ScrollViewer /template/ ScrollBar">
+                                            <Setter
+                                                Property="Theme"
+                                                Value="{DynamicResource StyledScrollBar}"/>
                                         </Style>
+
                                     </ScrollViewer.Styles>
-                                    <ItemsPresenter Name="PART_ItemsPresenter"
-                                                    ItemsPanel="{TemplateBinding ItemsPanel}"/>
+
+                                    <ItemsPresenter
+                                        Name="PART_ItemsPresenter"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}"/>
+
                                 </ScrollViewer>
+
                             </Border>
+
                         </Popup>
+
                     </Grid>
+
                 </DataValidationErrors>
+
             </ControlTemplate>
+
         </Setter>
 
-        <Style Selector="^ /template/ Border#Background">
-            <Setter Property="Transitions">
+        <Style
+            Selector="^ /template/ Border#Background">
+
+            <Setter
+                Property="Transitions">
+
                 <Transitions>
-                    <BrushTransition Property="Background" Duration="0:0:0.2" Easing="CubicEaseOut"/>
-                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" Easing="CubicEaseOut"/>
+
+                    <BrushTransition
+                        Property="Background"
+                        Duration="0:0:0.2"
+                        Easing="CubicEaseOut"/>
+
+                    <BrushTransition
+                        Property="BorderBrush"
+                        Duration="0:0:0.2"
+                        Easing="CubicEaseOut"/>
+
                 </Transitions>
+
             </Setter>
+
         </Style>
-        <Style Selector="^ /template/ PathIcon#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Style
+            Selector="^ /template/ PathIcon#DropDownGlyph">
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Text.Primary}"/>
+
         </Style>
-        <Style Selector="^:pointerover /template/ Border#Background, ^:focus-visible /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.Focused}"/>
-            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource StyledComboBox.ActiveBorder}"/>
+
+        <Style
+            Selector="^:pointerover /template/ Border#Background, ^:focus-visible /template/ Border#Background">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Surface.Focused}"/>
+
+            <Setter
+                Property="components:StrokeGradientAdapter.Source"
+                Value="{DynamicResource StyledComboBox.ActiveBorder}"/>
+
         </Style>
-        <Style Selector="^:pressed /template/ Border#Background, ^:dropdownopen /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource Brush.ComboBox.Background.Pressed}"/>
-            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource StyledComboBox.ActiveBorder}"/>
+
+        <Style
+            Selector="^:pressed /template/ Border#Background, ^:dropdownopen /template/ Border#Background">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.ComboBox.Background.Pressed}"/>
+
+            <Setter
+                Property="components:StrokeGradientAdapter.Source"
+                Value="{DynamicResource StyledComboBox.ActiveBorder}"/>
+
         </Style>
-        <Style Selector="^:pointerover /template/ PathIcon#DropDownGlyph, ^:dropdownopen /template/ PathIcon#DropDownGlyph, ^:focus-visible /template/ PathIcon#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Accent.Primary}"/>
+
+        <Style
+            Selector="^:pointerover /template/ PathIcon#DropDownGlyph, ^:dropdownopen /template/ PathIcon#DropDownGlyph, ^:focus-visible /template/ PathIcon#DropDownGlyph">
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Accent.Primary}"/>
+
         </Style>
-        <Style Selector="^:focus-visible /template/ ContentControl#ContentPresenter, ^:focus:pressed /template/ ContentControl#ContentPresenter">
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
+
+        <Style
+            Selector="^:focus-visible /template/ ContentControl#ContentPresenter, ^:focus:pressed /template/ ContentControl#ContentPresenter">
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Text.Primary}"/>
+
         </Style>
-        <Style Selector="^ /template/ Border#PopupBorder">
-            <Setter Property="Background" Value="{DynamicResource Brush.ComboBox.Popup.Background}"/>
-            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource StyledComboBox.Border}"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="6"/>
+
+        <Style
+            Selector="^ /template/ Border#PopupBorder">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.ComboBox.Popup.Background}"/>
+
+            <Setter
+                Property="components:StrokeGradientAdapter.Source"
+                Value="{DynamicResource StyledComboBox.Border}"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="2"/>
+
+            <Setter
+                Property="CornerRadius"
+                Value="12"/>
+
+            <Setter
+                Property="Padding"
+                Value="6"/>
+
         </Style>
-        <Style Selector="^:disabled">
-            <Setter Property="Opacity" Value="0.45"/>
-            <Setter Property="Cursor" Value="Arrow"/>
+
+        <Style
+            Selector="^:disabled">
+
+            <Setter
+                Property="Opacity"
+                Value="0.45"/>
+
+            <Setter
+                Property="Cursor"
+                Value="Arrow"/>
+
         </Style>
-        <Style Selector="^:disabled /template/ Border#Background">
-            <Setter Property="Background" Value="{DynamicResource Brush.ComboBox.Background.Pressed}"/>
-            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource StyledComboBox.Border}"/>
+
+        <Style
+            Selector="^:disabled /template/ Border#Background">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.ComboBox.Background.Pressed}"/>
+
+            <Setter
+                Property="components:StrokeGradientAdapter.Source"
+                Value="{DynamicResource StyledComboBox.Border}"/>
+
         </Style>
-        <Style Selector="^:disabled /template/ ContentControl#ContentPresenter, ^:disabled /template/ PathIcon#DropDownGlyph">
-            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Placeholder}"/>
+
+        <Style
+            Selector="^:disabled /template/ ContentControl#ContentPresenter, ^:disabled /template/ PathIcon#DropDownGlyph">
+
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Text.Placeholder}"/>
+
         </Style>
+
     </ControlTheme>
+
 </ResourceDictionary>

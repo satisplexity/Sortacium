@@ -18,7 +18,9 @@ public sealed class CodeLanguageOption : INotifyPropertyChanged
     {
         Id = id;
         _name = displayName;
-        LocalizationService.Instance.LanguageChanged += (_, _) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayName)));
+
+        LocalizationService.Instance.LanguageChanged += (_, _)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayName)));
     }
     public override string ToString() => DisplayName;
 }

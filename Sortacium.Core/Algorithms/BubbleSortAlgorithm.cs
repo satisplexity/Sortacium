@@ -4,9 +4,7 @@ namespace Sortacium.Core.Algorithms;
 
 public sealed class BubbleSortAlgorithm : ISortingAlgorithm
 {
-    public SortingTrace Bake(
-        IReadOnlyList<double> values,
-        CancellationToken cancellationToken = default)
+    public SortingTrace Bake(IReadOnlyList<double> values, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(values);
 
@@ -31,31 +29,32 @@ public sealed class BubbleSortAlgorithm : ISortingAlgorithm
                 double left = working[j];
                 double right = working[j + 1];
 
-                actions.Add(new SortingAction(
-                    SortingActionKind.Compare,
-                    j,
-                    j + 1,
-                    i,
-                    j,
-                    left,
-                    right));
+                actions.Add(
+                    new SortingAction(
+                        SortingActionKind.Compare,
+                        j,
+                        j + 1,
+                        i,
+                        j,
+                        left,
+                        right));
 
                 if (left <= right)
                 {
                     continue;
                 }
                    
-                actions.Add(new SortingAction(
-                    SortingActionKind.Swap,
-                    j,
-                    j + 1,
-                    i,
-                    j,
-                    left,
-                    right));
-
-                (working[j], working[j + 1]) =
-                    (working[j + 1], working[j]);
+                actions.Add(
+                    new SortingAction(
+                        SortingActionKind.Swap,
+                        j,
+                        j + 1,
+                        i,
+                        j,
+                        left,
+                        right));
+                
+                (working[j], working[j + 1]) = (working[j + 1], working[j]);
             }
         }
 

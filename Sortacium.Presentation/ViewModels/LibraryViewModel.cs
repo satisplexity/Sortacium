@@ -21,8 +21,7 @@ public partial class LibraryViewModel : ViewModelBase
     private AlgorithmOption? _previewAlgorithm;
 
     [ObservableProperty]
-    private IReadOnlyList<CodeLanguageOption>
-        _previewAvailableLanguages = [];
+    private IReadOnlyList<CodeLanguageOption> _previewAvailableLanguages = [];
 
     [ObservableProperty]
     private CodeLanguageOption? _previewLanguage;
@@ -41,14 +40,10 @@ public partial class LibraryViewModel : ViewModelBase
         AvailableAlgorithms = availableAlgorithms;
     }
 
-    public void BeginSelection(
-        AlgorithmOption activeAlgorithm,
-        CodeLanguageOption? activeLanguage)
+    public void BeginSelection(AlgorithmOption activeAlgorithm, CodeLanguageOption? activeLanguage)
     {
         PreviewAlgorithm = activeAlgorithm;
 
-        // Важно обновить список и при повторном открытии,
-        // когда PreviewAlgorithm не изменился.
         RefreshPreviewLanguages(activeLanguage?.Id);
     }
 
@@ -69,22 +64,23 @@ public partial class LibraryViewModel : ViewModelBase
             PreviewAvailableLanguages = [];
             PreviewLanguage = null;
             PreviewCodeDocument = new TextDocument();
+
             return;
         }
 
-        IReadOnlyCollection<string> supportedLanguages =
-            _codeService.GetLanguages(algorithm.Id);
+        IReadOnlyCollection<string> supportedLanguages = _codeService.GetLanguages(algorithm.Id);
 
-        PreviewAvailableLanguages = _allLanguages
+        PreviewAvailableLanguages =
+            _allLanguages
             .Where(language => supportedLanguages.Contains(language.Id))
             .ToArray();
 
-        PreviewLanguage = PreviewAvailableLanguages.FirstOrDefault(
-            language => language.Id == preferredLanguageId)
-            ?? PreviewAvailableLanguages.FirstOrDefault();
+        PreviewLanguage =
+            PreviewAvailableLanguages
+            .FirstOrDefault(language => language.Id == preferredLanguageId)
+            ??
+            PreviewAvailableLanguages.FirstOrDefault();
 
-        // Язык может остаться прежним, а алгоритм измениться.
-        // Поэтому нельзя полагаться только на OnPreviewLanguageChanged.
         LoadPreviewCode();
     }
 
@@ -93,26 +89,28 @@ public partial class LibraryViewModel : ViewModelBase
         if (GetSelection() is not { } selection)
         {
             PreviewCodeDocument = new TextDocument();
+
             return;
         }
 
-        CodeImplementation implementation = _codeService.GetCode(
-            selection.Algorithm.Id,
-            selection.Language.Id);
+        CodeImplementation implementation =
+            _codeService.GetCode(selection.Algorithm.Id, selection.Language.Id);
 
         PreviewCodeDocument = new TextDocument(implementation.Source);
     }
 
     public AlgorithmSelectionResult? GetSelection()
     {
-        if (PreviewAlgorithm is not { } algorithm ||
-            PreviewLanguage is not { } language)
+        if (PreviewAlgorithm is not { } algorithm
+            || PreviewLanguage is not { } language)
         {
             return null;
         }
 
         if (!_codeService.GetLanguages(algorithm.Id).Contains(language.Id))
+        {
             return null;
+        }
 
         return new AlgorithmSelectionResult(algorithm, language);
     }

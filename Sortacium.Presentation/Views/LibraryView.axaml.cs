@@ -1,7 +1,7 @@
-using System;
-
-using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Controls;
+
+using System;
 
 namespace Sortacium.Presentation.Views;
 

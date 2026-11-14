@@ -1,21 +1,21 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-
-using Avalonia.Threading;
+using System.Diagnostics;
+using System.Threading;
+using System.Linq;
+using System;
 
 using AvaloniaEdit.Document;
+using Avalonia.Threading;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using Sortacium.Presentation.Services;
+using Sortacium.Presentation.Models;
+
 using Sortacium.Core.Algorithms;
 using Sortacium.Core.Execution;
-using Sortacium.Presentation.Models;
-using Sortacium.Presentation.Services;
 
 namespace Sortacium.Presentation.ViewModels;
 
@@ -37,105 +37,16 @@ public partial class MainViewModel : ViewModelBase
         new("assembly", "Assembly")
     ];
 
-    public IReadOnlyList<AlgorithmOption> AvailableAlgorithms
-    { get; }
+    public IReadOnlyList<AlgorithmOption> AvailableAlgorithms { get; }
 
     [ObservableProperty]
     private AlgorithmOption _selectedAlgorithm = null!;
 
     [ObservableProperty]
-    private CodeLanguageOption? _selectedLanguage =
-    new("csharp", "C#");
+    private CodeLanguageOption? _selectedLanguage = new("csharp", "C#");
 
     [ObservableProperty]
     private IReadOnlyList<CodeLanguageOption> _availableLanguages = [];
-
-    partial void OnSelectedAlgorithmChanged(AlgorithmOption value)
-    {
-        // Получаем языки, поддерживаемые новым алгоритмом.
-        IReadOnlyList<CodeLanguageOption> languages =
-            GetLanguageOptions(value.Id);
-
-        string? preferredLanguage = SelectedLanguage?.Id;
-
-        AvailableLanguages = languages;
-
-        // Если предыдущий язык недоступен,
-        // выбираем первый поддерживаемый.
-        SelectedLanguage = languages.FirstOrDefault(
-            language => language.Id == preferredLanguage)
-            ?? languages.FirstOrDefault();
-
-        LoadSelectedLanguageCode();
-
-        // Только изменение активного алгоритма
-        // запускает новую сортировку.
-        ResetBars();
-    }
-
-    private IReadOnlyList<CodeLanguageOption> GetLanguageOptions(
-    string algorithmId)
-    {
-        IReadOnlyCollection<string> supported =
-            _codeService.GetLanguages(algorithmId);
-
-        return AllLanguages
-            .Where(language => supported.Contains(language.Id))
-            .ToArray();
-    }
-
-    public void BeginAlgorithmSelection()
-    {
-        Library.BeginSelection(
-            SelectedAlgorithm,
-            SelectedLanguage);
-    }
-
-    public bool SwitchAlgorithm()
-    {
-        if (Library.GetSelection() is not { } selection)
-            return false;
-
-        // Только MainViewModel меняет активный алгоритм.
-        // Существующий OnSelectedAlgorithmChanged вызовет ResetBars().
-        SelectedAlgorithm = selection.Algorithm;
-
-        SelectedLanguage = AvailableLanguages.FirstOrDefault(
-            language => language.Id == selection.Language.Id);
-
-        LoadSelectedLanguageCode();
-
-        return true;
-    }
-
-    private void LoadSelectedLanguageCode()
-    {
-        if (SelectedAlgorithm is not { } algorithm ||
-            SelectedLanguage is not { } language)
-        {
-            return;
-        }
-
-        if (!_codeService.GetLanguages(algorithm.Id)
-            .Contains(language.Id))
-        {
-            return;
-        }
-
-        CodeImplementation code = _codeService.GetCode(
-            algorithm.Id,
-            language.Id);
-
-        CodeDocument = new TextDocument(code.Source);
-
-        UpdateCodeHighlight(_player?.CurrentAction?.CodePoint);
-    }
-
-    partial void OnSelectedLanguageChanged(CodeLanguageOption? value)
-    {
-        if (value is not null)
-            LoadSelectedLanguageCode();
-    }
 
     private SortingPlayer? _player;
 
@@ -161,10 +72,13 @@ public partial class MainViewModel : ViewModelBase
 
         set
         {
-            int count = Math.Clamp(value, 5, 5000);
+            int count = Math.Clamp(value, 5, 100);
 
             if (SetProperty(ref _count, count))
+            {
                 ResetBars();
+            }
+                
         }
     }
 
@@ -181,9 +95,7 @@ public partial class MainViewModel : ViewModelBase
     public double Speed
     {
         get => _speed;
-        set => SetProperty(
-            ref _speed,
-            Math.Clamp(value, 1, 100));
+        set => SetProperty(ref _speed, Math.Clamp(value, 1, 100));
     }
 
     [ObservableProperty]
@@ -219,38 +131,161 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private string _bakeError = "";
 
-    public bool IsReady =>
-        !IsBaking && _player is not null;
+    public bool IsReady => !IsBaking && _player is not null;
 
     public MainViewModel()
     {
         AvailableAlgorithms = _codeService.GetAlgorithms();
 
-        Library = new LibraryViewModel(
-            _codeService,
-            AvailableAlgorithms,
-            AllLanguages);
+        Library = new LibraryViewModel(_codeService, AvailableAlgorithms, AllLanguages);
 
-        // Устанавливаем начальный алгоритм без повторной
-        // генерации последовательности операций.
-        _selectedAlgorithm = AvailableAlgorithms.First(
-            algorithm => algorithm.Id == "bubble-sort");
+        _selectedAlgorithm = AvailableAlgorithms.First(algorithm => algorithm.Id == "bubble-sort");
 
         AvailableLanguages = GetLanguageOptions(SelectedAlgorithm.Id);
 
-        _selectedLanguage = AvailableLanguages.First(
-            language => language.Id == "csharp");
+        _selectedLanguage = AvailableLanguages.First(language => language.Id == "csharp");
 
         LoadSelectedLanguageCode();
 
         ResetBars();
     }
 
+    #region Commands
+
     [RelayCommand]
     private void Shuffle()
     {
         ResetBars();
     }
+
+    [RelayCommand]
+    private async Task PlayAsync()
+    {
+        if (!IsReady || _playCts is not null)
+        {
+            return;
+        }
+
+        SortingPlayer player = _player!;
+        var cts = new CancellationTokenSource();
+
+        _playCts = cts;
+        IsPlaying = true;
+
+        var stopwatch = Stopwatch.StartNew();
+
+        TimeSpan previousTime = stopwatch.Elapsed;
+
+        double accumulatedOperations = 1;
+
+        try
+        {
+            while (!cts.IsCancellationRequested &&
+                   ReferenceEquals(_player, player) &&
+                   player.Position < player.TotalSteps)
+            {
+                TimeSpan currentTime = stopwatch.Elapsed;
+
+                double deltaTime = Math.Min((currentTime - previousTime).TotalSeconds, 0.25);
+
+                previousTime = currentTime;
+
+                accumulatedOperations += deltaTime * Speed;
+
+                int stepsToExecute = Math.Min((int) Math.Floor(accumulatedOperations),64);
+
+                int executed = 0;
+
+                while (executed < stepsToExecute && player.Next())
+                {
+                    executed++;
+                }
+
+                accumulatedOperations -= executed;
+
+                if (executed > 0)
+                {
+                    PublishPlayerState(instant: false);
+                }
+
+                if (player.Position >= player.TotalSteps)
+                {
+                    break;
+                }
+
+                await Task.Delay(16, cts.Token);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+
+        }
+        finally
+        {
+            stopwatch.Stop();
+
+            if (ReferenceEquals(_playCts, cts))
+            {
+                _playCts = null;
+                IsPlaying = false;
+            }
+
+            cts.Dispose();
+        }
+    }
+
+    [RelayCommand]
+    private void Pause()
+    {
+        StopPlayback();
+    }
+
+    [RelayCommand]
+    private void NextStep()
+    {
+        StopPlayback();
+
+        if (!IsReady)
+        {
+            return;
+        }
+
+        _player!.Next();
+
+        PublishPlayerState(instant: false);
+    }
+
+    [RelayCommand]
+    private void PreviousStep()
+    {
+        StopPlayback();
+
+        if (!IsReady)
+        {
+            return;
+        }
+
+        _player!.Previous();
+
+        PublishPlayerState(instant: false);
+    }
+
+    [RelayCommand]
+    private void ForceToEnd()
+    {
+        StopPlayback();
+
+        if (!IsReady)
+        {
+            return;
+        }
+
+        _player!.Seek(_player.TotalSteps);
+
+        PublishPlayerState(instant: true);
+    }
+
+    #endregion
 
     private void ResetBars()
     {
@@ -271,8 +306,7 @@ public partial class MainViewModel : ViewModelBase
         {
             int j = Random.Shared.Next(i + 1);
 
-            (values[i], values[j]) =
-                (values[j], values[i]);
+            (values[i], values[j]) = (values[j], values[i]);
         }
 
         _barsById = Enumerable
@@ -300,8 +334,7 @@ public partial class MainViewModel : ViewModelBase
 
         _bakeCts = cts;
 
-        ISortingAlgorithm algorithm =
-    SortingAlgorithmFactory.Create(SelectedAlgorithm.Id);
+        ISortingAlgorithm algorithm = SortingAlgorithmFactory.Create(SelectedAlgorithm.Id);
 
         _ = BakeAsync(
             generation,
@@ -312,11 +345,7 @@ public partial class MainViewModel : ViewModelBase
         UpdateCodeHighlight(null);
     }
 
-    private async Task BakeAsync(
-    int generation,
-    double[] values,
-    CancellationTokenSource cts,
-    ISortingAlgorithm algorithm)
+    private async Task BakeAsync(int generation, double[] values, CancellationTokenSource cts, ISortingAlgorithm algorithm)
     {
         SortingTrace? trace = null;
         string? error = null;
@@ -330,7 +359,7 @@ public partial class MainViewModel : ViewModelBase
         }
         catch (OperationCanceledException)
         {
-            // Отменённое запекание.
+
         }
         catch (Exception ex)
         {
@@ -340,12 +369,14 @@ public partial class MainViewModel : ViewModelBase
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
             if (!ReferenceEquals(_bakeCts, cts))
+            {
                 return;
+            }
+                
 
             _bakeCts = null;
 
-            if (generation == _generation &&
-                !cts.IsCancellationRequested)
+            if (generation == _generation && !cts.IsCancellationRequested)
             {
                 if (trace is not null)
                 {
@@ -367,96 +398,14 @@ public partial class MainViewModel : ViewModelBase
         cts.Dispose();
     }
 
-    [RelayCommand]
-    private async Task PlayAsync()
-    {
-        if (!IsReady || _playCts is not null)
-            return;
-
-        var player = _player!;
-        var cts = new CancellationTokenSource();
-
-        _playCts = cts;
-        IsPlaying = true;
-
-        var stopwatch = Stopwatch.StartNew();
-
-        TimeSpan previousTime = stopwatch.Elapsed;
-
-        // Первую операцию выполняем сразу.
-        double accumulatedOperations = 1;
-
-        try
-        {
-            while (!cts.IsCancellationRequested &&
-                   ReferenceEquals(_player, player) &&
-                   player.Position < player.TotalSteps)
-            {
-                TimeSpan currentTime = stopwatch.Elapsed;
-
-                // Ограничиваем скачок времени после зависания UI.
-                double deltaTime = Math.Min(
-                    (currentTime - previousTime).TotalSeconds,
-                    0.25);
-
-                previousTime = currentTime;
-
-                // Speed читается заново на каждом обновлении.
-                accumulatedOperations += deltaTime * Speed;
-
-                int stepsToExecute = Math.Min(
-                    (int) Math.Floor(accumulatedOperations),
-                    64);
-
-                int executed = 0;
-
-                while (executed < stepsToExecute &&
-                       player.Next())
-                {
-                    executed++;
-                }
-
-                accumulatedOperations -= executed;
-
-                if (executed > 0)
-                    PublishPlayerState(instant: false);
-
-                if (player.Position >= player.TotalSteps)
-                    break;
-
-                await Task.Delay(16, cts.Token);
-            }
-        }
-        catch (OperationCanceledException)
-        {
-            // Воспроизведение остановлено.
-        }
-        finally
-        {
-            stopwatch.Stop();
-
-            if (ReferenceEquals(_playCts, cts))
-            {
-                _playCts = null;
-                IsPlaying = false;
-            }
-
-            cts.Dispose();
-        }
-    }
-
-    [RelayCommand]
-    private void Pause()
-    {
-        StopPlayback();
-    }
-
     private void StopPlayback()
     {
         var cts = _playCts;
 
         if (cts is null)
+        {
             return;
+        }
 
         _playCts = null;
         IsPlaying = false;
@@ -464,49 +413,12 @@ public partial class MainViewModel : ViewModelBase
         cts.Cancel();
     }
 
-    [RelayCommand]
-    private void NextStep()
-    {
-        StopPlayback();
-
-        if (!IsReady)
-            return;
-
-        _player!.Next();
-
-        PublishPlayerState(instant: false);
-    }
-
-    [RelayCommand]
-    private void PreviousStep()
-    {
-        StopPlayback();
-
-        if (!IsReady)
-            return;
-
-        _player!.Previous();
-
-        PublishPlayerState(instant: false);
-    }
-
-    [RelayCommand]
-    private void ForceToEnd()
-    {
-        StopPlayback();
-
-        if (!IsReady)
-            return;
-
-        _player!.Seek(_player.TotalSteps);
-
-        PublishPlayerState(instant: true);
-    }
-
     partial void OnTimelinePositionChanged(double value)
     {
         if (!IsReady)
+        {
             return;
+        }
 
         int target = Math.Clamp(
             (int) Math.Round(value),
@@ -514,7 +426,9 @@ public partial class MainViewModel : ViewModelBase
             _player!.TotalSteps);
 
         if (target == _player.Position)
+        {
             return;
+        }
 
         StopPlayback();
 
@@ -551,7 +465,9 @@ public partial class MainViewModel : ViewModelBase
     private void PublishPlayerState(bool instant)
     {
         if (_player is not { } player)
+        {
             return;
+        }
 
         for (int position = 0; position < player.Count; position++)
         {
@@ -561,7 +477,9 @@ public partial class MainViewModel : ViewModelBase
         }
 
         foreach (Bar bar in _barsById)
+        {
             bar.State = BarState.Idle;
+        }
 
         var action = player.CurrentAction;
 
@@ -574,11 +492,8 @@ public partial class MainViewModel : ViewModelBase
 
             BarState state = current.Kind switch
             {
-                SortingActionKind.Compare =>
-                    BarState.Comparing,
-
-                SortingActionKind.Swap =>
-                    BarState.Swapping,
+                SortingActionKind.Compare => BarState.Comparing,
+                SortingActionKind.Swap => BarState.Swapping,
 
                 _ => BarState.Idle
             };
@@ -616,5 +531,82 @@ public partial class MainViewModel : ViewModelBase
         }
 
         UpdateCodeHighlight(action?.CodePoint);
+    }
+
+    partial void OnSelectedAlgorithmChanged(AlgorithmOption value)
+    {
+        IReadOnlyList<CodeLanguageOption> languages = GetLanguageOptions(value.Id);
+
+        string? preferredLanguage = SelectedLanguage?.Id;
+
+        AvailableLanguages = languages;
+
+        SelectedLanguage =
+            languages.FirstOrDefault(language => language.Id == preferredLanguage)
+            ?? languages.FirstOrDefault();
+
+        LoadSelectedLanguageCode();
+
+        ResetBars();
+    }
+
+    private IReadOnlyList<CodeLanguageOption> GetLanguageOptions(string algorithmId)
+    {
+        IReadOnlyCollection<string> supported = _codeService.GetLanguages(algorithmId);
+
+        return AllLanguages
+            .Where(language => supported.Contains(language.Id))
+            .ToArray();
+    }
+
+    public void BeginAlgorithmSelection()
+    {
+        Library.BeginSelection(SelectedAlgorithm, SelectedLanguage);
+    }
+
+    public bool SwitchAlgorithm()
+    {
+        if (Library.GetSelection() is not { } selection)
+        {
+            return false;
+        }
+
+        SelectedAlgorithm = selection.Algorithm;
+
+        SelectedLanguage =
+            AvailableLanguages.FirstOrDefault(language => language.Id == selection.Language.Id);
+
+        LoadSelectedLanguageCode();
+
+        return true;
+    }
+
+    private void LoadSelectedLanguageCode()
+    {
+        if (SelectedAlgorithm is not { } algorithm ||
+            SelectedLanguage is not { } language)
+        {
+            return;
+        }
+
+        if (!_codeService.GetLanguages(algorithm.Id)
+            .Contains(language.Id))
+        {
+            return;
+        }
+
+        CodeImplementation code = _codeService.GetCode(algorithm.Id, language.Id);
+
+        CodeDocument = new TextDocument(code.Source);
+
+        UpdateCodeHighlight(_player?.CurrentAction?.CodePoint);
+    }
+
+    partial void OnSelectedLanguageChanged(CodeLanguageOption? value)
+    {
+        if (value is not null)
+        {
+            LoadSelectedLanguageCode();
+        }
     }
 }
