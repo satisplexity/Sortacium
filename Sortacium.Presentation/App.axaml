@@ -2,19 +2,17 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Sortacium.Presentation.App"
-    RequestedThemeVariant="Default">
+    RequestedThemeVariant="Dark">
 
     <Application.Styles>
 
         <FluentTheme/>
 
-        <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml"/>
-
         <StyleInclude
             Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml"/>
 
         <StyleInclude
-            Source="avares://Sortacium.Presentation/Themes/SortingCodeEditor.axaml"/>
+            Source="avares://Sortacium.Presentation/Themes/Control/SortingCodeEditor.axaml"/>
 
     </Application.Styles>
 
@@ -22,15 +20,25 @@
 
         <ResourceDictionary>
 
-            <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <ResourceDictionary.MergedDictionaries>
+                        <MergeResourceInclude Source="/Themes/Palettes/Dark.axaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <ResourceDictionary.MergedDictionaries>
+                        <MergeResourceInclude Source="/Themes/Palettes/Light.axaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
 
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Palettes/Dark.axaml"/>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Common/Brushes.axaml"/>
+            <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Common/Dimensions.axaml"/>
 
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/BeveledBorder.axaml"/>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/Border.axaml"/>
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Controls/Window.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/BeveledBorder.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Border.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Window.axaml"/>
 
                 <ResourceInclude
                     Source="avares://Sortacium.Presentation/Resources/Fonts.axaml"/>
@@ -39,36 +47,27 @@
                     Source="avares://Sortacium.Presentation/Resources/Icons.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Resources/Colors.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/ToolTip.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Resources/Brushes.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/VerticalSlider.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Resources/BorderThemes.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/HorizontalSlider.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/ToolTip.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/IconButton.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/VerticalSlider.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/StyledComboBox.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/HorizontalSlider.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/StyledScrollBar.axaml"/>
 
                 <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/IconButton.axaml"/>
+                    Source="avares://Sortacium.Presentation/Themes/Control/StyledListBox.axaml"/>
 
-                <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/StyledComboBox.axaml"/>
-
-                <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/StyledScrollBar.axaml"/>
-
-                <ResourceInclude
-                    Source="avares://Sortacium.Presentation/Themes/StyledListBox.axaml"/>
-
-                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Settings.axaml"/>
+                <ResourceInclude Source="avares://Sortacium.Presentation/Themes/Control/Settings.axaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

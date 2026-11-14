@@ -2,7 +2,6 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:avaloniaedit="https://github.com/avaloniaui/avaloniaedit"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components"
@@ -17,7 +16,7 @@
 
     <Window.Styles>
         <Style
-            Selector="Border#ModalOverlay">
+            Selector="Border#ModalScrim">
 
             <Setter
                 Property="Opacity"
@@ -26,63 +25,11 @@
         </Style>
 
         <Style
-            Selector="Border#ModalOverlay.open">
+            Selector="Border#ModalScrim.open">
 
             <Setter
                 Property="Opacity"
                 Value="1"/>
-
-        </Style>
-
-        <Style
-            Selector="controls|BeveledBorder#SettingsDialog">
-
-            <Setter
-                Property="Opacity"
-                Value="0"/>
-
-            <Setter
-                Property="RenderTransform"
-                Value="scale(0.9) translateY(-70px) translateX(70px)"/>
-
-        </Style>
-
-        <Style
-            Selector="controls|BeveledBorder#SettingsDialog.open">
-
-            <Setter
-                Property="Opacity"
-                Value="1"/>
-
-            <Setter
-                Property="RenderTransform"
-                Value="scale(1) translateY(0px) translateX(0px)"/>
-
-        </Style>
-
-        <Style
-            Selector="controls|BeveledBorder#AlgorithmSelectionDialog">
-
-            <Setter
-                Property="Opacity"
-                Value="0"/>
-
-            <Setter
-                Property="RenderTransform"
-                Value="scale(0.9) translateY(200px) translateX(-100px)"/>
-
-        </Style>
-
-        <Style
-            Selector="controls|BeveledBorder#AlgorithmSelectionDialog.open">
-
-            <Setter
-                Property="Opacity"
-                Value="1"/>
-
-            <Setter
-                Property="RenderTransform"
-                Value="scale(1) translateY(0px) translateX(0px)"/>
 
         </Style>
 
@@ -92,11 +39,11 @@
 
             <Setter
                 Property="Background"
-                Value="{DynamicResource Palette.Brush.003D204D}"/>
+                Value="{DynamicResource Brush.Accent.Highlight.Transparent}"/>
 
             <Setter
                 Property="BorderBrush"
-                Value="{DynamicResource Palette.Brush.00AF4BE9}"/>
+                Value="{DynamicResource Brush.Accent.Primary.Transparent}"/>
 
         </Style>
 
@@ -106,11 +53,11 @@
 
             <Setter
                 Property="Background"
-                Value="{DynamicResource Palette.Brush.3D204D}"/>
+                Value="{DynamicResource Brush.Accent.Highlight}"/>
 
             <Setter
                 Property="BorderBrush"
-                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
+                Value="{DynamicResource Brush.Accent.Primary}"/>
 
         </Style>
 
@@ -119,7 +66,7 @@
             Selector="TextBlock.code-text">
             <Setter
                 Property="Foreground"
-                Value="{DynamicResource Palette.Brush.CCCCCC}"/>
+                Value="{DynamicResource Brush.Text.Code}"/>
         </Style>
 
         <!-- Active code text -->
@@ -127,7 +74,7 @@
             Selector="Border.code-line.active TextBlock.code-text">
             <Setter
                 Property="Foreground"
-                Value="{DynamicResource Palette.Brush.C18DDF}"/>
+                Value="{DynamicResource Brush.Accent.Text.Hover}"/>
         </Style>
 
     </Window.Styles>
@@ -152,7 +99,7 @@
                             Text="Sortacium"
                             FontSize="26"
                             FontWeight="Bold"
-                            Foreground="{DynamicResource Palette.Brush.AF4BE9}"
+                            Foreground="{DynamicResource Brush.Accent.Primary}"
                             VerticalAlignment="Center"/>
 
                     </StackPanel>
@@ -245,13 +192,13 @@
 
                             <TextBlock
                                 Text="{DynamicResource L.SelectedAlgorithm}"
-                                Foreground="{DynamicResource Palette.Brush.999999}"
+                                Foreground="{DynamicResource Brush.Text.Muted}"
                                 FontWeight="Bold"/>
 
                             <TextBlock
                                 Text="{Binding SelectedAlgorithm.Name}"
                                 FontSize="24"
-                                Foreground="{DynamicResource Palette.Brush.AF4BE9}"
+                                Foreground="{DynamicResource Brush.Accent.Primary}"
                                 FontWeight="Bold"
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"/>
@@ -284,7 +231,7 @@
                             HorizontalAlignment="Stretch"
                             Text="{DynamicResource L.SelectAlgorithm}"
                             Icon="{StaticResource Icon.Change}"
-                            Foreground="{DynamicResource Palette.Brush.EEEEEE}"
+                            Foreground="{DynamicResource Brush.Text.Strong}"
                             Padding="20"
                             HorizontalContentAlignment="Center"
                             CornerRadius="10"
@@ -364,10 +311,10 @@
                                 Document="{Binding CodeDocument}"
                                 HighlightedLines="{Binding HighlightedCodeLines}"
                                 Background="Transparent"
-                                Foreground="{DynamicResource Palette.Brush.CCCCCC}"
+                                Foreground="{DynamicResource Brush.Text.Code}"
                                 FontFamily="Consolas, Menlo, Monospace"
                                 FontSize="14"
-                                LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
+                                LineNumbersForeground="{DynamicResource Brush.Text.LineNumber}"/>
 
                         </controls:BeveledBorder>
 
@@ -377,33 +324,33 @@
                             Spacing="8">
 
                             <Border
-                                Background="{DynamicResource Palette.Brush.303030}"
+                                Background="{DynamicResource Brush.Surface.Hover}"
                                 Height="1"/>
 
                             <TextBlock
                                 Text="{DynamicResource L.ExecutionDetails}"
                                 FontSize="16"
                                 FontWeight="Medium"
-                                Foreground="{DynamicResource Palette.Brush.EEEEEE}"/>
+                                Foreground="{DynamicResource Brush.Text.Strong}"/>
 
                             <Grid
                                 ColumnDefinitions="*,*">
 
                                 <StackPanel Orientation="Horizontal" Spacing="5">
-                                    <TextBlock Text="{DynamicResource L.Comparisons}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
-                                    <TextBlock Text="{Binding ComparisonCount}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                    <TextBlock Text="{DynamicResource L.Comparisons}" Foreground="{DynamicResource Brush.Text.Code}"/>
+                                    <TextBlock Text="{Binding ComparisonCount}" Foreground="{DynamicResource Brush.Text.Code}"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
-                                    <TextBlock Text="{DynamicResource L.Swaps}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
-                                    <TextBlock Text="{Binding SwapCount}" Foreground="{DynamicResource Palette.Brush.CCCCCC}"/>
+                                    <TextBlock Text="{DynamicResource L.Swaps}" Foreground="{DynamicResource Brush.Text.Code}"/>
+                                    <TextBlock Text="{Binding SwapCount}" Foreground="{DynamicResource Brush.Text.Code}"/>
                                 </StackPanel>
 
                             </Grid>
 
                             <TextBlock
                                 Text="{Binding VariablesDescription}"
-                                Foreground="{DynamicResource Palette.Brush.AAAAAA}"
+                                Foreground="{DynamicResource Brush.Text.Secondary}"
                                 FontFamily="Consolas, Menlo, DejaVu Sans Mono"
                                 FontSize="12"/>
 
@@ -417,29 +364,27 @@
 
         </Grid>
 
-        <Border
+        <Grid
             x:Name="ModalOverlay"
-            Background="{DynamicResource Palette.Brush.55000000}"
-            CornerRadius="{StaticResource CornerRadius.Window}"
             IsHitTestVisible="False">
 
-            <Border.Transitions>
-
-                <Transitions>
-
-                    <DoubleTransition
-                        Property="Opacity"
-                        Duration="0:0:0.25"
-                        Easing="CubicEaseOut"/>
-
-                </Transitions>
-
-            </Border.Transitions>
+            <Border x:Name="ModalScrim"
+                    Background="{DynamicResource Brush.Overlay.Scrim}"
+                    CornerRadius="{StaticResource CornerRadius.Window}">
+                <Border.Transitions>
+                    <Transitions>
+                        <DoubleTransition Property="Opacity"
+                                          Duration="0:0:0.25"
+                                          Easing="CubicEaseOut"/>
+                    </Transitions>
+                </Border.Transitions>
+            </Border>
 
             <Grid Margin="50">
 
                 <controls:BeveledBorder
                     x:Name="SettingsDialog"
+                    IsVisible="False"
                     Theme="{StaticResource BeveledBorder.DialogPanel}">
 
                     <views:SettingsView
@@ -449,6 +394,7 @@
 
                 <controls:BeveledBorder
                     x:Name="AlgorithmSelectionDialog"
+                    IsVisible="False"
                     Theme="{StaticResource BeveledBorder.DialogPanel}">
 
                     <views:LibraryView
@@ -460,7 +406,7 @@
 
             </Grid>
 
-        </Border>
+        </Grid>
 
     </Grid>
 

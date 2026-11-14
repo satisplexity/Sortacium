@@ -1,7 +1,6 @@
 <UserControl
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Sortacium.Presentation.ViewModels"
@@ -22,7 +21,7 @@
             Text="{DynamicResource L.SelectAlgorithm}"
             FontSize="24"
             FontWeight="Bold"
-            Foreground="{DynamicResource Palette.Brush.EEEEEE}"/>
+            Foreground="{DynamicResource Brush.Text.Strong}"/>
 
         <controls:IconButton
             Click="Close_Click"
@@ -58,7 +57,7 @@
 
                                 <TextBlock
                                     Text="{Binding Description}"
-                                    Foreground="{DynamicResource Palette.Brush.999999}"
+                                    Foreground="{DynamicResource Brush.Text.Muted}"
                                     FontSize="11"
                                     TextWrapping="Wrap"
                                     MaxLines="2"/>
@@ -80,7 +79,7 @@
 
                 <TextBlock
                     Text="{Binding PreviewAlgorithm.Name}"
-                    Foreground="{DynamicResource Palette.Brush.AF4BE9}"
+                    Foreground="{DynamicResource Brush.Accent.Primary}"
                     FontSize="26"
                     FontWeight="Bold"/>
 
@@ -88,7 +87,7 @@
                     Grid.Row="1"
                     Text="{Binding PreviewAlgorithm.Description}"
                     TextWrapping="Wrap"
-                    Foreground="{DynamicResource Palette.Brush.BBBBBB}"/>
+                    Foreground="{DynamicResource Brush.Text.Description}"/>
 
                 <!-- Complexity and history -->
                 <Grid
@@ -100,28 +99,28 @@
 
                     <TextBlock
                         Text="{DynamicResource L.Author}"
-                        Foreground="{DynamicResource Palette.Brush.888888}"/>
+                        Foreground="{DynamicResource Brush.Text.Placeholder}"/>
 
                     <TextBlock
                         Grid.Column="1"
                         Text="{Binding PreviewAlgorithm.Author}"
-                        Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
+                        Foreground="{DynamicResource Brush.Text.Detail}"/>
 
                     <TextBlock
                         Grid.Row="1"
                         Text="{DynamicResource L.Year}"
-                        Foreground="{DynamicResource Palette.Brush.888888}"/>
+                        Foreground="{DynamicResource Brush.Text.Placeholder}"/>
 
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
                         Text="{Binding PreviewAlgorithm.Year}"
-                        Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
+                        Foreground="{DynamicResource Brush.Text.Detail}"/>
 
                     <TextBlock
                         Grid.Row="2"
                         Text="{DynamicResource L.TimeComplexity}"
-                        Foreground="{DynamicResource Palette.Brush.888888}"/>
+                        Foreground="{DynamicResource Brush.Text.Placeholder}"/>
 
                     <StackPanel
                         Grid.Row="2"
@@ -131,22 +130,22 @@
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.BestTime}"
-                            Foreground="{DynamicResource Palette.Brush.A7D6A4}"/>
+                            Foreground="{DynamicResource Brush.Text.Positive}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.AverageTime}"
-                            Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
+                            Foreground="{DynamicResource Brush.Text.Detail}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.WorstTime}"
-                            Foreground="{DynamicResource Palette.Brush.D9A1A1}"/>
+                            Foreground="{DynamicResource Brush.Text.Negative}"/>
 
                     </StackPanel>
 
                     <TextBlock
                         Grid.Row="3"
                         Text="{DynamicResource L.SpaceComplexity}"
-                        Foreground="{DynamicResource Palette.Brush.888888}"/>
+                        Foreground="{DynamicResource Brush.Text.Placeholder}"/>
 
                     <StackPanel
                         Grid.Row="3"
@@ -156,11 +155,11 @@
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.SpaceComplexity}"
-                            Foreground="{DynamicResource Palette.Brush.DDDDDD}"/>
+                            Foreground="{DynamicResource Brush.Text.Detail}"/>
 
                         <TextBlock
                             Text="{Binding PreviewAlgorithm.Stability}"
-                            Foreground="{DynamicResource Palette.Brush.AF4BE9}"/>
+                            Foreground="{DynamicResource Brush.Accent.Primary}"/>
 
                     </StackPanel>
 
@@ -207,10 +206,10 @@
                             Language="{Binding PreviewLanguage.Id}"
                             Document="{Binding PreviewCodeDocument}"
                             Background="Transparent"
-                            Foreground="{DynamicResource Palette.Brush.CCCCCC}"
+                            Foreground="{DynamicResource Brush.Text.Code}"
                             FontFamily="Consolas, Menlo, Monospace"
                             FontSize="13"
-                            LineNumbersForeground="{DynamicResource Palette.Brush.666666}"/>
+                            LineNumbersForeground="{DynamicResource Brush.Text.LineNumber}"/>
 
                     </controls:BeveledBorder>
 
@@ -229,7 +228,7 @@
                 Text="{DynamicResource L.ResetWarning}"
                 TextWrapping="Wrap"
                 Margin="0,0,16,0"
-                Foreground="{DynamicResource Palette.Brush.777777}"
+                Foreground="{DynamicResource Brush.Text.Subtle}"
                 VerticalAlignment="Center"
                 FontSize="12"/>
 

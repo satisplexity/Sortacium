@@ -5,17 +5,10 @@
              x:Class="Sortacium.Presentation.Views.SettingsView"
              x:DataType="services:SettingsService">
     <UserControl.Styles>
-        <Style Selector="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Palette.Brush.CCCCEE}"/></Style>
+        <Style Selector="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/></Style>
         <Style Selector="TextBlock.section"><Setter Property="FontSize" Value="16"/><Setter Property="FontWeight" Value="SemiBold"/></Style>
-        <Style Selector="TextBlock.hint"><Setter Property="Foreground" Value="{DynamicResource Palette.Brush.999999}"/><Setter Property="FontSize" Value="12"/><Setter Property="TextWrapping" Value="Wrap"/></Style>
-        <Style Selector="Border.setting-row"><Setter Property="Background" Value="{DynamicResource Palette.Brush.222222}"/><Setter Property="CornerRadius" Value="12"/><Setter Property="Padding" Value="16"/></Style>
-        <Style Selector="ColorPicker /template/ DropDownButton"><Setter Property="Theme" Value="{StaticResource Settings.ColorButton}"/></Style>
-        <Style Selector="FlyoutPresenter.nopadding">
-            <Setter Property="Background" Value="{DynamicResource Palette.Brush.222222}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource ScrollSurface.Border}"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="CornerRadius" Value="12"/>
-        </Style>
+        <Style Selector="TextBlock.hint"><Setter Property="Foreground" Value="{DynamicResource Brush.Text.Muted}"/><Setter Property="FontSize" Value="12"/><Setter Property="TextWrapping" Value="Wrap"/></Style>
+        <Style Selector="Border.setting-row"><Setter Property="Background" Value="{DynamicResource Brush.Panel.Surface}"/><Setter Property="CornerRadius" Value="12"/><Setter Property="Padding" Value="16"/></Style>
         <Style Selector="ScrollViewer /template/ ScrollBar"><Setter Property="Theme" Value="{DynamicResource StyledScrollBar}"/></Style>
     </UserControl.Styles>
     <Grid RowDefinitions="Auto,*" RowSpacing="22" MaxHeight="720">
@@ -45,10 +38,10 @@
                                     </StackPanel>
                                     <Grid Grid.Column="1" Grid.Row="1" Margin="16,14" RowDefinitions="*,14" RowSpacing="10">
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                                            <Border Width="12" Height="22" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="40" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="30" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="52" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
+                                            <Border Width="12" Height="22" Background="{DynamicResource Brush.Accent.Preview.Light}" CornerRadius="3"/>
+                                            <Border Width="12" Height="40" Background="{DynamicResource Brush.Accent.Preview.Light}" CornerRadius="3"/>
+                                            <Border Width="12" Height="30" Background="{DynamicResource Brush.Accent.Preview.Light}" CornerRadius="3"/>
+                                            <Border Width="12" Height="52" Background="{DynamicResource Brush.Accent.Preview.Light}" CornerRadius="3"/>
                                         </StackPanel>
                                         <Border Grid.Row="1" Background="#DEDEDE" CornerRadius="5"/>
                                     </Grid>
@@ -72,10 +65,10 @@
                                     </StackPanel>
                                     <Grid Grid.Column="1" Grid.Row="1" Margin="16,14" RowDefinitions="*,14" RowSpacing="10">
                                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                                            <Border Width="12" Height="22" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="40" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="30" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
-                                            <Border Width="12" Height="52" Background="{DynamicResource AccentBrush}" CornerRadius="3"/>
+                                            <Border Width="12" Height="22" Background="{DynamicResource Brush.Accent.Preview.Dark}" CornerRadius="3"/>
+                                            <Border Width="12" Height="40" Background="{DynamicResource Brush.Accent.Preview.Dark}" CornerRadius="3"/>
+                                            <Border Width="12" Height="30" Background="{DynamicResource Brush.Accent.Preview.Dark}" CornerRadius="3"/>
+                                            <Border Width="12" Height="52" Background="{DynamicResource Brush.Accent.Preview.Dark}" CornerRadius="3"/>
                                         </StackPanel>
                                         <Border Grid.Row="1" Background="#333333" CornerRadius="5"/>
                                     </Grid>
@@ -87,24 +80,48 @@
                     </RadioButton>
                 </Grid>
                 <Border Classes="setting-row">
-                    <Grid ColumnDefinitions="*,160" ColumnSpacing="24">
+                    <StackPanel Spacing="12">
                         <StackPanel Spacing="6" VerticalAlignment="Center">
                             <TextBlock Text="{DynamicResource L.Accent}" Classes="section"/>
                             <TextBlock Text="{DynamicResource L.AccentHint}" Classes="hint"/>
                         </StackPanel>
-                        <ColorPicker Name="AccentPicker" Grid.Column="1" Color="{Binding AccentColor, Mode=TwoWay}"
-                                     Height="46" Width="160" CornerRadius="8"
-                                     IsAlphaEnabled="False" IsAlphaVisible="False"
-                                     IsColorPaletteVisible="False" IsColorComponentsVisible="False"
-                                     IsColorPreviewVisible="False" IsHexInputVisible="True"
-                                     AutomationProperties.Name="{DynamicResource L.Accent}">
-                            <ColorPicker.Resources>
-                                <SolidColorBrush x:Key="ColorViewContentBackgroundBrush" Color="{Binding Colors[222222], Source={x:Static services:AppearanceService.Instance}}"/>
-                                <SolidColorBrush x:Key="SystemControlBackgroundBaseLowBrush" Color="{Binding Colors[262626], Source={x:Static services:AppearanceService.Instance}}"/>
-                                <SolidColorBrush x:Key="ColorViewContentBorderBrush" Color="{Binding Colors[353535], Source={x:Static services:AppearanceService.Instance}}"/>
-                            </ColorPicker.Resources>
-                        </ColorPicker>
-                    </Grid>
+                        <ListBox Name="AccentPicker" Theme="{StaticResource Settings.AccentSelector}"
+                                 SelectedValueBinding="{ReflectionBinding Tag}" SelectedValue="{Binding AccentId, Mode=TwoWay}"
+                                 SelectionMode="AlwaysSelected" AutomationProperties.Name="{DynamicResource L.Accent}">
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Violet" AutomationProperties.Name="{DynamicResource L.Accent.Violet}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Violet}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Violet}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Blue" AutomationProperties.Name="{DynamicResource L.Accent.Blue}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Blue}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Blue}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Cyan" AutomationProperties.Name="{DynamicResource L.Accent.Cyan}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Cyan}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Cyan}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Teal" AutomationProperties.Name="{DynamicResource L.Accent.Teal}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Teal}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Teal}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Green" AutomationProperties.Name="{DynamicResource L.Accent.Green}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Green}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Green}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Amber" AutomationProperties.Name="{DynamicResource L.Accent.Amber}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Amber}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Amber}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Orange" AutomationProperties.Name="{DynamicResource L.Accent.Orange}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Orange}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Orange}"/>
+                            </ListBoxItem>
+                            <ListBoxItem Theme="{StaticResource Settings.AccentSwatch}" Tag="Rose" AutomationProperties.Name="{DynamicResource L.Accent.Rose}"
+                                         ToolTip.Tip="{DynamicResource L.Accent.Rose}">
+                                <Border Width="22" Height="22" CornerRadius="11" Background="{DynamicResource Brush.Accent.Swatch.Rose}"/>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
                 </Border>
                 <Border Classes="setting-row">
                     <Grid ColumnDefinitions="*,200" ColumnSpacing="24">

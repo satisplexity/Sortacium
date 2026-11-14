@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:components="using:Sortacium.Presentation.Components">
+    <ControlTheme x:Key="Settings.AccentSwatch" TargetType="ListBoxItem"
+                  BasedOn="{StaticResource {x:Type ListBoxItem}}">
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Margin" Value="0,0,4,4"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="18"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource Brush.Surface.Hover}"/>
+        </Style>
+        <Style Selector="^:selected, ^:focus-visible">
+            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Text.Primary}"/>
+        </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="Settings.AccentSelector" TargetType="ListBox"
+                  BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="Settings.ThemeCard" TargetType="RadioButton">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Control}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.Border}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="14"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalContentAlignment="Stretch"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover, ^:focus-visible">
+            <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+        </Style>
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Surface.Selected}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+        </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="Settings.Switch" TargetType="ToggleSwitch">
+        <Setter Property="Width" Value="52"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface.Recessed}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.Border}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" components:StrokeGradientAdapter.Source="{TemplateBinding BorderBrush}"
+                        BorderThickness="2" CornerRadius="15" Padding="3">
+                    <Canvas Name="PART_SwitchKnob" Width="22" Height="20" HorizontalAlignment="Left">
+                        <Panel Name="PART_MovingKnobs" Width="20" Height="20">
+                            <Border CornerRadius="10" Background="{DynamicResource Brush.Text.Strong}"/>
+                        </Panel>
+                    </Canvas>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{DynamicResource Brush.Accent.Control}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/>
+        </Style>
+        <Style Selector="^:focus-visible, ^:pointerover"><Setter Property="BorderBrush" Value="{DynamicResource ScrollSurface.AccentBorder}"/></Style>
+    </ControlTheme>
+</ResourceDictionary>

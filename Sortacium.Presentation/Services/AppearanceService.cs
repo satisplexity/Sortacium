@@ -1,79 +1,97 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text.Json;
+using System.Linq;
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Platform;
 using Avalonia.Styling;
 
 namespace Sortacium.Presentation.Services;
 
-public sealed class AppearanceService : INotifyPropertyChanged
+public sealed class AppearanceService
 {
+    public const string DefaultAccent = "Violet";
     public static AppearanceService Instance { get; } = new();
-    public bool IsDark { get; private set; } = true;
-    public Color Accent { get; private set; } = Color.Parse("#AF4BE9");
-    public event EventHandler? Changed;
-    public event PropertyChangedEventHandler? PropertyChanged;
-    public IReadOnlyDictionary<string, Color> Colors { get; private set; } = new Dictionary<string, Color>();
-    private Dictionary<string, string>? _palette;
 
-    public void Apply(bool dark, Color accent)
+    private static readonly string[] AccentIds =
+        [DefaultAccent, "Blue", "Cyan", "Teal", "Green", "Amber", "Orange", "Rose"];
+
+    private readonly Dictionary<string, ResourceDictionary> _accents = new();
+    private IResourceDictionary? _applicationResources;
+    private ResourceDictionary? _activeAccent;
+
+    public bool IsDark { get; private set; } = true;
+    public Color Accent => GetAccentColor("Color.Accent.Primary");
+    public Color EditorHighlight => GetAccentColor("Color.Accent.Highlight");
+    public event EventHandler? Changed;
+
+    public static string ResolveAccentId(string? saved)
+    {
+        if (saved is not null && AccentIds.Contains(saved, StringComparer.Ordinal))
+            return saved;
+
+        if (Color.TryParse(saved, out var legacy))
+        {
+            var palette = Instance;
+            return AccentIds.MinBy(id => ColorDistance(legacy, ReadColor(
+                palette.LoadAccent(id), "Color.Accent.Primary", ThemeVariant.Dark)))!;
+        }
+
+        return DefaultAccent;
+    }
+
+    public void Apply(bool dark, string accentId)
     {
         IsDark = dark;
-        Accent = Color.FromRgb(accent.R, accent.G, accent.B);
-        if (Application.Current is not { } app) return;
-        if (_palette is null)
+        var accent = LoadAccent(AccentIds.Contains(accentId, StringComparer.Ordinal) ? accentId : DefaultAccent);
+        if (Application.Current is { } app)
         {
-            using var stream = AssetLoader.Open(new Uri("avares://Sortacium.Presentation/Resources/Palette.json"));
-            _palette = JsonSerializer.Deserialize<Dictionary<string, string>>(stream)!;
+            var resources = app.Resources;
+            if (_applicationResources != resources || _activeAccent != accent)
+            {
+                if (_activeAccent is not null)
+                    _applicationResources?.MergedDictionaries.Remove(_activeAccent);
+                resources.MergedDictionaries.Add(accent);
+                _applicationResources = resources;
+            }
+
+            _activeAccent = accent;
+            app.RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light;
         }
-        app.RequestedThemeVariant = dark ? ThemeVariant.Dark : ThemeVariant.Light;
-        var colors = new Dictionary<string, Color>();
-        foreach (var (key, source) in _palette)
+        else
         {
-            var color = Resolve(Color.Parse(source));
-            colors[key] = color;
-            app.Resources["Palette.Color." + key] = color;
-            app.Resources["Palette.Brush." + key] = new SolidColorBrush(color);
+            _activeAccent = accent;
         }
-        Colors = colors;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Colors)));
-        app.Resources["Color.WindowBackground"] = Resolve(Color.Parse("#191919"));
-        app.Resources["Color.TitleBarBackground"] = Resolve(Color.Parse("#1F1F1F"));
-        app.Resources["AccentBrush"] = new SolidColorBrush(Accent);
-        // Fluent controls (including the color picker) use the same accent family.
-        foreach (var key in new[] { "SystemAccentColor", "SystemAccentColorLight1", "SystemAccentColorLight2", "SystemAccentColorLight3", "SystemAccentColorDark1", "SystemAccentColorDark2", "SystemAccentColorDark3" })
-            app.Resources[key] = Resolve(Color.Parse("#AF4BE9"));
+
         Changed?.Invoke(this, EventArgs.Empty);
     }
 
-    public Color Resolve(Color original)
+    private ResourceDictionary LoadAccent(string id)
     {
-        var hsv = original.ToHsv();
-        // Violet shades are the existing design's accent family; neutral/lilac text stays neutral.
-        if (hsv.H >= 260 && hsv.H <= 310 && hsv.S > 0.18)
+        if (!_accents.TryGetValue(id, out var dictionary))
         {
-            var selected = Accent.ToHsv();
-            var baseline = Color.Parse("#AF4BE9").ToHsv();
-            double saturation = Math.Clamp(hsv.S * selected.S / baseline.S, 0, 1);
-            double value = Math.Clamp(hsv.V * selected.V / baseline.V, 0, 1);
-            if (!IsDark)
-            {
-                bool surface = hsv.V < 0.46;
-                value = surface ? 0.97 : Math.Min(value, 0.70);
-                saturation = surface ? saturation * 0.22 : saturation;
-            }
-            return new HsvColor(original.A / 255.0, selected.H, saturation, value).ToRgb();
+            var uri = new Uri($"avares://Sortacium.Presentation/Themes/Palettes/Accents/{id}.axaml");
+            dictionary = (ResourceDictionary)AvaloniaXamlLoader.Load(uri);
+            _accents.Add(id, dictionary);
         }
-        if (IsDark || original.A < 255) return original;
-        // Reverse the neutral surface/text ramp while retaining the sculpted border contrast.
-        if (hsv.S < 0.19)
-        {
-            byte channel = (byte)Math.Clamp(255 - (original.R + original.G + original.B) / 3, 20, 248);
-            return Color.FromArgb(original.A, channel, channel, channel);
-        }
-        return new HsvColor(original.A / 255.0, hsv.H, hsv.S, Math.Min(hsv.V, 0.62)).ToRgb();
+
+        return dictionary;
+    }
+
+    private Color GetAccentColor(string key) =>
+        ReadColor(_activeAccent ?? LoadAccent(DefaultAccent), key, IsDark ? ThemeVariant.Dark : ThemeVariant.Light);
+
+    private static Color ReadColor(ResourceDictionary dictionary, string key, ThemeVariant variant) =>
+        dictionary.TryGetResource(key, variant, out var value) && value is Color color
+            ? color
+            : throw new InvalidOperationException($"Missing color resource {key} for {variant}.");
+
+    private static int ColorDistance(Color first, Color second)
+    {
+        int red = first.R - second.R;
+        int green = first.G - second.G;
+        int blue = first.B - second.B;
+        return red * red + green * green + blue * blue;
     }
 }

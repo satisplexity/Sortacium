@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Headless;
 using Avalonia.Media;
+using Avalonia.Styling;
 using Avalonia.VisualTree;
 using Sortacium.Presentation.Controls;
 using Sortacium.Presentation.Services;
@@ -55,27 +55,30 @@ public sealed class SettingsIntegrationTests
             Assert.True(localizedNotifications > 0);
             Assert.Equal("Tri à bulles", algorithms[0].Name);
 
-            var picker = view.FindControl<ColorPicker>("AccentPicker")!;
-            picker.Color = Color.Parse("#20B59B");
-            Assert.Equal(picker.Color, settings.AccentColor);
-            Assert.Equal(settings.AccentColor, AppearanceService.Instance.Accent);
-            var accent = (ISolidColorBrush)Application.Current!.FindResource("Palette.Brush.AF4BE9")!;
-            Assert.InRange(Math.Abs(accent.Color.ToHsv().H - settings.AccentColor.ToHsv().H), 0, 1);
+            var picker = view.FindControl<ListBox>("AccentPicker")!;
+            Assert.Equal(8, picker.Items.Count);
+            picker.SelectedValue = "Teal";
+            Assert.Equal("Teal", settings.AccentId);
+            Assert.Equal(Color.Parse("#37C6AA"), AppearanceService.Instance.Accent);
+            Assert.Equal("Teal", AppearanceService.ResolveAccentId("#20B59B"));
 
-            // A regression once made every stop transparent when DynamicResource was used inside setters.
-            Assert.Contains(icon.Transitions!.OfType<BrushTransition>(), t => t.Property == Border.BorderBrushProperty);
             icon.Transitions = null;
-            IGradientBrush Gradient() => Assert.IsAssignableFrom<IGradientBrush>(icon.BorderBrush);
+            var border = Assert.Single(icon.GetVisualDescendants().OfType<BeveledBorder>());
+            border.Transitions = null;
+            IGradientBrush Gradient() => Assert.IsAssignableFrom<IGradientBrush>(border.BorderBrush);
             Assert.All(Gradient().GradientStops, stop => Assert.Equal((byte)255, stop.Color.A));
             Assert.Equal(Color.Parse("#353535"), Gradient().GradientStops[0].Color);
             ((IPseudoClasses)icon.Classes).Set(":pressed", true);
-            Assert.Equal(Color.Parse("#131313"), Gradient().GradientStops[0].Color);
+            Assert.Equal(Color.Parse("#191919"), Gradient().GradientStops[0].Color);
             ((IPseudoClasses)icon.Classes).Set(":pressed", false);
             Assert.Equal(Color.Parse("#353535"), Gradient().GradientStops[0].Color);
 
             view.FindControl<RadioButton>("LightCard")!.IsChecked = true;
             Assert.False(settings.IsDark);
             Assert.True(Gradient().GradientStops[0].Color.R > 150);
+            Assert.Equal(ThemeVariant.Light, window.ActualThemeVariant);
+            Assert.Equal(Color.Parse("#087260"), AppearanceService.Instance.Accent);
+            Assert.Equal("Teal", picker.SelectedValue);
             view.FindControl<ToggleSwitch>("SoundToggle")!.IsChecked = false;
             Assert.False(settings.SoundEnabled);
             using (var sound = new SoundService(settings))
@@ -89,7 +92,7 @@ public sealed class SettingsIntegrationTests
             Assert.False(restored.IsDark);
             Assert.False(restored.SoundEnabled);
             Assert.Equal("fr", restored.SelectedLanguage.Id);
-            Assert.Equal(settings.AccentColor, restored.AccentColor);
+            Assert.Equal(settings.AccentId, restored.AccentId);
 
             File.WriteAllText(path, "invalid json");
             var fallback = new SettingsService(path);

@@ -33,10 +33,6 @@ public partial class MainWindow : Window
 
     private void OpenDialog(Border dialog)
     {
-        // Сбрасываем состояние обоих диалогов.
-        SettingsDialog.Classes.Remove("open");
-        AlgorithmSelectionDialog.Classes.Remove("open");
-
         SettingsDialog.IsVisible =
             ReferenceEquals(dialog, SettingsDialog);
 
@@ -44,21 +40,16 @@ public partial class MainWindow : Window
             ReferenceEquals(dialog, AlgorithmSelectionDialog);
 
         ModalOverlay.IsHitTestVisible = true;
-        ModalOverlay.Classes.Add("open");
-
-        dialog.Classes.Add("open");
+        ModalScrim.Classes.Add("open");
     }
 
     private void CloseDialog()
     {
-        SettingsDialog.Classes.Remove("open");
-        AlgorithmSelectionDialog.Classes.Remove("open");
+        SettingsDialog.IsVisible = false;
+        AlgorithmSelectionDialog.IsVisible = false;
 
-        ModalOverlay.Classes.Remove("open");
+        ModalScrim.Classes.Remove("open");
         ModalOverlay.IsHitTestVisible = false;
-
-        // IsVisible здесь не выключаем:
-        // существующие анимации закрытия должны завершиться.
     }
 
     private void OpenSettings_Click(

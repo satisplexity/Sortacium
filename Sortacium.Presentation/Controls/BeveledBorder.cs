@@ -73,7 +73,7 @@ public sealed class BeveledBorder : Border
 
     private void UpdateColors()
     {
-        SolidColorBrush? background = Background as SolidColorBrush;
+        ISolidColorBrush? background = Background as ISolidColorBrush;
 
         if (background is null)
         {

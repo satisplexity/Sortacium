@@ -1,91 +1,70 @@
+using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia;
-using System;
 
 namespace Sortacium.Presentation.Components;
 
 public sealed class StrokeGradientAdapter : AvaloniaObject
 {
-    public static readonly AttachedProperty<bool> EnableProperty =
-        AvaloniaProperty.RegisterAttached<StrokeGradientAdapter, Border, bool>("Enable");
+    public static readonly AttachedProperty<IBrush?> SourceProperty =
+        AvaloniaProperty.RegisterAttached<StrokeGradientAdapter, Border, IBrush?>("Source");
 
     static StrokeGradientAdapter()
     {
-        EnableProperty.Changed.AddClassHandler<Border>(OnEnableChanged);
+        SourceProperty.Changed.AddClassHandler<Border>(OnSourceChanged);
     }
 
-    public static bool GetEnable(Border border)
-    {
-        return border.GetValue(EnableProperty);
-    }
+    public static IBrush? GetSource(Border border) => border.GetValue(SourceProperty);
 
-    public static void SetEnable(Border border, bool value)
-    {
-        border.SetValue(EnableProperty, value);
-    }
+    public static void SetSource(Border border, IBrush? value) => border.SetValue(SourceProperty, value);
 
-    private static void OnEnableChanged(
-        Border border,
-        AvaloniaPropertyChangedEventArgs args)
+    private static void OnSourceChanged(Border border, AvaloniaPropertyChangedEventArgs args)
     {
         border.PropertyChanged -= OnBorderPropertyChanged;
-
-        if (!args.GetNewValue<bool>())
+        var source = GetSource(border);
+        if (source is not ILinearGradientBrush { GradientStops.Count: 4 } gradient)
         {
+            border.BorderBrush = source;
             return;
         }
 
-        border.PropertyChanged += OnBorderPropertyChanged;
+        var brush = new LinearGradientBrush
+        {
+            StartPoint = gradient.StartPoint,
+            EndPoint = gradient.EndPoint,
+            SpreadMethod = gradient.SpreadMethod,
+            Opacity = gradient.Opacity,
+            Transform = gradient.Transform,
+            TransformOrigin = gradient.TransformOrigin,
+        };
+        foreach (var stop in gradient.GradientStops)
+            brush.GradientStops.Add(new GradientStop(stop.Color, stop.Offset));
 
-        UpdateGradient(border);
+        UpdateOffsets(border, brush);
+        border.BorderBrush = brush;
+        border.PropertyChanged += OnBorderPropertyChanged;
     }
 
     private static void OnBorderPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs args)
     {
-        if (sender is not Border border)
+        if ((args.Property == Visual.BoundsProperty || args.Property == Border.CornerRadiusProperty) &&
+            sender is Border border && border.GetBaseValue(Border.BorderBrushProperty).GetValueOrDefault() is LinearGradientBrush brush)
         {
-            return;
-        }
-
-        if (args.Property == Visual.BoundsProperty ||
-            args.Property == Border.CornerRadiusProperty ||
-            args.Property == Border.BorderBrushProperty)
-        {
-            UpdateGradient(border);
+            UpdateOffsets(border, brush);
         }
     }
 
-    private static void UpdateGradient(Border border)
+    private static void UpdateOffsets(Border border, LinearGradientBrush brush)
     {
-        if (border.BorderBrush is not LinearGradientBrush gradient)
-        {
-            return;
-        }
-
-        if (gradient.GradientStops.Count != 4)
-        {
-            return;
-        }   
-
         double height = border.Bounds.Height;
-
         if (!double.IsFinite(height) || height <= 0)
-        {
             return;
-        }
 
         CornerRadius radius = border.CornerRadius;
-
-        double topRadius =Math.Max(radius.TopLeft, radius.TopRight);
-
-        double bottomRadius = Math.Max(radius.BottomLeft, radius.BottomRight);
-
-        double topOffset = Math.Clamp(topRadius / height, 0, 0.5);
-
-        double bottomOffset = 1 - Math.Clamp(bottomRadius / height, 0, 0.5);
-
-        gradient.GradientStops[1].Offset = topOffset;
-        gradient.GradientStops[2].Offset = bottomOffset;
+        double top = Math.Max(radius.TopLeft, radius.TopRight);
+        double bottom = Math.Max(radius.BottomLeft, radius.BottomRight);
+        brush.GradientStops[1].Offset = Math.Clamp(top / height, 0, 0.5);
+        brush.GradientStops[2].Offset = 1 - Math.Clamp(bottom / height, 0, 0.5);
     }
 }

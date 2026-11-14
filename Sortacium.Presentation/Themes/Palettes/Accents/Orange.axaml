@@ -1,0 +1,223 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="Color.Accent.Surface.Hover">#FF402E29</Color>
+            <Color x:Key="Color.Accent.Surface.Selected">#FF503229</Color>
+            <Color x:Key="Color.Accent.Surface.Pressed">#FF603B24</Color>
+            <Color x:Key="Color.Accent.Surface.SelectedHover">#FF764326</Color>
+            <Color x:Key="Color.Accent.Control.Pressed">#FFAB5A33</Color>
+            <Color x:Key="Color.Accent.Primary">#FFF69060</Color>
+            <Color x:Key="Color.Accent.Stroke.Fill">#FFCB7349</Color>
+            <Color x:Key="Color.Accent.Stroke.Shadow">#FF904C2C</Color>
+            <Color x:Key="Color.Accent.Control">#FFC76A3C</Color>
+            <Color x:Key="Color.Accent.Slider.Fill">#FFBF5A2B</Color>
+            <Color x:Key="Color.Accent.Slider.ThumbStroke">#FFCB6839</Color>
+            <Color x:Key="Color.Accent.Slider.ThumbPressed">#FFBD6036</Color>
+            <Color x:Key="Color.Accent.Slider.PressedHighlight">#FF7A3B1D</Color>
+            <Color x:Key="Color.Accent.Slider.PressedShadow">#FFD2784E</Color>
+            <Color x:Key="Color.Accent.Text.Hover">#FFE9B49B</Color>
+            <Color x:Key="Color.Accent.Surface.Focused">#FF312B27</Color>
+            <Color x:Key="Color.Accent.Text.Selected">#FFFAC9B2</Color>
+            <Color x:Key="Color.Accent.Control.Hover">#FFD37F56</Color>
+            <Color x:Key="Color.Accent.Highlight.Transparent">#00593320</Color>
+            <Color x:Key="Color.Accent.Primary.Transparent">#00F69060</Color>
+            <Color x:Key="Color.Accent.Highlight">#FF593320</Color>
+            <Color x:Key="SystemAccentColor">#FFF69060</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFF79E75</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFF8AC88</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFF9BA9C</Color>
+            <Color x:Key="SystemAccentColorDark1">#FFD87F54</Color>
+            <Color x:Key="SystemAccentColorDark2">#FFBB6D49</Color>
+            <Color x:Key="SystemAccentColorDark3">#FF9D5C3D</Color>
+
+            <SolidColorBrush x:Key="Brush.Accent.Control" Color="{StaticResource Color.Accent.Control}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Control.Hover" Color="{StaticResource Color.Accent.Control.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Control.Pressed" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Highlight" Color="{StaticResource Color.Accent.Highlight}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Highlight.Transparent" Color="{StaticResource Color.Accent.Highlight.Transparent}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Primary.Transparent" Color="{StaticResource Color.Accent.Primary.Transparent}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.Fill" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.ThumbPressed" Color="{StaticResource Color.Accent.Slider.ThumbPressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.ThumbStroke" Color="{StaticResource Color.Accent.Slider.ThumbStroke}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Stroke.Shadow" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Focused" Color="{StaticResource Color.Accent.Surface.Focused}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Hover" Color="{StaticResource Color.Accent.Surface.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Pressed" Color="{StaticResource Color.Accent.Surface.Pressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Selected" Color="{StaticResource Color.Accent.Surface.Selected}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.SelectedHover" Color="{StaticResource Color.Accent.Surface.SelectedHover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Text.Hover" Color="{StaticResource Color.Accent.Text.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Text.Selected" Color="{StaticResource Color.Accent.Text.Selected}"/>
+
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.InnerBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.PressedBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.PressedHighlight}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Slider.PressedShadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Track.Fill" StartPoint="100%,50%" EndPoint="0%,50%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+                <GradientStop Offset="1" Color="#313131"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="StyledComboBox.ActiveBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="ScrollSurface.AccentBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.InnerBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.PressedBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.PressedHighlight}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Slider.PressedShadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Track.Fill" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+                <GradientStop Offset="1" Color="#262626"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="Color.Accent.Surface.Hover">#FFFAEBE4</Color>
+            <Color x:Key="Color.Accent.Surface.Selected">#FFF9E2D9</Color>
+            <Color x:Key="Color.Accent.Surface.Pressed">#FFF5D5C9</Color>
+            <Color x:Key="Color.Accent.Surface.SelectedHover">#FFF3CABA</Color>
+            <Color x:Key="Color.Accent.Control.Pressed">#FF954520</Color>
+            <Color x:Key="Color.Accent.Primary">#FFA04620</Color>
+            <Color x:Key="Color.Accent.Stroke.Fill">#FFB65C3A</Color>
+            <Color x:Key="Color.Accent.Stroke.Shadow">#FF743316</Color>
+            <Color x:Key="Color.Accent.Control">#FFAF5931</Color>
+            <Color x:Key="Color.Accent.Slider.Fill">#FFB66037</Color>
+            <Color x:Key="Color.Accent.Slider.ThumbStroke">#FF8F4923</Color>
+            <Color x:Key="Color.Accent.Slider.ThumbPressed">#FF924521</Color>
+            <Color x:Key="Color.Accent.Slider.PressedHighlight">#FF793917</Color>
+            <Color x:Key="Color.Accent.Slider.PressedShadow">#FFD2754C</Color>
+            <Color x:Key="Color.Accent.Text.Hover">#FF8C411E</Color>
+            <Color x:Key="Color.Accent.Surface.Focused">#FFFBEEE9</Color>
+            <Color x:Key="Color.Accent.Text.Selected">#FF813817</Color>
+            <Color x:Key="Color.Accent.Control.Hover">#FFC56439</Color>
+            <Color x:Key="Color.Accent.Highlight.Transparent">#00F9E2D9</Color>
+            <Color x:Key="Color.Accent.Primary.Transparent">#00A04620</Color>
+            <Color x:Key="Color.Accent.Highlight">#FFF9E2D9</Color>
+            <Color x:Key="SystemAccentColor">#FFA04620</Color>
+            <Color x:Key="SystemAccentColorLight1">#FFAC5E3D</Color>
+            <Color x:Key="SystemAccentColorLight2">#FFB87458</Color>
+            <Color x:Key="SystemAccentColorLight3">#FFC48C75</Color>
+            <Color x:Key="SystemAccentColorDark1">#FF8D3E1C</Color>
+            <Color x:Key="SystemAccentColorDark2">#FF7A3518</Color>
+            <Color x:Key="SystemAccentColorDark3">#FF662D14</Color>
+
+            <SolidColorBrush x:Key="Brush.Accent.Control" Color="{StaticResource Color.Accent.Control}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Control.Hover" Color="{StaticResource Color.Accent.Control.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Control.Pressed" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Highlight" Color="{StaticResource Color.Accent.Highlight}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Highlight.Transparent" Color="{StaticResource Color.Accent.Highlight.Transparent}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Primary.Transparent" Color="{StaticResource Color.Accent.Primary.Transparent}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.Fill" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.ThumbPressed" Color="{StaticResource Color.Accent.Slider.ThumbPressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Slider.ThumbStroke" Color="{StaticResource Color.Accent.Slider.ThumbStroke}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Stroke.Shadow" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Focused" Color="{StaticResource Color.Accent.Surface.Focused}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Hover" Color="{StaticResource Color.Accent.Surface.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Pressed" Color="{StaticResource Color.Accent.Surface.Pressed}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.Selected" Color="{StaticResource Color.Accent.Surface.Selected}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Surface.SelectedHover" Color="{StaticResource Color.Accent.Surface.SelectedHover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Text.Hover" Color="{StaticResource Color.Accent.Text.Hover}"/>
+            <SolidColorBrush x:Key="Brush.Accent.Text.Selected" Color="{StaticResource Color.Accent.Text.Selected}"/>
+
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.InnerBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Thumb.PressedBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.PressedHighlight}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Slider.PressedShadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Horizontal.Track.Fill" StartPoint="100%,50%" EndPoint="0%,50%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+                <GradientStop Offset="1" Color="#ECECF2"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="StyledComboBox.ActiveBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="ScrollSurface.AccentBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.InnerBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Primary}"/>
+                <GradientStop Offset="0.3" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="0.7" Color="{StaticResource Color.Accent.Stroke.Fill}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Stroke.Shadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Thumb.PressedBorder" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.PressedHighlight}"/>
+                <GradientStop Offset="0.2" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="0.8" Color="{StaticResource Color.Accent.Control.Pressed}"/>
+                <GradientStop Offset="1" Color="{StaticResource Color.Accent.Slider.PressedShadow}"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="Slider.Vertical.Track.Fill" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="{StaticResource Color.Accent.Slider.Fill}"/>
+                <GradientStop Offset="1" Color="#F8F8FB"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <Color x:Key="Color.Accent.Preview.Dark">#FFF69060</Color>
+    <Color x:Key="Color.Accent.Preview.Light">#FFA04620</Color>
+    <SolidColorBrush x:Key="Brush.Accent.Preview.Dark" Color="{StaticResource Color.Accent.Preview.Dark}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Preview.Light" Color="{StaticResource Color.Accent.Preview.Light}"/>
+</ResourceDictionary>

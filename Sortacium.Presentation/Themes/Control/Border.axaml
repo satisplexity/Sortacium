@@ -173,10 +173,10 @@
                 Value="{StaticResource CornerRadius.WindowTitleBar}"/>
 
         <Setter Property="Background"
-                Value="{StaticResource Brush.Panel.Surface}"/>
+                Value="{DynamicResource Brush.Panel.Surface}"/>
 
         <Setter Property="BorderBrush"
-                Value="{StaticResource Brush.Panel.Shadow}"/>
+                Value="{DynamicResource Brush.Panel.Shadow}"/>
 
         <Setter Property="BorderThickness"
                 Value="{StaticResource Thickness.Border.WindowTitleBar}"/>

@@ -84,7 +84,7 @@ public sealed class SortingCodeEditor : TextEditor
             _darkTheme = appearance.IsDark;
             _installation.SetTheme(_registry.LoadTheme(appearance.IsDark ? ThemeName.DarkPlus : ThemeName.LightPlus));
         }
-        _renderer.SetColor(appearance.Resolve(Color.Parse("#3D204D")));
+        _renderer.SetColor(appearance.EditorHighlight);
         TextArea.TextView.Redraw();
     }
 
@@ -153,8 +153,7 @@ public sealed class SortingCodeEditor : TextEditor
     {
         private int[] _lines = [];
 
-        private IBrush _background =
-            new SolidColorBrush(Color.Parse("#3D204D"));
+        private IBrush _background = Brushes.Transparent;
 
         public void SetColor(Color color) => _background = new SolidColorBrush(color);
 

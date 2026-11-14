@@ -1,0 +1,275 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls"
+    xmlns:components="using:Sortacium.Presentation.Components">
+
+    <ControlTheme
+        x:Key="HorizontalSlider.SegmentTheme"
+        TargetType="RepeatButton">
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <Border
+                    Background="{TemplateBinding Background}"/>
+
+            </ControlTemplate>
+
+        </Setter>
+
+    </ControlTheme>
+
+    <!-- Thumb -->
+    <ControlTheme
+        x:Key="HorizontalSlider.ThumbTheme"
+        TargetType="Thumb">
+
+        <Setter
+            Property="Transitions">
+
+            <Transitions>
+
+                <BrushTransition
+                    Property="Background"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="BorderBrush"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <BrushTransition
+                    Property="Foreground"
+                    Duration="0:0:0.2"
+                    Easing="CubicEaseOut"/>
+
+                <TransformOperationsTransition
+                    Property="RenderTransform"
+                    Duration="0:0:0.15"
+                    Easing="CubicEaseOut"/>
+
+            </Transitions>
+
+        </Setter>
+
+        <Setter Property="BorderBrush" Value="{DynamicResource Slider.Horizontal.Thumb.Border}"/>
+
+        <Setter
+            Property="RenderTransform"
+            Value="translateY(0px)"/>
+
+        <Setter
+            Property="Background"
+            Value="{DynamicResource Brush.Accent.Control}"/>
+
+        <Setter
+            Property="Width"
+            Value="60"/>
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <!-- Outer Border -->
+                <Border
+                    Background="{DynamicResource Brush.Accent.Slider.Fill}"
+                    BorderThickness="0,0,2,0"
+                    CornerRadius="0,10,10,0"
+                    BorderBrush="{DynamicResource Brush.Accent.Slider.ThumbStroke}">
+
+                    <!-- Inner Border -->
+                    <Border
+                        Name="PART_InnerBorder"
+                        Background="{DynamicResource Brush.Accent.Control}"
+                        BorderThickness="1.5"
+                        CornerRadius="8"
+                        Margin="6"
+                        RenderTransform="translateY(0px)"
+                        components:StrokeGradientAdapter.Source="{DynamicResource Slider.Horizontal.Thumb.InnerBorder}">
+
+                        <Border.Transitions>
+
+                            <Transitions>
+
+                                <BrushTransition
+                                    Property="Background"
+                                    Duration="0:0:0.2"
+                                    Easing="CubicEaseOut"/>
+
+                                <BrushTransition
+                                    Property="BorderBrush"
+                                    Duration="0:0:0.2"
+                                    Easing="CubicEaseOut"/>
+
+                                <TransformOperationsTransition
+                                    Property="RenderTransform"
+                                    Duration="0:0:0.15"
+                                    Easing="CubicEaseOut"/>
+
+                            </Transitions>
+
+                        </Border.Transitions>
+
+                    </Border>
+
+                </Border>
+
+            </ControlTemplate>
+
+        </Setter>
+
+        <Style
+            Selector="^:pointerover">
+
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
+
+        </Style>
+
+        <Style
+            Selector="^:pressed /template/ Border#PART_InnerBorder">
+
+            <Setter
+                Property="Background"
+                Value="{DynamicResource Brush.Accent.Slider.ThumbPressed}"/>
+
+            <Setter
+                Property="RenderTransform"
+                Value="translateY(-1px)"/>
+
+            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource Slider.Horizontal.Thumb.PressedBorder}"/>
+
+        </Style>
+
+    </ControlTheme>
+
+    <ControlTheme
+        x:Key="{x:Type controls:HorizontalSlider}"
+        TargetType="{x:Type controls:HorizontalSlider}">
+
+        <Setter
+            Property="FontSize"
+            Value="16"/>
+
+        <Setter
+            Property="FontWeight"
+            Value="Medium"/>
+
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource Brush.Text.Strong}"/>
+
+        <Setter
+            Property="Template">
+
+            <ControlTemplate>
+
+                <Border
+                    Background="{DynamicResource Brush.Slider.Horizontal.Background}"
+                    CornerRadius="18"
+                    BorderThickness="1.5"
+                    Padding="6, 6, 6, 7"
+                    components:StrokeGradientAdapter.Source="{DynamicResource Slider.Horizontal.Frame.Border}">
+
+                    <Border
+                        Background="{DynamicResource Brush.Slider.Horizontal.Track}"
+                        BorderThickness="1.5"
+                        CornerRadius="14"
+                        components:StrokeGradientAdapter.Source="{DynamicResource Slider.Horizontal.Track.Border}">
+
+                        <Grid
+                            ColumnDefinitions="Auto, *, Auto">
+
+                            <Border
+                                Background="{DynamicResource Brush.Slider.Horizontal.EndCap}"
+                                CornerRadius="13,0,0,13">
+
+                                <TextBlock
+                                    Text="{TemplateBinding Title}"
+                                    IsHitTestVisible="False"
+                                    Margin="10, 7, 10, 7"/>
+
+                            </Border>
+
+                            <Track
+                                Name="PART_Track"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Minimum="{TemplateBinding Minimum}"
+                                Maximum="{TemplateBinding Maximum}"
+                                Value="{TemplateBinding Value, Mode=TwoWay}"
+                                IsDirectionReversed="False">
+
+                                <Track.DecreaseButton>
+
+                                    <RepeatButton
+                                        Name="PART_DecreaseButton"
+                                        Theme="{StaticResource HorizontalSlider.SegmentTheme}"
+                                        Focusable="False"
+                                        Background="{DynamicResource Slider.Horizontal.Track.Fill}">
+
+                                    </RepeatButton>
+
+                                </Track.DecreaseButton>
+
+                                <Track.IncreaseButton>
+
+                                    <RepeatButton
+                                        Name="PART_IncreaseButton"
+                                        Theme="{StaticResource HorizontalSlider.SegmentTheme}"
+                                        Background="{DynamicResource Brush.Slider.Horizontal.Unfilled}"
+                                        Focusable="False"/>
+
+                                </Track.IncreaseButton>
+
+                                <Track.Thumb>
+
+                                    <Thumb
+                                        Name="PART_Thumb"
+                                        Theme="{StaticResource HorizontalSlider.ThumbTheme}"/>
+
+                                </Track.Thumb>
+
+                            </Track>
+
+                            <Border
+                                Grid.Column="2"
+                                Background="{DynamicResource Brush.Slider.Horizontal.EndCap}"
+                                CornerRadius="0,13,13,0">
+
+                                <StackPanel
+                                    Orientation="Horizontal">
+
+                                    <TextBlock
+                                        Text="{Binding Value,
+                                           RelativeSource={RelativeSource TemplatedParent},
+                                           StringFormat='{}{0:F0}'}"
+                                        Margin="10, 7, 0, 7"/>
+
+                                    <TextBlock
+                                        Text="{TemplateBinding Suffix}"
+                                        Margin="0, 7, 10, 7"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+                </Border>
+
+            </ControlTemplate>
+
+        </Setter>
+
+    </ControlTheme>
+
+</ResourceDictionary>

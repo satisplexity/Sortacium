@@ -1,4 +1,183 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Add Resources Here -->
+
+    <Color x:Key="Color.Window.Surface">#FFEDEDF2</Color>
+    <Color x:Key="Color.Window.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.Window.Shadow">#FFA7A7B5</Color>
+    <Color x:Key="Color.Panel.Surface">#FFF6F6FA</Color>
+    <Color x:Key="Color.Panel.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.Panel.Shadow">#FFB5B5C2</Color>
+    <Color x:Key="Color.RecessedPanel.Surface">#FFE5E5ED</Color>
+    <Color x:Key="Color.RecessedPanel.Highlight">#FFBABAC8</Color>
+    <Color x:Key="Color.RecessedPanel.Shadow">#FFFFFFFF</Color>
+    <Color x:Key="Color.Button.Background.Default">#FFF4F4F8</Color>
+    <Color x:Key="Color.Button.Background.PointerOver">#FFEAEAF2</Color>
+    <Color x:Key="Color.Button.Background.Pressed">#FFE0E0EA</Color>
+    <Color x:Key="Color.Button.Background.Disabled">#FFE8E8EE</Color>
+    <Color x:Key="Color.Button.Foreground.Default">#FF30303B</Color>
+    <Color x:Key="Color.Button.Foreground.PointerOver">#FF47478D</Color>
+    <Color x:Key="Color.Button.Foreground.Pressed">#FF454551</Color>
+    <Color x:Key="Color.Button.Foreground.Disabled">#FF666675</Color>
+    <Color x:Key="Color.Button.Stroke.Highlight.Default">#FFFFFFFF</Color>
+    <Color x:Key="Color.Button.Stroke.Highlight.Pressed">#FFAFAFBD</Color>
+    <Color x:Key="Color.Button.Stroke.Highlight.Disabled">#FFE8E8EE</Color>
+    <Color x:Key="Color.Button.Stroke.Shadow.Default">#FFB2B2C1</Color>
+    <Color x:Key="Color.Button.Stroke.Shadow.Pressed">#FFF6F6FB</Color>
+    <Color x:Key="Color.Button.Stroke.Shadow.Disabled">#FFE8E8EE</Color>
+
+    <Color x:Key="Color.ComboBox.Background">#FFF1F1F6</Color>
+    <Color x:Key="Color.ComboBox.Background.Pressed">#FFDADAE3</Color>
+    <Color x:Key="Color.ComboBox.Popup.Background">#FFFFFFFF</Color>
+    <Color x:Key="Color.ComboBox.Stroke.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.ComboBox.Stroke.Shadow">#FFA9A9B9</Color>
+    <Color x:Key="Color.Overlay.Scrim">#55000000</Color>
+    <Color x:Key="Color.ScrollBar.Background">#FFE2E2E8</Color>
+    <Color x:Key="Color.ScrollBar.Stroke.Fill">#FFF1F1F6</Color>
+    <Color x:Key="Color.ScrollBar.Stroke.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.ScrollBar.Stroke.Shadow">#FFA9A9B9</Color>
+    <Color x:Key="Color.Slider.Horizontal.Background">#FFFAFAFC</Color>
+    <Color x:Key="Color.Slider.Horizontal.EndCap">#FFECECF2</Color>
+    <Color x:Key="Color.Slider.Horizontal.Frame">#FFF5F5F9</Color>
+    <Color x:Key="Color.Slider.Horizontal.FrameShadow">#FFAEAEBC</Color>
+    <Color x:Key="Color.Slider.Horizontal.Track">#FFE4E4EA</Color>
+    <Color x:Key="Color.Slider.Horizontal.TrackHighlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.Slider.Horizontal.TrackShadow">#FFBCBCCA</Color>
+    <Color x:Key="Color.Slider.Horizontal.Unfilled">#FFDCDCE4</Color>
+    <Color x:Key="Color.Slider.Vertical.Background">#FFF8F8FB</Color>
+    <Color x:Key="Color.Slider.Vertical.EndCap">#FFE4E4EA</Color>
+    <Color x:Key="Color.Slider.Vertical.EndCapStroke">#FFC9C9D4</Color>
+    <Color x:Key="Color.Slider.Vertical.FrameShadow">#FFAEAEBC</Color>
+    <Color x:Key="Color.Slider.Vertical.Track">#FFDCDCE6</Color>
+    <Color x:Key="Color.Slider.Vertical.TrackShadow">#FFBABAC6</Color>
+    <Color x:Key="Color.Slider.Vertical.TrackStroke">#FFE2E2EB</Color>
+    <Color x:Key="Color.Slider.Vertical.Unfilled">#FFFFFFFF</Color>
+    <Color x:Key="Color.Stroke.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.Stroke.RecessedHighlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.Surface.Control">#FFF1F1F6</Color>
+    <Color x:Key="Color.Surface.Hover">#FFE3E3EC</Color>
+    <Color x:Key="Color.Surface.Recessed">#FFE2E2E8</Color>
+    <Color x:Key="Color.Text.Code">#FF2D2D38</Color>
+    <Color x:Key="Color.Text.Description">#FF373749</Color>
+    <Color x:Key="Color.Text.Detail">#FF242432</Color>
+    <Color x:Key="Color.Text.LineNumber">#FF656575</Color>
+    <Color x:Key="Color.Text.Muted">#FF565668</Color>
+    <Color x:Key="Color.Text.Negative">#FFA03640</Color>
+    <Color x:Key="Color.Text.Placeholder">#FF626274</Color>
+    <Color x:Key="Color.Text.Positive">#FF306828</Color>
+    <Color x:Key="Color.Text.Primary">#FF272737</Color>
+    <Color x:Key="Color.Text.Secondary">#FF48485B</Color>
+    <Color x:Key="Color.Text.Strong">#FF191922</Color>
+    <Color x:Key="Color.Text.Subtle">#FF5E5E70</Color>
+    <Color x:Key="Color.ToolTip.Background">#FFFAFAFE</Color>
+    <Color x:Key="Color.ToolTip.Stroke.Highlight">#FFFFFFFF</Color>
+    <Color x:Key="Color.ToolTip.Stroke.Shadow">#FFB6B6C3</Color>
+
+    <Color x:Key="Color.Accent.Swatch.Violet">#FF7730A6</Color>
+    <Color x:Key="Color.Accent.Swatch.Blue">#FF185AAA</Color>
+    <Color x:Key="Color.Accent.Swatch.Cyan">#FF006B82</Color>
+    <Color x:Key="Color.Accent.Swatch.Teal">#FF087260</Color>
+    <Color x:Key="Color.Accent.Swatch.Green">#FF386D26</Color>
+    <Color x:Key="Color.Accent.Swatch.Amber">#FF875200</Color>
+    <Color x:Key="Color.Accent.Swatch.Orange">#FFA04620</Color>
+    <Color x:Key="Color.Accent.Swatch.Rose">#FFA02F5F</Color>
+
+    <SolidColorBrush x:Key="Brush.Button.Background.Default" Color="{StaticResource Color.Button.Background.Default}"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Disabled" Color="{StaticResource Color.Button.Background.Disabled}"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.PointerOver" Color="{StaticResource Color.Button.Background.PointerOver}"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Pressed" Color="{StaticResource Color.Button.Background.Pressed}"/>
+    <SolidColorBrush x:Key="Brush.Button.Foreground.Default" Color="{StaticResource Color.Button.Foreground.Default}"/>
+    <SolidColorBrush x:Key="Brush.Button.Foreground.Disabled" Color="{StaticResource Color.Button.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="Brush.Button.Foreground.PointerOver" Color="{StaticResource Color.Button.Foreground.PointerOver}"/>
+    <SolidColorBrush x:Key="Brush.Button.Foreground.Pressed" Color="{StaticResource Color.Button.Foreground.Pressed}"/>
+    <SolidColorBrush x:Key="Brush.ComboBox.Background" Color="{StaticResource Color.ComboBox.Background}"/>
+    <SolidColorBrush x:Key="Brush.ComboBox.Background.Pressed" Color="{StaticResource Color.ComboBox.Background.Pressed}"/>
+    <SolidColorBrush x:Key="Brush.ComboBox.Popup.Background" Color="{StaticResource Color.ComboBox.Popup.Background}"/>
+    <SolidColorBrush x:Key="Brush.Overlay.Scrim" Color="{StaticResource Color.Overlay.Scrim}"/>
+    <SolidColorBrush x:Key="Brush.Panel.Shadow" Color="{StaticResource Color.Panel.Shadow}"/>
+    <SolidColorBrush x:Key="Brush.Panel.Surface" Color="{StaticResource Color.Panel.Surface}"/>
+    <SolidColorBrush x:Key="Brush.RecessedPanel.Surface" Color="{StaticResource Color.RecessedPanel.Surface}"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Background" Color="{StaticResource Color.ScrollBar.Background}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Horizontal.Background" Color="{StaticResource Color.Slider.Horizontal.Background}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Horizontal.EndCap" Color="{StaticResource Color.Slider.Horizontal.EndCap}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Horizontal.Track" Color="{StaticResource Color.Slider.Horizontal.Track}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Horizontal.Unfilled" Color="{StaticResource Color.Slider.Horizontal.Unfilled}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Vertical.Background" Color="{StaticResource Color.Slider.Vertical.Background}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Vertical.EndCap" Color="{StaticResource Color.Slider.Vertical.EndCap}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Vertical.EndCapStroke" Color="{StaticResource Color.Slider.Vertical.EndCapStroke}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Vertical.Track" Color="{StaticResource Color.Slider.Vertical.Track}"/>
+    <SolidColorBrush x:Key="Brush.Slider.Vertical.Unfilled" Color="{StaticResource Color.Slider.Vertical.Unfilled}"/>
+    <SolidColorBrush x:Key="Brush.Stroke.RecessedHighlight" Color="{StaticResource Color.Stroke.RecessedHighlight}"/>
+    <SolidColorBrush x:Key="Brush.Surface.Control" Color="{StaticResource Color.Surface.Control}"/>
+    <SolidColorBrush x:Key="Brush.Surface.Hover" Color="{StaticResource Color.Surface.Hover}"/>
+    <SolidColorBrush x:Key="Brush.Surface.Recessed" Color="{StaticResource Color.Surface.Recessed}"/>
+    <SolidColorBrush x:Key="Brush.Text.Code" Color="{StaticResource Color.Text.Code}"/>
+    <SolidColorBrush x:Key="Brush.Text.Description" Color="{StaticResource Color.Text.Description}"/>
+    <SolidColorBrush x:Key="Brush.Text.Detail" Color="{StaticResource Color.Text.Detail}"/>
+    <SolidColorBrush x:Key="Brush.Text.LineNumber" Color="{StaticResource Color.Text.LineNumber}"/>
+    <SolidColorBrush x:Key="Brush.Text.Muted" Color="{StaticResource Color.Text.Muted}"/>
+    <SolidColorBrush x:Key="Brush.Text.Negative" Color="{StaticResource Color.Text.Negative}"/>
+    <SolidColorBrush x:Key="Brush.Text.Placeholder" Color="{StaticResource Color.Text.Placeholder}"/>
+    <SolidColorBrush x:Key="Brush.Text.Positive" Color="{StaticResource Color.Text.Positive}"/>
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="{StaticResource Color.Text.Primary}"/>
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{StaticResource Color.Text.Secondary}"/>
+    <SolidColorBrush x:Key="Brush.Text.Strong" Color="{StaticResource Color.Text.Strong}"/>
+    <SolidColorBrush x:Key="Brush.Text.Subtle" Color="{StaticResource Color.Text.Subtle}"/>
+    <SolidColorBrush x:Key="Brush.ToolTip.Background" Color="{StaticResource Color.ToolTip.Background}"/>
+    <SolidColorBrush x:Key="Brush.Window.Surface" Color="{StaticResource Color.Window.Surface}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Violet" Color="{StaticResource Color.Accent.Swatch.Violet}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Blue" Color="{StaticResource Color.Accent.Swatch.Blue}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Cyan" Color="{StaticResource Color.Accent.Swatch.Cyan}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Teal" Color="{StaticResource Color.Accent.Swatch.Teal}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Green" Color="{StaticResource Color.Accent.Swatch.Green}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Amber" Color="{StaticResource Color.Accent.Swatch.Amber}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Orange" Color="{StaticResource Color.Accent.Swatch.Orange}"/>
+    <SolidColorBrush x:Key="Brush.Accent.Swatch.Rose" Color="{StaticResource Color.Accent.Swatch.Rose}"/>
+
+    <LinearGradientBrush x:Key="Slider.Horizontal.Frame.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.Stroke.Highlight}"/>
+        <GradientStop Offset="0.3" Color="{StaticResource Color.Slider.Horizontal.Frame}"/>
+        <GradientStop Offset="0.7" Color="{StaticResource Color.Slider.Horizontal.Frame}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.Slider.Horizontal.FrameShadow}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Slider.Horizontal.Track.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.Slider.Horizontal.TrackShadow}"/>
+        <GradientStop Offset="0.1" Color="{StaticResource Color.Slider.Horizontal.Track}"/>
+        <GradientStop Offset="0.95" Color="{StaticResource Color.Slider.Horizontal.Track}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.Slider.Horizontal.TrackHighlight}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="StyledComboBox.Border" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.ComboBox.Stroke.Highlight}"/>
+        <GradientStop Offset="0.2" Color="{StaticResource Color.ComboBox.Background}"/>
+        <GradientStop Offset="0.8" Color="{StaticResource Color.ComboBox.Background}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.ComboBox.Stroke.Shadow}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ScrollSurface.Border" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.ScrollBar.Stroke.Highlight}"/>
+        <GradientStop Offset="0.2" Color="{StaticResource Color.ScrollBar.Stroke.Fill}"/>
+        <GradientStop Offset="0.8" Color="{StaticResource Color.ScrollBar.Stroke.Fill}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.ScrollBar.Stroke.Shadow}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ToolTip.Border" StartPoint="50%,0%" EndPoint="50%,100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.ToolTip.Stroke.Highlight}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.ToolTip.Stroke.Shadow}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Slider.Vertical.Frame.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.Stroke.Highlight}"/>
+        <GradientStop Offset="0.1" Color="{StaticResource Color.Slider.Vertical.Background}"/>
+        <GradientStop Offset="0.9" Color="{StaticResource Color.Slider.Vertical.Background}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.Slider.Vertical.FrameShadow}"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Slider.Vertical.Track.Border" StartPoint="50%, 0%" EndPoint="50%, 100%">
+        <GradientStop Offset="0" Color="{StaticResource Color.Slider.Vertical.TrackShadow}"/>
+        <GradientStop Offset="0.1" Color="{StaticResource Color.Slider.Vertical.TrackStroke}"/>
+        <GradientStop Offset="0.95" Color="{StaticResource Color.Slider.Vertical.TrackStroke}"/>
+        <GradientStop Offset="1" Color="{StaticResource Color.Stroke.RecessedHighlight}"/>
+    </LinearGradientBrush>
+
 </ResourceDictionary>

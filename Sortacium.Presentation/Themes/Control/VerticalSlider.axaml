@@ -1,7 +1,6 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:appearance="using:Sortacium.Presentation.Services"
     xmlns:controls="using:Sortacium.Presentation.Controls"
     xmlns:components="using:Sortacium.Presentation.Components">
 
@@ -57,36 +56,7 @@
 
         </Setter>
 
-        <Setter
-            Property="BorderBrush">
-
-            <Setter.Value>
-
-                <LinearGradientBrush
-                    StartPoint="50%, 0%"
-                    EndPoint="50%, 100%">
-
-                    <GradientStop
-                        Color="{Binding Colors[AF4BE9], Source={x:Static appearance:AppearanceService.Instance}}"
-                        Offset="0"/>
-
-                    <GradientStop
-                        Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
-                        Offset="0.3"/>
-
-                    <GradientStop
-                        Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
-                        Offset="0.7"/>
-
-                    <GradientStop
-                        Color="{Binding Colors[5F2D7C], Source={x:Static appearance:AppearanceService.Instance}}"
-                        Offset="1"/>
-
-                </LinearGradientBrush>
-
-            </Setter.Value>
-
-        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource Slider.Vertical.Thumb.Border}"/>
 
         <Setter
             Property="RenderTransform"
@@ -94,7 +64,7 @@
 
         <Setter
             Property="Background"
-            Value="{DynamicResource Palette.Brush.853CAE}"/>
+            Value="{DynamicResource Brush.Accent.Control}"/>
 
         <Setter
             Property="Height"
@@ -107,46 +77,20 @@
 
                 <!-- Outer Border -->
                 <Border
-                    Background="{DynamicResource Palette.Brush.792FA4}"
+                    Background="{DynamicResource Brush.Accent.Slider.Fill}"
                     BorderThickness="0,2,0,0"
                     CornerRadius="10,10,0,0"
-                    BorderBrush="{DynamicResource Palette.Brush.8539B1}">
+                    BorderBrush="{DynamicResource Brush.Accent.Slider.ThumbStroke}">
 
                     <!-- Inner Border -->
                     <Border
                         Name="PART_InnerBorder"
-                        Background="{DynamicResource Palette.Brush.853CAE}"
+                        Background="{DynamicResource Brush.Accent.Control}"
                         BorderThickness="1.5"
                         CornerRadius="8"
                         Margin="6"
                         RenderTransform="translateY(0px)"
-                        components:StrokeGradientAdapter.Enable="True">
-
-                        <Border.BorderBrush>
-
-                            <LinearGradientBrush
-                                StartPoint="50%,0%"
-                                EndPoint="50%,100%">
-
-                                <GradientStop
-                                    Color="{Binding Colors[AF4BE9], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0.3"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[8D40B9], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0.7"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[5F2D7C], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="1"/>
-
-                            </LinearGradientBrush>
-
-                        </Border.BorderBrush>
+                        components:StrokeGradientAdapter.Source="{DynamicResource Slider.Vertical.Thumb.InnerBorder}">
 
                         <Border.Transitions>
 
@@ -193,41 +137,13 @@
 
             <Setter
                 Property="Background"
-                Value="{DynamicResource Palette.Brush.7B38A3}"/>
+                Value="{DynamicResource Brush.Accent.Slider.ThumbPressed}"/>
 
             <Setter
                 Property="RenderTransform"
                 Value="translateY(-1px)"/>
 
-            <Setter
-                Property="BorderBrush">
-                <Setter.Value>
-
-                    <LinearGradientBrush
-                        StartPoint="50%,0%"
-                        EndPoint="50%,100%">
-
-                        <GradientStop
-                            Offset="0"
-                            Color="{Binding Colors[4E1F69], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="0.2"
-                            Color="{Binding Colors[713593], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="0.8"
-                            Color="{Binding Colors[713593], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="1"
-                            Color="{Binding Colors[9340C3], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                    </LinearGradientBrush>
-
-                </Setter.Value>
-
-            </Setter>
+            <Setter Property="components:StrokeGradientAdapter.Source" Value="{DynamicResource Slider.Vertical.Thumb.PressedBorder}"/>
 
         </Style>
 
@@ -243,7 +159,7 @@
 
         <Setter
             Property="Foreground"
-            Value="{DynamicResource Palette.Brush.EEEEEE}"/>
+            Value="{DynamicResource Brush.Text.Strong}"/>
 
         <Setter
             Property="FontWeight"
@@ -259,69 +175,17 @@
             <ControlTemplate>
 
                 <Border
-                    Background="{DynamicResource Palette.Brush.262626}"
+                    Background="{DynamicResource Brush.Slider.Vertical.Background}"
                     CornerRadius="18"
                     BorderThickness="1.5"
                     Padding="6, 6, 6, 8"
-                    components:StrokeGradientAdapter.Enable="True">
-
-                    <Border.BorderBrush>
-
-                        <LinearGradientBrush
-                            StartPoint="50%, 0%"
-                            EndPoint="50%, 100%">
-
-                            <GradientStop
-                                Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.1"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="0.9"/>
-
-                            <GradientStop
-                                Color="{Binding Colors[1B1B1B], Source={x:Static appearance:AppearanceService.Instance}}"
-                                Offset="1"/>
-
-                        </LinearGradientBrush>
-
-                    </Border.BorderBrush>
+                    components:StrokeGradientAdapter.Source="{DynamicResource Slider.Vertical.Frame.Border}">
 
                     <Border
-                        Background="{DynamicResource Palette.Brush.151515}"
+                        Background="{DynamicResource Brush.Slider.Vertical.Track}"
                         BorderThickness="1.5"
                         CornerRadius="14"
-                        components:StrokeGradientAdapter.Enable="True">
-
-                        <Border.BorderBrush>
-
-                            <LinearGradientBrush
-                                StartPoint="50%, 0%"
-                                EndPoint="50%, 100%">
-
-                                <GradientStop
-                                    Color="{Binding Colors[1E1E1E], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0.1"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[232323], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="0.95"/>
-
-                                <GradientStop
-                                    Color="{Binding Colors[363636], Source={x:Static appearance:AppearanceService.Instance}}"
-                                    Offset="1"/>
-
-                            </LinearGradientBrush>
-
-                        </Border.BorderBrush>
+                        components:StrokeGradientAdapter.Source="{DynamicResource Slider.Vertical.Track.Border}">
 
                         <Grid
                             RowDefinitions="Auto, *, Auto">
@@ -329,8 +193,8 @@
                             <Border
                                 x:Name="PART_TitleBackgroundBorder"
                                 CornerRadius="13,13,0,0"
-                                Background="{DynamicResource Palette.Brush.2F2F2F}"
-                                BorderBrush="{DynamicResource Palette.Brush.252525}"
+                                Background="{DynamicResource Brush.Slider.Vertical.EndCap}"
+                                BorderBrush="{DynamicResource Brush.Slider.Vertical.EndCapStroke}"
                                 BorderThickness="0,0,0,2">
 
                                 <TextBlock
@@ -356,25 +220,8 @@
                                     <RepeatButton
                                         Name="PART_DecreaseButton"
                                         Theme="{StaticResource VerticalSlider.SegmentTheme}"
-                                        Focusable="False">
-
-                                        <RepeatButton.Background>
-
-                                            <LinearGradientBrush
-                                                StartPoint="50%,0%"
-                                                EndPoint="50%,100%">
-
-                                                <GradientStop
-                                                    Color="{Binding Colors[792FA4], Source={x:Static appearance:AppearanceService.Instance}}"
-                                                    Offset="0"/>
-
-                                                <GradientStop
-                                                    Color="{Binding Colors[262626], Source={x:Static appearance:AppearanceService.Instance}}"
-                                                    Offset="1"/>
-
-                                            </LinearGradientBrush>
-
-                                        </RepeatButton.Background>
+                                        Focusable="False"
+                                        Background="{DynamicResource Slider.Vertical.Track.Fill}">
 
                                     </RepeatButton>
 
@@ -385,7 +232,7 @@
                                     <RepeatButton
                                         Name="PART_IncreaseButton"
                                         Theme="{StaticResource VerticalSlider.SegmentTheme}"
-                                        Background="{DynamicResource Palette.Brush.1C1C1C}"
+                                        Background="{DynamicResource Brush.Slider.Vertical.Unfilled}"
                                         Focusable="False"/>
 
                                 </Track.IncreaseButton>
@@ -405,8 +252,8 @@
                                 Grid.Row="2"
                                 CornerRadius="0,0,13,13"
                                 BorderThickness="0, 2, 0, 0"
-                                BorderBrush="{DynamicResource Palette.Brush.363636}"
-                                Background="{DynamicResource Palette.Brush.2F2F2F}">
+                                BorderBrush="{DynamicResource Brush.Stroke.RecessedHighlight}"
+                                Background="{DynamicResource Brush.Slider.Vertical.EndCap}">
 
                                 <StackPanel
                                     Orientation="Horizontal"

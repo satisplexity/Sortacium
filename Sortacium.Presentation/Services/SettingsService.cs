@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Sortacium.Presentation.Services;
@@ -22,7 +21,7 @@ public sealed partial class SettingsService : ObservableObject
     private readonly string _path;
     private bool _initialized;
     [ObservableProperty] private bool _isDark = true;
-    [ObservableProperty] private Color _accentColor = Color.Parse("#AF4BE9");
+    [ObservableProperty] private string _accentId = AppearanceService.DefaultAccent;
     [ObservableProperty] private InterfaceLanguage _selectedLanguage = new("en", "English");
     [ObservableProperty] private bool _soundEnabled = true;
     public bool IsLight { get => !IsDark; set { if (value) IsDark = false; } }
@@ -40,7 +39,7 @@ public sealed partial class SettingsService : ObservableObject
             if (File.Exists(_path) && JsonSerializer.Deserialize<SavedSettings>(File.ReadAllText(_path)) is { } saved)
             {
                 IsDark = saved.Theme != "light";
-                if (Color.TryParse(saved.Accent, out var color)) AccentColor = Color.FromRgb(color.R, color.G, color.B);
+                AccentId = AppearanceService.ResolveAccentId(saved.Accent);
                 SelectedLanguage = Languages.FirstOrDefault(l => l.Id == saved.Language) ?? Languages[3];
                 SoundEnabled = saved.SoundEnabled;
             }
@@ -48,7 +47,7 @@ public sealed partial class SettingsService : ObservableObject
         catch (Exception e) when (e is IOException or JsonException or UnauthorizedAccessException)
         { Debug.WriteLine($"Settings could not be loaded: {e.Message}"); }
         _initialized = true;
-        AppearanceService.Instance.Apply(IsDark, AccentColor);
+        AppearanceService.Instance.Apply(IsDark, AccentId);
         LocalizationService.Instance.SetLanguage(SelectedLanguage.Id);
     }
 
@@ -57,7 +56,7 @@ public sealed partial class SettingsService : ObservableObject
         OnPropertyChanged(nameof(IsLight));
         ApplyAppearance();
     }
-    partial void OnAccentColorChanged(Color value) => ApplyAppearance();
+    partial void OnAccentIdChanged(string value) => ApplyAppearance();
     partial void OnSelectedLanguageChanged(InterfaceLanguage value)
     {
         if (!_initialized || value is null) return;
@@ -68,7 +67,7 @@ public sealed partial class SettingsService : ObservableObject
     private void ApplyAppearance()
     {
         if (!_initialized) return;
-        AppearanceService.Instance.Apply(IsDark, AccentColor);
+        AppearanceService.Instance.Apply(IsDark, AccentId);
         Save();
     }
     private void Save()
@@ -77,7 +76,7 @@ public sealed partial class SettingsService : ObservableObject
         {
             Directory.CreateDirectory(Path.GetDirectoryName(_path)!);
             var temporary = _path + ".tmp";
-            File.WriteAllText(temporary, JsonSerializer.Serialize(new SavedSettings(IsDark ? "dark" : "light", AccentColor.ToString(), SelectedLanguage.Id, SoundEnabled), new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(temporary, JsonSerializer.Serialize(new SavedSettings(IsDark ? "dark" : "light", AccentId, SelectedLanguage.Id, SoundEnabled), new JsonSerializerOptions { WriteIndented = true }));
             File.Move(temporary, _path, true);
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)

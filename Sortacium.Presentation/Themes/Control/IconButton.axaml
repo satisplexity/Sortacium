@@ -1,9 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:appearance="using:Sortacium.Presentation.Services"
-    xmlns:controls="clr-namespace:Sortacium.Presentation.Controls"
-    xmlns:components="using:Sortacium.Presentation.Components">
+    xmlns:controls="using:Sortacium.Presentation.Controls">
 
     <ControlTheme
         x:Key="{x:Type controls:IconButton}"
@@ -23,7 +21,7 @@
 
         <Setter
             Property="BorderThickness"
-            Value="2"/>
+            Value="1, 2"/>
 
         <Setter
             Property="RenderTransform"
@@ -45,13 +43,8 @@
 
                 <BrushTransition
                     Property="Background"
-                    Duration="0:0:0.2"
-                    Easing="CubicEaseOut"/>
-
-                <BrushTransition
-                    Property="BorderBrush"
-                    Duration="0:0:0.2"
-                    Easing="CubicEaseOut"/>
+                    Duration="0:0:0.1"
+                    Easing="SineEaseOut"/>
 
                 <BrushTransition
                     Property="Foreground"
@@ -74,55 +67,23 @@
 
         <Setter
             Property="Background"
-            Value="{DynamicResource Palette.Brush.242424}"/>
+            Value="{DynamicResource Brush.Button.Background.Default}"/>
 
         <Setter
             Property="Foreground"
-            Value="{DynamicResource Palette.Brush.CCCCEE}"/>
-
-        <Setter
-            Property="BorderBrush">
-
-            <Setter.Value>
-
-                <LinearGradientBrush
-                    StartPoint="50%,0%"
-                    EndPoint="50%,100%">
-
-                    <GradientStop
-                        Offset="0"
-                        Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                    <GradientStop
-                        Offset="0.2"
-                        Color="{Binding Colors[242424], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                    <GradientStop
-                        Offset="0.8"
-                        Color="{Binding Colors[242424], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                    <GradientStop
-                        Offset="1"
-                        Color="{Binding Colors[131313], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                </LinearGradientBrush>
-
-            </Setter.Value>
-
-        </Setter>
+            Value="{DynamicResource Brush.Button.Foreground.Default}"/>
 
         <Setter
             Property="Template">
 
             <ControlTemplate>
 
-                <Border
+                <controls:BeveledBorder
+                    Name="PART_Border"
                     Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{TemplateBinding CornerRadius}"
-                    Padding="{TemplateBinding Padding}"
-                    components:StrokeGradientAdapter.Enable="True">
+                    Padding="{TemplateBinding Padding}">
 
                     <Grid
                         ColumnDefinitions="Auto,Auto"
@@ -148,7 +109,7 @@
 
                     </Grid>
 
-                </Border>
+                </controls:BeveledBorder>
 
             </ControlTemplate>
 
@@ -170,11 +131,11 @@
 
             <Setter
                 Property="Background"
-                Value="{DynamicResource Palette.Brush.242424}"/>
+                Value="{DynamicResource Brush.Button.Background.PointerOver}"/>
 
             <Setter
                 Property="Foreground"
-                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
+                Value="{DynamicResource Brush.Button.Foreground.PointerOver}"/>
 
             <Setter
                 Property="Padding"
@@ -191,47 +152,49 @@
 
             <Setter
                 Property="Background"
-                Value="{DynamicResource Palette.Brush.212121}"/>
+                Value="{DynamicResource Brush.Button.Background.Pressed}"/>
 
             <Setter
                 Property="Foreground"
-                Value="{DynamicResource Palette.Brush.AF4BE9}"/>
+                Value="{DynamicResource Brush.Button.Foreground.Pressed}"/>
 
             <Setter
                 Property="RenderTransform"
-                Value="translateY(-1px)"/>
+                Value="translateY(0px)"/>
+
+        </Style>
+
+        <Style Selector="^:disabled">
 
             <Setter
-                Property="BorderBrush">
+                Property="Background"
+                Value="{DynamicResource Brush.Button.Background.Disabled}"/>
 
-                <Setter.Value>
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource Brush.Button.Foreground.Disabled}"/>
 
-                    <LinearGradientBrush
-                        StartPoint="50%,0%"
-                        EndPoint="50%,100%">
+        </Style>
 
-                        <GradientStop
-                            Offset="0"
-                            Color="{Binding Colors[131313], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="0.2"
-                            Color="{Binding Colors[212121], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="0.8"
-                            Color="{Binding Colors[212121], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                        <GradientStop
-                            Offset="1"
-                            Color="{Binding Colors[353535], Source={x:Static appearance:AppearanceService.Instance}}"/>
-
-                    </LinearGradientBrush>
-
-                </Setter.Value>
-
+        <Style Selector="^ /template/ controls|BeveledBorder#PART_Border">
+            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Default}"/>
+            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Default}"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <ColorTransition Property="StrokeHighlightColor" Duration="0:0:0.2" Easing="SineEaseOut"/>
+                    <ColorTransition Property="StrokeShadowColor" Duration="0:0:0.2" Easing="SineEaseOut"/>
+                </Transitions>
             </Setter>
+        </Style>
 
+        <Style Selector="^:pressed /template/ controls|BeveledBorder#PART_Border">
+            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Pressed}"/>
+            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Pressed}"/>
+        </Style>
+
+        <Style Selector="^:disabled /template/ controls|BeveledBorder#PART_Border">
+            <Setter Property="StrokeHighlightColor" Value="{DynamicResource Color.Button.Stroke.Highlight.Disabled}"/>
+            <Setter Property="StrokeShadowColor" Value="{DynamicResource Color.Button.Stroke.Shadow.Disabled}"/>
         </Style>
 
         <Style Selector="^:has-text:pointerover, ^:has-text:pressed">
