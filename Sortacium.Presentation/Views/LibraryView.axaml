@@ -177,6 +177,7 @@
 
                         <TextBlock
                             Text="{DynamicResource L.Implementation}"
+                            Foreground="{DynamicResource Brush.Accent.Primary}"
                             FontSize="16"
                             FontWeight="Medium"
                             VerticalAlignment="Center"/>
@@ -212,7 +213,7 @@
                             Language="{Binding PreviewLanguage.Id}"
                             Document="{Binding PreviewCodeDocument}"
                             Background="Transparent"
-                            Foreground="{DynamicResource Brush.Text.Code}"
+                            Foreground="{DynamicResource Brush.Accent.Primary}"
                             FontFamily="Consolas, Menlo, Monospace"
                             FontSize="13"
                             LineNumbersForeground="{DynamicResource Brush.Text.LineNumber}"/>
