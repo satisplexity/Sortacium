@@ -185,6 +185,7 @@
             <Grid
                 Margin="10"
                 Grid.Row="1"
+                ColumnSpacing="10"
                 ColumnDefinitions="auto, *, auto">
 
                 <!-- Control panel -->
@@ -253,8 +254,7 @@
 
                 <Grid
                     Grid.Column="1"
-                    Margin="15"
-                    RowDefinitions="*,Auto,Auto"
+                    RowDefinitions="*,Auto"
                     RowSpacing="12">
 
                     <controls:BarsRenderer
@@ -278,7 +278,7 @@
 
                 <controls:BeveledBorder
                     Grid.Column="2"
-                    Width="420"
+                    Width="500"
                     Theme="{StaticResource BeveledBorder.Panel}">
 
                     <Grid
