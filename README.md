@@ -52,13 +52,7 @@ Under the hood, each comparison and swap is recorded as an individual action. Th
 
 The code highlighting and execution statistics follow along. For the current operation, you can also inspect the involved indices and values. The point is to understand the decisions an algorithm makes, not just watch it reach the right result.
 
-> **Screenshot coming soon — Step-by-step execution**
->
-> `docs/screenshots/step-by-step.png`
-
-<!-- SCREENSHOT 3: Capture an execution with the current step visible on the timeline, highlighted bars, the active line of code, and comparison/swap counters or variable details. Replace the blockquote above with:
 ![Step-by-step sorting with code highlighting and execution details](docs/screenshots/step-by-step.png)
--->
 
 ### An interface with some personality
 
